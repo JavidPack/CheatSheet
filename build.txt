@@ -1,0 +1,8 @@
+﻿author = jopojelly, jofairden
+version = 0.2.6.1
+displayName = Cheat Sheet
+homepage = http://forums.terraria.org/index.php?threads/cheat-sheet.41407/
+buildIgnore = .vs\*, Properties\*, *.csproj, *.user, obj\*, bin\*, *.config, .git\*
+includePDB = true
+hideCode = false
+languageVersion = 6

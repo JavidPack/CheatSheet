@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{04D22E3B-46D1-4647-B350-0AC3AEE68631}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CheatSheet</RootNamespace>
+    <AssemblyName>CheatSheet</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\..\Windows\Microsoft.NET\assembly\GAC_32\Microsoft.Xna.Framework\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework.Game, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\..\Windows\Microsoft.NET\assembly\GAC_32\Microsoft.Xna.Framework.Game\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Game.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework.Graphics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\..\Windows\Microsoft.NET\assembly\GAC_32\Microsoft.Xna.Framework.Graphics\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Graphics.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework.Xact, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\..\Windows\Microsoft.NET\assembly\GAC_32\Microsoft.Xna.Framework.Xact\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Xact.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\dllReferences\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="build.txt" />
+    <Content Include="description.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AllItemsMenu.cs" />
+    <Compile Include="CheatSheet.cs" />
+    <Compile Include="CheatSheetNPC.cs" />
+    <Compile Include="CheatSheetPlayer.cs" />
+    <Compile Include="CheatSheetWorld.cs" />
+    <Compile Include="Configuration.cs" />
+    <Compile Include="CustomUI\UIHotbar.cs" />
+    <Compile Include="Menus\BossDowner.cs" />
+    <Compile Include="Menus\ConfigurationTool.cs" />
+    <Compile Include="Menus\EventManagerHotbar.cs" />
+    <Compile Include="Menus\FullBright.cs" />
+    <Compile Include="Menus\MinionSlotBooster.cs" />
+    <Compile Include="Menus\NPCButchererHotbar.cs" />
+    <Compile Include="Menus\QuickClearHotbar.cs" />
+    <Compile Include="Menus\QuickTeleportHotbar.cs" />
+    <Compile Include="Menus\RecipeQuerySlot.cs" />
+    <Compile Include="Menus\SampleHotbar.cs" />
+    <Compile Include="Menus\SpawnRateMultiplier.cs" />
+    <Compile Include="UI\AnchorPosition.cs" />
+    <Compile Include="Menus\Hotbar.cs" />
+    <Compile Include="Menus\ExtendedCheatMenu.cs" />
+    <Compile Include="Menus\GenericItemSlot.cs" />
+    <Compile Include="Menus\ItemBrowser.cs" />
+    <Compile Include="Menus\ItemView.cs" />
+    <Compile Include="Menus\NPCBrowser.cs" />
+    <Compile Include="Menus\NPCSlot.cs" />
+    <Compile Include="Menus\NPCView.cs" />
+    <Compile Include="Menus\PaintToolsHotbar.cs" />
+    <Compile Include="Menus\RecipeBrowser.cs" />
+    <Compile Include="Menus\RecipeSlot.cs" />
+    <Compile Include="Menus\RecipeView.cs" />
+    <Compile Include="Menus\Slot.cs" />
+    <Compile Include="UI\UICheckbox.cs" />
+    <Compile Include="UI\UIImage.cs" />
+    <Compile Include="CustomUI\UIImageButtonWithBackground.cs" />
+    <Compile Include="UI\UILabel.cs" />
+    <Compile Include="UI\UIScrollBar.cs" />
+    <Compile Include="UI\UIScrollView.cs" />
+    <Compile Include="CustomUI\UISlideWindow.cs" />
+    <Compile Include="UI\UITextbox.cs" />
+    <Compile Include="UI\UIView.cs" />
+    <Compile Include="UI\UIWindow.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Modding\tModLoader\src\tModLoader\Terraria.csproj">
+      <Project>{3996d5fa-6e59-4fe4-9f2b-40eeef9645d5}</Project>
+      <Name>Terraria</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>"C:\Program Files (x86)\Steam\steamapps\common\terraria\tModLoaderServer.exe" -build "$(ProjectDir)\" -eac "$(TargetPath)"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
