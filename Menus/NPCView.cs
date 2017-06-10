@@ -1,22 +1,19 @@
-﻿using Microsoft.Xna.Framework;
+﻿using CheatSheet.UI;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
-using Terraria.ModLoader;
-using CheatSheet.UI;
-using Terraria.ID;
 
 namespace CheatSheet.Menus
 {
-    class NPCView : UIScrollView
+	internal class NPCView : UIScrollView
 	{
 		private float spacing = 8f;
 
 		public NPCSlot[] allNPCSlot;
 
-        public NPCSlot[] negativeNPCSlots;
+		public NPCSlot[] negativeNPCSlots;
 
 		private int[] _selectedCategory;
 
@@ -26,7 +23,7 @@ namespace CheatSheet.Menus
 
 		private int slotColumns = 8;
 
-        public int negativeSlots = 65; // number of netIDs < 0
+		public int negativeSlots = 65; // number of netIDs < 0
 
 		private float slotSize = (float)Slot.backgroundTexture.Width * 0.85f;
 
@@ -57,16 +54,16 @@ namespace CheatSheet.Menus
 
 		public NPCView()
 		{
-            base.Width = (this.slotSize + (float)this.slotSpace) * (float)this.slotColumns + (float)this.slotSpace + 20f;
+			base.Width = (this.slotSize + (float)this.slotSpace) * (float)this.slotColumns + (float)this.slotSpace + 20f;
 			base.Height = 200f;
 			this.allNPCSlot = new NPCSlot[Main.npcTexture.Length + negativeSlots];
-            for (int i = 0; i < this.allNPCSlot.Length; i++)
+			for (int i = 0; i < this.allNPCSlot.Length; i++)
 			{
-                int type = (i >= this.allNPCSlot.Length - negativeSlots) ? -(i - this.allNPCSlot.Length + negativeSlots) : i;
-                this.allNPCSlot[i] = new NPCSlot(type, i);
+				int type = (i >= this.allNPCSlot.Length - negativeSlots) ? -(i - this.allNPCSlot.Length + negativeSlots) : i;
+				this.allNPCSlot[i] = new NPCSlot(type, i);
 			}
-		//	this.allNPCSlot = (from s in this.allNPCSlot
-		//					   select s).ToArray<NPCSlot>();
+			//	this.allNPCSlot = (from s in this.allNPCSlot
+			//					   select s).ToArray<NPCSlot>();
 		}
 
 		/*	this.allNPCSlot = new NPCSlot[Main.npcTexture.Length + 65];

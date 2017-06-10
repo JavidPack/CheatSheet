@@ -209,7 +209,7 @@ namespace CheatSheet.UI
 					}
 				}
 			}
-			IL_1EC:
+		IL_1EC:
 			float y = this.ScrollPosition / this.ContentHeight * num2;
 			this.scrollBar.Height = num;
 			this.scrollBar.Position = new Vector2(base.Width - this.scrollBar.Width, y);

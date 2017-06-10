@@ -1,11 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿using CheatSheet.UI;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using Terraria.ModLoader;
-using Terraria;
-using Microsoft.Xna.Framework.Input;
-using CheatSheet.UI;
 using ReLogic.Graphics;
+using System;
+using Terraria;
 
 namespace CheatSheet.Menus
 {
@@ -52,8 +50,8 @@ namespace CheatSheet.Menus
 			//	hovering = true;
 		}
 
-
 		private double doubleClickTimer;
+
 		private void Slot_onLeftClick(object sender, EventArgs e)
 		{
 			((Parent as RecipeView).Parent as RecipeBrowserWindow).selectedRecipe = recipe;

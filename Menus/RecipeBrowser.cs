@@ -1,27 +1,25 @@
-﻿using Microsoft.Xna.Framework;
+﻿using CheatSheet.CustomUI;
+using CheatSheet.UI;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Graphics;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using Terraria;
 using Terraria.ID;
-using Terraria.ModLoader;
-using CheatSheet.UI;
-using CheatSheet.CustomUI;
-using ReLogic.Graphics;
 using Terraria.Map;
+using Terraria.ModLoader;
 
 namespace CheatSheet.Menus
 {
-	enum RecipeBrowserCategories
+	internal enum RecipeBrowserCategories
 	{
 		AllRecipes,
 		ModRecipes
 	}
 
-	class RecipeBrowserWindow : UISlideWindow
+	internal class RecipeBrowserWindow : UISlideWindow
 	{
 		private static string[] categNames = new string[]
 		{
@@ -37,12 +35,12 @@ namespace CheatSheet.Menus
 
 		internal static RecipeView recipeView;
 		public Mod mod;
+
 		//private static List<string> categoryNames = new List<string>();
 		private static UIImage[] bCategories = new UIImage[categoryIcons.Length];
 
 		//private static GenericItemSlot[] lookupItem = new GenericItemSlot[1];
 		internal static RecipeQuerySlot lookupItemSlot;
-
 
 		private static GenericItemSlot[] ingredients = new GenericItemSlot[Recipe.maxRequirements];
 		private static GenericItemSlot[] tiles = new GenericItemSlot[Recipe.maxRequirements];
@@ -86,7 +84,6 @@ namespace CheatSheet.Menus
 			this.textbox.Position = new Vector2(base.Width - this.spacing * 2f - uIImage.Width, this.spacing /** 2f + uIImage.Height*/);
 			this.textbox.KeyPressed += new UITextbox.KeyPressedHandler(this.textbox_KeyPressed);
 			this.AddChild(this.textbox);
-
 
 			//lookupItemSlot = new Slot(0);
 			lookupItemSlot = new RecipeQuerySlot();
@@ -148,8 +145,7 @@ namespace CheatSheet.Menus
 			recipeView.ReorderSlots();
 		}
 
-		const int cols = 5;
-
+		private const int cols = 5;
 
 		public override void Draw(SpriteBatch spriteBatch)
 		{
@@ -190,14 +186,12 @@ namespace CheatSheet.Menus
 			}
 			Utils.DrawBorderStringFourWay(spriteBatch, Main.fontMouseText, UIView.HoverText, vector.X, vector.Y, new Color((int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor), Color.Black, Vector2.Zero, 1f);
 
-
 			float positionX = this.X + spacing;
 			float positionY = this.Y + 270;//320;
 			string text4;
 			if (selectedRecipe != null && Visible)
 			{
 				Color color3 = new Color((int)((byte)((float)Main.mouseTextColor)), (int)((byte)((float)Main.mouseTextColor)), (int)((byte)((float)Main.mouseTextColor)), (int)((byte)((float)Main.mouseTextColor)));
-
 
 				text4 = Lang.inter[21] + " " + Main.guideItem.Name;
 				spriteBatch.DrawString(Main.fontMouseText, Lang.inter[22].Value, new Vector2((float)positionX, (float)(positionY)), color3, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);

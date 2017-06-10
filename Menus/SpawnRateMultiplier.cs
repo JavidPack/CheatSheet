@@ -1,19 +1,13 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
+﻿using CheatSheet.UI;
+using Microsoft.Xna.Framework;
 using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using CheatSheet.UI;
-using CheatSheet.CustomUI;
 
 namespace CheatSheet.Menus
 {
-	class SpawnRateMultiplierGlobalNPC : GlobalNPC
+	internal class SpawnRateMultiplierGlobalNPC : GlobalNPC
 	{
 		public override void EditSpawnRate(Player player, ref int spawnRate, ref int maxSpawns)
 		{
@@ -22,12 +16,12 @@ namespace CheatSheet.Menus
 		}
 	}
 
-	class SpawnRateMultiplier
+	internal class SpawnRateMultiplier
 	{
-		static float[] multipliers = new float[] { .25f, .5f, 1f, 1.5f, 2f, 3f, 5f, 10f, 30f };
-		static string[] multiplierStrings = new string[] { ".25x", ".5x", "1x", "1.5x", "2x", "3x", "5x", "10x", "30x" };
+		private static float[] multipliers = new float[] { .25f, .5f, 1f, 1.5f, 2f, 3f, 5f, 10f, 30f };
+		private static string[] multiplierStrings = new string[] { ".25x", ".5x", "1x", "1.5x", "2x", "3x", "5x", "10x", "30x" };
 		public static float currentMultiplier = 1f;
-		static int currentMultiplierIndex = 2;
+		private static int currentMultiplierIndex = 2;
 		public static UIImage button;
 		public static bool HasPermission = true;
 
@@ -92,7 +86,6 @@ namespace CheatSheet.Menus
 			netMessage.Write(newSetting);
 			netMessage.Send();
 		}
-
 
 		// Action taken by client receiving button
 		internal static void HandleSpawnRateSet(BinaryReader reader, int whoAmI)

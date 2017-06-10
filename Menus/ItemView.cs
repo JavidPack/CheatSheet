@@ -1,13 +1,11 @@
+using CheatSheet.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using Terraria;
-using Terraria.ModLoader;
-using CheatSheet.UI;
-using Terraria.UI;
 using System.Text;
+using Terraria;
+using Terraria.UI;
 
 namespace CheatSheet.Menus
 {
@@ -70,8 +68,8 @@ namespace CheatSheet.Menus
 			{
 				this.allItemsSlots[i] = new Slot(i);
 			}
-		//	this.allItemsSlots = (from s in this.allItemsSlots
-		//						  select s).ToArray<Slot>();
+			//	this.allItemsSlots = (from s in this.allItemsSlots
+			//						  select s).ToArray<Slot>();
 		}
 
 		public override void Draw(SpriteBatch spriteBatch)

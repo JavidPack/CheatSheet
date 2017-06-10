@@ -1,16 +1,16 @@
-﻿using System.IO;
-using Terraria;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using Terraria;
 using Terraria.ModLoader;
 
 namespace CheatSheet
 {
-	class ConfigurationLoader
+	internal class ConfigurationLoader
 	{
-		static string jsonDatabaseFilenamePersonal = "CheatSheetConfig.json";
-		static string jsonDatabaseFilenameServer = "CheatSheetConfig_Server.json";
+		private static string jsonDatabaseFilenamePersonal = "CheatSheetConfig.json";
+		private static string jsonDatabaseFilenameServer = "CheatSheetConfig_Server.json";
 		internal static PersonalConfiguration personalConfiguration;
 		internal static ServerConfiguration serverConfiguration;
 
@@ -81,7 +81,7 @@ namespace CheatSheet
 		}
 	}
 
-	class PersonalConfiguration
+	internal class PersonalConfiguration
 	{
 		public bool ItemBrowser = true;
 		public bool NPCBrowser = true;
@@ -95,6 +95,7 @@ namespace CheatSheet
 		public bool ModExtensions = true;
 		public bool ClearMenu = true;
 		public bool Vacuum = true;
+
 		//public bool BossDowner = true;
 		//public bool EventManager = true;
 		[JsonIgnore]
@@ -110,7 +111,7 @@ namespace CheatSheet
 		//}
 	}
 
-	class ServerConfiguration
+	internal class ServerConfiguration
 	{
 		public JSONNPC[] BannedNPCs
 		{
@@ -122,7 +123,7 @@ namespace CheatSheet
 			}
 			set
 			{
-				// Vanilla are saved as Name and type, type is used, name is just for reading convenience. 
+				// Vanilla are saved as Name and type, type is used, name is just for reading convenience.
 				// Modded are stored as Classname
 				List<int> loaded = value.Select(
 					jsonnpc => jsonnpc.id != 0 ? jsonnpc.id : (ModLoader.GetMod(jsonnpc.mod)?.NPCType(jsonnpc.name) ?? -100)
@@ -145,6 +146,7 @@ namespace CheatSheet
 		public string mod;
 		public string name;
 		public int id;
+
 		public JSONNPC(string mod, string name, int id)
 		{
 			this.mod = mod;

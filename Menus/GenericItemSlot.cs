@@ -1,11 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿using CheatSheet.UI;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using Terraria.ModLoader;
-using Terraria;
-using Microsoft.Xna.Framework.Input;
-using CheatSheet.UI;
 using ReLogic.Graphics;
+using System;
+using Terraria;
 
 namespace CheatSheet.Menus
 {
@@ -34,12 +32,12 @@ namespace CheatSheet.Menus
 		{
 			if (item != null)
 			{
-			//	UIView.HoverText = this.item.name;
-			//	UIView.HoverItem = this.item.Clone();
+				//	UIView.HoverText = this.item.name;
+				//	UIView.HoverItem = this.item.Clone();
 
 				Main.hoverItemName = this.item.Name;
-				Main.HoverItem = item.Clone();																							  
-				Main.HoverItem.SetNameOverride(Main.HoverItem.Name + (Main.HoverItem.modItem != null ? " [" + Main.HoverItem.modItem.mod.Name+"]" : ""));
+				Main.HoverItem = item.Clone();
+				Main.HoverItem.SetNameOverride(Main.HoverItem.Name + (Main.HoverItem.modItem != null ? " [" + Main.HoverItem.modItem.mod.Name + "]" : ""));
 			}
 		}
 

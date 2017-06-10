@@ -4,13 +4,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.ID;
-using Terraria.ModLoader;
-using Terraria.ObjectData;
 
 namespace CheatSheet.Menus
 {
@@ -28,12 +23,13 @@ namespace CheatSheet.Menus
 		public UIImage bToggleTransparentSelection;
 
 		private CheatSheet mod;
-		
+
 		// Idea: shift alt select to add subtract from selection.
 
 		//	public int brushSize = 1;
 		//	public int[,] BrushTileType = new int[10, 10];
 		public Tile[,] StampTiles = new Tile[0, 0];
+
 		internal bool StampToolActive;
 		internal bool EyeDropperActive;
 		internal bool TransparentSelectionEnabled = false;
@@ -190,9 +186,7 @@ namespace CheatSheet.Menus
 				}
 			}
 
-
 			//	base.Draw(spriteBatch);
-
 
 			if (Visible && (base.IsMouseInside() /*|| button.MouseInside*/))
 			{
@@ -309,7 +303,6 @@ namespace CheatSheet.Menus
 					DrawPreview(Main.spriteBatch, StampTiles, vector);
 				}
 
-
 				Rectangle value = new Rectangle(0, 0, 1, 1);
 				float r = 1f;
 				if (!mouseDown) r = .25f;
@@ -358,7 +351,6 @@ namespace CheatSheet.Menus
 				if (StampToolActive)
 				{
 					DisableAllWindows();
-
 				}
 				else
 				{
@@ -424,7 +416,6 @@ namespace CheatSheet.Menus
 					{
 						if (startTileX != -1 && startTileY != -1 && lastMouseTileX != -1 && lastMouseTileY != -1)
 						{
-
 							Vector2 upperLeft = new Vector2(Math.Min(startTileX, lastMouseTileX), Math.Min(startTileY, lastMouseTileY));
 							Vector2 lowerRight = new Vector2(Math.Max(startTileX, lastMouseTileX), Math.Max(startTileY, lastMouseTileY));
 
@@ -445,7 +436,6 @@ namespace CheatSheet.Menus
 								}
 							}
 
-
 							for (int x = minX; x < maxX; x++)
 							{
 								for (int y = minY; y < maxY; y++)
@@ -460,7 +450,6 @@ namespace CheatSheet.Menus
 								}
 							}
 							//Main.NewText("EyeDropper: width height" + (maxX - minX) + " " + (maxY - minY));
-
 						}
 						//Main.NewText("EyeDropper: x,y,min max " + minX + " " + maxX + " " + minY + " " + maxY);
 
@@ -477,8 +466,6 @@ namespace CheatSheet.Menus
 					//		Main.LocalPlayer.showItemIconText = "Click to paint";
 					if (mouseDown)
 					{
-
-
 						int width = StampTiles.GetLength(0);
 						int height = StampTiles.GetLength(1);
 						Vector2 brushsize = new Vector2(width, height);
@@ -596,12 +583,9 @@ namespace CheatSheet.Menus
 
 			DoSlideMovement();
 
-			
 			base.CenterXAxisToParentCenter();
 			base.Update();
 		}
-
-
 
 		public void Resize()
 		{
@@ -618,8 +602,8 @@ namespace CheatSheet.Menus
 			this.buttonView.Width = base.Width;
 		}
 
-		bool preHidePaintTiles;
-		bool preHideEyeDropper;
+		private bool preHidePaintTiles;
+		private bool preHideEyeDropper;
 		private bool constrainToAxis;
 		private int constrainedX;
 		private int constrainedY;
@@ -640,8 +624,8 @@ namespace CheatSheet.Menus
 
 		public void Show()
 		{
-            mod.hotbar.currentHotbar = this;
-            arrived = false;
+			mod.hotbar.currentHotbar = this;
+			arrived = false;
 			hidden = false;
 			Visible = true;
 

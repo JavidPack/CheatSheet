@@ -1,17 +1,12 @@
-﻿using CheatSheet.UI;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using Terraria;
-using Terraria.ID;
+using Terraria.GameInput;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
-using Terraria.GameInput;
 
 namespace CheatSheet
 {
-	class CheatSheetPlayer : ModPlayer
+	internal class CheatSheetPlayer : ModPlayer
 	{
 		public static int MaxExtraAccessories = 6;
 		public Item[] ExtraAccessories = new Item[MaxExtraAccessories];

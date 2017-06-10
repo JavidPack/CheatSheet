@@ -1,11 +1,10 @@
+using CheatSheet.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using Terraria.ModLoader;
-using Terraria;
 using Microsoft.Xna.Framework.Input;
-using CheatSheet.UI;
 using ReLogic.Graphics;
+using System;
+using Terraria;
 
 namespace CheatSheet.Menus
 {
@@ -104,21 +103,19 @@ namespace CheatSheet.Menus
 
 			//Main.craftingHide = true;
 			Main.hoverItemName = this.item.Name;// + (item.modItem != null ? " " + item.modItem.mod.Name : "???");
-			//if (item.stack > 1)
-			//{
-			//	object hoverItemName = Main.hoverItemName;
-			//	Main.hoverItemName = string.Concat(new object[]
-			//		{
-			//				hoverItemName,
-			//				" (",
-			//				item.stack,
-			//				")"
-			//		});
-			//}
+												//if (item.stack > 1)
+												//{
+												//	object hoverItemName = Main.hoverItemName;
+												//	Main.hoverItemName = string.Concat(new object[]
+												//		{
+												//				hoverItemName,
+												//				" (",
+												//				item.stack,
+												//				")"
+												//		});
+												//}
 			Main.HoverItem = item.Clone();
 			Main.HoverItem.SetNameOverride(Main.HoverItem.Name + (Main.HoverItem.modItem != null ? " [" + Main.HoverItem.modItem.mod.Name + "]" : ""));
-
-
 		}
 
 		private void Slot2_onLeftClick(object sender, EventArgs e)
@@ -225,7 +222,7 @@ namespace CheatSheet.Menus
 				{
 					if ((Main.mouseItem.stack < Main.mouseItem.maxStack || Main.mouseItem.type == 0) && item.stack > 0)
 					{
-					//	ErrorLogger.Log("3");
+						//	ErrorLogger.Log("3");
 
 						if (j == 0)
 						{
@@ -233,12 +230,12 @@ namespace CheatSheet.Menus
 						}
 						if (Main.mouseItem.type == 0)
 						{
-						//	ErrorLogger.Log("4");
+							//	ErrorLogger.Log("4");
 
 							Main.mouseItem.netDefaults(item.netID);
 							if (item.prefix != 0)
 							{
-//ErrorLogger.Log("??");
+								//ErrorLogger.Log("??");
 								Main.mouseItem.Prefix((int)item.prefix);
 							}
 							Main.mouseItem.stack = 0;
@@ -255,8 +252,6 @@ namespace CheatSheet.Menus
 					}
 				}
 			}
-
-
 		}
 
 		public override void Draw(SpriteBatch spriteBatch)

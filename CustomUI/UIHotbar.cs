@@ -13,6 +13,7 @@ namespace CheatSheet.CustomUI
 		{
 			ScissorTestEnable = true
 		};
+
 		internal static float slideMoveSpeed = 8f;
 		internal float lerpAmount;
 
@@ -45,13 +46,13 @@ namespace CheatSheet.CustomUI
 			}
 		}
 
-
 		internal float spacing = 8f;
 
 		public bool hidden;
 		internal bool arrived;
 
 		private bool _selected;
+
 		internal bool selected
 		{
 			get { return _selected; }

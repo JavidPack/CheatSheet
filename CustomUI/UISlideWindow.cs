@@ -1,16 +1,11 @@
 ﻿using CheatSheet.Menus;
 using CheatSheet.UI;
 using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 
 namespace CheatSheet.CustomUI
 {
-	class UISlideWindow : UIWindow
+	internal class UISlideWindow : UIWindow
 	{
 		internal static float moveSpeed = 10f;
 		internal float lerpAmount;
@@ -23,6 +18,7 @@ namespace CheatSheet.CustomUI
 		internal bool arrived;
 
 		private bool _selected;
+
 		internal bool selected
 		{
 			get { return _selected; }
@@ -49,19 +45,18 @@ namespace CheatSheet.CustomUI
 			shownPosition = Position;
 			hiddenPosition = Position;
 
-			if (Position.X + Width/2 > Main.screenWidth / 2)
+			if (Position.X + Width / 2 > Main.screenWidth / 2)
 			{
 				hiddenPosition.X = Main.screenWidth;
 			}
 			else
 			{
-				hiddenPosition.X = - Width;
+				hiddenPosition.X = -Width;
 			}
 		}
 
 		public UISlideWindow()
 		{
-
 		}
 
 		protected override bool IsMouseInside()
@@ -90,11 +85,11 @@ namespace CheatSheet.CustomUI
 			arrived = false;
 			Visible = true;
 
-			if(shownPosition.X > Main.screenWidth -25 || shownPosition.Y > Main.screenHeight - 25)
+			if (shownPosition.X > Main.screenWidth - 25 || shownPosition.Y > Main.screenHeight - 25)
 			{
 				shownPosition = defaultPosition;
 			}
-			if (shownPosition.X < -Width+25 || shownPosition.Y < -Height + 25)
+			if (shownPosition.X < -Width + 25 || shownPosition.Y < -Height + 25)
 			{
 				shownPosition = defaultPosition;
 			}
@@ -129,6 +124,5 @@ namespace CheatSheet.CustomUI
 
 			base.Update();
 		}
-
 	}
 }

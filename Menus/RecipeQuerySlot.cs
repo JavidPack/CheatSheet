@@ -1,11 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿using CheatSheet.UI;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using Terraria.ModLoader;
-using Terraria;
-using Microsoft.Xna.Framework.Input;
-using CheatSheet.UI;
 using ReLogic.Graphics;
+using System;
+using Terraria;
 
 namespace CheatSheet.Menus
 {
@@ -60,7 +58,6 @@ namespace CheatSheet.Menus
 				Main.mouseItem.SetDefaults(0);
 				real = true;
 			}
-
 
 			//call update.
 			RecipeBrowserWindow.recipeView.ReorderSlots();

@@ -1,15 +1,11 @@
-﻿using Microsoft.Xna.Framework;
+﻿using CheatSheet.CustomUI;
+using CheatSheet.UI;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using CheatSheet.UI;
-using CheatSheet.CustomUI;
 
 namespace CheatSheet.Menus
 {
@@ -57,10 +53,11 @@ namespace CheatSheet.Menus
 		}
 	}
 
-	class ConfigurationWindow : UISlideWindow
+	internal class ConfigurationWindow : UISlideWindow
 	{
 		public Mod mod;
 		private float spacing = 16f;
+
 		public ConfigurationWindow(Mod mod)
 		{
 			this.mod = mod;
@@ -165,45 +162,56 @@ namespace CheatSheet.Menus
 				case "Item Browser":
 					ConfigurationLoader.personalConfiguration.ItemBrowser = checkbox.Selected;
 					break;
+
 				case "NPC Browser":
 					ConfigurationLoader.personalConfiguration.NPCBrowser = checkbox.Selected;
 					break;
+
 				case "Recipe Browser":
 					ConfigurationLoader.personalConfiguration.RecipeBrowser = checkbox.Selected;
 					break;
+
 				case "Minion Booster":
 					ConfigurationLoader.personalConfiguration.MinionBooster = checkbox.Selected;
 					break;
+
 				case "Butcher":
 					ConfigurationLoader.personalConfiguration.Butcher = checkbox.Selected;
 					break;
+
 				case "Clear Menu":
 					ConfigurationLoader.personalConfiguration.ClearMenu = checkbox.Selected;
 					break;
+
 				case "Extra Accessory Slots":
 					ConfigurationLoader.personalConfiguration.ExtraAccessorySlots = checkbox.Selected;
 					break;
+
 				case "Mod Extensions":
 					ConfigurationLoader.personalConfiguration.ModExtensions = checkbox.Selected;
 					break;
+
 				case "Paint Tools":
 					ConfigurationLoader.personalConfiguration.PaintTools = checkbox.Selected;
 					break;
+
 				case "Spawn Rate":
 					ConfigurationLoader.personalConfiguration.SpawnRate = checkbox.Selected;
 					break;
+
 				case "Vacuum":
 					ConfigurationLoader.personalConfiguration.Vacuum = checkbox.Selected;
 					break;
+
 				case "Waypoints":
 					ConfigurationLoader.personalConfiguration.Waypoints = checkbox.Selected;
 					break;
-                //case "Boss Downer":
-                //    ConfigurationLoader.configuration.BossDowner = checkbox.Selected;
-                //    break;
-                //case "Event Manager":
-                //    ConfigurationLoader.configuration.EventManager = checkbox.Selected;
-                //    break;
+				//case "Boss Downer":
+				//    ConfigurationLoader.configuration.BossDowner = checkbox.Selected;
+				//    break;
+				//case "Event Manager":
+				//    ConfigurationLoader.configuration.EventManager = checkbox.Selected;
+				//    break;
 				default:
 					break;
 			}
@@ -212,5 +220,4 @@ namespace CheatSheet.Menus
 			ConfigurationTool.configurationWindow.selected = true;
 		}
 	}
-
 }

@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CheatSheet.Menus;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.UI;
-using CheatSheet.Menus;
 
 namespace CheatSheet
 {
-	class AllItemsMenu : GlobalItem
+	internal class AllItemsMenu : GlobalItem
 	{
 		private static Item[] singleSlotArray;
 
@@ -81,10 +76,8 @@ namespace CheatSheet
 			spriteBatch.End();
 			spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
 
-		//	DrawUpdateExtraAccessories(spriteBatch);
-
+			//	DrawUpdateExtraAccessories(spriteBatch);
 		}
-		
 
 		internal void DrawUpdateExtraAccessories(SpriteBatch spriteBatch)
 		{
@@ -121,7 +114,6 @@ namespace CheatSheet
 					if (Main.netMode == 1) num17 -= 47;
 					r.X = num17/* + l * -47*/;
 					r.Y = num18 + (0 + i) * 47;
-
 
 					if (r.Contains(value)/* && !flag2*/)
 					{

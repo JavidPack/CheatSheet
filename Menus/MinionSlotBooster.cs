@@ -1,40 +1,34 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
+﻿using CheatSheet.UI;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using CheatSheet.UI;
-using CheatSheet.CustomUI;
 
 namespace CheatSheet.Menus
 {
-
 	// TODO, test if server needs to know this as well.
-	class MinionSlotBoosterModPlayer : ModPlayer
+	internal class MinionSlotBoosterModPlayer : ModPlayer
 	{
 		public override void PostUpdateEquips()
 		{
 			player.maxMinions += MinionSlotBooster.currentBoost;
 		}
 	}
-		class MinionSlotBoosterModPlayer2 : GlobalTile
+
+	internal class MinionSlotBoosterModPlayer2 : GlobalTile
 	{
 		public override void ModifyLight(int i, int j, int type, ref float r, ref float g, ref float b)
 		{
 			base.ModifyLight(i, j, type, ref r, ref g, ref b);
 		}
 	}
-	class MinionSlotBooster
+
+	internal class MinionSlotBooster
 	{
-		static int[] boosts = new int[] { 0,1,2,3,5,10,15,20};
-		static string[] boostStrings = new string[] { "+0", "+1", "+2", "+3", "+5", "+10", "+15", "+20" };
+		private static int[] boosts = new int[] { 0, 1, 2, 3, 5, 10, 15, 20 };
+		private static string[] boostStrings = new string[] { "+0", "+1", "+2", "+3", "+5", "+10", "+15", "+20" };
 		public static int currentBoost = 0;
-		static int currentBoostIndex = 0;
+		private static int currentBoostIndex = 0;
 		public static UIImage button;
 
 		public static UIImage GetButton(Mod mod)
@@ -63,7 +57,7 @@ namespace CheatSheet.Menus
 			//}
 			//else
 			//{
-				ChangeSettingLogic(newIndex);
+			ChangeSettingLogic(newIndex);
 			//}
 		}
 
@@ -99,7 +93,6 @@ namespace CheatSheet.Menus
 		//	netMessage.Send();
 		//}
 
-		
 		//// Action taken by client receiving button
 		//internal static void HandleSpawnRateSet(BinaryReader reader, int whoAmI)
 		//{

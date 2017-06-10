@@ -1,15 +1,11 @@
-﻿using Microsoft.Xna.Framework;
+﻿using CheatSheet.CustomUI;
+using CheatSheet.UI;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using CheatSheet.UI;
-using CheatSheet.CustomUI;
 
 namespace CheatSheet.Menus
 {
@@ -33,22 +29,24 @@ namespace CheatSheet.Menus
 		public static Texture2D loginTexture;
 		public static Texture2D logoutTexture;
 
-
 		public UIView buttonView;
 
 		private UIImage arrow;
 		internal UIImage button;
 		public UIImage bToggleItemBrowser;
+
 		//		public UIImage bToggleEnemies;
 		//		public UIImage bToggleBlockReach;
 		//		public UIImage bFlyCamera;
 		public UIImage bToggleClearMenu;
+
 		//		public UIImage bRevealMap;
 		//		public UIImage bWaypoints;
 		//		public UIImage bGroupManager;
 		//		public UIImage bOnlinePlayers;
 		//		public UIImage bTime;
 		public UIImage bToggleNPCBrowser;
+
 		public UIImage bTogglePaintTools;
 		//		public UIImage bWeatherWindow;
 		//		public UIImage bBackupWorld;
@@ -66,7 +64,9 @@ namespace CheatSheet.Menus
 
 		//private static Color buttonUnselectedColor = Color.White;
 		internal static Color buttonUnselectedColor = Color.LightSkyBlue;
+
 		internal static Color buttonSelectedColor = Color.White;
+
 		//private static Color buttonSelectedColor = Color.LightSkyBlue;
 		internal static Color buttonSelectedHiddenColor = Color.Blue;
 
@@ -185,7 +185,7 @@ namespace CheatSheet.Menus
 			bVacuum.Tooltip = "Vacuum Items";
 			bToggleNPCButcherer.Tooltip = "Show NPC Butcherer";
 			bToggleQuickTeleport.Tooltip = "Show Quick Waypoints";
-	//		bToggleEventManager.Tooltip = "Show Event Manager";
+			//		bToggleEventManager.Tooltip = "Show Event Manager";
 
 			//		this.bToggleBlockReach.Opacity = Hotbar.disabledOpacity;
 			//		this.bFlyCamera.Opacity = Hotbar.disabledOpacity;
@@ -233,7 +233,7 @@ namespace CheatSheet.Menus
 				//QuickTeleportHotbar.TeleportPlayer(Main.LocalPlayer, new Vector2(Main.spawnTileX, Main.spawnTileY), true);
 				QuickTeleportHotbar.HandleTeleport();
 			};
-	//		this.bToggleEventManager.onLeftClick += new EventHandler(this.bToggleEventManager_onLeftClick);
+			//		this.bToggleEventManager.onLeftClick += new EventHandler(this.bToggleEventManager_onLeftClick);
 
 			//		this.buttonView.AddChild(this.bToggleBlockReach);
 			//		this.buttonView.AddChild(this.bFlyCamera);
@@ -258,11 +258,11 @@ namespace CheatSheet.Menus
 			buttonView.AddChild(bVacuum);
 			buttonView.AddChild(bToggleNPCButcherer);
 			buttonView.AddChild(bToggleQuickTeleport);
-//			buttonView.AddChild(bToggleEventManager);
+			//			buttonView.AddChild(bToggleEventManager);
 			buttonView.AddChild(SpawnRateMultiplier.GetButton(mod));
 			buttonView.AddChild(MinionSlotBooster.GetButton(mod));
 			//	buttonView.AddChild(FullBright.GetButton(mod));
-//			buttonView.AddChild(BossDowner.GetButton(mod));
+			//			buttonView.AddChild(BossDowner.GetButton(mod));
 			buttonView.AddChild(ConfigurationTool.GetButton(mod));
 
 			base.Width = 200f;
@@ -329,7 +329,6 @@ namespace CheatSheet.Menus
 		public override void Draw(SpriteBatch spriteBatch)
 		{
 			base.Draw(spriteBatch);
-
 
 			if (Visible && (IsMouseInside() || button.MouseInside))
 			{
@@ -619,7 +618,7 @@ namespace CheatSheet.Menus
 				writer.Write(item2.prefix);
 				writer.Write((byte)number2);
 				writer.Write(value); //netID
-            
+
                 int num56 = (int)this.reader.ReadInt16();
 				Vector2 vector = this.reader.ReadVector2();
 				Vector2 velocity = this.reader.ReadVector2();
@@ -866,7 +865,6 @@ namespace CheatSheet.Menus
 		//	Resize();
 		//}
 
-
 		public void Resize()
 		{
 			float num = this.spacing;
@@ -986,9 +984,6 @@ namespace CheatSheet.Menus
 	}
 }
 
-
-
-
 //using Microsoft.Xna.Framework;
 //using Microsoft.Xna.Framework.Graphics;
 //using System;
@@ -999,7 +994,6 @@ namespace CheatSheet.Menus
 //using Terraria;
 //using Terraria.ID;
 //using Terraria.ModLoader;
-
 
 //namespace CheatSheet.UI
 //{
@@ -1050,7 +1044,6 @@ namespace CheatSheet.Menus
 //				this.AddChild(button);
 //			}
 //		}
-
 
 //		public override void Draw(SpriteBatch spriteBatch)
 //		{

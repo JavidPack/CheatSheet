@@ -1,20 +1,15 @@
 ﻿using CheatSheet.Menus;
-using CheatSheet.UI;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria;
-using Terraria.ModLoader;
 using System.IO;
-using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ID;
-using Terraria.DataStructures;
-using Terraria.UI;
 using Terraria.Localization;
+using Terraria.ModLoader;
+using Terraria.UI;
 
 // TODO: move windows below inventory
 // TODO: Filter recipes with unobtainables.
@@ -112,7 +107,7 @@ namespace CheatSheet
 
 		private void SetupHEROsModIntegration(Mod herosMod)
 		{
-			// Add Permissions always. 
+			// Add Permissions always.
 			herosMod.Call(
 				// Special string
 				"AddPermission",
@@ -201,13 +196,14 @@ namespace CheatSheet
 		//	Main.spriteBatch.DrawString(Main.fontMouseText, "Testing Testing", new Vector2(Main.screenWidth / 2, Main.screenHeight / 2), Color.Pink, 0.0f, new Vector2(), 0.8f, SpriteEffects.None, 0.0f);
 		//}
 
-		int lastmode = -1;
+		private int lastmode = -1;
+
 		public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
 		{
-			if(Main.netMode != lastmode)
+			if (Main.netMode != lastmode)
 			{
 				lastmode = Main.netMode;
-				if(Main.netMode == 0)
+				if (Main.netMode == 0)
 				{
 					SpawnRateMultiplier.HasPermission = true;
 				}
@@ -266,7 +262,7 @@ namespace CheatSheet
 		//	PreviousKeyState = Main.keyState;
 		//}
 
-		KeyboardState PreviousKeyState;
+		private KeyboardState PreviousKeyState;
 
 		public void RegisterButton(Texture2D texture, Action buttonClickedAction, Func<string> tooltip)
 		{
@@ -310,6 +306,7 @@ namespace CheatSheet
 					//message = "Spawned " + netID + " by " + Netplay.Clients[whoAmI].Name;
 					//NetMessage.SendData(25, -1, -1, message, 255, Color.Azure.R, Color.Azure.G, Color.Azure.B, 0);
 					break;
+
 				case CheatSheetMessageType.QuickClear:
 					int clearType = reader.ReadInt32();
 					switch (clearType)
@@ -318,10 +315,12 @@ namespace CheatSheet
 							key = "Mods.CheatSheet.ItemClearNotification";
 							//message = "Items were cleared by ";
 							break;
+
 						case 1:
 							key = "Mods.CheatSheet.ProjectileClearNotification";
 							//message = "Projectiles were cleared by ";
 							break;
+
 						default:
 							key = "";
 							break;
@@ -331,6 +330,7 @@ namespace CheatSheet
 					NetMessage.BroadcastChatMessage(NetworkText.FromKey(key, Netplay.Clients[whoAmI].Name), Color.Azure);
 					//NetMessage.SendData(25, -1, -1, message, 255, Color.Azure.R, Color.Azure.G, Color.Azure.B, 0);
 					break;
+
 				case CheatSheetMessageType.VacuumItems:
 					Hotbar.HandleVacuum(true, whoAmI);
 					key = "Mods.CheatSheet.VacuumNotification";
@@ -338,6 +338,7 @@ namespace CheatSheet
 					//message = "Items on the ground were vacuumed by " + Netplay.Clients[whoAmI].Name;
 					//NetMessage.SendData(25, -1, -1, message, 255, Color.Azure.R, Color.Azure.G, Color.Azure.B, 0);
 					break;
+
 				case CheatSheetMessageType.ButcherNPCs:
 					NPCButchererHotbar.HandleButcher(reader.ReadInt32(), true);
 					key = "Mods.CheatSheet.ButcherNotification";
@@ -345,15 +346,19 @@ namespace CheatSheet
 					//message = "NPCs were butchered by " + Netplay.Clients[whoAmI].Name;
 					//NetMessage.SendData(25, -1, -1, message, 255, Color.Azure.R, Color.Azure.G, Color.Azure.B, 0);
 					break;
+
 				case CheatSheetMessageType.TeleportPlayer:
 					QuickTeleportHotbar.HandleTeleport(reader.ReadInt32(), true, whoAmI);
 					break;
+
 				case CheatSheetMessageType.SetSpawnRate:
 					SpawnRateMultiplier.HandleSetSpawnRate(reader, whoAmI);
 					break;
+
 				case CheatSheetMessageType.SpawnRateSet:
 					SpawnRateMultiplier.HandleSpawnRateSet(reader, whoAmI);
 					break;
+
 				case CheatSheetMessageType.RequestFilterNPC:
 					int netID2 = reader.ReadInt32();
 					bool desired = reader.ReadBoolean();
@@ -366,6 +371,7 @@ namespace CheatSheet
 					packet.Write(desired);
 					packet.Send();
 					break;
+
 				case CheatSheetMessageType.InformFilterNPC:
 					int netID3 = reader.ReadInt32();
 					bool desired2 = reader.ReadBoolean();
@@ -404,6 +410,7 @@ namespace CheatSheet
 	public class CheatSheetButton
 	{
 		internal Texture2D texture;
+
 		//internal Action buttonClickedAction;
 		//internal Func<string> tooltip;
 		public CheatSheetButton(Texture2D texture/*, Action buttonClickedAction, Func<string> tooltip*/)
@@ -416,15 +423,14 @@ namespace CheatSheet
 		public virtual void buttonClickedAction()
 		{
 		}
+
 		public virtual string tooltip()
 		{
 			return "";
 		}
-
-
 	}
 
-	enum CheatSheetMessageType : byte
+	internal enum CheatSheetMessageType : byte
 	{
 		SpawnNPC,
 		QuickClear,

@@ -1,11 +1,9 @@
 ﻿using CheatSheet.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
-using Terraria.ModLoader;
 
 namespace CheatSheet.Menus
 {
@@ -100,7 +98,7 @@ namespace CheatSheet.Menus
 					// if my item is in a recipe group, i should add that to required items.
 					bool inGroup = allRecipeSlot[activeSlots[i]].recipe.acceptedGroups.Intersect(groups).Any();
 
-					inGroup |= curRecipe.useWood(type,type) || curRecipe.useSand(type,type) || curRecipe.useFragment(type,type) || curRecipe.useIronBar(type,type) || curRecipe.usePressurePlate(type,type);
+					inGroup |= curRecipe.useWood(type, type) || curRecipe.useSand(type, type) || curRecipe.useFragment(type, type) || curRecipe.useIronBar(type, type) || curRecipe.usePressurePlate(type, type);
 
 					//if (inGroup)
 					//{

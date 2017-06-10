@@ -1,12 +1,8 @@
-﻿using Microsoft.Xna.Framework;
+﻿using CheatSheet.UI;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Linq;
-using Terraria.ModLoader;
 using Terraria;
-using Microsoft.Xna.Framework.Input;
-using CheatSheet.UI;
-using Terraria.ID;
 
 namespace CheatSheet.Menus
 {
@@ -82,8 +78,6 @@ namespace CheatSheet.Menus
 			};
 			base.onHover += new EventHandler(this.Slot2_onHover);
 		}
-
-
 
 		protected override float GetWidth()
 		{
@@ -291,17 +285,17 @@ namespace CheatSheet.Menus
 		}
 	}
 }
+
 /*
 			Microsoft.Xna.Framework.Color color9 = Lighting.GetColor((int)((double)Main.npc[i].position.X + (double)Main.npc[i].width * 0.5) / 16, (int)(((double)Main.npc[i].position.Y + (double)Main.npc[i].height * 0.5) / 16.0));
 
-
 	Main.spriteBatch.Draw(Main.npcTexture[type],
-	new Vector2(Main.npc[i].position.X - Main.screenPosition.X + (float)(Main.npc[i].width / 2) - (float)Main.npcTexture[type].Width * Main.npc[i].scale / 2f + vector10.X * Main.npc[i].scale, Main.npc[i].position.Y - Main.screenPosition.Y + (float)Main.npc[i].height - (float)Main.npcTexture[type].Height * Main.npc[i].scale / (float)Main.npcFrameCount[type] + 4f + vector10.Y * Main.npc[i].scale + num66 + num65 + Main.npc[i].gfxOffY), 
+	new Vector2(Main.npc[i].position.X - Main.screenPosition.X + (float)(Main.npc[i].width / 2) - (float)Main.npcTexture[type].Width * Main.npc[i].scale / 2f + vector10.X * Main.npc[i].scale, Main.npc[i].position.Y - Main.screenPosition.Y + (float)Main.npc[i].height - (float)Main.npcTexture[type].Height * Main.npc[i].scale / (float)Main.npcFrameCount[type] + 4f + vector10.Y * Main.npc[i].scale + num66 + num65 + Main.npc[i].gfxOffY),
 	new Microsoft.Xna.Framework.Rectangle?(frame4),
-	Main.npc[i].GetAlpha(color9), 
-	Main.npc[i].rotation, 
+	Main.npc[i].GetAlpha(color9),
+	Main.npc[i].rotation,
 	vector10,
-	Main.npc[i].scale, 
+	Main.npc[i].scale,
 	spriteEffects,
 	0f);
 									if (Main.npc[i].color != default(Microsoft.Xna.Framework.Color))

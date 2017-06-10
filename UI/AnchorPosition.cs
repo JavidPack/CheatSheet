@@ -1,5 +1,3 @@
-using System;
-
 namespace CheatSheet.UI
 {
 	internal enum AnchorPosition

@@ -1,19 +1,14 @@
 ﻿using CheatSheet.CustomUI;
+using CheatSheet.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
 using Terraria;
-using Terraria.ID;
 using Terraria.ModLoader;
-using CheatSheet.UI;
 
 namespace CheatSheet.Menus
 {
-	class ExtendedCheatMenu : UISlideWindow
+	internal class ExtendedCheatMenu : UISlideWindow
 	{
 		public Mod mod;
 		private static UIImage[] buttons = new UIImage[CheatSheet.ButtonTexture.Count];
@@ -73,7 +68,6 @@ namespace CheatSheet.Menus
 					//	uIImage2.Tooltip = RecipeBrowser.categNames[j];
 					ExtendedCheatMenu.buttons[j] = button;
 					this.AddChild(button);
-
 				}
 
 				Width += 40 * cols;
@@ -86,9 +80,7 @@ namespace CheatSheet.Menus
 			uIImage.Position = new Vector2(base.Width - this.spacing / 2, this.spacing / 2);
 			uIImage.onLeftClick += new EventHandler(this.bClose_onLeftClick);
 			this.AddChild(uIImage);
-
 		}
-
 
 		public override void Draw(SpriteBatch spriteBatch)
 		{

@@ -1,20 +1,18 @@
 ﻿using CheatSheet.CustomUI;
+using CheatSheet.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using Terraria;
+using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.ModLoader;
-using CheatSheet.UI;
-using Terraria.GameInput;
 
 namespace CheatSheet.Menus
 {
-	enum NPCBrowserCategories
+	internal enum NPCBrowserCategories
 	{
 		AllNPCs,
 		Bosses,
@@ -24,7 +22,7 @@ namespace CheatSheet.Menus
 		ModNPCs
 	}
 
-	class NPCBrowser : UISlideWindow
+	internal class NPCBrowser : UISlideWindow
 	{
 		private static string[] categNames = new string[]
 		{
@@ -50,6 +48,7 @@ namespace CheatSheet.Menus
 
 		public NPCView npcView;
 		public Mod mod;
+
 		//	private static List<string> categoryNames = new List<string>();
 		private static UIImage[] bCategories = new UIImage[categoryIcons.Length];
 
@@ -66,9 +65,9 @@ namespace CheatSheet.Menus
 
 		private float numWidth = categNames.Length - 5; // when adding more filtering buttons, decreases textbar size
 
-
 		// filteredNPCSlots represents currently loaded npc.
 		public static List<int> filteredNPCSlots = new List<int>();
+
 		internal static bool needsUpdate = true;
 
 		// 270 : 16 40 ?? 16
@@ -130,6 +129,7 @@ namespace CheatSheet.Menus
 			npcView.activeSlots = npcView.selectedCategory;
 			npcView.ReorderSlots();
 		}
+
 		public override void Draw(SpriteBatch spriteBatch)
 		{
 			base.Draw(spriteBatch);
