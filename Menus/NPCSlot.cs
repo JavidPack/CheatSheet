@@ -50,10 +50,10 @@ namespace CheatSheet.Menus
 			this.index = index;
 			isFiltered = false;
 			//	npc.netDefaults(npcNum);
-			npc.netDefaults(npcNum);
+			npc.SetDefaults(npcNum);
 			npcType = npc.type;
 			netID = npc.netID;
-			displayName = (netID < 0) ? npc.displayName : Main.npcName[npcType];
+			displayName = Lang.GetNPCNameValue(npcType);
 			syncNPC = (NPC)npc.Clone();
 			//npcType = npc.type;
 			//	this.isBoss = npc.boss;
@@ -247,7 +247,7 @@ namespace CheatSheet.Menus
 			{
 				//NPC refNPC = new NPC();
 				//refNPC.netDefaults(syncID);
-				Main.npc[index].netDefaults(syncID);
+				Main.npc[index].SetDefaults(syncID);
 			}
 		}
 

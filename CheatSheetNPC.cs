@@ -12,6 +12,9 @@ namespace CheatSheet
 {
     class CheatSheetNPC : GlobalNPC
     {
+		public bool isFiltered = false;
+		public override bool InstancePerEntity => true;
+
         public override bool PreAI(NPC npc)
         {
             //Main.NewText("using " + npc.ToString());
@@ -19,12 +22,12 @@ namespace CheatSheet
             if (NPCBrowser.filteredNPCSlots.Contains(npc.netID)/* || NPCBrowser.filteredNPCSlots.Contains(npc.type)*/)
             {
                 //NPCSlot.HandleFilterNPC(npc.whoAmI);
-                npc.GetModInfo<CheatSheetNPCInfo>(mod).isFiltered = true;
+                isFiltered = true;
 				int life = npc.life;
                 npc.StrikeNPCNoInteraction(life, 0f, -npc.direction, true);
                 if (Main.netMode == 1) // syncData does not do visuals
                 {
-                    NetMessage.SendData(28, -1, -1, "", npc.whoAmI, life, 0f, -Main.npc[npc.whoAmI].direction, 1);
+					NetMessage.SendData(28, -1, -1, null, npc.whoAmI, life, 0f, -Main.npc[npc.whoAmI].direction, 1);
                     // type, -1, -1, msg, index, damage, knockback, direction, crit
                 }
                 //NetMessage.SendData(23, -1, -1, "", npc.whoAmI);
@@ -36,7 +39,7 @@ namespace CheatSheet
 
         public override bool PreNPCLoot(NPC npc)
         {
-            return !npc.GetModInfo<CheatSheetNPCInfo>(mod).isFiltered;
+            return !isFiltered;
         }
 
         /*public override void SpawnNPC(int npc, int tileX, int tileY)
@@ -50,10 +53,5 @@ namespace CheatSheet
                 Main.npc[npc].active = false;
             }
         }*/
-    }
-
-    class CheatSheetNPCInfo : NPCInfo
-    {
-        public bool isFiltered = false;
     }
 }

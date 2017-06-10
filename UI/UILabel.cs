@@ -1,13 +1,15 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Graphics;
 using System;
 using Terraria;
+
 
 namespace CheatSheet.UI
 {
 	internal class UILabel : UIView
 	{
-		public SpriteFont font;
+		public DynamicSpriteFont font;
 
 		private string text = "";
 
@@ -17,7 +19,7 @@ namespace CheatSheet.UI
 
 		private float height;
 
-		public static SpriteFont defaultFont
+		public static DynamicSpriteFont defaultFont
 		{
 			get
 			{

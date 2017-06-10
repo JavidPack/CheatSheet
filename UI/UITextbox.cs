@@ -2,44 +2,46 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
-using Terraria.ModLoader;
 
 namespace CheatSheet.UI
 {
 	internal class UITextbox : UIView
 	{
-		public delegate void KeyPressedHandler(object sender, char key);
-
-		private RasterizerState _rasterizerState = new RasterizerState
-		{
-			ScissorTestEnable = true
-		};
-
+		private RasterizerState _rasterizerState = new RasterizerState() { ScissorTestEnable = true };
 		private static Texture2D textboxBackground = Terraria.ModLoader.ModLoader.GetTexture("CheatSheet/UI/Images.UIKit.textboxEdge");
-
 		private static Texture2D textboxFill;
 
-		private bool focused;
+		private static Texture2D TextboxFill
+		{
+			get
+			{
+				if (textboxFill == null)
+				{
+					Color[] edgeColors = new Color[textboxBackground.Width * textboxBackground.Height];
+					textboxBackground.GetData(edgeColors);
+					Color[] fillColors = new Color[textboxBackground.Height];
+					for (int y = 0; y < fillColors.Length; y++)
+					{
+						fillColors[y] = edgeColors[textboxBackground.Width - 1 + y * textboxBackground.Width];
+					}
+					textboxFill = new Texture2D(UIView.graphics, 1, fillColors.Length);
+					textboxFill.SetData(fillColors);
+				}
+				return textboxFill;
+			}
+		}
 
+		private bool focused = false;
+		public bool HadFocus { get { return focused; } }
+		public bool Numeric { get; set; }
+		public bool HasDecimal { get; set; }
 		private static float blinkTime = 1f;
-
 		private static float timer = 0f;
 
-		private bool eventSet;
+		//bool eventSet = false;
+		private float width = 200;
 
-		private float width = 200f;
-
-		private bool drawCarrot;
-
-		private UILabel label = new UILabel();
-
-		private static int padding = 4;
-
-		private string text = "";
-
-		private int maxCharacters = 20;
-
-		private bool passwordBox;
+		public delegate void KeyPressedHandler(object sender, char key);
 
 		public event EventHandler OnTabPress;
 
@@ -47,228 +49,173 @@ namespace CheatSheet.UI
 
 		public event EventHandler OnLostFocus;
 
-		public event UITextbox.KeyPressedHandler KeyPressed;
+		public event KeyPressedHandler KeyPressed;
 
-		private static Texture2D TextboxFill
-		{
-			get
-			{
-				if (UITextbox.textboxFill == null)
-				{
-					Color[] array = new Color[UITextbox.textboxBackground.Width * UITextbox.textboxBackground.Height];
-					UITextbox.textboxBackground.GetData<Color>(array);
-					Color[] array2 = new Color[UITextbox.textboxBackground.Height];
-					for (int i = 0; i < array2.Length; i++)
-					{
-						array2[i] = array[UITextbox.textboxBackground.Width - 1 + i * UITextbox.textboxBackground.Width];
-					}
-					UITextbox.textboxFill = new Texture2D(UIView.graphics, 1, array2.Length);
-					UITextbox.textboxFill.SetData<Color>(array2);
-				}
-				return UITextbox.textboxFill;
-			}
-		}
-
-		public bool HadFocus
-		{
-			get
-			{
-				return this.focused;
-			}
-		}
+		private bool drawCarrot = false;
+		private UILabel label = new UILabel();
+		private static int padding = 4;
+		private string text = "";
 
 		public string Text
 		{
-			get
-			{
-				return this.text;
-			}
-			set
-			{
-				this.text = value;
-			}
+			get { return text; }
+			set { text = value; }
 		}
+
+		private int maxCharacters = 20;
 
 		public int MaxCharacters
 		{
-			get
-			{
-				return this.maxCharacters;
-			}
-			set
-			{
-				this.maxCharacters = value;
-			}
+			get { return maxCharacters; }
+			set { maxCharacters = value; }
 		}
+
+		private bool passwordBox = false;
 
 		public bool PasswordBox
 		{
-			get
-			{
-				return this.passwordBox;
-			}
-			set
-			{
-				this.passwordBox = value;
-			}
+			get { return passwordBox; }
+			set { passwordBox = value; }
 		}
 
 		private string passwordString
 		{
 			get
 			{
-				string text = "";
-				for (int i = 0; i < this.Text.Length; i++)
-				{
-					text += "*";
-				}
-				return text;
+				string result = "";
+				for (int i = 0; i < Text.Length; i++) result += "*";
+				return result;
 			}
 		}
 
 		public UITextbox()
 		{
-			base.onLeftClick += new EventHandler(this.UITextbox_onLeftClick);
-			this.label.ForegroundColor = Color.Black;
-			this.label.Scale = base.Height / this.label.Height;
-			this.label.TextOutline = false;
-			this.AddChild(this.label);
+			this.onLeftClick += new EventHandler(UITextbox_onLeftClick);
+			label.ForegroundColor = Color.Black;
+			label.Scale = Height / label.Height;
+			label.TextOutline = false;
+			Numeric = false;
+			HasDecimal = false;
+			label.Position = new Vector2(4, 4);
+			this.AddChild(label);
 		}
 
 		private void UITextbox_onLeftClick(object sender, EventArgs e)
 		{
-			this.Focus();
+			Focus();
 		}
 
 		public void Focus()
 		{
-			if (this.focused)
+			if (!focused)
 			{
-				return;
+				focused = true;
+				//		Main.blockInput = true;
+				//		Main.clrInput();
+				timer = 0f;
+				//eventSet = true;
 			}
-			this.focused = true;
-			UITextbox.timer = 0f;
-			this.eventSet = true;
-			Main.blockInput = true;
-		//	Main.RemoveKeyEvent();
-			keyBoardInput.newKeyEvent += new Action<char>(this.KeyboardInput_newKeyEvent);
+			//ModUtils.StopListeningForKeyEvents();
+			//Main.RemoveKeyEvent();
+			//keyBoardInput.newKeyEvent += new Action<char>(KeyboardInput_newKeyEvent);
 		}
 
 		public void Unfocus()
 		{
-			if (this.focused && this.OnLostFocus != null)
+			if (focused)
 			{
-				this.OnLostFocus(this, EventArgs.Empty);
+				focused = false;
+				//		Main.blockInput = false;
+
+				OnLostFocus?.Invoke(this, EventArgs.Empty);
 			}
-			this.focused = false;
-			if (!this.eventSet)
-			{
-				return;
-			}
-			this.eventSet = false;
-			Main.blockInput = false;
-			keyBoardInput.newKeyEvent -= new Action<char>(this.KeyboardInput_newKeyEvent);
-		//	Main.AddKeyEvent();
+			//if (!eventSet) return;
+			//eventSet = false;
+			//keyBoardInput.newKeyEvent -= new Action<char>(KeyboardInput_newKeyEvent);
+			//ModUtils.StartListeningForKeyEvents();
+			//Main.AddKeyEvent();
 		}
 
-		private void KeyboardInput_newKeyEvent(char obj)
+		/*void KeyboardInput_newKeyEvent(char obj)
+        {
+            if (obj.Equals('\b'))
+            {
+                if (Text.Length > 0)
+                {
+                    Text = Text.Substring(0, Text.Length - 1);
+                    SetLabelPosition();
+					KeyPressed?.Invoke(this, obj);
+				}
+            }
+            else if(obj.Equals(''))
+            {
+                this.Unfocus();
+            }
+            else if (obj.Equals('\t'))
+            {
+				OnTabPress?.Invoke(this, new EventArgs());
+			}
+            else if (obj.Equals('\r'))
+            {
+                Main.chatRelease = false;
+				OnEnterPress?.Invoke(this, new EventArgs());
+			}*/
+		/*else
 		{
-			if (obj.Equals('\b')) // Backspace key
+			for (int i = 0; i < label.font.Characters.Count; i++)
 			{
-				if (this.Text.Length > 0)
+				if (Text.Length < MaxCharacters && obj == label.font.Characters[i])
 				{
-					this.Text = this.Text.Substring(0, this.Text.Length - 1);
-					this.SetLabelPosition();
-					if (this.KeyPressed != null)
+					if(Numeric && obj.Equals('.'))
 					{
-						this.KeyPressed(this, obj);
-						return;
-					}
-				}
-			}
-			else
-			{
-				if (obj.Equals('\u001b')) // Escape key
-				{
-					this.Unfocus();
-					return;
-				}
-				if (obj.Equals('\t'))
-				{
-					if (this.OnTabPress != null)
-					{
-						this.OnTabPress(this, new EventArgs());
-						return;
-					}
-				}
-				else if (obj.Equals('\r'))
-				{
-					Main.chatRelease = false;
-					if (this.OnEnterPress != null)
-					{
-						this.OnEnterPress(this, new EventArgs());
-						return;
-					}
-				}
-				else if (obj.Equals('\u0001'))
-				{
-					if (this.Text.Length > 0)
-					{
-						this.Text = this.Text.Substring(0, 0);
-						this.SetLabelPosition();
-						if (this.KeyPressed != null)
+						bool containsDecimal = false;
+						for(int j = 0; j < text.Length; j++)
 						{
-							this.KeyPressed(this, obj);
-							return;
-						}
-					}
-				}
-				else if (obj >=0 && obj <= 37)
-				{
-					return;
-				}
-				else
-				{
-					int i = 0;
-					while (i < this.label.font.Characters.Count)
-					{
-						if (this.Text.Length < this.MaxCharacters && obj == Main.fontItemStack.Characters[i])
-						{
-							this.Text += obj;
-							this.SetLabelPosition();
-							if (this.KeyPressed != null)
+							if(text[j] == obj)
 							{
-								this.KeyPressed(this, obj);
-								return;
+								containsDecimal = true;
+								break;
 							}
-							break;
 						}
-						else
+						if(!containsDecimal)
 						{
-							i++;
+							Text += obj;
+							SetLabelPosition();
+							if (KeyPressed != null)
+								KeyPressed(this, obj);
 						}
 					}
+					if (!Numeric || char.IsNumber(obj) || (text.Length == 0 && obj.Equals('-')))
+					{
+						Text += obj;
+						SetLabelPosition();
+						if (KeyPressed != null)
+							KeyPressed(this, obj);
+					}
+					break;
 				}
 			}
-		}
+		}*/
+		//}
 
 		private void SetLabelPosition()
 		{
-			this.label.Position = new Vector2((float)UITextbox.padding, 0f);
-			Vector2 vector = this.label.font.MeasureString(this.Text + "|") * this.label.Scale;
-			if (this.passwordBox)
+			label.Position = new Vector2(padding, 0);
+
+			Vector2 size = label.font.MeasureString(Text + "|") * label.Scale;
+			if (passwordBox)
 			{
-				vector = this.label.font.MeasureString(this.passwordString + "|") * this.label.Scale;
+				size = label.font.MeasureString(passwordString + "|") * label.Scale;
 			}
-			if (vector.X > base.Width - (float)(UITextbox.padding * 2))
+			if (size.X > Width - padding * 2)
 			{
-				this.label.Position = new Vector2((float)UITextbox.padding - (vector.X - (base.Width - (float)(UITextbox.padding * 2))), 0f);
+				label.Position = new Vector2(padding - (size.X - (Width - padding * 2)), 0);
 			}
 		}
 
 		protected override float GetWidth()
 		{
-			return this.width;
+			return width;
 		}
 
 		protected override void SetWidth(float width)
@@ -278,81 +225,89 @@ namespace CheatSheet.UI
 
 		protected override float GetHeight()
 		{
-			return (float)UITextbox.textboxBackground.Height;
+			return textboxBackground.Height;
 		}
 
 		public override void Update()
 		{
 			base.Update();
-			if (!this.IsMouseInside() && UIView.MouseLeftButton)
+			if (!IsMouseInside() && MouseLeftButton)
 			{
-				this.Unfocus();
+				Unfocus();
 			}
-			if (this.focused)
+			if (focused)
 			{
-				UITextbox.timer +=  .1f;//Mod.deltaTime;
-				if (UITextbox.timer < UITextbox.blinkTime / 2f)
-				{
-					this.drawCarrot = true;
-				}
-				else
-				{
-					this.drawCarrot = false;
-				}
-				if (UITextbox.timer >= UITextbox.blinkTime)
-				{
-					UITextbox.timer = 0f;
-				}
+				timer += .1f; //ModUtils.DeltaTime;
+				if (timer < blinkTime / 2) drawCarrot = true;
+				else drawCarrot = false;
+				if (timer >= blinkTime) timer = 0;
 			}
 		}
 
 		public override void Draw(SpriteBatch spriteBatch)
 		{
-			spriteBatch.Draw(UITextbox.textboxBackground, base.DrawPosition, null, Color.White, 0f, base.Origin, 1f, SpriteEffects.None, 0f);
-			int num = (int)base.Width - 2 * UITextbox.textboxBackground.Width;
-			Vector2 vector = base.DrawPosition;
-			vector.X += (float)UITextbox.textboxBackground.Width;
-			spriteBatch.Draw(UITextbox.TextboxFill, vector - base.Origin, null, Color.White, 0f, Vector2.Zero, new Vector2((float)num, 1f), SpriteEffects.None, 0f);
-			vector.X += (float)num;
-			spriteBatch.Draw(UITextbox.textboxBackground, vector, null, Color.White, 0f, base.Origin, 1f, SpriteEffects.FlipHorizontally, 0f);
-			string str = this.Text;
-			if (this.PasswordBox)
+			if (focused)
 			{
-				str = this.passwordString;
+				Terraria.GameInput.PlayerInput.WritingText = true;
+				Main.instance.HandleIME();
+				string oldText = Text;
+				Text = Main.GetInputText(Text);
+				if (oldText != Text)
+				{
+					KeyPressed?.Invoke(this, ' ');
+				}
+				if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Tab))
+				{
+					OnTabPress?.Invoke(this, new EventArgs());
+				}
+				if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Enter))
+				{
+					OnEnterPress?.Invoke(this, new EventArgs());
+				}
+				spriteBatch.End();
+				spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
+				Main.instance.DrawWindowsIMEPanel(new Vector2(98f, (float)(Main.screenHeight - 36)), 0f);
 			}
-			if (this.drawCarrot && this.focused)
-			{
-				str += "|";
-			}
-			this.label.Text = str;
-			vector = base.DrawPosition - base.Origin;
-			if (vector.X <= (float)Main.screenWidth && vector.Y <= (float)Main.screenHeight && vector.X + base.Width >= 0f && vector.Y + base.Height >= 0f)
+
+			spriteBatch.Draw(textboxBackground, DrawPosition, null, Color.White, 0f, Origin, 1f, SpriteEffects.None, 0f);
+			int fillWidth = (int)Width - 2 * textboxBackground.Width;
+			Vector2 pos = DrawPosition;
+			pos.X += textboxBackground.Width;
+			spriteBatch.Draw(TextboxFill, pos - Origin, null, Color.White, 0f, Vector2.Zero, new Vector2(fillWidth, 1f), SpriteEffects.None, 0f);
+			pos.X += fillWidth;
+			spriteBatch.Draw(textboxBackground, pos, null, Color.White, 0f, Origin, 1f, SpriteEffects.FlipHorizontally, 0f);
+			string drawString = Text;
+			if (PasswordBox) drawString = passwordString;
+			if (drawCarrot && focused) drawString += "|";
+			label.Text = drawString;
+
+			pos = DrawPosition - Origin;
+
+			if (pos.X <= Main.screenWidth && pos.Y <= Main.screenHeight && pos.X + Width >= 0 && pos.Y + Height >= 0)
 			{
 				spriteBatch.End();
-				spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, null, null, this._rasterizerState);
-				Rectangle scissorRectangle = new Rectangle((int)vector.X, (int)vector.Y, (int)base.Width, (int)base.Height);
-				if (scissorRectangle.X < 0)
+				spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, null, null, _rasterizerState);
+
+				Rectangle cutRect = new Rectangle((int)pos.X, (int)pos.Y, (int)Width, (int)Height);
+				if (cutRect.X < 0)
 				{
-					scissorRectangle.Width += scissorRectangle.X;
-					scissorRectangle.X = 0;
+					cutRect.Width += cutRect.X;
+					cutRect.X = 0;
 				}
-				if (scissorRectangle.Y < 0)
+				if (cutRect.Y < 0)
 				{
-					scissorRectangle.Height += scissorRectangle.Y;
-					scissorRectangle.Y = 0;
+					cutRect.Height += cutRect.Y;
+					cutRect.Y = 0;
 				}
-				if ((float)scissorRectangle.X + base.Width > (float)Main.screenWidth)
-				{
-					scissorRectangle.Width = Main.screenWidth - scissorRectangle.X;
-				}
-				if ((float)scissorRectangle.Y + base.Height > (float)Main.screenHeight)
-				{
-					scissorRectangle.Height = Main.screenHeight - scissorRectangle.Y;
-				}
-				Rectangle scissorRectangle2 = spriteBatch.GraphicsDevice.ScissorRectangle;
-				spriteBatch.GraphicsDevice.ScissorRectangle = scissorRectangle;
+				if (cutRect.X + Width > Main.screenWidth) cutRect.Width = Main.screenWidth - cutRect.X;
+				if (cutRect.Y + Height > Main.screenHeight) cutRect.Height = Main.screenHeight - cutRect.Y;
+
+				Rectangle currentRect = spriteBatch.GraphicsDevice.ScissorRectangle;
+				spriteBatch.GraphicsDevice.ScissorRectangle = cutRect;
+
 				base.Draw(spriteBatch);
-				spriteBatch.GraphicsDevice.ScissorRectangle = scissorRectangle2;
+
+				spriteBatch.GraphicsDevice.ScissorRectangle = currentRect;
 				spriteBatch.End();
 				spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
 			}

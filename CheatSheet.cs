@@ -13,6 +13,8 @@ using System.IO;
 using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.DataStructures;
+using Terraria.UI;
+using Terraria.Localization;
 
 // TODO: move windows below inventory
 // TODO: Filter recipes with unobtainables.
@@ -54,7 +56,7 @@ namespace CheatSheet
 		public override void Load()
 		{
 			// Since we are using hooks not in older versions, and since ItemID.Count changed, we need to do this.
-			if (ModLoader.version < new Version(0, 9, 2, 1))
+			if (ModLoader.version < new Version(0, 10))
 			{
 				throw new Exception("\nThis mod uses functionality only present in the latest tModLoader. Please update tModLoader to use this mod\n\n");
 			}
@@ -70,6 +72,19 @@ namespace CheatSheet
 			{
 				Main.rand = new Terraria.Utilities.UnifiedRandom();
 			}
+
+			ModTranslation text = CreateTranslation("ButcherNotification");
+			text.SetDefault("NPCs were butchered by {0}");
+			AddTranslation(text);
+			text = CreateTranslation("VacuumNotification");
+			text.SetDefault("Items on the ground were vacuumed by {0}");
+			AddTranslation(text);
+			text = CreateTranslation("SpawnNPCNotification");
+			text.SetDefault("Spawned {0} by {1}");
+			AddTranslation(text);
+			text = CreateTranslation("VolcanoWarning");
+			text.SetDefault("Did you hear something....A Volcano! Find Cover!");
+			AddTranslation(text);
 		}
 
 		//public override void PreSaveAndQuit()
@@ -187,7 +202,7 @@ namespace CheatSheet
 		//}
 
 		int lastmode = -1;
-		public override void ModifyInterfaceLayers(List<MethodSequenceListItem> layers)
+		public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
 		{
 			if(Main.netMode != lastmode)
 			{
@@ -201,7 +216,7 @@ namespace CheatSheet
 			int MouseTextIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Mouse Text"));
 			if (MouseTextIndex != -1)
 			{
-				layers.Insert(MouseTextIndex, new MethodSequenceListItem(
+				layers.Insert(MouseTextIndex, new LegacyGameInterfaceLayer(
 					"CheatSheet: All Cheat Sheet",
 					delegate
 					{
@@ -209,14 +224,14 @@ namespace CheatSheet
 						menu.DrawUpdateAll(Main.spriteBatch);
 						return true;
 					},
-					null)
+					InterfaceScaleType.UI)
 				);
 			}
 
 			MouseTextIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Inventory"));
 			if (MouseTextIndex != -1)
 			{
-				layers.Insert(MouseTextIndex, new MethodSequenceListItem(
+				layers.Insert(MouseTextIndex, new LegacyGameInterfaceLayer(
 					"CheatSheet: Extra Accessories",
 					delegate
 					{
@@ -224,7 +239,7 @@ namespace CheatSheet
 						menu.DrawUpdateExtraAccessories(Main.spriteBatch);
 						return true;
 					},
-					null)
+					InterfaceScaleType.UI)
 				);
 			}
 		}
@@ -282,7 +297,7 @@ namespace CheatSheet
 		public override void HandlePacket(BinaryReader reader, int whoAmI)
 		{
 			CheatSheetMessageType msgType = (CheatSheetMessageType)reader.ReadByte();
-			string message = "CheatSheet: Unknown Message type: " + msgType;
+			string key;
 
 			switch (msgType)
 			{
@@ -290,36 +305,45 @@ namespace CheatSheet
 					int npcType = reader.ReadInt32();
 					int netID = reader.ReadInt32();
 					NPCSlot.HandleNPC(npcType, netID, true, whoAmI);
-					message = "Spawned " + netID + " by " + Netplay.Clients[whoAmI].Name;
-					NetMessage.SendData(25, -1, -1, message, 255, Color.Azure.R, Color.Azure.G, Color.Azure.B, 0);
+					key = "Mods.CheatSheet.SpawnNPCNotification";
+					NetMessage.BroadcastChatMessage(NetworkText.FromKey(key, netID, Netplay.Clients[whoAmI].Name), Color.Azure);
+					//message = "Spawned " + netID + " by " + Netplay.Clients[whoAmI].Name;
+					//NetMessage.SendData(25, -1, -1, message, 255, Color.Azure.R, Color.Azure.G, Color.Azure.B, 0);
 					break;
 				case CheatSheetMessageType.QuickClear:
 					int clearType = reader.ReadInt32();
 					switch (clearType)
 					{
 						case 0:
-							message = "Items were cleared by ";
+							key = "Mods.CheatSheet.ItemClearNotification";
+							//message = "Items were cleared by ";
 							break;
 						case 1:
-							message = "Projectiles were cleared by ";
+							key = "Mods.CheatSheet.ProjectileClearNotification";
+							//message = "Projectiles were cleared by ";
 							break;
 						default:
+							key = "";
 							break;
 					}
-					message += Netplay.Clients[whoAmI].Name;
+					//message += Netplay.Clients[whoAmI].Name;
 					QuickClearHotbar.HandleQuickClear(clearType, true, whoAmI);
-
-					NetMessage.SendData(25, -1, -1, message, 255, Color.Azure.R, Color.Azure.G, Color.Azure.B, 0);
+					NetMessage.BroadcastChatMessage(NetworkText.FromKey(key, Netplay.Clients[whoAmI].Name), Color.Azure);
+					//NetMessage.SendData(25, -1, -1, message, 255, Color.Azure.R, Color.Azure.G, Color.Azure.B, 0);
 					break;
 				case CheatSheetMessageType.VacuumItems:
 					Hotbar.HandleVacuum(true, whoAmI);
-					message = "Items on the ground were vacuumed by " + Netplay.Clients[whoAmI].Name;
-					NetMessage.SendData(25, -1, -1, message, 255, Color.Azure.R, Color.Azure.G, Color.Azure.B, 0);
+					key = "Mods.CheatSheet.VacuumNotification";
+					NetMessage.BroadcastChatMessage(NetworkText.FromKey(key, Netplay.Clients[whoAmI].Name), Color.Azure);
+					//message = "Items on the ground were vacuumed by " + Netplay.Clients[whoAmI].Name;
+					//NetMessage.SendData(25, -1, -1, message, 255, Color.Azure.R, Color.Azure.G, Color.Azure.B, 0);
 					break;
 				case CheatSheetMessageType.ButcherNPCs:
 					NPCButchererHotbar.HandleButcher(reader.ReadInt32(), true);
-					message = "NPCs were butchered by " + Netplay.Clients[whoAmI].Name;
-					NetMessage.SendData(25, -1, -1, message, 255, Color.Azure.R, Color.Azure.G, Color.Azure.B, 0);
+					key = "Mods.CheatSheet.ButcherNotification";
+					NetMessage.BroadcastChatMessage(NetworkText.FromKey(key, Netplay.Clients[whoAmI].Name), Color.Azure);
+					//message = "NPCs were butchered by " + Netplay.Clients[whoAmI].Name;
+					//NetMessage.SendData(25, -1, -1, message, 255, Color.Azure.R, Color.Azure.G, Color.Azure.B, 0);
 					break;
 				case CheatSheetMessageType.TeleportPlayer:
 					QuickTeleportHotbar.HandleTeleport(reader.ReadInt32(), true, whoAmI);
@@ -352,7 +376,7 @@ namespace CheatSheet
 				//	NPCSlot.HandleFilterRequest(reader.ReadInt32(), reader.ReadInt32(), true);
 				//	break;
 				default:
-					ErrorLogger.Log(message);
+					ErrorLogger.Log("CheatSheet: Unknown Message type: " + msgType);
 					break;
 			}
 		}

@@ -5,6 +5,7 @@ using Terraria.ModLoader;
 using Terraria;
 using Microsoft.Xna.Framework.Input;
 using CheatSheet.UI;
+using ReLogic.Graphics;
 
 namespace CheatSheet.Menus
 {
@@ -36,9 +37,9 @@ namespace CheatSheet.Menus
 			//	UIView.HoverText = this.item.name;
 			//	UIView.HoverItem = this.item.Clone();
 
-				Main.hoverItemName = this.item.name;
-				Main.toolTip = item.Clone();																							  
-				Main.toolTip.name = Main.toolTip.name + (Main.toolTip.modItem != null ? " [" + Main.toolTip.modItem.mod.Name+"]" : "");
+				Main.hoverItemName = this.item.Name;
+				Main.HoverItem = item.Clone();																							  
+				Main.HoverItem.SetNameOverride(Main.HoverItem.Name + (Main.HoverItem.modItem != null ? " [" + Main.HoverItem.modItem.mod.Name+"]" : ""));
 			}
 		}
 

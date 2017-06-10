@@ -143,7 +143,7 @@ namespace CheatSheet.Menus
                     Main.npc[i].StrikeNPCNoInteraction(Main.npc[i].lifeMax, 0f, -Main.npc[i].direction, true);
                     if (syncData) // syncData does not do visuals
                     {
-                        NetMessage.SendData(28, -1, -1, "", i, Main.npc[i].lifeMax, 0f, -Main.npc[i].direction, 1);
+                        NetMessage.SendData(28, -1, -1, null, i, Main.npc[i].lifeMax, 0f, -Main.npc[i].direction, 1);
                         // type, -1, -1, msg, index, damage, knockback, direction, crit
                     }
                 }

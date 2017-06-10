@@ -117,11 +117,13 @@ namespace CheatSheet
 			get
 			{
 				return Menus.NPCBrowser.filteredNPCSlots.Select(
-					type => NPCLoader.GetNPC(type) == null ? new JSONNPC(null, Lang.npcName(type, true), type) : new JSONNPC(NPCLoader.GetNPC(type).mod.Name, Main.npcName[type], 0)
+					type => NPCLoader.GetNPC(type) == null ? new JSONNPC(null, Lang.GetNPCNameValue(type), type) : new JSONNPC(NPCLoader.GetNPC(type).mod.Name, NPCLoader.GetNPC(type).Name, 0)
 				).ToArray();
 			}
 			set
 			{
+				// Vanilla are saved as Name and type, type is used, name is just for reading convenience. 
+				// Modded are stored as Classname
 				List<int> loaded = value.Select(
 					jsonnpc => jsonnpc.id != 0 ? jsonnpc.id : (ModLoader.GetMod(jsonnpc.mod)?.NPCType(jsonnpc.name) ?? -100)
 				).ToList();

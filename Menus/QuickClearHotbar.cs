@@ -10,6 +10,7 @@ using CheatSheet.CustomUI;
 using Microsoft.Xna.Framework;
 using CheatSheet.UI;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic;
 
 
 //TODO: projectiles, buffs/debuffs MP compatible
@@ -167,7 +168,7 @@ namespace CheatSheet.Menus
                 else
                 {
                     Main.item[i].SetDefaults(0);
-                    NetMessage.SendData(21, -1, -1, "", i, 0f, 0f, 0f, 0);
+                    NetMessage.SendData(21, -1, -1, null, i, 0f, 0f, 0f, 0);
                 }
             }
         }
@@ -182,7 +183,7 @@ namespace CheatSheet.Menus
                     //Main.projectile[i].SetDefaults(0);
                     if (syncData)
                     {
-                        NetMessage.SendData(27, -1, -1, "", i, 0f, 0f, 0f, 0);
+                        NetMessage.SendData(27, -1, -1, null, i, 0f, 0f, 0f, 0);
                     }
                 }
             }

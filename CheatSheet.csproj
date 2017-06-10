@@ -56,6 +56,9 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\dllReferences\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="ReLogic">
+      <HintPath>..\..\..\Modding\tModLoader\references\ReLogic.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>

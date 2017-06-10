@@ -156,11 +156,11 @@ namespace CheatSheet.Menus
             Main.stopMoonEvent();
             if (Main.netMode != 1)
             {
-                Main.NewText(Lang.misc[34], (byte)50, byte.MaxValue, (byte)130, false);
+                Main.NewText(Lang.misc[34].Value, (byte)50, byte.MaxValue, (byte)130, false);
                 Main.startSnowMoon();
             }
             else
-                NetMessage.SendData(61, -1, -1, "", Main.LocalPlayer.whoAmI, -5f, 0.0f, 0.0f, 0, 0, 0);
+                NetMessage.SendData(61, -1, -1, null, Main.LocalPlayer.whoAmI, -5f, 0.0f, 0.0f, 0, 0, 0);
         }
 
         private void bPumpkinMoon_onLeftClick(object sender, EventArgs e)
@@ -170,12 +170,12 @@ namespace CheatSheet.Menus
             // REQUIRED
             if (Main.netMode != 1)
             {
-                Main.NewText(Lang.misc[31], (byte)50, byte.MaxValue, (byte)130, false);
+                Main.NewText(Lang.misc[31].Value, (byte)50, byte.MaxValue, (byte)130, false);
                 Main.startPumpkinMoon();
             }
             else
             {
-                NetMessage.SendData(61, -1, -1, "", Main.LocalPlayer.whoAmI, -4f, 0.0f, 0.0f, 0, 0, 0);
+                NetMessage.SendData(61, -1, -1, null, Main.LocalPlayer.whoAmI, -4f, 0.0f, 0.0f, 0, 0, 0);
             }
         }
 
@@ -198,16 +198,16 @@ namespace CheatSheet.Menus
                 {
                     if (Main.netMode == 0)
                     {
-                        Main.NewText(Lang.misc[20], (byte)50, byte.MaxValue, (byte)130, false);
+                        Main.NewText(Lang.misc[20].Value, (byte)50, byte.MaxValue, (byte)130, false);
                     }
                     else if (Main.netMode == 2)
                     {
-                        NetMessage.SendData(25, -1, -1, Lang.misc[20], (int)byte.MaxValue, 50f, (float)byte.MaxValue, 130f, 0, 0, 0);
+						NetMessage.BroadcastChatMessage(Lang.misc[20].ToNetworkText(), new Color(50, 255, 130), -1);
                     }
                 }
                 if (Main.netMode == 2)
                 {
-                    NetMessage.SendData(7, -1, -1, "", 0, 0.0f, 0.0f, 0.0f, 0, 0, 0);
+                    NetMessage.SendData(7, -1, -1, null, 0, 0.0f, 0.0f, 0.0f, 0, 0, 0);
                 }
             }
         }
@@ -242,9 +242,9 @@ namespace CheatSheet.Menus
             Main.bloodMoon = true;
             AchievementsHelper.NotifyProgressionEvent(4);
             if (Main.netMode == 0)
-                Main.NewText(Lang.misc[8], (byte)50, byte.MaxValue, (byte)130, false);
+				Main.NewText(Lang.misc[8].Value, 50, 255, 130, false);
             else if (Main.netMode == 2)
-                NetMessage.SendData(25, -1, -1, Lang.misc[8], (int)byte.MaxValue, 50f, (float)byte.MaxValue, 130f, 0, 0, 0);
+                NetMessage.BroadcastChatMessage(Lang.misc[8].ToNetworkText(), new Microsoft.Xna.Framework.Color(50, 255, 130), -1);
         }
 
         private void bGoblinInvasion_onLeftClick(object sender, EventArgs e)

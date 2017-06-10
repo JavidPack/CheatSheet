@@ -14,7 +14,6 @@ namespace CheatSheet
 {
 	class AllItemsMenu : GlobalItem
 	{
-		double time;
 		private static Item[] singleSlotArray;
 
 		public AllItemsMenu()

@@ -5,6 +5,7 @@ using Terraria.ModLoader;
 using Terraria;
 using Microsoft.Xna.Framework.Input;
 using CheatSheet.UI;
+using ReLogic.Graphics;
 
 namespace CheatSheet.Menus
 {
@@ -35,9 +36,9 @@ namespace CheatSheet.Menus
 
 		private void Slot_OnHover(object sender, EventArgs e)
 		{
-			Main.hoverItemName = this.item.name;
-			Main.toolTip = item.Clone();
-			Main.toolTip.name = Main.toolTip.name + (Main.toolTip.modItem != null ? " [" + Main.toolTip.modItem.mod.Name + "]" : "");
+			Main.hoverItemName = this.item.Name;
+			Main.HoverItem = item.Clone();
+			Main.HoverItem.SetNameOverride(Main.HoverItem.Name + (Main.HoverItem.modItem != null ? " [" + Main.HoverItem.modItem.mod.Name + "]" : ""));
 		}
 
 		private void Slot2_onLeftClick(object sender, EventArgs e)
@@ -128,7 +129,7 @@ namespace CheatSheet.Menus
 					Main.item[num].newAndShiny = false;
 					if (Main.netMode == 1)
 					{
-						NetMessage.SendData(21, -1, -1, "", num, 1f, 0f, 0f, 0, 0, 0);
+						NetMessage.SendData(21, -1, -1, null, num, 1f, 0f, 0f, 0, 0, 0);
 					}
 				}
 				RecipeBrowserWindow.lookupItemSlot.item = new Item();

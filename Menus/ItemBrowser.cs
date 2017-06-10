@@ -278,7 +278,7 @@ namespace CheatSheet.Menus
             {
                 int num = category[i];
                 Slot slot = this.itemView.allItemsSlots[num];
-                if (slot.item.name.ToLower().IndexOf(this.textbox.Text.ToLower(), StringComparison.Ordinal) != -1)
+                if (slot.item.Name.ToLower().IndexOf(this.textbox.Text.ToLower(), StringComparison.Ordinal) != -1)
                 {
                     list.Add(num);
                 }

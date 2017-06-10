@@ -283,7 +283,7 @@ namespace CheatSheet.Menus
             if (syncData)
             {
                 RemoteClient.CheckSection(player.whoAmI, player.position, 1);
-                NetMessage.SendData(65, -1, -1, "", 0, (float)player.whoAmI, player.position.X, player.position.Y, 3, 0, 0);
+                NetMessage.SendData(65, -1, -1, null, 0, (float)player.whoAmI, player.position.X, player.position.Y, 3, 0, 0);
             }
             return;
         }
@@ -445,7 +445,7 @@ namespace CheatSheet.Menus
             if (syncData)
             {
                 RemoteClient.CheckSection(player.whoAmI, player.position, 1);
-                NetMessage.SendData(65, -1, -1, "", 0, (float)player.whoAmI, pos.X, pos.Y, 3, 0, 0);
+                NetMessage.SendData(65, -1, -1, null, 0, (float)player.whoAmI, pos.X, pos.Y, 3, 0, 0);
             }
         }
 

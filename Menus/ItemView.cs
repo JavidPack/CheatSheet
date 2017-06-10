@@ -6,6 +6,8 @@ using System.Linq;
 using Terraria;
 using Terraria.ModLoader;
 using CheatSheet.UI;
+using Terraria.UI;
+using System.Text;
 
 namespace CheatSheet.Menus
 {
@@ -39,7 +41,7 @@ namespace CheatSheet.Menus
 				for (int i = 0; i < list.Count; i++)
 				{
 					Slot slot = this.allItemsSlots[list[i]];
-					if (slot.item.type == 0 || slot.item.toolTip == "You shouldn't have this")
+					if (slot.item.type == 0 || GetTooltipsAsString(slot.item.ToolTip) == "You shouldn't have this")
 					{
 						list.RemoveAt(i);
 						i--;
@@ -47,6 +49,16 @@ namespace CheatSheet.Menus
 				}
 				this._selectedCategory = list.ToArray();
 			}
+		}
+
+		private string GetTooltipsAsString(ItemTooltip toolTip)
+		{
+			StringBuilder sb = new StringBuilder();
+			for (int j = 0; j < toolTip.Lines; j++)
+			{
+				sb.Append(toolTip.GetLine(j) + "\n");
+			}
+			return sb.ToString().ToLower();
 		}
 
 		public ItemView()

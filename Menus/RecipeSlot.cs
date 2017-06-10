@@ -5,6 +5,7 @@ using Terraria.ModLoader;
 using Terraria;
 using Microsoft.Xna.Framework.Input;
 using CheatSheet.UI;
+using ReLogic.Graphics;
 
 namespace CheatSheet.Menus
 {
@@ -44,9 +45,9 @@ namespace CheatSheet.Menus
 		private void Slot_onHover(object sender, EventArgs e)
 		{
 			//UIView.HoverText = recipe.createItem.name;
-			Main.hoverItemName = recipe.createItem.name;
-			Main.toolTip = recipe.createItem.Clone();
-			Main.toolTip.name = Main.toolTip.name + (Main.toolTip.modItem != null ? " [" + Main.toolTip.modItem.mod.Name + "]" : "");
+			Main.hoverItemName = recipe.createItem.Name;
+			Main.HoverItem = recipe.createItem.Clone();
+			Main.HoverItem.SetNameOverride(Main.HoverItem.Name + (Main.HoverItem.modItem != null ? " [" + Main.HoverItem.modItem.mod.Name + "]" : ""));
 			//UIView.HoverItem = this.item.Clone();
 			//	hovering = true;
 		}
