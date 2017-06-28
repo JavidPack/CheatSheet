@@ -74,7 +74,7 @@ namespace CheatSheet
 			//((CheatSheet)mod).eventManagerHotbar.Draw(spriteBatch);
 
 			spriteBatch.End();
-			spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
+			spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, null, null, null, null, Main.UIScaleMatrix);
 
 			//	DrawUpdateExtraAccessories(spriteBatch);
 		}

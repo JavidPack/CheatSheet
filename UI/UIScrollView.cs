@@ -235,9 +235,9 @@ namespace CheatSheet.UI
 			if (vector.X <= (float)Main.screenWidth && vector.Y <= (float)Main.screenHeight && vector.X + base.Width >= 0f && vector.Y + base.Height >= 0f)
 			{
 				spriteBatch.End();
-				spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, null, null, this._rasterizerState);
+				spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, null, null, this._rasterizerState, null, Main.UIScaleMatrix);
 				Rectangle scissorRectangle = new Rectangle((int)vector.X, (int)vector.Y, (int)base.Width, (int)base.Height);
-				if (scissorRectangle.X < 0)
+				/*if (scissorRectangle.X < 0)
 				{
 					scissorRectangle.Width += scissorRectangle.X;
 					scissorRectangle.X = 0;
@@ -254,7 +254,8 @@ namespace CheatSheet.UI
 				if ((float)scissorRectangle.Y + base.Height > (float)Main.screenHeight)
 				{
 					scissorRectangle.Height = Main.screenHeight - scissorRectangle.Y;
-				}
+				}*/
+				scissorRectangle = CheatSheet.GetClippingRectangle(spriteBatch, scissorRectangle);
 				Rectangle scissorRectangle2 = spriteBatch.GraphicsDevice.ScissorRectangle;
 				spriteBatch.GraphicsDevice.ScissorRectangle = scissorRectangle;
 				if (this.OverrideDrawAndUpdate)
@@ -267,7 +268,7 @@ namespace CheatSheet.UI
 				}
 				spriteBatch.GraphicsDevice.ScissorRectangle = scissorRectangle2;
 				spriteBatch.End();
-				spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
+				spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, null, Main.UIScaleMatrix);
 				this.scrollBar.Draw(spriteBatch);
 			}
 		}

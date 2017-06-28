@@ -91,13 +91,13 @@ namespace CheatSheet.Menus
 			if (Visible)
 			{
 				spriteBatch.End();
-				spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, null, null, this._rasterizerState);
+				spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, null, null, this._rasterizerState, null, Main.UIScaleMatrix);
 				//	Rectangle scissorRectangle = new Rectangle((int)base.X- (int)base.Width, (int)base.Y, (int)base.Width, (int)base.Height);
 				//Parent.Position.Y
 				//		Main.NewText((int)Parent.Position.Y + " " + (int)shownPosition);
 				//	Rectangle scissorRectangle = new Rectangle((int)(base.X - base.Width / 2), (int)(shownPosition), (int)base.Width, (int)base.Height);
 				Rectangle scissorRectangle = new Rectangle((int)(base.X - base.Width / 2), (int)(shownPosition), (int)base.Width, (int)(mod.hotbar.Position.Y - shownPosition));
-				if (scissorRectangle.X < 0)
+				/*if (scissorRectangle.X < 0)
 				{
 					scissorRectangle.Width += scissorRectangle.X;
 					scissorRectangle.X = 0;
@@ -114,7 +114,8 @@ namespace CheatSheet.Menus
 				if ((float)scissorRectangle.Y + base.Height > (float)Main.screenHeight)
 				{
 					scissorRectangle.Height = Main.screenHeight - scissorRectangle.Y;
-				}
+				}*/
+				scissorRectangle = CheatSheet.GetClippingRectangle(spriteBatch, scissorRectangle);
 				Rectangle scissorRectangle2 = spriteBatch.GraphicsDevice.ScissorRectangle;
 				spriteBatch.GraphicsDevice.ScissorRectangle = scissorRectangle;
 
@@ -122,7 +123,7 @@ namespace CheatSheet.Menus
 
 				spriteBatch.GraphicsDevice.ScissorRectangle = scissorRectangle2;
 				spriteBatch.End();
-				spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
+				spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, null, null, null, null, Main.UIScaleMatrix);
 			}
 
 			//	base.Draw(spriteBatch);
