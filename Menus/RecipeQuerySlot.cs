@@ -41,22 +41,29 @@ namespace CheatSheet.Menus
 
 		private void Slot2_onLeftClick(object sender, EventArgs e)
 		{
+			Player player = Main.LocalPlayer;
 			if (real)
 			{
-				Item item = Main.mouseItem.Clone();
-				Main.mouseItem = this.item.Clone();
-				if (Main.mouseItem.type > 0)
+				if (player.itemAnimation == 0 && player.itemTime == 0)
 				{
-					Main.playerInventory = true;
+					Item item = Main.mouseItem.Clone();
+					Main.mouseItem = this.item.Clone();
+					if (Main.mouseItem.type > 0)
+					{
+						Main.playerInventory = true;
+					}
+					this.item = item.Clone();
 				}
-				this.item = item.Clone();
 			}
 			else
 			{
-				//Item item = Main.mouseItem.Clone();
-				this.item = Main.mouseItem.Clone();
-				Main.mouseItem.SetDefaults(0);
-				real = true;
+				if (player.itemAnimation == 0 && player.itemTime == 0)
+				{
+					//Item item = Main.mouseItem.Clone();
+					this.item = Main.mouseItem.Clone();
+					Main.mouseItem.SetDefaults(0);
+					real = true;
+				}
 			}
 
 			//call update.
