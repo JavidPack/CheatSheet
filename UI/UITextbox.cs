@@ -8,7 +8,7 @@ namespace CheatSheet.UI
 	internal class UITextbox : UIView
 	{
 		private RasterizerState _rasterizerState = new RasterizerState() { ScissorTestEnable = true };
-		private static Texture2D textboxBackground = Terraria.ModLoader.ModLoader.GetTexture("CheatSheet/UI/Images.UIKit.textboxEdge");
+		private static Texture2D textboxBackground;
 		private static Texture2D textboxFill;
 
 		private static Texture2D TextboxFill
@@ -90,6 +90,7 @@ namespace CheatSheet.UI
 
 		public UITextbox()
 		{
+			textboxBackground = CheatSheet.instance.GetTexture("UI/Images.UIKit.textboxEdge");
 			this.onLeftClick += new EventHandler(UITextbox_onLeftClick);
 			label.ForegroundColor = Color.Black;
 			label.Scale = Height / label.Height;

@@ -13,7 +13,7 @@ namespace CheatSheet.UI
 			ScissorTestEnable = true
 		};
 
-		private static Texture2D ScrollbgTexture = Terraria.ModLoader.ModLoader.GetTexture("CheatSheet/UI/Images.UIKit.scrollbgEdge");// UIView.GetEmbeddedTexture("Images.UIKit.scrollbgEdge.png");
+		private static Texture2D ScrollbgTexture;
 
 		private static Texture2D scrollbgFill;
 
@@ -96,6 +96,7 @@ namespace CheatSheet.UI
 
 		public UIScrollView()
 		{
+			ScrollbgTexture = CheatSheet.instance.GetTexture("UI/Images.UIKit.scrollbgEdge");
 			this.scrollBar.onMouseDown += new UIView.ClickEventHandler(this.scrollBar_onMouseDown);
 			this.AddChild(this.scrollBar);
 		}
@@ -209,7 +210,7 @@ namespace CheatSheet.UI
 					}
 				}
 			}
-		IL_1EC:
+			IL_1EC:
 			float y = this.ScrollPosition / this.ContentHeight * num2;
 			this.scrollBar.Height = num;
 			this.scrollBar.Position = new Vector2(base.Width - this.scrollBar.Width, y);

@@ -5,7 +5,7 @@ namespace CheatSheet.UI
 {
 	internal class UIScrollBar : UIView
 	{
-		private static Texture2D ScrollbarTexture = Terraria.ModLoader.ModLoader.GetTexture("CheatSheet/UI/Images.UIKit.scrollbarEdge");//UIView.GetEmbeddedTexture("Images.UIKit.scrollbarEdge.png");
+		private static Texture2D ScrollbarTexture;
 
 		private static Texture2D scrollbarFill;
 
@@ -29,6 +29,11 @@ namespace CheatSheet.UI
 				}
 				return UIScrollBar.scrollbarFill;
 			}
+		}
+
+		public UIScrollBar()
+		{
+			ScrollbarTexture = CheatSheet.instance.GetTexture("UI/Images.UIKit.scrollbarEdge");
 		}
 
 		protected override float GetHeight()

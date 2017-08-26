@@ -6,8 +6,8 @@ namespace CheatSheet.UI
 {
 	internal class UICheckbox : UIView
 	{
-		private static Texture2D checkboxTexture = ((CheatSheet)CheatSheet.instance).GetTexture("UI/checkBox");//UIView.GetEmbeddedTexture("Images/UIKit/checkBox");
-		private static Texture2D checkmarkTexture = ((CheatSheet)CheatSheet.instance).GetTexture("UI/checkMark");//UIView.GetEmbeddedTexture("Images/UIKit/checkMark");
+		private static Texture2D checkboxTexture;
+		private static Texture2D checkmarkTexture;
 
 		private bool selected = false;
 
@@ -39,6 +39,9 @@ namespace CheatSheet.UI
 
 		public UICheckbox(string text)
 		{
+			checkboxTexture = CheatSheet.instance.GetTexture("UI/checkBox");
+			checkmarkTexture = CheatSheet.instance.GetTexture("UI/checkMark");
+
 			label = new UILabel(text);
 			label.Scale = .5f;
 			label.Position = new Vector2(checkboxTexture.Width + spacing, 0);

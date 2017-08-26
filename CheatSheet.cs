@@ -82,6 +82,16 @@ namespace CheatSheet
 			AddTranslation(text);
 		}
 
+		public override void Unload()
+		{
+			itemBrowser = null;
+			npcBrowser = null;
+			instance = null;
+			ToggleCheatSheetHotbarHotKey = null;
+			RecipeBrowserWindow.recipeView = null;
+			RecipeBrowserWindow.lookupItemSlot = null;
+		}
+
 		//public override void PreSaveAndQuit()
 		//{
 		//	SpawnRateMultiplier.HasPermission = true;

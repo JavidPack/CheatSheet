@@ -10,7 +10,7 @@ namespace CheatSheet.UI
 	{
 		public delegate void ClickEventHandler(object sender, byte button);
 
-		protected static Texture2D closeTexture = Terraria.ModLoader.ModLoader.GetTexture("CheatSheet/UI/closeButton");// UIView.GetEmbeddedTexture("Images.closeButton.png");
+		protected static Texture2D closeTexture;
 
 		public static UIView exclusiveControl = null;
 
@@ -662,6 +662,11 @@ namespace CheatSheet.UI
 		public void RemoveChild(UIView view)
 		{
 			this.childrenToRemove.Add(view);
+		}
+
+		public UIView()
+		{
+			closeTexture = CheatSheet.instance.GetTexture("UI/closeButton");
 		}
 
 		//public static Texture2D GetEmbeddedTexture(string name)
