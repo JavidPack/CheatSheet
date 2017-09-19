@@ -1,4 +1,5 @@
 ﻿using CheatSheet.Menus;
+using System;
 using System.IO;
 using Terraria;
 using Terraria.ModLoader;
@@ -11,7 +12,14 @@ namespace CheatSheet
 		{
 			if (!Main.dedServ && Main.LocalPlayer.name != "")
 			{
-				(mod as CheatSheet).hotbar.bCycleExtraAccessorySlots.Tooltip = "Extra Accessory Slots: " + Main.LocalPlayer.GetModPlayer<CheatSheetPlayer>(mod).numberExtraAccessoriesEnabled;
+				try
+				{
+					(mod as CheatSheet).hotbar.bCycleExtraAccessorySlots.Tooltip = "Extra Accessory Slots: " + Main.LocalPlayer.GetModPlayer<CheatSheetPlayer>(mod).numberExtraAccessoriesEnabled;
+				}
+				catch (Exception e)
+				{
+					CheatSheetUtilities.ReportException(e);
+				}
 			}
 
 			//    ((CheatSheet)mod).hotbar.ChangedBossDowner();

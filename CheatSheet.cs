@@ -2,9 +2,12 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
+using System.Net;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -471,5 +474,53 @@ namespace CheatSheet
 		RequestToggleNPCSpawn,
 		RequestFilterNPC,
 		InformFilterNPC,
+	}
+
+	static class CheatSheetUtilities
+	{
+		private static Uri reporturl = new Uri("http://javid.ddns.net/tModLoader/jopojellymods/report.php");
+
+		internal static void ReportException(Exception e)
+		{
+			ErrorLogger.Log("CheatSheet: " + e.Message + e.StackTrace);
+			try
+			{
+				ReportData data = new ReportData(e);
+				data.additionaldata = "Loaded Mods: " + string.Join(", ", ModLoader.GetLoadedMods());
+				string jsonpayload = JsonConvert.SerializeObject(data);
+				using (WebClient client = new WebClient())
+				{
+					var values = new NameValueCollection
+					{
+						{ "jsonpayload", jsonpayload },
+					};
+					client.UploadValuesAsync(reporturl, "POST", values);
+				}
+			}
+			catch { }
+		}
+
+		class ReportData
+		{
+			public string mod;
+			public string modversion;
+			public string tmodversion;
+			public string platform;
+			public string errormessage;
+			public string additionaldata;
+
+			public ReportData()
+			{
+				tmodversion = ModLoader.version.ToString();
+				modversion = CheatSheet.instance.Version.ToString();
+				mod = "CheatSheet";
+				platform = ModLoader.compressedPlatformRepresentation;
+			}
+
+			public ReportData(Exception e) : this()
+			{
+				errormessage = e.Message + e.StackTrace;
+			}
+		}
 	}
 }
