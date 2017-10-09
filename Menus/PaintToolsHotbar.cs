@@ -29,6 +29,7 @@ namespace CheatSheet.Menus
 		//	public int brushSize = 1;
 		//	public int[,] BrushTileType = new int[10, 10];
 		public Tile[,] StampTiles = new Tile[0, 0];
+        public StampInfo stampInfo;
 
 		internal bool StampToolActive;
 		internal bool EyeDropperActive;
@@ -78,6 +79,10 @@ namespace CheatSheet.Menus
 						Utils.Swap(ref StampTiles[i, j], ref StampTiles[i, StampTiles.GetLength(1) - 1 - j]);
 					}
 				}
+                if (stampInfo != null)
+                {
+                    stampInfo.bFlipVertical = !stampInfo.bFlipVertical;
+                }
 			};
 			bFlipHorizontal.onLeftClick += (s, e) =>
 			{
@@ -88,7 +93,11 @@ namespace CheatSheet.Menus
 						Utils.Swap(ref StampTiles[i, j], ref StampTiles[StampTiles.GetLength(0) - 1 - i, j]);
 					}
 				}
-			};
+                if (stampInfo != null)
+                {
+                    stampInfo.bFlipHorizontal = !stampInfo.bFlipHorizontal;
+                }
+            };
 			bToggleTransparentSelection.onLeftClick += (s, e) => { TransparentSelectionEnabled = !TransparentSelectionEnabled; bToggleTransparentSelection.Tooltip = TransparentSelectionEnabled ? "    Toggle Transparent Selection: On" : "    Toggle Transparent Selection: Off"; };
 
 			onMouseDown += (s, e) =>
@@ -99,7 +108,13 @@ namespace CheatSheet.Menus
 					Main.LocalPlayer.mouseInterface = true;
 				}
 			};
-			onMouseUp += (s, e) => { justMouseDown = true; mouseDown = false; /*startTileX = -1; startTileY = -1;*/ };
+			onMouseUp += (s, e) =>
+            {
+                if (!Main.LocalPlayer.mouseInterface && !mod.hotbar.MouseInside && !mod.hotbar.button.MouseInside)
+                {
+                    justMouseDown = true; mouseDown = false; /*startTileX = -1; startTileY = -1;*/
+                }
+            };
 
 			//UpdateWhenOutOfBounds = true;
 
@@ -138,7 +153,19 @@ namespace CheatSheet.Menus
 			return base.IsMouseInside();
 		}
 
-		public override void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            try
+            {
+                Draw2(spriteBatch);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
+        }
+
+        public void Draw2(SpriteBatch spriteBatch)
 		{
 			if (Visible)
 			{
@@ -213,7 +240,7 @@ namespace CheatSheet.Menus
 			Utils.DrawBorderStringFourWay(spriteBatch, Main.fontMouseText, UIView.HoverText, vector.X, vector.Y, new Color((int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor), Color.Black, Vector2.Zero, 1f);
 		}
 
-		private static Color buffColor(Color newColor, float R, float G, float B, float A)
+		internal static Color buffColor(Color newColor, float R, float G, float B, float A)
 		{
 			newColor.R = (byte)((float)newColor.R * R);
 			newColor.G = (byte)((float)newColor.G * G);
@@ -259,50 +286,56 @@ namespace CheatSheet.Menus
 				Main.spriteBatch.Draw(Main.magicPixel, upperLeftScreen + Vector2.UnitX * 16f * brushSize.X, new Microsoft.Xna.Framework.Rectangle?(value), color * scale, 0f, Vector2.Zero, new Vector2(2f, 16f * brushSize.Y), SpriteEffects.None, 0f);
 				Main.spriteBatch.Draw(Main.magicPixel, upperLeftScreen + Vector2.UnitY * -2f, new Microsoft.Xna.Framework.Rectangle?(value), color * scale, 0f, Vector2.Zero, new Vector2(16f * brushSize.X, 2f), SpriteEffects.None, 0f);
 				Main.spriteBatch.Draw(Main.magicPixel, upperLeftScreen + Vector2.UnitY * 16f * brushSize.Y, new Microsoft.Xna.Framework.Rectangle?(value), color * scale, 0f, Vector2.Zero, new Vector2(16f * brushSize.X, 2f), SpriteEffects.None, 0f);
-			}
-			else if (StampToolActive)
+
+                Vector2 pos = Main.MouseScreen.Offset(48, 24);
+                Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, $"{brushSize.X} x {brushSize.Y}", pos.X, pos.Y, Color.White, Color.Black, Vector2.Zero, 1f);
+            }
+			else if (StampToolActive && stampInfo != null)
 			{
 				int width = StampTiles.GetLength(0);
 				int height = StampTiles.GetLength(1);
 				Vector2 brushsize = new Vector2(width, height);
-				Vector2 evenOffset = Vector2.Zero;
-				if (width % 2 == 0)
-				{
-					evenOffset.X = 1;
-				}
-				if (height % 2 == 0)
-				{
-					evenOffset.Y = 1;
-				}
-				Point point = (Main.MouseWorld + evenOffset * 8).ToTileCoordinates();
+				//Vector2 evenOffset = Vector2.Zero;
+				//if (width % 2 == 0)
+				//{
+				//	evenOffset.X = 1;
+				//}
+				//if (height % 2 == 0)
+				//{
+				//	evenOffset.Y = 1;
+				//}
+				//Point point = (Main.MouseWorld + evenOffset * 8).ToTileCoordinates();
+                //
+				////Point point = (Main.MouseWorld + (brushSize % 2 == 0 ? Vector2.One * 8 : Vector2.Zero)).ToTileCoordinates();
+				//point.X -= width / 2;
+				//point.Y -= height / 2;
+				//if (constrainToAxis)
+				//{
+				//	if (constrainedX != -1)
+				//	{
+				//		point.X = constrainedX;
+				//	}
+				//	if (constrainedY != -1)
+				//	{
+				//		point.Y = constrainedY;
+				//	}
+				//}
+                //
+				//Vector2 vector = new Vector2(point.X, point.Y) * 16f;
+				//vector -= Main.screenPosition;
+				//if (Main.LocalPlayer.gravDir == -1f)
+				//{
+				//	vector.Y = (float)Main.screenHeight - vector.Y;
+				//	vector.Y -= height * 16;
+				//}
 
-				//Point point = (Main.MouseWorld + (brushSize % 2 == 0 ? Vector2.One * 8 : Vector2.Zero)).ToTileCoordinates();
-				point.X -= width / 2;
-				point.Y -= height / 2;
-				if (constrainToAxis)
-				{
-					if (constrainedX != -1)
-					{
-						point.X = constrainedX;
-					}
-					if (constrainedY != -1)
-					{
-						point.Y = constrainedY;
-					}
-				}
+                Vector2 vector = Snap.GetSnapPosition(CheatSheet.instance.paintToolsUI.SnapType, width, height, constrainToAxis, constrainedX, constrainedY, false);
 
-				Vector2 vector = new Vector2(point.X, point.Y) * 16f;
-				vector -= Main.screenPosition;
-				if (Main.LocalPlayer.gravDir == -1f)
+                if (!mouseDown)
 				{
-					vector.Y = (float)Main.screenHeight - vector.Y;
-					vector.Y -= height * 16;
-				}
-
-				if (!mouseDown)
-				{
-					DrawPreview(Main.spriteBatch, StampTiles, vector);
-				}
+                    //DrawPreview(Main.spriteBatch, StampTiles, vector);
+                    DrawPreview(Main.spriteBatch, stampInfo, vector);
+                }
 
 				Rectangle value = new Rectangle(0, 0, 1, 1);
 				float r = 1f;
@@ -313,7 +346,7 @@ namespace CheatSheet.Menus
 				//a = .2f;
 				float scale = 0.6f;
 				Color color = buffColor(Color.White, r, g, b, a);
-				Main.spriteBatch.Draw(Main.magicPixel, vector, new Microsoft.Xna.Framework.Rectangle?(value), color * scale, 0f, Vector2.Zero, 16f * brushsize, SpriteEffects.None, 0f);
+				//Main.spriteBatch.Draw(Main.magicPixel, vector, new Microsoft.Xna.Framework.Rectangle?(value), color * scale, 0f, Vector2.Zero, 16f * brushsize, SpriteEffects.None, 0f);
 				b = 0.3f;
 				g = 0.95f;
 				scale = (a = 1f);
@@ -342,7 +375,7 @@ namespace CheatSheet.Menus
 
 		private void bTogglePaintTiles_onLeftClick(object sender, EventArgs e)
 		{
-			if (StampTiles.GetLength(0) == 0)
+			if (stampInfo == null || StampTiles.GetLength(0) == 0)
 			{
 				Main.NewText("Use Eyedropper prior to using brush");
 			}
@@ -370,7 +403,19 @@ namespace CheatSheet.Menus
 			EyeDropperActive = false;
 		}
 
-		public override void Update()
+        public override void Update()
+        {
+            try
+            {
+                Update2();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
+        }
+
+        public void Update2()
 		{
 			Player player = Main.LocalPlayer;
 			if (selected && (EyeDropperActive || StampToolActive))
@@ -459,38 +504,42 @@ namespace CheatSheet.Menus
 						lastMouseTileX = -1;
 						lastMouseTileY = -1;
 						justMouseDown = false;
+
+                        CheatSheet.instance.paintToolsUI.AddSlot(PaintToolsEx.GetStampInfo(StampTiles));
 					}
 				}
 				if (StampToolActive)
 				{
 					player.showItemIcon2 = ItemID.Paintbrush;
 					//		Main.LocalPlayer.showItemIconText = "Click to paint";
-					if (mouseDown)
+					if (mouseDown && stampInfo != null)
 					{
 						int width = StampTiles.GetLength(0);
 						int height = StampTiles.GetLength(1);
-						Vector2 brushsize = new Vector2(width, height);
-						Vector2 evenOffset = Vector2.Zero;
-						if (width % 2 == 0)
-						{
-							evenOffset.X = 1;
-						}
-						if (height % 2 == 0)
-						{
-							evenOffset.Y = 1;
-						}
-						Point point = (Main.MouseWorld + evenOffset * 8).ToTileCoordinates();
-						//Point point = (Main.MouseWorld + (brushSize % 2 == 0 ? Vector2.One * 8 : Vector2.Zero)).ToTileCoordinates();
-						point.X -= width / 2;
-						point.Y -= height / 2;
-						//Vector2 vector = new Vector2(point.X, point.Y) * 16f;
-						//vector -= Main.screenPosition;
-						//if (Main.LocalPlayer.gravDir == -1f)
+						//Vector2 brushsize = new Vector2(width, height);
+						//Vector2 evenOffset = Vector2.Zero;
+						//if (width % 2 == 0)
 						//{
-						//	vector.Y = (float)Main.screenHeight - vector.Y - 16f;
+						//	evenOffset.X = 1;
 						//}
+						//if (height % 2 == 0)
+						//{
+						//	evenOffset.Y = 1;
+						//}
+						//Point point = (Main.MouseWorld + evenOffset * 8).ToTileCoordinates();
+						////Point point = (Main.MouseWorld + (brushSize % 2 == 0 ? Vector2.One * 8 : Vector2.Zero)).ToTileCoordinates();
+						//point.X -= width / 2;
+						//point.Y -= height / 2;
+						////Vector2 vector = new Vector2(point.X, point.Y) * 16f;
+						////vector -= Main.screenPosition;
+						////if (Main.LocalPlayer.gravDir == -1f)
+						////{
+						////	vector.Y = (float)Main.screenHeight - vector.Y - 16f;
+						////}
 
-						if (startTileX == -1)
+                        Point point = Snap.GetSnapPosition(CheatSheet.instance.paintToolsUI.SnapType, width, height, constrainToAxis, constrainedX, constrainedY, true).ToPoint();
+
+                        if (startTileX == -1)
 						{
 							startTileX = point.X;
 							startTileY = point.Y;
@@ -656,7 +705,41 @@ namespace CheatSheet.Menus
 			}
 		}
 
-		public static void Smooth()
+        public static void DrawPreview(SpriteBatch sb, StampInfo info, Vector2 position)
+        {
+            int maxX = info.Textures.GetLength(0);
+            int maxY = info.Textures.GetLength(1);
+            bool isHR = info.bFlipHorizontal;
+            bool isVR = info.bFlipVertical ^ Main.LocalPlayer.gravDir == -1f;
+
+            Texture2D[,] textures = new Texture2D[maxX, maxY];
+            for (int x = 0; x < maxX; x++)
+            {
+                for (int y = 0; y < maxY; y++)
+                {
+                    textures[isHR ? maxX - x - 1 : x, isVR ? maxY - y - 1 : y] = info.Textures[x, y];
+                }
+            }
+
+            SpriteEffects effects = SpriteEffects.None;
+            if (isHR)
+                effects |= SpriteEffects.FlipHorizontally;
+            if (isVR)
+                effects |= SpriteEffects.FlipVertically;
+
+            for (int x = 0; x < info.Textures.GetLength(0); x++)
+            {
+                Vector2 pos = position;
+                pos.X += x * ModUtils.TextureMaxTile * 16;
+                for (int y = 0; y < info.Textures.GetLength(1); y++)
+                {
+                    sb.Draw(textures[x, y], pos, null, Color.White * 0.6f, 0f, Vector2.Zero, 1f, effects, 0f);
+                    pos.Y += ModUtils.TextureMaxTile * 16;
+                }
+            }
+        }
+
+        public static void Smooth()
 		{
 			//progress.Message = Lang.gen[60];
 			for (int k = 20; k < Main.maxTilesX - 20; k++)

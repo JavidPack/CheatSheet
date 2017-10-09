@@ -45,19 +45,21 @@ namespace CheatSheet
 			((CheatSheet)mod).npcBrowser.Draw(spriteBatch);
 			((CheatSheet)mod).recipeBrowser.Draw(spriteBatch);
 			((CheatSheet)mod).extendedCheatMenu.Draw(spriteBatch);
+            ((CheatSheet)mod).paintToolsUI.Draw(spriteBatch);
 
-			//			((CheatSheet)mod).itemBrowser.Update();
-			//	spriteBatch.End();
-			//	spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
+            //			((CheatSheet)mod).itemBrowser.Update();
+            //	spriteBatch.End();
+            //	spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
 
-			((CheatSheet)mod).npcBrowser.Update();
+            ((CheatSheet)mod).npcBrowser.Update();
 			((CheatSheet)mod).itemBrowser.Update();
 			((CheatSheet)mod).recipeBrowser.Update();
 			((CheatSheet)mod).extendedCheatMenu.Update();
 
 			((CheatSheet)mod).hotbar.Update();
 			((CheatSheet)mod).paintToolsHotbar.Update();
-			((CheatSheet)mod).quickTeleportHotbar.Update();
+            ((CheatSheet)mod).paintToolsUI.Update();
+            ((CheatSheet)mod).quickTeleportHotbar.Update();
 			((CheatSheet)mod).quickClearHotbar.Update();
 			((CheatSheet)mod).npcButchererHotbar.Update();
 			ConfigurationTool.configurationWindow.Update();
