@@ -33,8 +33,8 @@ namespace CheatSheet
 		internal RecipeBrowserWindow recipeBrowser;
 		internal ExtendedCheatMenu extendedCheatMenu;
 		internal PaintToolsHotbar paintToolsHotbar;
-        internal PaintToolsUI paintToolsUI;
-        internal QuickTeleportHotbar quickTeleportHotbar;
+		internal PaintToolsUI paintToolsUI;
+		internal QuickTeleportHotbar quickTeleportHotbar;
 		internal QuickClearHotbar quickClearHotbar;
 		internal NPCButchererHotbar npcButchererHotbar;
 		internal EventManagerHotbar eventManagerHotbar;
@@ -177,11 +177,11 @@ namespace CheatSheet
 					paintToolsHotbar.Visible = false;
 					paintToolsHotbar.Hide();
 
-                    paintToolsUI = new PaintToolsUI(this);
-                    paintToolsUI.SetDefaultPosition(new Vector2(30, 180));
-                    paintToolsUI.Visible = false;
+					paintToolsUI = new PaintToolsUI(this);
+					paintToolsUI.SetDefaultPosition(new Vector2(30, 180));
+					paintToolsUI.Visible = false;
 
-                    quickTeleportHotbar = new QuickTeleportHotbar(this);
+					quickTeleportHotbar = new QuickTeleportHotbar(this);
 					quickTeleportHotbar.Visible = false;
 					quickTeleportHotbar.Hide();
 

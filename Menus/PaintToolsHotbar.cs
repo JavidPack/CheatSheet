@@ -29,7 +29,7 @@ namespace CheatSheet.Menus
 		//	public int brushSize = 1;
 		//	public int[,] BrushTileType = new int[10, 10];
 		public Tile[,] StampTiles = new Tile[0, 0];
-        public StampInfo stampInfo;
+		public StampInfo stampInfo;
 
 		internal bool StampToolActive;
 		internal bool EyeDropperActive;
@@ -79,10 +79,10 @@ namespace CheatSheet.Menus
 						Utils.Swap(ref StampTiles[i, j], ref StampTiles[i, StampTiles.GetLength(1) - 1 - j]);
 					}
 				}
-                if (stampInfo != null)
-                {
-                    stampInfo.bFlipVertical = !stampInfo.bFlipVertical;
-                }
+				if (stampInfo != null)
+				{
+					stampInfo.bFlipVertical = !stampInfo.bFlipVertical;
+				}
 			};
 			bFlipHorizontal.onLeftClick += (s, e) =>
 			{
@@ -93,11 +93,11 @@ namespace CheatSheet.Menus
 						Utils.Swap(ref StampTiles[i, j], ref StampTiles[StampTiles.GetLength(0) - 1 - i, j]);
 					}
 				}
-                if (stampInfo != null)
-                {
-                    stampInfo.bFlipHorizontal = !stampInfo.bFlipHorizontal;
-                }
-            };
+				if (stampInfo != null)
+				{
+					stampInfo.bFlipHorizontal = !stampInfo.bFlipHorizontal;
+				}
+			};
 			bToggleTransparentSelection.onLeftClick += (s, e) => { TransparentSelectionEnabled = !TransparentSelectionEnabled; bToggleTransparentSelection.Tooltip = TransparentSelectionEnabled ? "    Toggle Transparent Selection: On" : "    Toggle Transparent Selection: Off"; };
 
 			onMouseDown += (s, e) =>
@@ -109,12 +109,12 @@ namespace CheatSheet.Menus
 				}
 			};
 			onMouseUp += (s, e) =>
-            {
-                if (!Main.LocalPlayer.mouseInterface && !mod.hotbar.MouseInside && !mod.hotbar.button.MouseInside)
-                {
-                    justMouseDown = true; mouseDown = false; /*startTileX = -1; startTileY = -1;*/
-                }
-            };
+			{
+				if (!Main.LocalPlayer.mouseInterface && !mod.hotbar.MouseInside && !mod.hotbar.button.MouseInside)
+				{
+					justMouseDown = true; mouseDown = false; /*startTileX = -1; startTileY = -1;*/
+				}
+			};
 
 			//UpdateWhenOutOfBounds = true;
 
@@ -153,19 +153,19 @@ namespace CheatSheet.Menus
 			return base.IsMouseInside();
 		}
 
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            try
-            {
-                Draw2(spriteBatch);
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine(ex.Message);
-            }
-        }
+		public override void Draw(SpriteBatch spriteBatch)
+		{
+			try
+			{
+				Draw2(spriteBatch);
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine(ex.Message);
+			}
+		}
 
-        public void Draw2(SpriteBatch spriteBatch)
+		public void Draw2(SpriteBatch spriteBatch)
 		{
 			if (Visible)
 			{
@@ -287,9 +287,9 @@ namespace CheatSheet.Menus
 				Main.spriteBatch.Draw(Main.magicPixel, upperLeftScreen + Vector2.UnitY * -2f, new Microsoft.Xna.Framework.Rectangle?(value), color * scale, 0f, Vector2.Zero, new Vector2(16f * brushSize.X, 2f), SpriteEffects.None, 0f);
 				Main.spriteBatch.Draw(Main.magicPixel, upperLeftScreen + Vector2.UnitY * 16f * brushSize.Y, new Microsoft.Xna.Framework.Rectangle?(value), color * scale, 0f, Vector2.Zero, new Vector2(16f * brushSize.X, 2f), SpriteEffects.None, 0f);
 
-                Vector2 pos = Main.MouseScreen.Offset(48, 24);
-                Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, $"{brushSize.X} x {brushSize.Y}", pos.X, pos.Y, Color.White, Color.Black, Vector2.Zero, 1f);
-            }
+				Vector2 pos = Main.MouseScreen.Offset(48, 24);
+				Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, $"{brushSize.X} x {brushSize.Y}", pos.X, pos.Y, Color.White, Color.Black, Vector2.Zero, 1f);
+			}
 			else if (StampToolActive && stampInfo != null)
 			{
 				int width = StampTiles.GetLength(0);
@@ -305,7 +305,7 @@ namespace CheatSheet.Menus
 				//	evenOffset.Y = 1;
 				//}
 				//Point point = (Main.MouseWorld + evenOffset * 8).ToTileCoordinates();
-                //
+				//
 				////Point point = (Main.MouseWorld + (brushSize % 2 == 0 ? Vector2.One * 8 : Vector2.Zero)).ToTileCoordinates();
 				//point.X -= width / 2;
 				//point.Y -= height / 2;
@@ -320,7 +320,7 @@ namespace CheatSheet.Menus
 				//		point.Y = constrainedY;
 				//	}
 				//}
-                //
+				//
 				//Vector2 vector = new Vector2(point.X, point.Y) * 16f;
 				//vector -= Main.screenPosition;
 				//if (Main.LocalPlayer.gravDir == -1f)
@@ -329,13 +329,13 @@ namespace CheatSheet.Menus
 				//	vector.Y -= height * 16;
 				//}
 
-                Vector2 vector = Snap.GetSnapPosition(CheatSheet.instance.paintToolsUI.SnapType, width, height, constrainToAxis, constrainedX, constrainedY, false);
+				Vector2 vector = Snap.GetSnapPosition(CheatSheet.instance.paintToolsUI.SnapType, width, height, constrainToAxis, constrainedX, constrainedY, false);
 
-                if (!mouseDown)
+				if (!mouseDown)
 				{
-                    //DrawPreview(Main.spriteBatch, StampTiles, vector);
-                    DrawPreview(Main.spriteBatch, stampInfo, vector);
-                }
+					//DrawPreview(Main.spriteBatch, StampTiles, vector);
+					DrawPreview(Main.spriteBatch, stampInfo, vector);
+				}
 
 				Rectangle value = new Rectangle(0, 0, 1, 1);
 				float r = 1f;
@@ -403,19 +403,19 @@ namespace CheatSheet.Menus
 			EyeDropperActive = false;
 		}
 
-        public override void Update()
-        {
-            try
-            {
-                Update2();
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine(ex.Message);
-            }
-        }
+		public override void Update()
+		{
+			try
+			{
+				Update2();
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine(ex.Message);
+			}
+		}
 
-        public void Update2()
+		public void Update2()
 		{
 			Player player = Main.LocalPlayer;
 			if (selected && (EyeDropperActive || StampToolActive))
@@ -505,7 +505,7 @@ namespace CheatSheet.Menus
 						lastMouseTileY = -1;
 						justMouseDown = false;
 
-                        CheatSheet.instance.paintToolsUI.AddSlot(PaintToolsEx.GetStampInfo(StampTiles));
+						CheatSheet.instance.paintToolsUI.AddSlot(PaintToolsEx.GetStampInfo(StampTiles));
 					}
 				}
 				if (StampToolActive)
@@ -537,9 +537,9 @@ namespace CheatSheet.Menus
 						////	vector.Y = (float)Main.screenHeight - vector.Y - 16f;
 						////}
 
-                        Point point = Snap.GetSnapPosition(CheatSheet.instance.paintToolsUI.SnapType, width, height, constrainToAxis, constrainedX, constrainedY, true).ToPoint();
+						Point point = Snap.GetSnapPosition(CheatSheet.instance.paintToolsUI.SnapType, width, height, constrainToAxis, constrainedX, constrainedY, true).ToPoint();
 
-                        if (startTileX == -1)
+						if (startTileX == -1)
 						{
 							startTileX = point.X;
 							startTileY = point.Y;
@@ -705,41 +705,41 @@ namespace CheatSheet.Menus
 			}
 		}
 
-        public static void DrawPreview(SpriteBatch sb, StampInfo info, Vector2 position)
-        {
-            int maxX = info.Textures.GetLength(0);
-            int maxY = info.Textures.GetLength(1);
-            bool isHR = info.bFlipHorizontal;
-            bool isVR = info.bFlipVertical ^ Main.LocalPlayer.gravDir == -1f;
+		public static void DrawPreview(SpriteBatch sb, StampInfo info, Vector2 position)
+		{
+			int maxX = info.Textures.GetLength(0);
+			int maxY = info.Textures.GetLength(1);
+			bool isHR = info.bFlipHorizontal;
+			bool isVR = info.bFlipVertical ^ Main.LocalPlayer.gravDir == -1f;
 
-            Texture2D[,] textures = new Texture2D[maxX, maxY];
-            for (int x = 0; x < maxX; x++)
-            {
-                for (int y = 0; y < maxY; y++)
-                {
-                    textures[isHR ? maxX - x - 1 : x, isVR ? maxY - y - 1 : y] = info.Textures[x, y];
-                }
-            }
+			Texture2D[,] textures = new Texture2D[maxX, maxY];
+			for (int x = 0; x < maxX; x++)
+			{
+				for (int y = 0; y < maxY; y++)
+				{
+					textures[isHR ? maxX - x - 1 : x, isVR ? maxY - y - 1 : y] = info.Textures[x, y];
+				}
+			}
 
-            SpriteEffects effects = SpriteEffects.None;
-            if (isHR)
-                effects |= SpriteEffects.FlipHorizontally;
-            if (isVR)
-                effects |= SpriteEffects.FlipVertically;
+			SpriteEffects effects = SpriteEffects.None;
+			if (isHR)
+				effects |= SpriteEffects.FlipHorizontally;
+			if (isVR)
+				effects |= SpriteEffects.FlipVertically;
 
-            for (int x = 0; x < info.Textures.GetLength(0); x++)
-            {
-                Vector2 pos = position;
-                pos.X += x * ModUtils.TextureMaxTile * 16;
-                for (int y = 0; y < info.Textures.GetLength(1); y++)
-                {
-                    sb.Draw(textures[x, y], pos, null, Color.White * 0.6f, 0f, Vector2.Zero, 1f, effects, 0f);
-                    pos.Y += ModUtils.TextureMaxTile * 16;
-                }
-            }
-        }
+			for (int x = 0; x < info.Textures.GetLength(0); x++)
+			{
+				Vector2 pos = position;
+				pos.X += x * ModUtils.TextureMaxTile * 16;
+				for (int y = 0; y < info.Textures.GetLength(1); y++)
+				{
+					sb.Draw(textures[x, y], pos, null, Color.White * 0.6f, 0f, Vector2.Zero, 1f, effects, 0f);
+					pos.Y += ModUtils.TextureMaxTile * 16;
+				}
+			}
+		}
 
-        public static void Smooth()
+		public static void Smooth()
 		{
 			//progress.Message = Lang.gen[60];
 			for (int k = 20; k < Main.maxTilesX - 20; k++)
