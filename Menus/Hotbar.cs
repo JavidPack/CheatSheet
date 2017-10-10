@@ -296,6 +296,8 @@ namespace CheatSheet.Menus
 				mod.paintToolsHotbar.selected = false;
 				mod.paintToolsHotbar.Hide();
 				uIImage.ForegroundColor = buttonUnselectedColor;
+				mod.paintToolsUI.selected = false;
+				mod.paintToolsUI.Hide();
 			}
 			else
 			{
@@ -303,6 +305,8 @@ namespace CheatSheet.Menus
 				mod.paintToolsHotbar.selected = true;
 				mod.paintToolsHotbar.Show();
 				uIImage.ForegroundColor = buttonSelectedColor;
+				mod.paintToolsUI.selected = true;
+				mod.paintToolsUI.Show();
 			}
 		}
 
@@ -430,6 +434,7 @@ namespace CheatSheet.Menus
 			mod.extendedCheatMenu.selected = false;
 			mod.recipeBrowser.selected = false;
 			mod.paintToolsHotbar.selected = false;
+			mod.paintToolsUI.selected = false;
 			mod.quickTeleportHotbar.selected = false;
 			mod.quickClearHotbar.selected = false;
 			mod.npcButchererHotbar.selected = false;
@@ -906,6 +911,10 @@ namespace CheatSheet.Menus
 			{
 				mod.paintToolsHotbar.Hide();
 			}
+			if (mod.paintToolsUI.selected && !mod.paintToolsUI.hidden)
+			{
+				mod.paintToolsUI.Hide();
+			}
 			if (mod.quickTeleportHotbar.selected && !mod.quickTeleportHotbar.hidden)
 			{
 				mod.quickTeleportHotbar.Hide();
@@ -955,6 +964,10 @@ namespace CheatSheet.Menus
 			if (mod.paintToolsHotbar.selected)
 			{
 				mod.paintToolsHotbar.Show();
+			}
+			if (mod.paintToolsUI.selected)
+			{
+				mod.paintToolsUI.Show();
 			}
 			if (mod.quickTeleportHotbar.selected)
 			{

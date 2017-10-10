@@ -45,6 +45,7 @@ namespace CheatSheet
 			((CheatSheet)mod).npcBrowser.Draw(spriteBatch);
 			((CheatSheet)mod).recipeBrowser.Draw(spriteBatch);
 			((CheatSheet)mod).extendedCheatMenu.Draw(spriteBatch);
+			((CheatSheet)mod).paintToolsUI.Draw(spriteBatch);
 
 			//			((CheatSheet)mod).itemBrowser.Update();
 			//	spriteBatch.End();
@@ -57,6 +58,7 @@ namespace CheatSheet
 
 			((CheatSheet)mod).hotbar.Update();
 			((CheatSheet)mod).paintToolsHotbar.Update();
+			((CheatSheet)mod).paintToolsUI.Update();
 			((CheatSheet)mod).quickTeleportHotbar.Update();
 			((CheatSheet)mod).quickClearHotbar.Update();
 			((CheatSheet)mod).npcButchererHotbar.Update();
