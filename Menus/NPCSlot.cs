@@ -49,7 +49,8 @@ namespace CheatSheet.Menus
 			npc.SetDefaults(npcNum);
 			npcType = npc.type;
 			netID = npc.netID;
-			displayName = Lang.GetNPCNameValue(npcType);
+			//displayName = Lang.GetNPCNameValue(npcType);
+			displayName = Lang.GetNPCNameValue(netID);
 			syncNPC = (NPC)npc.Clone();
 			//npcType = npc.type;
 			//	this.isBoss = npc.boss;
@@ -92,6 +93,7 @@ namespace CheatSheet.Menus
 		private void Slot2_onHover(object sender, EventArgs e)
 		{
 			UIView.HoverText = displayName + (npc.modNPC != null ? " [" + npc.modNPC.mod.Name + "]" : "") + (isFiltered ? " [DISABLED]" : "");
+			NPCBrowser.hoverNpc = npc;
 			//UIView.HoverItem = this.item.Clone();
 			//	hovering = true;
 		}
@@ -274,13 +276,17 @@ namespace CheatSheet.Menus
 			drawPosition.Y += (float)Slot.backgroundTexture.Height * base.Scale / 2f - (float)rectangle2.Height * num / 2f;
 
 			//Color color =  new Color(1f, 1f, 1f);//this.item.GetColor(Color.White);
-			Color color = (npc.color != new Color(byte.MinValue, byte.MinValue, byte.MinValue, byte.MinValue)) ? new Color(npc.color.R, npc.color.G, npc.color.B, 255f) : new Color(1f, 1f, 1f);
-
-			spriteBatch.Draw(texture2D, drawPosition, new Rectangle?(rectangle2), color, 0f, Vector2.Zero, num, SpriteEffects.None, 0f);
+			//Color color = (npc.color != new Color(byte.MinValue, byte.MinValue, byte.MinValue, byte.MinValue)) ? new Color(npc.color.R, npc.color.G, npc.color.B, 255f) : new Color(1f, 1f, 1f);
+			//spriteBatch.Draw(texture2D, drawPosition, new Rectangle?(rectangle2), color, 0f, Vector2.Zero, num, SpriteEffects.None, 0f);
 			//if (this.item.color != default(Color))
 			//{
 			//	spriteBatch.Draw(texture2D, drawPosition, new Rectangle?(rectangle2), this.item.GetColor(Color.White), 0f, Vector2.Zero, num, SpriteEffects.None, 0f);
 			//}
+			spriteBatch.Draw(texture2D, drawPosition, new Rectangle?(rectangle2), Color.White, 0, Vector2.Zero, num, SpriteEffects.None, 0f);
+			if (npc.color != default(Color))
+			{
+				spriteBatch.Draw(texture2D, drawPosition, new Rectangle?(rectangle2), npc.color, 0, Vector2.Zero, num, SpriteEffects.None, 0f);
+			}
 			base.Draw(spriteBatch);
 		}
 	}
