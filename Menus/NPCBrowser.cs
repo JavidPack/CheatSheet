@@ -24,7 +24,17 @@ namespace CheatSheet.Menus
 
 	internal class NPCBrowser : UISlideWindow
 	{
-		private static string[] categNames = new string[]
+        private static NPC tooltipNpc;
+        internal static NPC hoverNpc;
+        internal static Texture2D[] textures =
+        {
+            Main.heartTexture.Resize(22),
+            Main.itemTexture[ItemID.CopperShortsword].Resize(22),
+            Main.EquipPageTexture[0].Resize(22),
+            Main.itemTexture[ItemID.CobaltShield].Resize(22),
+        };
+
+        private static string[] categNames = new string[]
 		{
 			"All NPCs",
 			"Bosses",
@@ -151,6 +161,25 @@ namespace CheatSheet.Menus
 				vector.X = (float)(Main.screenWidth - 460);
 			}
 			Utils.DrawBorderStringFourWay(spriteBatch, Main.fontMouseText, UIView.HoverText, vector.X, vector.Y, new Color((int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor), Color.Black, Vector2.Zero, 1f);
+            
+            if (hoverNpc != null)
+            {
+                if (tooltipNpc == null || tooltipNpc.netID != hoverNpc.netID)
+                {
+                    tooltipNpc = new NPC();
+                    tooltipNpc.SetDefaults(hoverNpc.netID);
+                }
+
+                string[] texts = { $"{tooltipNpc.lifeMax}", $"{tooltipNpc.defDamage}", $"{tooltipNpc.defDefense}", $"{tooltipNpc.knockBackResist:0.##}" };
+                Vector2 pos = new Vector2(vector.X, vector.Y + 24);
+                for (int i = 0; i < textures.Length; i++)
+                {
+                    spriteBatch.Draw(textures[i], pos, Color.White);
+                    pos.X += textures[i].Width + 4;
+                    Utils.DrawBorderStringFourWay(spriteBatch, Main.fontMouseText, texts[i], pos.X, pos.Y, Color.White, Color.Black, Vector2.Zero, 1f);
+                    pos.X += Main.fontMouseText.MeasureString(texts[i]).X + 8;
+                }
+            }
 		}
 
 		public override void Update()
@@ -172,6 +201,7 @@ namespace CheatSheet.Menus
 			UIView.HoverItem = UIView.EmptyItem;
 			UIView.HoverText = "";
 			UIView.HoverOverridden = false;
+            hoverNpc = null;
 
 			base.Update();
 		}
