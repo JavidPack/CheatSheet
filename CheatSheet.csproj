@@ -84,6 +84,7 @@
     <Compile Include="Menus\RecipeQuerySlot.cs" />
     <Compile Include="Menus\SampleHotbar.cs" />
     <Compile Include="Menus\SpawnRateMultiplier.cs" />
+    <Compile Include="ModUtils.cs" />
     <Compile Include="UI\AnchorPosition.cs" />
     <Compile Include="Menus\Hotbar.cs" />
     <Compile Include="Menus\ExtendedCheatMenu.cs" />
