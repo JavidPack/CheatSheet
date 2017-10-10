@@ -48,10 +48,14 @@ namespace CheatSheet.Menus
 		{
 			if (PaintToolsSlot.CurrentSelect != null)
 			{
+				int index = slotList.IndexOf(PaintToolsSlot.CurrentSelect);
 				slotList.Remove(PaintToolsSlot.CurrentSelect);
 				PaintToolsSlot.CurrentSelect = null;
 				CheatSheet.instance.paintToolsHotbar.StampTiles = new Tile[0, 0];
 				CheatSheet.instance.paintToolsHotbar.stampInfo = null;
+
+				if (slotList.Count > 0 && index > -1)
+					slotList[index >= slotList.Count ? index - 1 : index].Select();
 				ReorderSlots();
 			}
 		}

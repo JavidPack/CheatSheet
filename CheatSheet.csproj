@@ -79,6 +79,10 @@
     <Compile Include="Menus\FullBright.cs" />
     <Compile Include="Menus\MinionSlotBooster.cs" />
     <Compile Include="Menus\NPCButchererHotbar.cs" />
+    <Compile Include="Menus\PaintToolsEx.cs" />
+    <Compile Include="Menus\PaintToolsSlot.cs" />
+    <Compile Include="Menus\PaintToolsUI.cs" />
+    <Compile Include="Menus\PaintToolsView.cs" />
     <Compile Include="Menus\QuickClearHotbar.cs" />
     <Compile Include="Menus\QuickTeleportHotbar.cs" />
     <Compile Include="Menus\RecipeQuerySlot.cs" />
@@ -102,6 +106,7 @@
     <Compile Include="UI\UICheckbox.cs" />
     <Compile Include="UI\UIImage.cs" />
     <Compile Include="CustomUI\UIImageButtonWithBackground.cs" />
+    <Compile Include="UI\UIImageListButton.cs" />
     <Compile Include="UI\UILabel.cs" />
     <Compile Include="UI\UIScrollBar.cs" />
     <Compile Include="UI\UIScrollView.cs" />

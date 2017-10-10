@@ -401,6 +401,7 @@ namespace CheatSheet.Menus
 			bEyeDropper.ForegroundColor = buttonUnselectedColor;
 			StampToolActive = false;
 			EyeDropperActive = false;
+			startTileX = startTileY = lastMouseTileX = lastMouseTileY = -1;
 		}
 
 		public override void Update()
@@ -496,6 +497,7 @@ namespace CheatSheet.Menus
 								}
 							}
 							//Main.NewText("EyeDropper: width height" + (maxX - minX) + " " + (maxY - minY));
+							CheatSheet.instance.paintToolsUI.AddSlot(PaintToolsEx.GetStampInfo(StampTiles));
 						}
 						//Main.NewText("EyeDropper: x,y,min max " + minX + " " + maxX + " " + minY + " " + maxY);
 
@@ -504,8 +506,6 @@ namespace CheatSheet.Menus
 						lastMouseTileX = -1;
 						lastMouseTileY = -1;
 						justMouseDown = false;
-
-						CheatSheet.instance.paintToolsUI.AddSlot(PaintToolsEx.GetStampInfo(StampTiles));
 					}
 				}
 				if (StampToolActive)

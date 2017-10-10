@@ -119,28 +119,6 @@ namespace CheatSheet.Menus
 			}
 		}
 
-		public override void Update()
-		{
-			//if (needsUpdate)
-			//{
-			//    foreach (var npcslot in npcView.allNPCSlot)
-			//    {
-			//        npcslot.isFiltered = filteredNPCSlots.Contains(npcslot.netID);
-			//    }
-			//    needsUpdate = false;
-			//}
-			//UIView.MousePrevLeftButton = UIView.MouseLeftButton;
-			//UIView.MouseLeftButton = Main.mouseLeft;
-			//UIView.MousePrevRightButton = UIView.MouseRightButton;
-			//UIView.MouseRightButton = Main.mouseRight;
-			//UIView.ScrollAmount = PlayerInput.ScrollWheelDeltaForUI;
-			UIView.HoverItem = UIView.EmptyItem;
-			UIView.HoverText = "";
-			UIView.HoverOverridden = true;
-
-			base.Update();
-		}
-
 		private void bClose_onLeftClick(object sender, EventArgs e)
 		{
 			Hide();
