@@ -26,7 +26,7 @@ namespace CheatSheet.Menus
 	{
 		private static NPC tooltipNpc;
 		internal static NPC hoverNpc;
-		internal static Texture2D[] textures =
+		internal static Texture2D[] textures = Main.dedServ ? null : new Texture2D[] 
 		{
 			Main.heartTexture.Resize(22),
 			Main.itemTexture[ItemID.CopperShortsword].Resize(22),
