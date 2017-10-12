@@ -34,8 +34,8 @@ namespace CheatSheet.Menus
 		internal bool StampToolActive;
 		internal bool EyeDropperActive;
 		internal bool TransparentSelectionEnabled = false;
-		internal bool mouseDown;
-		internal bool justMouseDown;
+		internal bool leftMouseDown;
+		internal bool justLeftMouseDown;
 		internal int startTileX = -1;
 		internal int startTileY = -1;
 		internal int lastMouseTileX = -1;
@@ -102,17 +102,17 @@ namespace CheatSheet.Menus
 
 			onMouseDown += (s, e) =>
 			{
-				if (!Main.LocalPlayer.mouseInterface && !mod.hotbar.MouseInside && !mod.hotbar.button.MouseInside)
+				if (!Main.LocalPlayer.mouseInterface && !mod.hotbar.MouseInside && !mod.hotbar.button.MouseInside && !UIView.MouseRightButton)
 				{
-					mouseDown = true;
+					leftMouseDown = true;
 					Main.LocalPlayer.mouseInterface = true;
 				}
 			};
 			onMouseUp += (s, e) =>
 			{
-				if (!Main.LocalPlayer.mouseInterface && !mod.hotbar.MouseInside && !mod.hotbar.button.MouseInside)
+				if (!Main.LocalPlayer.mouseInterface && !mod.hotbar.MouseInside && !mod.hotbar.button.MouseInside && (!UIView.MousePrevRightButton || (UIView.MousePrevLeftButton && !UIView.MouseLeftButton)))
 				{
-					justMouseDown = true; mouseDown = false; /*startTileX = -1; startTileY = -1;*/
+					justLeftMouseDown = true; leftMouseDown = false; /*startTileX = -1; startTileY = -1;*/
 				}
 			};
 
@@ -225,6 +225,10 @@ namespace CheatSheet.Menus
 			if (Visible && IsMouseInside())
 			{
 				Main.LocalPlayer.mouseInterface = true;
+				if (UIView.MouseRightButton)
+				{
+					Main.LocalPlayer.mouseInterface = false;
+				}
 			}
 
 			float x = Main.fontMouseText.MeasureString(UIView.HoverText).X;
@@ -251,7 +255,7 @@ namespace CheatSheet.Menus
 
 		private void DrawBrush()
 		{
-			if (EyeDropperActive && mouseDown)
+			if (EyeDropperActive && leftMouseDown)
 			{
 				Vector2 upperLeft = new Vector2(Math.Min(startTileX, lastMouseTileX), Math.Min(startTileY, lastMouseTileY));
 				Vector2 lowerRight = new Vector2(Math.Max(startTileX, lastMouseTileX) + 1, Math.Max(startTileY, lastMouseTileY) + 1);
@@ -331,7 +335,7 @@ namespace CheatSheet.Menus
 
 				Vector2 vector = Snap.GetSnapPosition(CheatSheet.instance.paintToolsUI.SnapType, width, height, constrainToAxis, constrainedX, constrainedY, false);
 
-				if (!mouseDown)
+				if (!leftMouseDown)
 				{
 					//DrawPreview(Main.spriteBatch, StampTiles, vector);
 					DrawPreview(Main.spriteBatch, stampInfo, vector);
@@ -339,7 +343,7 @@ namespace CheatSheet.Menus
 
 				Rectangle value = new Rectangle(0, 0, 1, 1);
 				float r = 1f;
-				if (!mouseDown) r = .25f;
+				if (!leftMouseDown) r = .25f;
 				float g = 0.9f;
 				float b = 0.1f;
 				float a = 1f;
@@ -427,7 +431,7 @@ namespace CheatSheet.Menus
 				{
 					//		Main.LocalPlayer.showItemIconText = "Click to select pallete";
 					player.showItemIcon2 = ItemID.EmptyDropper;
-					if (mouseDown)
+					if (leftMouseDown)
 					{
 						Point point = (Main.MouseWorld).ToTileCoordinates();
 						//Point point = (Main.MouseWorld + (brushSize % 2 == 0 ? Vector2.One * 8 : Vector2.Zero)).ToTileCoordinates();
@@ -459,7 +463,7 @@ namespace CheatSheet.Menus
 							lastMouseTileY = point.Y;
 						}
 					}
-					if (justMouseDown)
+					if (justLeftMouseDown)
 					{
 						if (startTileX != -1 && startTileY != -1 && lastMouseTileX != -1 && lastMouseTileY != -1)
 						{
@@ -505,14 +509,14 @@ namespace CheatSheet.Menus
 						startTileY = -1;
 						lastMouseTileX = -1;
 						lastMouseTileY = -1;
-						justMouseDown = false;
+						justLeftMouseDown = false;
 					}
 				}
 				if (StampToolActive)
 				{
 					player.showItemIcon2 = ItemID.Paintbrush;
 					//		Main.LocalPlayer.showItemIconText = "Click to paint";
-					if (mouseDown && stampInfo != null)
+					if (leftMouseDown && stampInfo != null)
 					{
 						int width = StampTiles.GetLength(0);
 						int height = StampTiles.GetLength(1);
