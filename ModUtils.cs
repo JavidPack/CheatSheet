@@ -21,6 +21,7 @@ namespace CheatSheet
 			using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
 			{
 				texture.SaveAsPng(ms, width, height);
+				// Crashes Mac (maybe Linux?)
 				result = Texture2D.FromStream(texture.GraphicsDevice, ms);
 			}
 			return result;

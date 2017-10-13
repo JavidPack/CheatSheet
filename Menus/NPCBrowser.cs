@@ -26,13 +26,7 @@ namespace CheatSheet.Menus
 	{
 		private static NPC tooltipNpc;
 		internal static NPC hoverNpc;
-		internal static Texture2D[] textures = Main.dedServ ? null : new Texture2D[] 
-		{
-			Main.heartTexture.Resize(22),
-			Main.itemTexture[ItemID.CopperShortsword].Resize(22),
-			Main.EquipPageTexture[0].Resize(22),
-			Main.itemTexture[ItemID.CobaltShield].Resize(22),
-		};
+		internal Texture2D[] textures;
 
 		private static string[] categNames = new string[]
 		{
@@ -138,6 +132,13 @@ namespace CheatSheet.Menus
 			npcView.selectedCategory = NPCBrowser.categories[0].ToArray();
 			npcView.activeSlots = npcView.selectedCategory;
 			npcView.ReorderSlots();
+			textures = new Texture2D[]
+			{
+				mod.GetTexture("UI/NPCLifeIcon"),
+				mod.GetTexture("UI/NPCDamageIcon"),
+				mod.GetTexture("UI/NPCDefenseIcon"),
+				mod.GetTexture("UI/NPCKnockbackIcon"),
+			};
 		}
 
 		public override void Draw(SpriteBatch spriteBatch)
