@@ -261,6 +261,7 @@ namespace CheatSheet.Menus
 			//			buttonView.AddChild(bToggleEventManager);
 			buttonView.AddChild(SpawnRateMultiplier.GetButton(mod));
 			buttonView.AddChild(MinionSlotBooster.GetButton(mod));
+			buttonView.AddChild(LightHack.GetButton(mod));
 			//	buttonView.AddChild(FullBright.GetButton(mod));
 			//			buttonView.AddChild(BossDowner.GetButton(mod));
 			buttonView.AddChild(ConfigurationTool.GetButton(mod));
@@ -849,6 +850,7 @@ namespace CheatSheet.Menus
 			bToggleNPCBrowser.Visible = ConfigurationLoader.personalConfiguration.NPCBrowser;
 			bToggleRecipeBrowser.Visible = ConfigurationLoader.personalConfiguration.RecipeBrowser;
 			MinionSlotBooster.button.Visible = ConfigurationLoader.personalConfiguration.MinionBooster;
+			LightHack.button.Visible = ConfigurationLoader.personalConfiguration.LightHack;
 			bToggleClearMenu.Visible = ConfigurationLoader.personalConfiguration.ClearMenu;
 			bTogglePaintTools.Visible = ConfigurationLoader.personalConfiguration.PaintTools;
 			bToggleExtendedCheat.Visible = ConfigurationLoader.personalConfiguration.ModExtensions;
