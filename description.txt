@@ -42,6 +42,9 @@ This is programmed to exclude Target Dummies, Banners and Cultist spawned near t
 Spawn Rate Multiplier:
 Cycle through settings for manipulating a spawn rate multiplier. (Spawn limit also affected) Fun for a challenge.
 
+LightHack:
+See through the darkness.
+
 Next Update: Event Manager:
 Start or stop all events.
 
