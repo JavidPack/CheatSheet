@@ -858,6 +858,7 @@ namespace CheatSheet.Menus
 			bVacuum.Visible = ConfigurationLoader.personalConfiguration.Vacuum;
 			bToggleNPCButcherer.Visible = ConfigurationLoader.personalConfiguration.Butcher;
 			bToggleQuickTeleport.Visible = ConfigurationLoader.personalConfiguration.Waypoints;
+			LightHack.button.Visible = ConfigurationLoader.personalConfiguration.LightHack;
 			SpawnRateMultiplier.button.Visible = ConfigurationLoader.personalConfiguration.SpawnRate && SpawnRateMultiplier.HasPermission;
 			//BossDowner.button.Visible = ConfigurationLoader.configuration.BossDowner;
 			//bToggleEventManager.Visible = ConfigurationLoader.configuration.EventManager;
