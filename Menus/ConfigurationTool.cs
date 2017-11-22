@@ -75,7 +75,7 @@ namespace CheatSheet.Menus
 			//ConfigurationLoader.Initialized();
 
 			string[] labels = new string[] { "Item Browser", "NPC Browser", "Recipe Browser", "Minion Booster", "Butcher", "Clear Menu", "Extra Accessory Slots",
-				"Mod Extensions", "Paint Tools", "Spawn Rate", "Vacuum", "Waypoints",/* "Boss Downer", "Event Manager"*/
+				"Mod Extensions", "Paint Tools", "Spawn Rate", "Vacuum", "Waypoints", "Light Hack"/* "Boss Downer", "Event Manager"*/
 			};
 			bool[] selecteds = new bool[] {
 				ConfigurationLoader.personalConfiguration.ItemBrowser,
@@ -90,6 +90,7 @@ namespace CheatSheet.Menus
 				ConfigurationLoader.personalConfiguration.SpawnRate,
 				ConfigurationLoader.personalConfiguration.Vacuum,
 				ConfigurationLoader.personalConfiguration.Waypoints,
+				ConfigurationLoader.personalConfiguration.LightHack,
               //  ConfigurationLoader.configuration.BossDowner,
               //  ConfigurationLoader.configuration.EventManager,
             };
@@ -205,6 +206,10 @@ namespace CheatSheet.Menus
 
 				case "Waypoints":
 					ConfigurationLoader.personalConfiguration.Waypoints = checkbox.Selected;
+					break;
+
+				case "Light Hack":
+					ConfigurationLoader.personalConfiguration.LightHack = checkbox.Selected;
 					break;
 				//case "Boss Downer":
 				//    ConfigurationLoader.configuration.BossDowner = checkbox.Selected;

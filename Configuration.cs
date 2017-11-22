@@ -95,6 +95,7 @@ namespace CheatSheet
 		public bool ModExtensions = true;
 		public bool ClearMenu = true;
 		public bool Vacuum = true;
+		public bool LightHack = true;
 
 		//public bool BossDowner = true;
 		//public bool EventManager = true;
