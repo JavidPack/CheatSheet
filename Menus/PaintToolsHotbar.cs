@@ -155,18 +155,6 @@ namespace CheatSheet.Menus
 
 		public override void Draw(SpriteBatch spriteBatch)
 		{
-			try
-			{
-				Draw2(spriteBatch);
-			}
-			catch (Exception ex)
-			{
-				System.Diagnostics.Debug.WriteLine(ex.Message);
-			}
-		}
-
-		public void Draw2(SpriteBatch spriteBatch)
-		{
 			if (Visible)
 			{
 				spriteBatch.End();
@@ -205,14 +193,14 @@ namespace CheatSheet.Menus
 				spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, null, null, null, null, Main.UIScaleMatrix);
 			}
 			//Main.LocalPlayer.showItemIcon = false;
-			if (Visible && !base.IsMouseInside() && (StampToolActive || EyeDropperActive))
-			{
-				if (!Main.LocalPlayer.mouseInterface)
-				{
-					//		Main.LocalPlayer.showItemIcon = true;
-					DrawBrush();
-				}
-			}
+			//if (Visible && !base.IsMouseInside() && (StampToolActive || EyeDropperActive))
+			//{
+			//	if (!Main.LocalPlayer.mouseInterface)
+			//	{
+			//		//		Main.LocalPlayer.showItemIcon = true;
+			//		DrawBrush();
+			//	}
+			//}
 
 			//	base.Draw(spriteBatch);
 
@@ -244,6 +232,24 @@ namespace CheatSheet.Menus
 			Utils.DrawBorderStringFourWay(spriteBatch, Main.fontMouseText, UIView.HoverText, vector.X, vector.Y, new Color((int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor), Color.Black, Vector2.Zero, 1f);
 		}
 
+		public void DrawGameScale(SpriteBatch spriteBatch)
+		{
+			try
+			{
+				if (Visible && !base.IsMouseInside() && (StampToolActive || EyeDropperActive))
+				{
+					if (!Main.LocalPlayer.mouseInterface)
+					{
+						DrawBrush();
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine(ex.Message);
+			}
+		}
+
 		internal static Color buffColor(Color newColor, float R, float G, float B, float A)
 		{
 			newColor.R = (byte)((float)newColor.R * R);
@@ -255,11 +261,20 @@ namespace CheatSheet.Menus
 
 		private void DrawBrush()
 		{
-			if (EyeDropperActive && leftMouseDown)
+			if (EyeDropperActive)
 			{
-				Vector2 upperLeft = new Vector2(Math.Min(startTileX, lastMouseTileX), Math.Min(startTileY, lastMouseTileY));
-				Vector2 lowerRight = new Vector2(Math.Max(startTileX, lastMouseTileX) + 1, Math.Max(startTileY, lastMouseTileY) + 1);
-
+				Vector2 upperLeft;
+				Vector2 lowerRight;
+				if (leftMouseDown)
+				{
+					upperLeft = new Vector2(Math.Min(startTileX, lastMouseTileX), Math.Min(startTileY, lastMouseTileY));
+					lowerRight = new Vector2(Math.Max(startTileX, lastMouseTileX) + 1, Math.Max(startTileY, lastMouseTileY) + 1);
+				}
+				else
+				{
+					upperLeft = Main.MouseWorld.ToTileCoordinates().ToVector2();
+					lowerRight = upperLeft.Offset(1, 1);
+				}
 				Vector2 upperLeftScreen = upperLeft * 16f;
 				Vector2 lowerRightScreen = lowerRight * 16f;
 				upperLeftScreen -= Main.screenPosition;
@@ -272,94 +287,47 @@ namespace CheatSheet.Menus
 					Utils.Swap(ref upperLeftScreen.Y, ref lowerRightScreen.Y);
 				}
 
-				Vector2 brushSize = lowerRight - upperLeft;
-
-				Rectangle value = new Rectangle(0, 0, 1, 1);
-				float r = 1f;
-				float g = 0.9f;
-				float b = 0.1f;
-				float a = 1f;
-				float scale = 0.6f;
-				Color color = buffColor(Color.White, r, g, b, a);
-				Main.spriteBatch.Draw(Main.magicPixel, upperLeftScreen, new Microsoft.Xna.Framework.Rectangle?(value), color * scale, 0f, Vector2.Zero, 16f * brushSize, SpriteEffects.None, 0f);
-				b = 0.3f;
-				g = 0.95f;
-				scale = (a = 1f);
-				color = buffColor(Color.White, r, g, b, a);
-				Main.spriteBatch.Draw(Main.magicPixel, upperLeftScreen + Vector2.UnitX * -2f, new Microsoft.Xna.Framework.Rectangle?(value), color * scale, 0f, Vector2.Zero, new Vector2(2f, 16f * brushSize.Y), SpriteEffects.None, 0f);
-				Main.spriteBatch.Draw(Main.magicPixel, upperLeftScreen + Vector2.UnitX * 16f * brushSize.X, new Microsoft.Xna.Framework.Rectangle?(value), color * scale, 0f, Vector2.Zero, new Vector2(2f, 16f * brushSize.Y), SpriteEffects.None, 0f);
-				Main.spriteBatch.Draw(Main.magicPixel, upperLeftScreen + Vector2.UnitY * -2f, new Microsoft.Xna.Framework.Rectangle?(value), color * scale, 0f, Vector2.Zero, new Vector2(16f * brushSize.X, 2f), SpriteEffects.None, 0f);
-				Main.spriteBatch.Draw(Main.magicPixel, upperLeftScreen + Vector2.UnitY * 16f * brushSize.Y, new Microsoft.Xna.Framework.Rectangle?(value), color * scale, 0f, Vector2.Zero, new Vector2(16f * brushSize.X, 2f), SpriteEffects.None, 0f);
-
-				Vector2 pos = Main.MouseScreen.Offset(48, 24);
-				Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, $"{brushSize.X} x {brushSize.Y}", pos.X, pos.Y, Color.White, Color.Black, Vector2.Zero, 1f);
+				DrawSelectedRectangle(upperLeftScreen, lowerRight - upperLeft, 1f, leftMouseDown);
 			}
 			else if (StampToolActive && stampInfo != null)
 			{
 				int width = StampTiles.GetLength(0);
 				int height = StampTiles.GetLength(1);
-				Vector2 brushsize = new Vector2(width, height);
-				//Vector2 evenOffset = Vector2.Zero;
-				//if (width % 2 == 0)
-				//{
-				//	evenOffset.X = 1;
-				//}
-				//if (height % 2 == 0)
-				//{
-				//	evenOffset.Y = 1;
-				//}
-				//Point point = (Main.MouseWorld + evenOffset * 8).ToTileCoordinates();
-				//
-				////Point point = (Main.MouseWorld + (brushSize % 2 == 0 ? Vector2.One * 8 : Vector2.Zero)).ToTileCoordinates();
-				//point.X -= width / 2;
-				//point.Y -= height / 2;
-				//if (constrainToAxis)
-				//{
-				//	if (constrainedX != -1)
-				//	{
-				//		point.X = constrainedX;
-				//	}
-				//	if (constrainedY != -1)
-				//	{
-				//		point.Y = constrainedY;
-				//	}
-				//}
-				//
-				//Vector2 vector = new Vector2(point.X, point.Y) * 16f;
-				//vector -= Main.screenPosition;
-				//if (Main.LocalPlayer.gravDir == -1f)
-				//{
-				//	vector.Y = (float)Main.screenHeight - vector.Y;
-				//	vector.Y -= height * 16;
-				//}
-
 				Vector2 vector = Snap.GetSnapPosition(CheatSheet.instance.paintToolsUI.SnapType, width, height, constrainToAxis, constrainedX, constrainedY, false);
 
 				if (!leftMouseDown)
 				{
-					//DrawPreview(Main.spriteBatch, StampTiles, vector);
 					DrawPreview(Main.spriteBatch, stampInfo, vector);
 				}
 
-				Rectangle value = new Rectangle(0, 0, 1, 1);
-				float r = 1f;
-				if (!leftMouseDown) r = .25f;
-				float g = 0.9f;
-				float b = 0.1f;
-				float a = 1f;
-				//a = .2f;
-				float scale = 0.6f;
-				Color color = buffColor(Color.White, r, g, b, a);
-				//Main.spriteBatch.Draw(Main.magicPixel, vector, new Microsoft.Xna.Framework.Rectangle?(value), color * scale, 0f, Vector2.Zero, 16f * brushsize, SpriteEffects.None, 0f);
-				b = 0.3f;
-				g = 0.95f;
-				scale = (a = 1f);
-				color = buffColor(Color.White, r, g, b, a);
-				Main.spriteBatch.Draw(Main.magicPixel, vector + Vector2.UnitX * -2f, new Microsoft.Xna.Framework.Rectangle?(value), color * scale, 0f, Vector2.Zero, new Vector2(2f, 16f * brushsize.Y), SpriteEffects.None, 0f);
-				Main.spriteBatch.Draw(Main.magicPixel, vector + Vector2.UnitX * 16f * brushsize.X, new Microsoft.Xna.Framework.Rectangle?(value), color * scale, 0f, Vector2.Zero, new Vector2(2f, 16f * brushsize.Y), SpriteEffects.None, 0f);
-				Main.spriteBatch.Draw(Main.magicPixel, vector + Vector2.UnitY * -2f, new Microsoft.Xna.Framework.Rectangle?(value), color * scale, 0f, Vector2.Zero, new Vector2(16f * brushsize.X, 2f), SpriteEffects.None, 0f);
-				Main.spriteBatch.Draw(Main.magicPixel, vector + Vector2.UnitY * 16f * brushsize.Y, new Microsoft.Xna.Framework.Rectangle?(value), color * scale, 0f, Vector2.Zero, new Vector2(16f * brushsize.X, 2f), SpriteEffects.None, 0f);
+				DrawSelectedRectangle(vector, new Vector2(width, height), leftMouseDown ? 1f : .25f, false);
 			}
+		}
+
+		private void DrawSelectedRectangle(Vector2 upperLeftScreen, Vector2 brushSize, float r, bool drawBack = true)
+		{
+			Rectangle value = new Rectangle(0, 0, 1, 1);
+			//float r = 1f;
+			float g = 0.9f;
+			float b = 0.1f;
+			float a = 1f;
+			float scale = 0.6f;
+			Color color = buffColor(Color.White, r, g, b, a);
+			if (drawBack)
+			{
+				Main.spriteBatch.Draw(Main.magicPixel, upperLeftScreen, new Microsoft.Xna.Framework.Rectangle?(value), color * scale, 0f, Vector2.Zero, 16f * brushSize, SpriteEffects.None, 0f);
+			}
+			b = 0.3f;
+			g = 0.95f;
+			scale = (a = 1f);
+			color = buffColor(Color.White, r, g, b, a);
+			Main.spriteBatch.Draw(Main.magicPixel, upperLeftScreen + Vector2.UnitX * -2f, new Microsoft.Xna.Framework.Rectangle?(value), color * scale, 0f, Vector2.Zero, new Vector2(2f, 16f * brushSize.Y), SpriteEffects.None, 0f);
+			Main.spriteBatch.Draw(Main.magicPixel, upperLeftScreen + Vector2.UnitX * 16f * brushSize.X, new Microsoft.Xna.Framework.Rectangle?(value), color * scale, 0f, Vector2.Zero, new Vector2(2f, 16f * brushSize.Y), SpriteEffects.None, 0f);
+			Main.spriteBatch.Draw(Main.magicPixel, upperLeftScreen + Vector2.UnitY * -2f, new Microsoft.Xna.Framework.Rectangle?(value), color * scale, 0f, Vector2.Zero, new Vector2(16f * brushSize.X, 2f), SpriteEffects.None, 0f);
+			Main.spriteBatch.Draw(Main.magicPixel, upperLeftScreen + Vector2.UnitY * 16f * brushSize.Y, new Microsoft.Xna.Framework.Rectangle?(value), color * scale, 0f, Vector2.Zero, new Vector2(16f * brushSize.X, 2f), SpriteEffects.None, 0f);
+
+			Vector2 pos = Main.MouseScreen.Offset(48, 24);
+			Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, $"{brushSize.X} x {brushSize.Y}", pos.X, pos.Y, Color.White, Color.Black, Vector2.Zero, 1f);
 		}
 
 		private void bToggleEyeDropper_onLeftClick(object sender, EventArgs e)
@@ -409,6 +377,13 @@ namespace CheatSheet.Menus
 		}
 
 		public override void Update()
+		{
+			DoSlideMovement();
+			base.CenterXAxisToParentCenter();
+			base.Update();
+		}
+
+		public void UpdateGameScale()
 		{
 			try
 			{
@@ -634,11 +609,6 @@ namespace CheatSheet.Menus
 				}
 				Main.LocalPlayer.showItemIcon = true;
 			}
-
-			DoSlideMovement();
-
-			base.CenterXAxisToParentCenter();
-			base.Update();
 		}
 
 		public void Resize()
