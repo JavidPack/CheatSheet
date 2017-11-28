@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 
@@ -18,6 +19,7 @@ namespace CheatSheet.Menus
 		public UIView buttonView;
 		public UIImage bStampTiles;
 		public UIImage bEyeDropper;
+		public UIImage bUndo;
 		public UIImage bFlipHorizontal;
 		public UIImage bFlipVertical;
 		public UIImage bToggleTransparentSelection;
@@ -29,6 +31,7 @@ namespace CheatSheet.Menus
 		//	public int brushSize = 1;
 		//	public int[,] BrushTileType = new int[10, 10];
 		public Tile[,] StampTiles = new Tile[0, 0];
+		public Stack<Tuple<Point, Tile[,]>> UndoHistory = new Stack<Tuple<Point, Tile[,]>>();
 		public StampInfo stampInfo;
 
 		internal bool StampToolActive;
@@ -53,6 +56,7 @@ namespace CheatSheet.Menus
 			//		bDecreaseBrushSize = new UIImage(Main.itemTexture[ItemID.CopperShortsword]);
 			//		bIncreaseBrushSize = new UIImage(Main.itemTexture[ItemID.CrossNecklace]);
 			bStampTiles = new UIImage(Main.itemTexture[ItemID.Paintbrush]);
+			bUndo = new UIImage(Main.itemTexture[ItemID.AlphabetStatueU]);
 			bEyeDropper = new UIImage(Main.itemTexture[ItemID.EmptyDropper]);
 			bFlipHorizontal = new UIImage(mod.GetTexture("CustomUI/Horizontal"));
 			bFlipVertical = new UIImage(mod.GetTexture("CustomUI/Vertical"));
@@ -62,6 +66,7 @@ namespace CheatSheet.Menus
 			//		this.bDecreaseBrushSize.Tooltip = "    Decrease Brush Size";
 			bStampTiles.Tooltip = "    Paint Tiles";
 			bEyeDropper.Tooltip = "    Eye Dropper";
+			bUndo.Tooltip = "    Undo Last Paint (RMB: Last 10) [0 steps]";
 			bFlipHorizontal.Tooltip = "    Flip Horizontal";
 			bFlipVertical.Tooltip = "    Flip Vertical";
 			bToggleTransparentSelection.Tooltip = "    Toggle Transparent Selection: Off";
@@ -84,6 +89,8 @@ namespace CheatSheet.Menus
 					stampInfo.bFlipVertical = !stampInfo.bFlipVertical;
 				}
 			};
+			bUndo.onLeftClick += (a, b) => bUndo_onClick(false);
+			bUndo.onRightClick += (a, b) => bUndo_onClick(true);
 			bFlipHorizontal.onLeftClick += (s, e) =>
 			{
 				for (int j = 0; j < StampTiles.GetLength(1); j++)
@@ -122,6 +129,7 @@ namespace CheatSheet.Menus
 			//		buttonView.AddChild(bIncreaseBrushSize);
 			buttonView.AddChild(bStampTiles);
 			buttonView.AddChild(bEyeDropper);
+			buttonView.AddChild(bUndo);
 			buttonView.AddChild(bFlipHorizontal);
 			buttonView.AddChild(bFlipVertical);
 			buttonView.AddChild(bToggleTransparentSelection);
@@ -144,6 +152,68 @@ namespace CheatSheet.Menus
 				num += this.buttonView.children[i].Width + this.spacing;
 			}
 			this.Resize();
+		}
+
+		private void bUndo_onClick(bool right)
+		{
+			if (UndoHistory.Count == 0)
+			{
+				Main.NewText("There are no actions left in history to undo.");
+				return;
+			}
+			if (right)
+			{
+				for (int i = 0; i < 10; i++)
+				{
+					Undo();
+					if (UndoHistory.Count == 0)
+						break;
+				}
+			}
+			else
+			{
+				Undo();
+			}
+			//if (UndoHistory.Count > 0)
+			Main.NewText($"{UndoHistory.Count} actions remain in undo history");
+		}
+
+		private void Undo()
+		{
+			if (UndoHistory.Count == 0)
+			{
+				//Main.NewText("There are no actions left in history to undo.");
+			}
+			else
+			{
+				var HistoryItem = UndoHistory.Pop();
+				UpdateUndoTooltip();
+				Point UndoOrigin = HistoryItem.Item1;
+				Tile[,] UndoTiles = HistoryItem.Item2;
+				int width = UndoTiles.GetLength(0);
+				int height = UndoTiles.GetLength(1);
+				for (int x = 0; x < width; x++)
+				{
+					for (int y = 0; y < height; y++)
+					{
+						if (WorldGen.InWorld(x + UndoOrigin.X, y + UndoOrigin.Y) && UndoTiles[x, y] != null)
+						{
+							//Tile target = Framing.GetTileSafely(x + UndoOrigin.X, y + UndoOrigin.Y);
+							//target.CopyFrom(UndoTiles[x, y]);
+							Main.tile[x + UndoOrigin.X, y + UndoOrigin.Y] = UndoTiles[x, y];
+						}
+					}
+				}
+				if (Main.netMode == 1)
+				{
+					NetMessage.SendTileSquare(-1, UndoOrigin.X + width / 2, UndoOrigin.Y + height / 2, Math.Max(width, height));
+				}
+			}
+		}
+
+		internal void UpdateUndoTooltip()
+		{
+			bUndo.Tooltip = $"    Undo Last Paint (RMB: Last 10) [{UndoHistory.Count} steps]";
 		}
 
 		protected override bool IsMouseInside()
@@ -566,7 +636,11 @@ namespace CheatSheet.Menus
 
 						if (lastMouseTileX != point.X || lastMouseTileY != point.Y)
 						{
+							lastMouseTileX = point.X;
+							lastMouseTileY = point.Y;
 							//Main.NewText("StartTileX " + startTileX);
+							UndoHistory.Push(Tuple.Create(point, new Tile[width, height]));
+							UpdateUndoTooltip();
 							for (int x = 0; x < width; x++)
 							{
 								for (int y = 0; y < height; y++)
@@ -574,6 +648,7 @@ namespace CheatSheet.Menus
 									if (WorldGen.InWorld(x + point.X, y + point.Y) && StampTiles[x, y] != null)
 									{
 										Tile target = Framing.GetTileSafely(x + point.X, y + point.Y);
+										UndoHistory.Peek().Item2[x, y] = new Tile(target);
 										int cycledX = ((x + point.X - startTileX) % width + width) % width;
 										int cycledY = ((y + point.Y - startTileY) % height + height) % height;
 										if (TransparentSelectionEnabled) // What about just walls?

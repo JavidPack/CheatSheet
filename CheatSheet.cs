@@ -39,15 +39,8 @@ namespace CheatSheet
 		internal NPCButchererHotbar npcButchererHotbar;
 		internal EventManagerHotbar eventManagerHotbar;
 
-		// once 0.9.1.1 is out, this can be removed.
 		public CheatSheet()
 		{
-			//Properties = new ModProperties()
-			//{
-			//	Autoload = true,
-			//	AutoloadGores = true,
-			//	AutoloadSounds = true
-			//};
 		}
 
 		// to do: debugmode, stat
