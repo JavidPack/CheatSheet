@@ -81,6 +81,12 @@ namespace CheatSheet
 			//	DrawUpdateExtraAccessories(spriteBatch);
 		}
 
+		public void DrawUpdatePaintTools(SpriteBatch spriteBatch)
+		{
+			((CheatSheet)mod).paintToolsHotbar.UpdateGameScale();
+			((CheatSheet)mod).paintToolsHotbar.DrawGameScale(spriteBatch);
+		}
+
 		internal void DrawUpdateExtraAccessories(SpriteBatch spriteBatch)
 		{
 			if (Main.playerInventory && Main.EquipPage == 0)

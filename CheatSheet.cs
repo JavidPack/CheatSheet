@@ -240,6 +240,17 @@ namespace CheatSheet
 					},
 					InterfaceScaleType.UI)
 				);
+
+				layers.Insert(MouseTextIndex, new LegacyGameInterfaceLayer(
+					"CheatSheet: Paint Tools",
+					delegate
+					{
+						AllItemsMenu menu = (AllItemsMenu)this.GetGlobalItem("AllItemsMenu");
+						menu.DrawUpdatePaintTools(Main.spriteBatch);
+						return true;
+					},
+					InterfaceScaleType.Game)
+				);
 			}
 
 			MouseTextIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Inventory"));
