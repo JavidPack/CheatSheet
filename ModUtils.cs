@@ -9,6 +9,7 @@ namespace CheatSheet
 	{
 		internal const int TextureMaxTile = 128;
 
+		/*
 		internal static Texture2D Resize(this Texture2D texture, int size)
 		{
 			Texture2D result = texture;
@@ -26,6 +27,7 @@ namespace CheatSheet
 			}
 			return result;
 		}
+		*/
 
 		internal static Texture2D Resize(this Texture2D[,] textures, int size)
 		{
@@ -53,6 +55,7 @@ namespace CheatSheet
 			int[] widths = new int[maxX + 1];
 			int[] heights = new int[maxY + 1];
 
+			// TODO: Wait, shouldn't I just do this all in 1 draw call?
 			for (int x = 0; x < maxX; x++)
 			{
 				for (int y = 0; y < maxY; y++)
@@ -65,11 +68,22 @@ namespace CheatSheet
 					heights[y + 1] = heights[y] + height;
 
 					Texture2D texture2;
-					using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
+					if (Terraria.ModLoader.ModLoader.windows)
 					{
-						texture.SaveAsPng(ms, width, height);
-						texture2 = Texture2D.FromStream(texture.GraphicsDevice, ms);
+						using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
+						{
+							// This doesn't work on Mac/Linux but doesn't cause a screen flash.
+							// TODO: Do this in an Update method so screen flash doesn't matter.
+							texture.SaveAsPng(ms, width, height);
+							texture2 = Texture2D.FromStream(texture.GraphicsDevice, ms);
+						}
 					}
+					else
+					{
+						// Alt method for Mac/Linux, causes screen flash
+						texture2 = ResizeTexture(texture, scale);
+					}
+
 					Color[] data2 = new Color[width * height];
 					texture2.GetData<Color>(data2);
 					for (int i = 0; i < height; i++)
@@ -85,6 +99,27 @@ namespace CheatSheet
 			result.SetData(data1);
 
 			return result;
+		}
+
+		private static Texture2D ResizeTexture(Texture2D texture, float scale)
+		{
+			int width = (int)(texture.Width * scale);
+			int height = (int)(texture.Height * scale);
+
+			Main.spriteBatch.End();
+			RenderTarget2D renderTarget = new RenderTarget2D(Main.graphics.GraphicsDevice, width, height);
+			Main.instance.GraphicsDevice.SetRenderTarget(renderTarget);
+			Main.instance.GraphicsDevice.Clear(Color.Transparent);
+			Main.spriteBatch.Begin();
+
+			Rectangle destinationRectangle = new Rectangle(
+			0, 0, width, height);
+			Main.spriteBatch.Draw(texture, destinationRectangle, Color.White);
+
+			Main.spriteBatch.End();
+			Main.instance.GraphicsDevice.SetRenderTarget(null);
+			Main.spriteBatch.Begin();
+			return renderTarget;
 		}
 
 		public static Texture2D Offset(this Texture2D texture, int x, int y, int width, int height)
