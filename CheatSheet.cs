@@ -65,6 +65,8 @@ namespace CheatSheet
 				Main.rand = new Terraria.Utilities.UnifiedRandom();
 			}
 
+			LoadTranslations();
+
 			ModTranslation text = CreateTranslation("ButcherNotification");
 			text.SetDefault("NPCs were butchered by {0}");
 			AddTranslation(text);
@@ -87,6 +89,43 @@ namespace CheatSheet
 			ToggleCheatSheetHotbarHotKey = null;
 			RecipeBrowserWindow.recipeView = null;
 			RecipeBrowserWindow.lookupItemSlot = null;
+		}
+
+		internal static string CSText(string category, string key)
+		{
+			return Language.GetTextValue($"Mods.CheatSheet.{category}.{key}");
+		}
+
+		private void LoadTranslations()
+		{
+			var modTranslationDictionary = new Dictionary<string, ModTranslation>();
+
+			var translationFiles = new List<string>();
+			foreach (var item in File)
+			{
+				if (item.Key.StartsWith("Localization"))
+					translationFiles.Add(item.Key);
+			}
+			foreach (var translationFile in translationFiles)
+			{
+				string translationFileContents = System.Text.Encoding.UTF8.GetString(GetFileBytes(translationFile));
+				GameCulture culture = GameCulture.FromName(Path.GetFileNameWithoutExtension(translationFile));
+				Dictionary<string, Dictionary<string, string>> dictionary = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(translationFileContents);
+				foreach (KeyValuePair<string, Dictionary<string, string>> category in dictionary)
+					foreach (KeyValuePair<string, string> kvp in category.Value)
+					{
+						ModTranslation mt;
+						string key = category.Key + "." + kvp.Key;
+						if (!modTranslationDictionary.TryGetValue(key, out mt))
+							modTranslationDictionary[key] = mt = CreateTranslation(key);
+						mt.AddTranslation(culture, kvp.Value);
+					}
+			}
+
+			foreach (var value in modTranslationDictionary.Values)
+			{
+				AddTranslation(value);
+			}
 		}
 
 		//public override void PreSaveAndQuit()
