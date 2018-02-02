@@ -10,6 +10,7 @@ namespace CheatSheet.Menus
 {
 	internal class ExtendedCheatMenu : UISlideWindow
 	{
+		internal static string CSText(string key, string category = "ExtendedCheatMenu") => CheatSheet.CSText(category, key);
 		public Mod mod;
 		private static UIImage[] buttons = new UIImage[CheatSheet.ButtonTexture.Count];
 		private float spacing = 16f;
@@ -24,7 +25,7 @@ namespace CheatSheet.Menus
 
 			if (CheatSheet.ButtonTexture.Count == 0)
 			{
-				UILabel none = new UILabel("No Extension\nCheat Mods\nInstalled");
+				UILabel none = new UILabel(CSText("No Extension Cheat Mods Installed"));
 				none.Scale = .3f;
 				//none.OverridesMouse = false;
 				//none.

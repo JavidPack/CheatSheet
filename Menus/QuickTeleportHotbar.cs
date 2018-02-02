@@ -9,6 +9,7 @@ namespace CheatSheet.Menus
 {
 	internal class QuickTeleportHotbar : UIHotbar
 	{
+		internal static string CSText(string key, string category = "Teleport") => CheatSheet.CSText(category, key);
 		public UIView buttonView;
 		public UIImage bDungeon;
 		public UIImage bSpawn;
@@ -36,11 +37,11 @@ namespace CheatSheet.Menus
 			bTemple = new UIImage(Main.itemTexture[ItemID.LihzahrdDoor]);
 			bRandom = new UIImage(Main.itemTexture[ItemID.SpookyDoor]);
 
-			bDungeon.Tooltip = "Dungeon";
-			bSpawn.Tooltip = "Spawnpoint";
-			bHell.Tooltip = "Hell";
-			bTemple.Tooltip = "Temple";
-			bRandom.Tooltip = "Random";
+			bDungeon.Tooltip = CSText("Dungeon");
+			bSpawn.Tooltip = CSText("Spawnpoint");
+			bHell.Tooltip = CSText("Hell");
+			bTemple.Tooltip = CSText("Temple");
+			bRandom.Tooltip = CSText("Random");
 
 			bDungeon.onLeftClick += (s, e) =>
 			{

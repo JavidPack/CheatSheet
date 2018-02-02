@@ -25,6 +25,7 @@ namespace CheatSheet.Menus
 
 	internal class MinionSlotBooster
 	{
+		internal static string CSText(string key, string category = "MinionSlot") => CheatSheet.CSText(category, key);
 		private static int[] boosts = new int[] { 0, 1, 2, 3, 5, 10, 15, 20 };
 		private static string[] boostStrings = new string[] { "+0", "+1", "+2", "+3", "+5", "+10", "+15", "+20" };
 		public static int currentBoost = 0;
@@ -34,7 +35,7 @@ namespace CheatSheet.Menus
 		public static UIImage GetButton(Mod mod)
 		{
 			button = new UIImage(Main.buffTexture[BuffID.Summoning]);
-			button.Tooltip = "Minion Slot Boost: +0";
+			button.Tooltip = CSText("Minion Slot Booster");
 			button.onRightClick += (s, e) =>
 			{
 				buttonLogic(false);
@@ -67,8 +68,8 @@ namespace CheatSheet.Menus
 			currentBoost = boosts[currentBoostIndex];
 			if (!Main.dedServ)
 			{
-				button.Tooltip = "Minion Slot Boost: " + boostStrings[currentBoostIndex];
-				Main.NewText("Minion boost now at " + boostStrings[currentBoostIndex]);
+				button.Tooltip = CSText("Minion Slot Booster New") + boostStrings[currentBoostIndex];
+				Main.NewText(CSText("Minion Slot Booster Text") + boostStrings[currentBoostIndex]);
 			}
 		}
 

@@ -32,22 +32,23 @@ namespace CheatSheet.Menus
 
 	internal class ItemBrowser : UISlideWindow
 	{
+		internal static string CSText(string key, string category = "ItemBrowser") => CheatSheet.CSText(category, key);
 		private static string[] categNames = new string[]
 		{
-			"All Items",
-			"Weapons",
-			"Tools",
-			"Armor",
-			"Accessories",
-			"Blocks",
-			"Ammo",
-			"Potions",
-			"Expert",
-			"Furniture",
-			"Pets",
-			"Mounts",
+			CSText("All Items"),
+			CSText("Weapons"),
+			CSText("Tools"),
+			CSText("Armor"),
+			CSText("Accessories"),
+			CSText("Blocks"),
+			CSText("Ammo"),
+			CSText("Potions"),
+			CSText("Expert"),
+			CSText("Furniture"),
+			CSText("Pets"),
+			CSText("Mounts"),
       //      "Crafting Materials",
-            "Cycle Mod Specific Items",
+            CSText("Cycle Mod Specific Items"),
 		};
 
 		private static Texture2D[] categoryIcons = new Texture2D[]

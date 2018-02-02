@@ -14,6 +14,7 @@ namespace CheatSheet.Menus
 {
 	internal class PaintToolsUI : UISlideWindow
 	{
+		internal static string CSText(string key, string category = "PaintTools") => CheatSheet.CSText(category, key);
 		internal UIImageListButton btnSnap;
 
 		public PaintToolsView view;
@@ -61,9 +62,9 @@ namespace CheatSheet.Menus
 					SnapType.BottomLeft, SnapType.BottomCenter, SnapType.BottomRight,
 				},
 				new List<string>() {
-					"Snap: TopLeft", "Snap: TopCenter", "Snap: TopRight",
-					"Snap: LeftCenter", "Snap: Center", "Snap: RightCenter",
-					"Snap: BottomLeft", "Snap: BottomCenter", "Snap: BottomRight",
+					CSText("Snap: TopLeft"), CSText("Snap: TopCenter"), CSText("Snap: TopRight"),
+					CSText("Snap: LeftCenter"), CSText("Snap: Center"), CSText("Snap: RightCenter"),
+					CSText("Snap: BottomLeft"), CSText("Snap: BottomCenter"), CSText("Snap: BottomRight"),
 				},
 				4);
 			btnSnap.onLeftClick += (a, b) => btnSnap.NextIamge();
@@ -77,21 +78,21 @@ namespace CheatSheet.Menus
 			position = position.Offset(btnSnap.Width + this.spacing, 0);
 			uIImage.Position = position;
 			uIImage.onLeftClick += (a, b) => view.RemoveSelectedItem();
-			uIImage.Tooltip = "Delete selection";
+			uIImage.Tooltip = CSText("Delete selection");
 			this.AddChild(uIImage);
 
 			uIImage = new UIImage(Main.itemTexture[ItemID.AlphabetStatueI]);
 			position = position.Offset(uIImage.Width + this.spacing, 0);
 			uIImage.Position = position;
 			uIImage.onLeftClick += (a, b) => PaintToolsEx.Import(this.view);
-			uIImage.Tooltip = "Import data";
+			uIImage.Tooltip = CSText("Import data");
 			this.AddChild(uIImage);
 
 			uIImage = new UIImage(Main.itemTexture[ItemID.AlphabetStatueE]);
 			position = position.Offset(uIImage.Width + this.spacing, 0);
 			uIImage.Position = position;
 			uIImage.onLeftClick += (a, b) => PaintToolsEx.Export(this.view);
-			uIImage.Tooltip = "Export data";
+			uIImage.Tooltip = CSText("Export data");
 			this.AddChild(uIImage);
 		}
 

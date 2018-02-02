@@ -18,6 +18,7 @@ namespace CheatSheet.Menus
 
 	internal class SpawnRateMultiplier
 	{
+		internal static string CSText(string key, string category = "SpawnRate") => CheatSheet.CSText(category, key);
 		private static float[] multipliers = new float[] { .25f, .5f, 1f, 1.5f, 2f, 3f, 5f, 10f, 30f };
 		private static string[] multiplierStrings = new string[] { ".25x", ".5x", "1x", "1.5x", "2x", "3x", "5x", "10x", "30x" };
 		public static float currentMultiplier = 1f;
@@ -28,7 +29,7 @@ namespace CheatSheet.Menus
 		public static UIImage GetButton(Mod mod)
 		{
 			button = new UIImage(Main.itemTexture[ItemID.WaterCandle]);
-			button.Tooltip = "Spawn Rate Multiplier: 1x";
+			button.Tooltip = CSText("Spawn Rate Multiplier");
 			button.onRightClick += (s, e) =>
 			{
 				buttonLogic(false);
@@ -61,8 +62,8 @@ namespace CheatSheet.Menus
 			currentMultiplier = multipliers[currentMultiplierIndex];
 			if (!Main.dedServ)
 			{
-				button.Tooltip = "Spawn Rate Multiplier: " + multiplierStrings[currentMultiplierIndex];
-				Main.NewText("Spawn rate and max spawns now " + multiplierStrings[currentMultiplierIndex] + " the normal value");
+				button.Tooltip = CSText("Spawn Rate Multiplier New") + multiplierStrings[currentMultiplierIndex];
+				Main.NewText(CSText("Spawn Rate Multiplier Text") + multiplierStrings[currentMultiplierIndex] + CSText("Spawn Rate Normal Value"));
 			}
 		}
 

@@ -9,9 +9,10 @@ namespace CheatSheet.Menus
 	// https://gfycat.com/LoathsomeSelfassuredBoilweevil
 	internal class LightHack
 	{
+		internal static string CSText(string key, string category = "LightHack") => CheatSheet.CSText(category, key);
 		internal static int LightStrength;
 		internal static float[] LightStrengthValues = new float[] { 0, .25f, .5f, 1f };
-		private static string[] LightStrengthStrings = new string[] { "LightHack: Disabled", "LightHack: 25%", "LightHack: 50%", "LightHack: 100%"};
+		private static string[] LightStrengthStrings = new string[] { CSText("LightHack Disabled"), CSText("LightHack 25%"), CSText("LightHack 50%"), CSText("LightHack 100%")};
 
 		public static UIImage button;
 

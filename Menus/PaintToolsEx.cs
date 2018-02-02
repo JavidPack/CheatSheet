@@ -24,6 +24,7 @@ namespace CheatSheet
 
 	internal static class PaintToolsEx
 	{
+		internal static string CSText(string key, string category = "PaintTools") => CheatSheet.CSText(category, key);
 		internal static string importPath = Path.Combine(Main.SavePath, "CheatSheet_PaintTools.txt");
 		internal static string exportPath = Path.Combine(Main.SavePath);
 
@@ -57,7 +58,7 @@ namespace CheatSheet
 				}
 				if (0 < list.Count)
 					File.WriteAllLines(importPath, list);
-				Main.NewText($"Exported data to {importPath}");
+				Main.NewText(CSText("Data Export") + importPath);
 			}
 			catch { }
 		}

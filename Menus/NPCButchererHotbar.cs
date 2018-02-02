@@ -9,6 +9,7 @@ namespace CheatSheet.Menus
 {
 	internal class NPCButchererHotbar : UIHotbar
 	{
+		internal static string CSText(string key, string category = "Butcherer") => CheatSheet.CSText(category, key);
 		public UIView buttonView;
 		public UIImage bButcherHostiles;
 		public UIImage bButcherBoth;
@@ -33,9 +34,9 @@ namespace CheatSheet.Menus
 			bButcherTownNPCs = new UIImage(Main.itemTexture[ItemID.Heart]);
 
 			// Button tooltips
-			bButcherHostiles.Tooltip = "Butcher hostile NPCs";
-			bButcherBoth.Tooltip = "Butcher hostile and friendly NPCs";
-			bButcherTownNPCs.Tooltip = "Butcher friendly NPCs";
+			bButcherHostiles.Tooltip = CSText("Butcher hostile NPCs");
+			bButcherBoth.Tooltip = CSText("Butcher hostile and friendly NPCs");
+			bButcherTownNPCs.Tooltip = CSText("Butcher friendly NPCs");
 
 			// Button EventHandlers
 			bButcherHostiles.onLeftClick += (s, e) =>

@@ -11,6 +11,7 @@ namespace CheatSheet.Menus
 {
 	internal class QuickClearHotbar : UIHotbar
 	{
+		internal static string CSText(string key, string category = "QuickClear") => CheatSheet.CSText(category, key);
 		public UIView buttonView;
 		public UIImage bItems;
 		public UIImage bProjectiles;
@@ -37,10 +38,10 @@ namespace CheatSheet.Menus
 			bDebuffs = new UIImage(Main.buffTexture[BuffID.Poisoned]);
 
 			// Button tooltips
-			bItems.Tooltip = "Clear dropped items";
-			bProjectiles.Tooltip = "Clear projectiles";
-			bBuffs.Tooltip = "Clear buffs";
-			bDebuffs.Tooltip = "Clear debuffs";
+			bItems.Tooltip = CSText("Clear dropped items");
+			bProjectiles.Tooltip = CSText("Clear projectiles");
+			bBuffs.Tooltip = CSText("Clear buffs");
+			bDebuffs.Tooltip = CSText("Clear debuffs");
 
 			// Button EventHandlers
 			bItems.onLeftClick += (s, e) =>

@@ -24,18 +24,19 @@ namespace CheatSheet.Menus
 
 	internal class NPCBrowser : UISlideWindow
 	{
+		internal static string CSText(string key, string category = "MobBrowser") => CheatSheet.CSText(category, key);
 		private static NPC tooltipNpc;
 		internal static NPC hoverNpc;
 		internal Texture2D[] textures;
 
 		private static string[] categNames = new string[]
 		{
-			"All NPCs",
-			"Bosses",
-			"Town NPCs",
-			"NetID NPCs",
-			"Filtered NPCs",
-			"Cycle Mod Specific NPCs"
+			CSText("All NPCs"),
+			CSText("Bosses"),
+			CSText("Town NPCs"),
+			CSText("NetID NPCs"),
+			CSText("Filtered NPCs"),
+			CSText("Cycle Mod Specific NPCs")
 		};
 
 		private static Texture2D[] categoryIcons = new Texture2D[]

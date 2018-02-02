@@ -15,7 +15,7 @@ namespace CheatSheet.Menus
 		//public static float xPosition = 78f;
 		//	public UIImage bIncreaseBrushSize;
 		//	public UIImage bDecreaseBrushSize;
-
+		internal static string CSText(string key, string category = "PaintTools") => CheatSheet.CSText(category, key);
 		public UIView buttonView;
 		public UIImage bStampTiles;
 		public UIImage bEyeDropper;
@@ -64,12 +64,12 @@ namespace CheatSheet.Menus
 
 			//		this.bIncreaseBrushSize.Tooltip = "    Increase Brush Size";
 			//		this.bDecreaseBrushSize.Tooltip = "    Decrease Brush Size";
-			bStampTiles.Tooltip = "    Paint Tiles";
-			bEyeDropper.Tooltip = "    Eye Dropper";
-			bUndo.Tooltip = "    Undo Last Paint (RMB: Last 10) [0 steps]";
-			bFlipHorizontal.Tooltip = "    Flip Horizontal";
-			bFlipVertical.Tooltip = "    Flip Vertical";
-			bToggleTransparentSelection.Tooltip = "    Toggle Transparent Selection: Off";
+			bStampTiles.Tooltip = CSText("Paint Tiles");
+			bEyeDropper.Tooltip = CSText("Eye Dropper");
+			bUndo.Tooltip = CSText("Undo");
+			bFlipHorizontal.Tooltip = CSText("Flip Horizontal");
+			bFlipVertical.Tooltip = CSText("Flip Vertical");
+			bToggleTransparentSelection.Tooltip = CSText("Transparent Selection Off");
 
 			//		this.bIncreaseBrushSize.onLeftClick += (s, e) => brushSize = Math.Min(10, brushSize + 1);
 			//		this.bDecreaseBrushSize.onLeftClick += (s, e) => brushSize = Math.Max(1, brushSize - 1);
@@ -105,7 +105,7 @@ namespace CheatSheet.Menus
 					stampInfo.bFlipHorizontal = !stampInfo.bFlipHorizontal;
 				}
 			};
-			bToggleTransparentSelection.onLeftClick += (s, e) => { TransparentSelectionEnabled = !TransparentSelectionEnabled; bToggleTransparentSelection.Tooltip = TransparentSelectionEnabled ? "    Toggle Transparent Selection: On" : "    Toggle Transparent Selection: Off"; };
+			bToggleTransparentSelection.onLeftClick += (s, e) => { TransparentSelectionEnabled = !TransparentSelectionEnabled; bToggleTransparentSelection.Tooltip = TransparentSelectionEnabled ? CSText("Transparent Selection On") : CSText("Transparent Selection Off"); };
 
 			onMouseDown += (s, e) =>
 			{
@@ -158,7 +158,7 @@ namespace CheatSheet.Menus
 		{
 			if (UndoHistory.Count == 0)
 			{
-				Main.NewText("There are no actions left in history to undo.");
+				Main.NewText(CSText("No Undo"));
 				return;
 			}
 			if (right)
@@ -175,7 +175,7 @@ namespace CheatSheet.Menus
 				Undo();
 			}
 			//if (UndoHistory.Count > 0)
-			Main.NewText($"{UndoHistory.Count} actions remain in undo history");
+			Main.NewText(UndoHistory.Count + CSText("Undo Left"));
 		}
 
 		private void Undo()
@@ -212,8 +212,8 @@ namespace CheatSheet.Menus
 		}
 
 		internal void UpdateUndoTooltip()
-		{
-			bUndo.Tooltip = $"    Undo Last Paint (RMB: Last 10) [{UndoHistory.Count} steps]";
+		{	
+			bUndo.Tooltip = CSText("Undo") + UndoHistory.Count + CSText("Undo2");
 		}
 
 		protected override bool IsMouseInside()
@@ -419,7 +419,7 @@ namespace CheatSheet.Menus
 		{
 			if (stampInfo == null || StampTiles.GetLength(0) == 0)
 			{
-				Main.NewText("Use Eyedropper prior to using brush");
+				Main.NewText(CSText("Prior Brush"));
 			}
 			else
 			{

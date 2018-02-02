@@ -8,13 +8,14 @@ namespace CheatSheet
 {
 	internal class CheatSheetWorld : ModWorld
 	{
+		internal static string CSText(string key, string category = "ExtraAccessorySlots") => CheatSheet.CSText(category, key);
 		public override void Initialize()
 		{
 			if (!Main.dedServ && Main.LocalPlayer.name != "")
 			{
 				try
 				{
-					(mod as CheatSheet).hotbar.bCycleExtraAccessorySlots.Tooltip = "Extra Accessory Slots: " + Main.LocalPlayer.GetModPlayer<CheatSheetPlayer>(mod).numberExtraAccessoriesEnabled;
+					(mod as CheatSheet).hotbar.bCycleExtraAccessorySlots.Tooltip = CSText("Extra Accessory Slots") + Main.LocalPlayer.GetModPlayer<CheatSheetPlayer>(mod).numberExtraAccessoriesEnabled;
 					CheatSheet.instance.paintToolsHotbar.UndoHistory.Clear();
 					CheatSheet.instance.paintToolsHotbar.UpdateUndoTooltip();
 				}

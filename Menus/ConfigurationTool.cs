@@ -11,6 +11,7 @@ namespace CheatSheet.Menus
 {
 	internal class ConfigurationTool
 	{
+		internal static string CSText(string key, string category = "Hotbar") => CheatSheet.CSText(category, key);
 		public static UIImage button;
 		public static ConfigurationWindow configurationWindow;
 		public static CheatSheet cheatSheet;
@@ -24,7 +25,7 @@ namespace CheatSheet.Menus
 			configurationWindow.Visible = false;
 
 			button = new UIImage(Main.itemTexture[ItemID.Cog]);
-			button.Tooltip = "Configure Available Tools";
+			button.Tooltip = CSText("Configure Available Tools");
 			button.onLeftClick += new EventHandler(bConfigurationToggle_onLeftClick);
 			//+= (s, e) =>
 			//{
@@ -55,6 +56,7 @@ namespace CheatSheet.Menus
 
 	internal class ConfigurationWindow : UISlideWindow
 	{
+		internal static string CSText(string key, string category = "ConfigurationTool") => CheatSheet.CSText(category, key);
 		public Mod mod;
 		private float spacing = 16f;
 
@@ -74,8 +76,9 @@ namespace CheatSheet.Menus
 
 			//ConfigurationLoader.Initialized();
 
-			string[] labels = new string[] { "Item Browser", "NPC Browser", "Recipe Browser", "Minion Booster", "Butcher", "Clear Menu", "Extra Accessory Slots",
-				"Mod Extensions", "Paint Tools", "Spawn Rate", "Vacuum", "Waypoints", "Light Hack"/* "Boss Downer", "Event Manager"*/
+			string[] labels = new string[] { CSText("Item Browser"), CSText("NPC Browser"), CSText("Recipe Browser"), CSText("Minion Booster"), CSText("Butcher"), CSText("Clear Menu"), 
+			CSText("Extra Accessory Slots"), CSText("Mod Extensions"), CSText("Paint Tools"), CSText("Spawn Rate"), CSText("Vacuum"), CSText("Waypoints"), CSText("Light Hack")
+			/* "Boss Downer", "Event Manager"*/
 			};
 			bool[] selecteds = new bool[] {
 				ConfigurationLoader.personalConfiguration.ItemBrowser,

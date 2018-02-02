@@ -21,10 +21,11 @@ namespace CheatSheet.Menus
 
 	internal class RecipeBrowserWindow : UISlideWindow
 	{
+		internal static string CSText(string key, string category = "RecipeBrowser") => CheatSheet.CSText(category, key);
 		private static string[] categNames = new string[]
 		{
-			"All Recipes",
-			"Cycle Mod Specific Recipes"
+			CSText("All Recipes"),
+			CSText("Cycle Mod Specific Recipes")
 		};
 
 		private static Texture2D[] categoryIcons = new Texture2D[]
@@ -32,7 +33,7 @@ namespace CheatSheet.Menus
 			Main.itemTexture[ItemID.AlphabetStatueA],
 			Main.itemTexture[ItemID.AlphabetStatueM],
 		};
-
+	
 		internal static RecipeView recipeView;
 		public Mod mod;
 
