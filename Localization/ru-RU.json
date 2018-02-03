@@ -17,6 +17,10 @@
 		"Butcher hostile NPCs": "Убить враждебных мобов",
 		"Butcher hostile and friendly NPCs": "Убить и враждебных, и дружелюбных мобов",
 		"Butcher friendly NPCs": "Убить дружелюбных мобов",
+		"ButcherNotification": "Мобы были убиты игроком {0}",
+	},
+	"Vacuum":{
+		"VacuumNotification": "Предметы на земле были убраны игроком {0}",
 	},
 	"Teleport":{
 		"Dungeon": "Данж",
@@ -30,6 +34,8 @@
 		"Clear projectiles": "Убрать снаряды",
 		"Clear buffs": "Убрать баффы",
 		"Clear debuffs": "Убрать дебаффы",
+		"ItemClearNotification": "Выпавшие предметы были убраны игроком {0}",
+		"ProjectileClearNotification": "Снаряды были убраны игроком {0}",
 	},
 	"SpawnRate":{
 		"Spawn Rate Multiplier": "Увеличение частоты спавна мобов: 1х",
@@ -81,6 +87,7 @@
 		"NetID NPCs": "Сортировка по NetID",
 		"Filtered NPCs": "Сортированные мобы",
 		"Cycle Mod Specific NPCs": "Мобы из мода",
+		"SpawnNPCNotification": "Игрок {1} заспавнил моба {0}",
 	},
 	"ItemBrowser":{
 		"All Items": "Все предметы",
