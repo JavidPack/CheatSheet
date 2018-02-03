@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
 using System.Net;
+using System.Reflection;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -27,6 +28,7 @@ namespace CheatSheet
 	{
 		internal static ModHotKey ToggleCheatSheetHotbarHotKey;
 		internal static CheatSheet instance;
+		internal static Dictionary<string, ModTranslation> translations; // reference to private field.
 		internal Hotbar hotbar;
 		internal ItemBrowser itemBrowser;
 		internal NPCBrowser npcBrowser;
@@ -65,20 +67,9 @@ namespace CheatSheet
 				Main.rand = new Terraria.Utilities.UnifiedRandom();
 			}
 
+			FieldInfo translationsField = typeof(Mod).GetField("translations", BindingFlags.Instance | BindingFlags.NonPublic);
+			translations = (Dictionary<string, ModTranslation>)translationsField.GetValue(this);
 			LoadTranslations();
-
-			ModTranslation text = CreateTranslation("ButcherNotification");
-			text.SetDefault("NPCs were butchered by {0}");
-			AddTranslation(text);
-			text = CreateTranslation("VacuumNotification");
-			text.SetDefault("Items on the ground were vacuumed by {0}");
-			AddTranslation(text);
-			text = CreateTranslation("SpawnNPCNotification");
-			text.SetDefault("Spawned {0} by {1}");
-			AddTranslation(text);
-			text = CreateTranslation("VolcanoWarning");
-			text.SetDefault("Did you hear something....A Volcano! Find Cover!");
-			AddTranslation(text);
 		}
 
 		public override void Unload()
@@ -93,7 +84,9 @@ namespace CheatSheet
 
 		internal static string CSText(string category, string key)
 		{
-			return Language.GetTextValue($"Mods.CheatSheet.{category}.{key}");
+			return translations[$"Mods.CheatSheet.{category}.{key}"].GetTranslation(Language.ActiveCulture);
+			// This isn't good until after load....can revert after fixing static initializers for string[]
+			// return Language.GetTextValue($"Mods.CheatSheet.{category}.{key}");
 		}
 
 		private void LoadTranslations()
@@ -362,7 +355,7 @@ namespace CheatSheet
 					int npcType = reader.ReadInt32();
 					int netID = reader.ReadInt32();
 					NPCSlot.HandleNPC(npcType, netID, true, whoAmI);
-					key = "Mods.CheatSheet.SpawnNPCNotification";
+					key = "Mods.CheatSheet.MobBrowser.SpawnNPCNotification";
 					NetMessage.BroadcastChatMessage(NetworkText.FromKey(key, netID, Netplay.Clients[whoAmI].Name), Color.Azure);
 					//message = "Spawned " + netID + " by " + Netplay.Clients[whoAmI].Name;
 					//NetMessage.SendData(25, -1, -1, message, 255, Color.Azure.R, Color.Azure.G, Color.Azure.B, 0);
@@ -373,12 +366,12 @@ namespace CheatSheet
 					switch (clearType)
 					{
 						case 0:
-							key = "Mods.CheatSheet.ItemClearNotification";
+							key = "Mods.CheatSheet.QuickClear.ItemClearNotification";
 							//message = "Items were cleared by ";
 							break;
 
 						case 1:
-							key = "Mods.CheatSheet.ProjectileClearNotification";
+							key = "Mods.CheatSheet.QuickClear.ProjectileClearNotification";
 							//message = "Projectiles were cleared by ";
 							break;
 
@@ -394,7 +387,7 @@ namespace CheatSheet
 
 				case CheatSheetMessageType.VacuumItems:
 					Hotbar.HandleVacuum(true, whoAmI);
-					key = "Mods.CheatSheet.VacuumNotification";
+					key = "Mods.CheatSheet.Vacuum.VacuumNotification";
 					NetMessage.BroadcastChatMessage(NetworkText.FromKey(key, Netplay.Clients[whoAmI].Name), Color.Azure);
 					//message = "Items on the ground were vacuumed by " + Netplay.Clients[whoAmI].Name;
 					//NetMessage.SendData(25, -1, -1, message, 255, Color.Azure.R, Color.Azure.G, Color.Azure.B, 0);
@@ -402,7 +395,7 @@ namespace CheatSheet
 
 				case CheatSheetMessageType.ButcherNPCs:
 					NPCButchererHotbar.HandleButcher(reader.ReadInt32(), true);
-					key = "Mods.CheatSheet.ButcherNotification";
+					key = "Mods.CheatSheet.Butcherer.ButcherNotification";
 					NetMessage.BroadcastChatMessage(NetworkText.FromKey(key, Netplay.Clients[whoAmI].Name), Color.Azure);
 					//message = "NPCs were butchered by " + Netplay.Clients[whoAmI].Name;
 					//NetMessage.SendData(25, -1, -1, message, 255, Color.Azure.R, Color.Azure.G, Color.Azure.B, 0);

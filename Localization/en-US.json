@@ -16,6 +16,10 @@
 		"Butcher hostile NPCs": "Butcher hostile NPCs",
 		"Butcher hostile and friendly NPCs": "Butcher hostile and friendly NPCs",
 		"Butcher friendly NPCs": "Butcher friendly NPCs",
+		"ButcherNotification": "NPCs were butchered by {0}",
+	},
+	"Vacuum":{
+		"VacuumNotification": "Items on the ground were vacuumed by {0}",
 	},
 	"Teleport":{
 		"Dungeon": "Dungeon",
@@ -29,6 +33,8 @@
 		"Clear projectiles": "Clear projectiles",
 		"Clear buffs": "Clear buffs",
 		"Clear debuffs": "Clear debuffs",
+		"ItemClearNotification": "Items were cleared by {0}",
+		"ProjectileClearNotification": "Projectiles were cleared by {0}",
 	},
 	"SpawnRate":{
 		"Spawn Rate Multiplier": "Spawn Rate Multiplier: 1х",
@@ -80,6 +86,7 @@
 		"NetID NPCs": "NetID NPCs",
 		"Filtered NPCs": "Filtered NPCs",
 		"Cycle Mod Specific NPCs": "Cycle Mod Specific NPCs",
+		"SpawnNPCNotification": "Spawned {0} by {1}",
 	},
 	"ItemBrowser":{
 		"All Items": "All Items",
