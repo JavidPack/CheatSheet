@@ -36,7 +36,6 @@
 		"Spawn Rate Multiplier New": "Multiplicador de Taxa de Spawns: ",
 		"Spawn Rate Multiplier Text": "Taxa de Spawns e Spawns Máximos agora ",
 		"Spawn Rate Normal Value": " o valor normal",
-		"": "",
 	},
 	"LightHack":{
 		"LightHack Disabled": "Hack de Luz: Desligado",
@@ -104,7 +103,7 @@
 		"Snap: TopLeft": "Snap: TopoEsquerda",
 		"Snap: TopCenter": "Snap: TopoCentro", 
 		"Snap: TopRight": "Snap: TopoDireita",
-		"Snap: LeftCenter": "Snap: "EsquerdaCentro", 
+		"Snap: LeftCenter": "Snap: EsquerdaCentro", 
 		"Snap: Center": "Snap: Centro", 
 		"Snap: RightCenter": "Snap: DireitaCentro",
 		"Snap: BottomLeft": "Snap: BaixoEsquerda", 
