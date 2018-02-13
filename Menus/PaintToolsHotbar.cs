@@ -64,12 +64,12 @@ namespace CheatSheet.Menus
 
 			//		this.bIncreaseBrushSize.Tooltip = "    Increase Brush Size";
 			//		this.bDecreaseBrushSize.Tooltip = "    Decrease Brush Size";
-			bStampTiles.Tooltip = CSText("Paint Tiles");
-			bEyeDropper.Tooltip = CSText("Eye Dropper");
+			bStampTiles.Tooltip = CSText("PaintTiles");
+			bEyeDropper.Tooltip = CSText("EyeDropper");
 			bUndo.Tooltip = CSText("Undo");
-			bFlipHorizontal.Tooltip = CSText("Flip Horizontal");
-			bFlipVertical.Tooltip = CSText("Flip Vertical");
-			bToggleTransparentSelection.Tooltip = CSText("Transparent Selection Off");
+			bFlipHorizontal.Tooltip = CSText("FlipHorizontal");
+			bFlipVertical.Tooltip = CSText("FlipVertical");
+			bToggleTransparentSelection.Tooltip = CSText("TransparentSelectionOff");
 
 			//		this.bIncreaseBrushSize.onLeftClick += (s, e) => brushSize = Math.Min(10, brushSize + 1);
 			//		this.bDecreaseBrushSize.onLeftClick += (s, e) => brushSize = Math.Max(1, brushSize - 1);
@@ -105,7 +105,7 @@ namespace CheatSheet.Menus
 					stampInfo.bFlipHorizontal = !stampInfo.bFlipHorizontal;
 				}
 			};
-			bToggleTransparentSelection.onLeftClick += (s, e) => { TransparentSelectionEnabled = !TransparentSelectionEnabled; bToggleTransparentSelection.Tooltip = TransparentSelectionEnabled ? CSText("Transparent Selection On") : CSText("Transparent Selection Off"); };
+			bToggleTransparentSelection.onLeftClick += (s, e) => { TransparentSelectionEnabled = !TransparentSelectionEnabled; bToggleTransparentSelection.Tooltip = TransparentSelectionEnabled ? CSText("TransparentSelectionOn") : CSText("TransparentSelectionOff"); };
 
 			onMouseDown += (s, e) =>
 			{
@@ -158,7 +158,7 @@ namespace CheatSheet.Menus
 		{
 			if (UndoHistory.Count == 0)
 			{
-				Main.NewText(CSText("No Undo"));
+				Main.NewText(CSText("NoUndo"));
 				return;
 			}
 			if (right)
@@ -175,7 +175,7 @@ namespace CheatSheet.Menus
 				Undo();
 			}
 			//if (UndoHistory.Count > 0)
-			Main.NewText(UndoHistory.Count + CSText("Undo Left"));
+			Main.NewText(UndoHistory.Count + CSText("UndoLeft"));
 		}
 
 		private void Undo()
@@ -419,7 +419,7 @@ namespace CheatSheet.Menus
 		{
 			if (stampInfo == null || StampTiles.GetLength(0) == 0)
 			{
-				Main.NewText(CSText("Prior Brush"));
+				Main.NewText(CSText("PriorBrush"));
 			}
 			else
 			{

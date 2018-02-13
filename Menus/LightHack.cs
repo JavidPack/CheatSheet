@@ -12,7 +12,7 @@ namespace CheatSheet.Menus
 		internal static string CSText(string key, string category = "LightHack") => CheatSheet.CSText(category, key);
 		internal static int LightStrength;
 		internal static float[] LightStrengthValues = new float[] { 0, .25f, .5f, 1f };
-		private static string[] LightStrengthStrings = new string[] { CSText("LightHack Disabled"), CSText("LightHack 25%"), CSText("LightHack 50%"), CSText("LightHack 100%")};
+		private static string[] LightStrengthStrings = new string[] { CSText("LightHackDisabled"), CSText("LightHack25%"), CSText("LightHack50%"), CSText("LightHack100%")};
 
 		public static UIImage button;
 

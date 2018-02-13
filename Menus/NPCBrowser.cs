@@ -31,12 +31,12 @@ namespace CheatSheet.Menus
 
 		private static string[] categNames = new string[]
 		{
-			CSText("All NPCs"),
+			CSText("AllNPCs"),
 			CSText("Bosses"),
-			CSText("Town NPCs"),
-			CSText("NetID NPCs"),
-			CSText("Filtered NPCs"),
-			CSText("Cycle Mod Specific NPCs")
+			CSText("TownNPCs"),
+			CSText("NetIDNPCs"),
+			CSText("FilteredNPCs"),
+			CSText("CycleModSpecificNPCs")
 		};
 
 		private static Texture2D[] categoryIcons = new Texture2D[]

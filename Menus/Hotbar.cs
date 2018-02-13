@@ -177,16 +177,16 @@ namespace CheatSheet.Menus
 			//		this.bLogin.Tooltip = "Login";
 			//		this.bCTFSettings.Tooltip = "Capture the Flag Settings";
 			//		this.bBackupWorld.Tooltip = "Backup World";
-			this.bToggleItemBrowser.Tooltip = CSText("Show Item Browser");
-			this.bToggleClearMenu.Tooltip = CSText("Show Clear Menu");
-			this.bToggleNPCBrowser.Tooltip = CSText("Show NPC Browser");
-			bToggleRecipeBrowser.Tooltip = CSText("Show Recipe Browser");
-			bToggleExtendedCheat.Tooltip = CSText("Show Mod Extension Cheats");
-			bTogglePaintTools.Tooltip = CSText("Show Paint Tools");
-			bCycleExtraAccessorySlots.Tooltip = CSText("Extra Accessory Slots") + ": ?";
-			bVacuum.Tooltip = CSText("Vacuum Items");
-			bToggleNPCButcherer.Tooltip = CSText("Show NPC Butcherer");
-			bToggleQuickTeleport.Tooltip = CSText("Show Quick Waypoints");
+			this.bToggleItemBrowser.Tooltip = CSText("ShowItemBrowser");
+			this.bToggleClearMenu.Tooltip = CSText("ShowClearMenu");
+			this.bToggleNPCBrowser.Tooltip = CSText("ShowNPCBrowser");
+			bToggleRecipeBrowser.Tooltip = CSText("ShowRecipeBrowser");
+			bToggleExtendedCheat.Tooltip = CSText("ShowModExtensionCheats");
+			bTogglePaintTools.Tooltip = CSText("ShowPaintTools");
+			bCycleExtraAccessorySlots.Tooltip = CSText("ExtraAccessorySlots") + ": ?";
+			bVacuum.Tooltip = CSText("VacuumItems");
+			bToggleNPCButcherer.Tooltip = CSText("ShowNPCButcherer");
+			bToggleQuickTeleport.Tooltip = CSText("ShowQuickWaypoints");
 			//		bToggleEventManager.Tooltip = "Show Event Manager";
 
 			//		this.bToggleBlockReach.Opacity = Hotbar.disabledOpacity;
@@ -216,12 +216,12 @@ namespace CheatSheet.Menus
 			this.bCycleExtraAccessorySlots.onLeftClick += (s, e) =>
 			{
 				Main.LocalPlayer.GetModPlayer<CheatSheetPlayer>(mod).numberExtraAccessoriesEnabled = (Main.LocalPlayer.GetModPlayer<CheatSheetPlayer>(mod).numberExtraAccessoriesEnabled + 1) % (CheatSheetPlayer.MaxExtraAccessories + 1);
-				bCycleExtraAccessorySlots.Tooltip = CSText("Extra Accessory Slots") + ": " + Main.LocalPlayer.GetModPlayer<CheatSheetPlayer>(mod).numberExtraAccessoriesEnabled;
+				bCycleExtraAccessorySlots.Tooltip = CSText("ExtraAccessorySlots") + ": " + Main.LocalPlayer.GetModPlayer<CheatSheetPlayer>(mod).numberExtraAccessoriesEnabled;
 			};
 			this.bCycleExtraAccessorySlots.onRightClick += (s, e) =>
 			{
 				Main.LocalPlayer.GetModPlayer<CheatSheetPlayer>(mod).numberExtraAccessoriesEnabled = (Main.LocalPlayer.GetModPlayer<CheatSheetPlayer>(mod).numberExtraAccessoriesEnabled == 0) ? 0 : (Main.LocalPlayer.GetModPlayer<CheatSheetPlayer>(mod).numberExtraAccessoriesEnabled - 1) % (CheatSheetPlayer.MaxExtraAccessories + 1);
-				bCycleExtraAccessorySlots.Tooltip = CSText("Extra Accessory Slots") + ": " + Main.LocalPlayer.GetModPlayer<CheatSheetPlayer>(mod).numberExtraAccessoriesEnabled;
+				bCycleExtraAccessorySlots.Tooltip = CSText("ExtraAccessorySlots") + ": " + Main.LocalPlayer.GetModPlayer<CheatSheetPlayer>(mod).numberExtraAccessoriesEnabled;
 			};
 			this.bVacuum.onLeftClick += new EventHandler(this.bVacuum_onLeftClick);
 			this.bToggleNPCButcherer.onLeftClick += new EventHandler(this.bButcher_onLeftClick);

@@ -29,7 +29,7 @@ namespace CheatSheet.Menus
 		public static UIImage GetButton(Mod mod)
 		{
 			button = new UIImage(Main.itemTexture[ItemID.WaterCandle]);
-			button.Tooltip = CSText("Spawn Rate Multiplier");
+			button.Tooltip = CSText("SpawnRateMultiplier");
 			button.onRightClick += (s, e) =>
 			{
 				buttonLogic(false);
@@ -62,8 +62,8 @@ namespace CheatSheet.Menus
 			currentMultiplier = multipliers[currentMultiplierIndex];
 			if (!Main.dedServ)
 			{
-				button.Tooltip = CSText("Spawn Rate Multiplier New") + multiplierStrings[currentMultiplierIndex];
-				Main.NewText(CSText("Spawn Rate Multiplier Text") + multiplierStrings[currentMultiplierIndex] + CSText("Spawn Rate Normal Value"));
+				button.Tooltip = CSText("SpawnRateMultiplierNew") + multiplierStrings[currentMultiplierIndex];
+				Main.NewText(CSText("SpawnRateMultiplierText") + multiplierStrings[currentMultiplierIndex] + CSText("SpawnRateNormalValue"));
 			}
 		}
 

@@ -35,7 +35,7 @@ namespace CheatSheet.Menus
 		internal static string CSText(string key, string category = "ItemBrowser") => CheatSheet.CSText(category, key);
 		private static string[] categNames = new string[]
 		{
-			CSText("All Items"),
+			CSText("AllItems"),
 			CSText("Weapons"),
 			CSText("Tools"),
 			CSText("Armor"),
@@ -48,7 +48,7 @@ namespace CheatSheet.Menus
 			CSText("Pets"),
 			CSText("Mounts"),
       //      "Crafting Materials",
-            CSText("Cycle Mod Specific Items"),
+            CSText("CycleModSpecificItems"),
 		};
 
 		private static Texture2D[] categoryIcons = new Texture2D[]

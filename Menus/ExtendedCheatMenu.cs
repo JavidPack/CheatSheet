@@ -25,7 +25,7 @@ namespace CheatSheet.Menus
 
 			if (CheatSheet.ButtonTexture.Count == 0)
 			{
-				UILabel none = new UILabel(CSText("No Extension Cheat Mods Installed"));
+				UILabel none = new UILabel(CSText("NoExtensionCheatModsInstalled"));
 				none.Scale = .3f;
 				//none.OverridesMouse = false;
 				//none.

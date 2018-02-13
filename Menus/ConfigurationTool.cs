@@ -25,7 +25,7 @@ namespace CheatSheet.Menus
 			configurationWindow.Visible = false;
 
 			button = new UIImage(Main.itemTexture[ItemID.Cog]);
-			button.Tooltip = CSText("Configure Available Tools");
+			button.Tooltip = CSText("ConfigureAvailableTools");
 			button.onLeftClick += new EventHandler(bConfigurationToggle_onLeftClick);
 			//+= (s, e) =>
 			//{
@@ -76,8 +76,8 @@ namespace CheatSheet.Menus
 
 			//ConfigurationLoader.Initialized();
 
-			string[] labels = new string[] { CSText("Item Browser"), CSText("NPC Browser"), CSText("Recipe Browser"), CSText("Minion Booster"), CSText("Butcher"), CSText("Clear Menu"), 
-			CSText("Extra Accessory Slots"), CSText("Mod Extensions"), CSText("Paint Tools"), CSText("Spawn Rate"), CSText("Vacuum"), CSText("Waypoints"), CSText("Light Hack")
+			string[] labels = new string[] { CSText("ItemBrowser"), CSText("NPCBrowser"), CSText("RecipeBrowser"), CSText("MinionBooster"), CSText("Butcher"), CSText("ClearMenu"), 
+			CSText("ExtraAccessorySlots"), CSText("ModExtensions"), CSText("PaintTools"), CSText("SpawnRate"), CSText("Vacuum"), CSText("Waypoints"), CSText("LightHack")
 			/* "Boss Downer", "Event Manager"*/
 			};
 			bool[] selecteds = new bool[] {

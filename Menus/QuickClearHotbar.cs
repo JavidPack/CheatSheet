@@ -38,10 +38,10 @@ namespace CheatSheet.Menus
 			bDebuffs = new UIImage(Main.buffTexture[BuffID.Poisoned]);
 
 			// Button tooltips
-			bItems.Tooltip = CSText("Clear dropped items");
-			bProjectiles.Tooltip = CSText("Clear projectiles");
-			bBuffs.Tooltip = CSText("Clear buffs");
-			bDebuffs.Tooltip = CSText("Clear debuffs");
+			bItems.Tooltip = CSText("ClearDroppedItems");
+			bProjectiles.Tooltip = CSText("ClearProjectiles");
+			bBuffs.Tooltip = CSText("ClearBuffs");
+			bDebuffs.Tooltip = CSText("ClearDebuffs");
 
 			// Button EventHandlers
 			bItems.onLeftClick += (s, e) =>

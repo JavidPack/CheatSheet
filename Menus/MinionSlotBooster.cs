@@ -35,7 +35,7 @@ namespace CheatSheet.Menus
 		public static UIImage GetButton(Mod mod)
 		{
 			button = new UIImage(Main.buffTexture[BuffID.Summoning]);
-			button.Tooltip = CSText("Minion Slot Booster");
+			button.Tooltip = CSText("MinionSlotBooster");
 			button.onRightClick += (s, e) =>
 			{
 				buttonLogic(false);
@@ -68,8 +68,8 @@ namespace CheatSheet.Menus
 			currentBoost = boosts[currentBoostIndex];
 			if (!Main.dedServ)
 			{
-				button.Tooltip = CSText("Minion Slot Booster New") + boostStrings[currentBoostIndex];
-				Main.NewText(CSText("Minion Slot Booster Text") + boostStrings[currentBoostIndex]);
+				button.Tooltip = CSText("MinionSlotBoosterNew") + boostStrings[currentBoostIndex];
+				Main.NewText(CSText("MinionSlotBoosterText") + boostStrings[currentBoostIndex]);
 			}
 		}
 

@@ -60,6 +60,9 @@
       <HintPath>..\..\..\Modding\tModLoader\references\ReLogic.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="tModLoaderDebug">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Terraria\tModLoaderDebug.exe</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="build.txt" />
@@ -115,12 +118,6 @@
     <Compile Include="UI\UITextbox.cs" />
     <Compile Include="UI\UIView.cs" />
     <Compile Include="UI\UIWindow.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Modding\tModLoader\src\tModLoader\Terraria.csproj">
-      <Project>{3996d5fa-6e59-4fe4-9f2b-40eeef9645d5}</Project>
-      <Name>Terraria</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -34,9 +34,9 @@ namespace CheatSheet.Menus
 			bButcherTownNPCs = new UIImage(Main.itemTexture[ItemID.Heart]);
 
 			// Button tooltips
-			bButcherHostiles.Tooltip = CSText("Butcher hostile NPCs");
-			bButcherBoth.Tooltip = CSText("Butcher hostile and friendly NPCs");
-			bButcherTownNPCs.Tooltip = CSText("Butcher friendly NPCs");
+			bButcherHostiles.Tooltip = CSText("ButcherHostileNPCs");
+			bButcherBoth.Tooltip = CSText("ButcherHostileAndFriendlyNPCs");
+			bButcherTownNPCs.Tooltip = CSText("ButcherFriendlyNPCs");
 
 			// Button EventHandlers
 			bButcherHostiles.onLeftClick += (s, e) =>

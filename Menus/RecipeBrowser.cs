@@ -24,8 +24,8 @@ namespace CheatSheet.Menus
 		internal static string CSText(string key, string category = "RecipeBrowser") => CheatSheet.CSText(category, key);
 		private static string[] categNames = new string[]
 		{
-			CSText("All Recipes"),
-			CSText("Cycle Mod Specific Recipes")
+			CSText("AllRecipes"),
+			CSText("CycleModSpecificRecipes")
 		};
 
 		private static Texture2D[] categoryIcons = new Texture2D[]

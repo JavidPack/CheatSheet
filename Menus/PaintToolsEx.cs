@@ -58,7 +58,7 @@ namespace CheatSheet
 				}
 				if (0 < list.Count)
 					File.WriteAllLines(importPath, list);
-				Main.NewText(CSText("Data Export") + importPath);
+				Main.NewText(CSText("DataExport") + importPath);
 			}
 			catch { }
 		}
