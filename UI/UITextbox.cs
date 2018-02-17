@@ -110,9 +110,9 @@ namespace CheatSheet.UI
 		{
 			if (!focused)
 			{
+				Main.clrInput();
 				focused = true;
-				//		Main.blockInput = true;
-				//		Main.clrInput();
+				Main.blockInput = true;
 				timer = 0f;
 				//eventSet = true;
 			}
@@ -126,7 +126,7 @@ namespace CheatSheet.UI
 			if (focused)
 			{
 				focused = false;
-				//		Main.blockInput = false;
+				Main.blockInput = false;
 
 				OnLostFocus?.Invoke(this, EventArgs.Empty);
 			}
