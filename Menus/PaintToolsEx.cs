@@ -52,6 +52,11 @@ namespace CheatSheet
 				{
 					Main.NewText("Bad JSON: " + response);
 				}
+				string message = (string)jsonObject["message"];
+				if (message != null)
+				{
+					Main.NewText(message);
+				}
 				JArray schematicslist = (JArray)jsonObject["schematics"];
 				if (schematicslist != null)
 				{
@@ -403,6 +408,8 @@ namespace CheatSheet
 								if (textureTile.Width < rect.X + rect.Width)
 								{
 									int width2 = textureTile.Width - rect.X;
+									if (width2 < 0)
+										continue;
 									rect.Width = width2;
 
 									Color[] d = new Color[16 * width2];
