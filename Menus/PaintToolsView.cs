@@ -53,7 +53,8 @@ namespace CheatSheet.Menus
 				PaintToolsSlot.CurrentSelect = null;
 				CheatSheet.instance.paintToolsHotbar.StampTiles = new Tile[0, 0];
 				CheatSheet.instance.paintToolsHotbar.stampInfo = null;
-
+				CheatSheet.instance.paintToolsUI.infoPanel.Visible = false;
+				CheatSheet.instance.paintToolsUI.submitPanel.Visible = false;
 				if (slotList.Count > 0 && index > -1)
 					slotList[index >= slotList.Count ? index - 1 : index].Select();
 				ReorderSlots();

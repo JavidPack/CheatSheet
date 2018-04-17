@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
+using Terraria.ObjectData;
 
 namespace CheatSheet.Menus
 {
@@ -212,7 +213,7 @@ namespace CheatSheet.Menus
 		}
 
 		internal void UpdateUndoTooltip()
-		{	
+		{
 			bUndo.Tooltip = CSText("Undo") + UndoHistory.Count + CSText("Undo2");
 		}
 
@@ -537,16 +538,32 @@ namespace CheatSheet.Menus
 								for (int y = minY; y < maxY; y++)
 								{
 									if (WorldGen.InWorld(x, y))
-									//if (WorldGen.InWorld(x + point.X, y + point.Y))
 									{
+										if (Main.tile[x, y].type == TileID.Count)
+										{
+										}
+										if (Main.tile[x, y].active())
+										{
+											WorldGen.TileFrame(x, y, true, false);
+										}
+										if (Main.tile[x, y].wall > 0)
+										{
+											Framing.WallFrame(x, y, true);
+										}
+
 										Tile target = Framing.GetTileSafely(x, y);
 										StampTiles[x - minX, y - minY].CopyFrom(target);
-										//	Main.NewText("{x}, {y}");
+										if (Main.tile[x, y].type == TileID.Count)
+											StampTiles[x - minX, y - minY].ClearTile();
+										if(Main.tileContainer[Main.tile[x, y].type])
+											StampTiles[x - minX, y - minY].ClearTile();
 									}
 								}
 							}
+
 							//Main.NewText("EyeDropper: width height" + (maxX - minX) + " " + (maxY - minY));
 							CheatSheet.instance.paintToolsUI.AddSlot(PaintToolsEx.GetStampInfo(StampTiles));
+							//CalculateItemCost(StampTiles);
 						}
 						//Main.NewText("EyeDropper: x,y,min max " + minX + " " + maxX + " " + minY + " " + maxY);
 
@@ -665,6 +682,17 @@ namespace CheatSheet.Menus
 									}
 								}
 							}
+							for (int i = point.X; i < point.X + width; i++)
+							{
+								for (int j = 0; j < point.Y + height; j++)
+								{
+									WorldGen.SquareTileFrame(i, j, false); // Need to do this after stamp so neighbors are correct.
+									if (Main.netMode == 1 && Framing.GetTileSafely(i, j).liquid > 0)
+									{
+										NetMessage.sendWater(i, j); // Does it matter that this is before sendtilesquare?
+									}
+								}
+							}
 							if (Main.netMode == 1)
 							{
 								NetMessage.SendTileSquare(-1, point.X + width / 2, point.Y + height / 2, Math.Max(width, height));
@@ -685,6 +713,29 @@ namespace CheatSheet.Menus
 				Main.LocalPlayer.showItemIcon = true;
 			}
 		}
+
+		//private void CalculateItemCost(Tile[,] stampTiles)
+		//{
+		//	Dictionary<int, int> itemsNeeded = new Dictionary<int, int>();
+
+		//	for (int i = 0; i < stampTiles.GetLength(0); i++)
+		//	{
+		//		for (int j = 0; j < stampTiles.GetLength(1); j++)
+		//		{
+		//			Tile tile = stampTiles[i, j];
+		//			int style = 0;
+		//			int alternate = 0;
+		//			TileObjectData.GetTileInfo(tile, ref style, ref alternate);
+
+		//			var tod = TileObjectData.GetTileData(tile);
+		//			//tod.
+		//			if (tile.active())
+		//			{
+		//				int tileType = tile.type;
+		//			}
+		//		}
+		//	}
+		//}
 
 		public void Resize()
 		{

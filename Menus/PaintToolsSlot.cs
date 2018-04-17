@@ -14,6 +14,12 @@ namespace CheatSheet.Menus
 		public bool isSelect;
 		private Texture2D texture;
 
+		// For items from the Schematics Browser.
+		internal string browserName;
+		internal int browserID;
+		internal int rating;
+		internal int vote;
+
 		public PaintToolsSlot(StampInfo stampInfo)
 		{
 			this.stampInfo = stampInfo;
@@ -23,6 +29,9 @@ namespace CheatSheet.Menus
 
 		public void Select()
 		{
+			CheatSheet.instance.paintToolsUI.infoPanel.Visible = false;
+			CheatSheet.instance.paintToolsUI.submitPanel.Visible = false;
+			CheatSheet.instance.paintToolsUI.submitInput.Text = "";
 			if (CurrentSelect != null)
 			{
 				CurrentSelect.isSelect = false;
@@ -39,6 +48,24 @@ namespace CheatSheet.Menus
 				CurrentSelect = this;
 				CheatSheet.instance.paintToolsHotbar.StampTiles = stampInfo.Tiles;
 				CheatSheet.instance.paintToolsHotbar.stampInfo = stampInfo;
+
+				// Update UI;
+				if (CurrentSelect.browserID > 0)
+				{
+					CheatSheet.instance.paintToolsUI.infoPanel.Visible = true;
+					CheatSheet.instance.paintToolsUI.infoMessage.Text = browserName + ": " + rating;
+					CheatSheet.instance.paintToolsUI.upVoteButton.ForegroundColor = Color.White;
+					CheatSheet.instance.paintToolsUI.downVoteButton.ForegroundColor = Color.White;
+
+					if (CurrentSelect.vote == 1)
+						CheatSheet.instance.paintToolsUI.upVoteButton.ForegroundColor = Color.Gray;
+					if (CurrentSelect.vote == -1)
+						CheatSheet.instance.paintToolsUI.downVoteButton.ForegroundColor = Color.Gray;
+				}
+				else if (CurrentSelect.browserID == 0)
+				{
+					CheatSheet.instance.paintToolsUI.submitPanel.Visible = true;
+				}
 			}
 		}
 

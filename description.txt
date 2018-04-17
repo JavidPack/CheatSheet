@@ -17,6 +17,8 @@ Paint Tools:
 Click to reveal the Paint Tools shelf.
 --Eye Dropper: Use cursor to select tiles.
 --Paint Tiles: Click to paint selected tiles. Click and drag to paint a tiled instance of selected tiles. Hold shift while dragging to constrain movement vertically or horizontally. Be very careful, stray clicks will override tiles and there is no undo function yet.
+--Pallet Window: Store several tile selections.
+--Schematics Browser: Submit builds to the schematics browser and explore other builds.
 
 Extra Accessory Slots:
 These slots appear to the left of your equipment. They will not affect you visually, but do affect stats as normal. Untested in multiplayer. 

@@ -9,6 +9,13 @@ using Terraria.ID;
 using Terraria.GameContent.Liquid;
 using Newtonsoft.Json;
 using CheatSheet.Menus;
+using System.Reflection;
+using Terraria.ModLoader.IO;
+using System.Net;
+using System.Collections.Specialized;
+using Newtonsoft.Json.Linq;
+using Terraria.DataStructures;
+using System.Linq;
 
 namespace CheatSheet
 {
@@ -28,6 +35,95 @@ namespace CheatSheet
 		internal static string importPath = Path.Combine(Main.SavePath, "CheatSheet_PaintTools.txt");
 		internal static string exportPath = Path.Combine(Main.SavePath);
 
+		private static Uri schematicsurl = new Uri("http://javid.ddns.net/tModLoader/jopojellymods/CheatSheet_Schematics_GetList.php");
+		private static bool waiting = false;
+
+		internal static void GetSchematicsComplete(object sender, UploadValuesCompletedEventArgs e)
+		{
+			if (!e.Cancelled)
+			{
+				string response = Encoding.UTF8.GetString(e.Result);
+				JObject jsonObject = new JObject();
+				try
+				{
+					jsonObject = JObject.Parse(response);
+				}
+				catch (Exception ex)
+				{
+					Main.NewText("Bad JSON: " + response);
+				}
+				JArray schematicslist = (JArray)jsonObject["schematics"];
+				if (schematicslist != null)
+				{
+					List<PaintToolsSlot> list = new List<PaintToolsSlot>();
+					foreach (JObject schematic in schematicslist.Children<JObject>())
+					{
+						int id = (int)schematic["id"];
+						string name = (string)schematic["name"];
+						int rating = (int)schematic["rating"];
+						int vote = (int)schematic["vote"];
+						string tiledata = (string)schematic["tiledata"];
+						try
+						{
+							Tile[,] tiles = LoadTilesFromBase64(tiledata);
+							if (tiles.GetLength(0) > 0)
+							{
+								var paintToolsSlot = new PaintToolsSlot(GetStampInfo(tiles));
+								paintToolsSlot.browserID = id;
+								paintToolsSlot.browserName = name;
+								paintToolsSlot.rating = rating;
+								paintToolsSlot.vote = vote;
+								list.Add(paintToolsSlot);
+							}
+						}
+						catch { }
+					}
+					if (list.Count > 0)
+						CheatSheet.instance.paintToolsUI.view.Add(list.ToArray());
+				}
+			}
+			else
+			{
+				Main.NewText("Schematics Server problem 2");
+			}
+			waiting = false;
+		}
+
+		internal static void OnlineImport(PaintToolsView paintToolsView)
+		{
+			if (waiting)
+			{
+				Main.NewText("Be patient");
+				return;
+			}
+			if (CheatSheet.instance.paintToolsUI.view.slotList.Any(x => x.browserID > 0))
+			{
+				Main.NewText("You've already loaded the database");
+				return;
+			}
+			waiting = true;
+			try
+			{
+				using (WebClient client = new WebClient())
+				{
+					var steamIDMethodInfo = typeof(Main).Assembly.GetType("Terraria.ModLoader.ModLoader").GetProperty("SteamID64", BindingFlags.Static | BindingFlags.NonPublic);
+					string steamid64 = (string)steamIDMethodInfo.GetValue(null, null);
+					var values = new NameValueCollection
+					{
+						{ "version", CheatSheet.instance.Version.ToString() },
+						{ "steamid64", steamid64 },
+					};
+					client.UploadValuesCompleted += new UploadValuesCompletedEventHandler(GetSchematicsComplete);
+					client.UploadValuesAsync(schematicsurl, "POST", values);
+				}
+			}
+			catch
+			{
+				Main.NewText("Schematics Server problem 1");
+				waiting = false;
+			}
+		}
+
 		internal static void Import(PaintToolsView paintToolsView)
 		{
 			try
@@ -41,6 +137,136 @@ namespace CheatSheet
 				paintToolsView.Add(list.ToArray());
 			}
 			catch { }
+		}
+
+		static MethodInfo LoadTilesMethodInfo;
+		static MethodInfo LoadWorldTilesVanillaMethodInfo;
+
+		public static Tile[,] LoadTilesFromBase64(string data)
+		{
+			int oldX = Main.maxTilesX;
+			int oldY = Main.maxTilesY;
+			Tile[,] oldTiles = Main.tile;
+			Tile[,] loadedTiles = new Tile[0, 0];
+			try
+			{
+				TagCompound tagCompound = TagIO.FromStream(new MemoryStream(Convert.FromBase64String(data)));
+				if (LoadTilesMethodInfo == null)
+					LoadTilesMethodInfo = typeof(Main).Assembly.GetType("Terraria.ModLoader.IO.TileIO").GetMethod("LoadTiles", BindingFlags.Static | BindingFlags.NonPublic);
+				if (LoadWorldTilesVanillaMethodInfo == null)
+					LoadWorldTilesVanillaMethodInfo = typeof(Main).Assembly.GetType("Terraria.IO.WorldFile").GetMethod("LoadWorldTiles", BindingFlags.Static | BindingFlags.NonPublic);
+				bool[] importance = new bool[TileID.Count];
+				for (int i = 0; i < TileID.Count; i++)
+					importance[i] = Main.tileFrameImportant[i];
+
+				Point16 dimensions = tagCompound.Get<Point16>("d");
+				Main.maxTilesX = dimensions.X;
+				Main.maxTilesY = dimensions.Y;
+				loadedTiles = new Tile[Main.maxTilesX, Main.maxTilesY];
+				for (int i = 0; i < Main.maxTilesX; i++)
+					for (int j = 0; j < Main.maxTilesY; j++)
+						loadedTiles[i, j] = new Tile();
+				Main.tile = loadedTiles;
+
+				using (MemoryStream memoryStream = new MemoryStream(tagCompound.GetByteArray("v")))
+				{
+					using (BinaryReader binaryReader = new BinaryReader(memoryStream))
+					{
+						LoadWorldTilesVanillaMethodInfo.Invoke(null, new object[] { binaryReader, importance });
+					}
+				}
+
+				if (tagCompound.ContainsKey("m"))
+				{
+					LoadTilesMethodInfo.Invoke(null, new object[] { tagCompound["m"] });
+				}
+
+				// Expand because TileFrame ignores edges of map.
+				Main.maxTilesX = dimensions.X + 12;
+				Main.maxTilesY = dimensions.Y + 12;
+				Tile[,] loadedTilesExpanded = new Tile[Main.maxTilesX, Main.maxTilesY];
+				for (int i = 0; i < Main.maxTilesX; i++)
+					for (int j = 0; j < Main.maxTilesY; j++)
+						if (i < 6 || i >= Main.maxTilesX - 6 || j < 6 || j >= Main.maxTilesY - 6)
+							loadedTilesExpanded[i, j] = new Tile();
+						else
+							loadedTilesExpanded[i, j] = Main.tile[i - 6, j - 6];
+				Main.tile = loadedTilesExpanded;
+
+				for (int i = 0; i < Main.maxTilesX; i++)
+				{
+					for (int j = 0; j < Main.maxTilesY; j++)
+					{
+						//WorldGen.TileFrame(i, j, true, false);
+
+						//if (i > 5 && j > 5 && i < Main.maxTilesX - 5 && j < Main.maxTilesY - 5
+						// 0 needs to be 6 ,   MaxX == 5, 4 index, 
+						// need tp add 6?       4(10) < 5(11) - 5
+
+						if (Main.tile[i, j].active())
+						{
+							WorldGen.TileFrame(i, j, true, false);
+						}
+						if (Main.tile[i, j].wall > 0)
+						{
+							Framing.WallFrame(i, j, true);
+						}
+					}
+				}
+			}
+			catch { }
+			Main.maxTilesX = oldX;
+			Main.maxTilesY = oldY;
+			Main.tile = oldTiles;
+			return loadedTiles;
+		}
+
+		static MethodInfo SaveTilesMethodInfo;
+		static MethodInfo SaveWorldTilesVanillaMethodInfo;
+
+		public static string SaveTilesToBase64(Tile[,] tiles)
+		{
+			int oldX = Main.maxTilesX;
+			int oldY = Main.maxTilesY;
+			Tile[,] oldTiles = Main.tile;
+			string base64result = "";
+			try
+			{
+				Main.maxTilesX = tiles.GetLength(0);
+				Main.maxTilesY = tiles.GetLength(1);
+				Main.tile = tiles;
+				if (SaveTilesMethodInfo == null)
+					SaveTilesMethodInfo = typeof(Main).Assembly.GetType("Terraria.ModLoader.IO.TileIO").GetMethod("SaveTiles", BindingFlags.Static | BindingFlags.NonPublic);
+				if (SaveWorldTilesVanillaMethodInfo == null)
+					SaveWorldTilesVanillaMethodInfo = typeof(Main).Assembly.GetType("Terraria.IO.WorldFile").GetMethod("SaveWorldTiles", BindingFlags.Static | BindingFlags.NonPublic);
+
+				TagCompound ModTileData = (TagCompound)SaveTilesMethodInfo.Invoke(null, null);
+
+				byte[] array = null;
+				using (MemoryStream memoryStream = new MemoryStream(7000000))
+				{
+					using (BinaryWriter binaryWriter = new BinaryWriter(memoryStream))
+					{
+						int rval = (int)SaveWorldTilesVanillaMethodInfo.Invoke(null, new object[] { binaryWriter });
+						array = memoryStream.ToArray();
+					}
+				}
+
+				TagCompound result = new TagCompound()
+				{
+					["d"] = new Point16(Main.maxTilesX, Main.maxTilesY),
+					["v"] = array,
+					["m"] = ModTileData,
+				};
+				MemoryStream ms = new MemoryStream();
+				TagIO.ToStream(result, ms, true);
+				base64result = Convert.ToBase64String(ms.ToArray());
+			}
+			catch { }
+			Main.maxTilesX = oldX;
+			Main.maxTilesY = oldY;
+			Main.tile = oldTiles;
+			return base64result;
 		}
 
 		public static void Export(PaintToolsView paintToolsView)

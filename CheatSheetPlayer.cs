@@ -53,6 +53,8 @@ namespace CheatSheet
 		{
 			if (CheatSheet.ToggleCheatSheetHotbarHotKey.JustPressed)
 			{
+				// Debug refresh UI elements
+				// CheatSheet.instance.paintToolsUI = new Menus.PaintToolsUI(CheatSheet.instance);
 				if (CheatSheet.instance.hotbar.hidden)
 				{
 					CheatSheet.instance.hotbar.Show();

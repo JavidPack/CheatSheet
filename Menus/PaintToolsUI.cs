@@ -2,9 +2,14 @@
 using CheatSheet.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
+using System.Net;
+using System.Reflection;
+using System.Text;
 using Terraria;
 using Terraria.GameInput;
 using Terraria.ID;
@@ -16,6 +21,16 @@ namespace CheatSheet.Menus
 	{
 		internal static string CSText(string key, string category = "PaintTools") => CheatSheet.CSText(category, key);
 		internal UIImageListButton btnSnap;
+
+		internal UIView infoPanel;
+		internal UILabel infoMessage;
+		internal UIImage upVoteButton;
+		internal UIImage downVoteButton;
+
+		internal UIView submitPanel;
+		internal UILabel submitLabel;
+		internal UITextbox submitInput;
+		internal UIImage submitButton;
 
 		public PaintToolsView view;
 		public Mod mod;
@@ -94,6 +109,213 @@ namespace CheatSheet.Menus
 			uIImage.onLeftClick += (a, b) => PaintToolsEx.Export(this.view);
 			uIImage.Tooltip = CSText("ExportData");
 			this.AddChild(uIImage);
+
+			uIImage = new UIImage(Main.itemTexture[ItemID.AlphabetStatueW]);
+			position = position.Offset(uIImage.Width + this.spacing, 0);
+			uIImage.Position = position;
+			uIImage.onLeftClick += (a, b) => PaintToolsEx.OnlineImport(this.view);
+			uIImage.Tooltip = "Load Online Schematics Database";
+			this.AddChild(uIImage);
+
+			infoPanel = new UIView();
+			position = position.Offset(uIImage.Width + this.spacing, 0);
+			infoPanel.Position = position;
+			infoPanel.Y = 6;
+			infoPanel.Width = 210;
+			infoPanel.Height = 44;
+			infoPanel.ForegroundColor = Color.Thistle;
+			AddChild(infoPanel);
+
+			infoMessage = new UILabel("Message Here");
+			infoMessage.Scale = 0.35f;
+			infoMessage.Position = new Vector2(30, 10);
+			infoPanel.AddChild(infoMessage);
+
+			upVoteButton = new UIImage(CheatSheet.instance.GetTexture("UI/VoteUp"));
+			upVoteButton.Position = new Vector2(0, 0);
+			upVoteButton.onLeftClick += (a, b) => Vote(true);
+			upVoteButton.Tooltip = "Vote Up";
+			infoPanel.AddChild(upVoteButton);
+
+			downVoteButton = new UIImage(CheatSheet.instance.GetTexture("UI/VoteDown"));
+			downVoteButton.Position = new Vector2(0, 24);
+			downVoteButton.onLeftClick += (a, b) => Vote(false);
+			downVoteButton.Tooltip = "Vote Down";
+			infoPanel.AddChild(downVoteButton);
+
+			infoPanel.Visible = false;
+
+			submitPanel = new UIView();
+			submitPanel.Position = position;
+			submitPanel.Y = 6;
+			submitPanel.Width = 210;
+			submitPanel.Height = 44;
+			AddChild(submitPanel);
+
+			submitLabel = new UILabel("Submit Name:");
+			submitLabel.Scale = 0.35f;
+			submitLabel.Position = new Vector2(0, 0);
+			submitPanel.AddChild(submitLabel);
+
+			submitInput = new UITextbox();
+			submitInput.Position = new Vector2(0, 20);
+			submitInput.Width = 200;
+			submitPanel.AddChild(submitInput);
+
+			submitButton = new UIImage(Terraria.Graphics.TextureManager.Load("Images/UI/ButtonCloudActive"));
+			submitButton.Position = new Vector2(178, -2);
+			submitButton.onLeftClick += (a, b) => Submit();
+			submitButton.Tooltip = "Submit to Schematics Browser";
+			submitPanel.AddChild(submitButton);
+
+			submitPanel.Visible = false;
+		}
+
+		private static Uri submiturl = new Uri("http://javid.ddns.net/tModLoader/jopojellymods/CheatSheet_Schematics_Submit.php");
+		private static bool submitWait = false;
+		private void Submit()
+		{
+			if (PaintToolsSlot.CurrentSelect == null)
+				return;
+			if (PaintToolsSlot.CurrentSelect.browserID == -1)
+			{
+				Main.NewText("Already submitted.");
+				return;
+			}
+			if (PaintToolsSlot.CurrentSelect.browserID != 0)
+				return;
+			if (submitWait)
+			{
+				Main.NewText("Be patient.");
+				return;
+			}
+			try
+			{
+				using (WebClient client = new WebClient())
+				{
+					var steamIDMethodInfo = typeof(Main).Assembly.GetType("Terraria.ModLoader.ModLoader").GetProperty("SteamID64", BindingFlags.Static | BindingFlags.NonPublic);
+					string steamid64 = (string)steamIDMethodInfo.GetValue(null, null);
+					string base64tiles = PaintToolsEx.SaveTilesToBase64(PaintToolsSlot.CurrentSelect.stampInfo.Tiles);
+					if (string.IsNullOrEmpty(base64tiles))
+					{
+						Main.NewText("Oops, base64tiles is bad.");
+					}
+					else if (string.IsNullOrEmpty(submitInput.Text))
+					{
+						Main.NewText("Please name your creation.");
+					}
+					else if (base64tiles.Length > 5000)
+					{
+						Main.NewText("Selection too big for now.");
+					}
+					else
+					{
+						submitWait = true;
+						var values = new NameValueCollection
+						{
+							{ "version", CheatSheet.instance.Version.ToString() },
+							{ "steamid64", steamid64 },
+							{ "name", submitInput.Text },
+							{ "tiledata", base64tiles },
+						};
+						PaintToolsSlot.CurrentSelect.browserID = -1;
+						CheatSheet.instance.paintToolsUI.submitPanel.Visible = false;
+						client.UploadValuesCompleted += new UploadValuesCompletedEventHandler(SubmitComplete);
+						client.UploadValuesAsync(submiturl, "POST", values);
+					}
+				}
+			}
+			catch
+			{
+				Main.NewText("Schematics Server problem 5");
+				submitWait = false;
+			}
+		}
+
+		private void SubmitComplete(object sender, UploadValuesCompletedEventArgs e)
+		{
+			try
+			{
+				if (!e.Cancelled)
+				{
+					string response = Encoding.UTF8.GetString(e.Result);
+					JObject jsonObject = JObject.Parse(response);
+					if (jsonObject["message"] != null)
+					{
+						Main.NewText((string)jsonObject["message"]);
+					}
+					else
+					{
+						Main.NewText("Schematics Server problem 12");
+					}
+				}
+				else
+				{
+					Main.NewText("Schematics Server problem 2");
+				}
+			}
+			catch
+			{
+				Main.NewText("Schematics Server problem 3");
+			}
+			submitWait = false;
+		}
+
+		private static Uri voteurl = new Uri("http://javid.ddns.net/tModLoader/jopojellymods/CheatSheet_Schematics_Vote.php");
+
+		private void Vote(bool up)
+		{
+			if (PaintToolsSlot.CurrentSelect == null)
+				return;
+
+			int voteInt = up ? 1 : -1;
+			if (PaintToolsSlot.CurrentSelect.vote == voteInt)
+			{
+				Main.NewText("You already voted");
+				return;
+			}
+
+			PaintToolsSlot.CurrentSelect.rating += voteInt - PaintToolsSlot.CurrentSelect.vote;
+			CheatSheet.instance.paintToolsUI.infoMessage.Text = PaintToolsSlot.CurrentSelect.browserName + ": " + PaintToolsSlot.CurrentSelect.rating;
+			PaintToolsSlot.CurrentSelect.vote = voteInt;
+			CheatSheet.instance.paintToolsUI.upVoteButton.ForegroundColor = Color.White;
+			CheatSheet.instance.paintToolsUI.downVoteButton.ForegroundColor = Color.White;
+			if (PaintToolsSlot.CurrentSelect.vote == 1)
+				CheatSheet.instance.paintToolsUI.upVoteButton.ForegroundColor = Color.Gray;
+			if (PaintToolsSlot.CurrentSelect.vote == -1)
+				CheatSheet.instance.paintToolsUI.downVoteButton.ForegroundColor = Color.Gray;
+			try
+			{
+				using (WebClient client = new WebClient())
+				{
+					var steamIDMethodInfo = typeof(Main).Assembly.GetType("Terraria.ModLoader.ModLoader").GetProperty("SteamID64", BindingFlags.Static | BindingFlags.NonPublic);
+					string steamid64 = (string)steamIDMethodInfo.GetValue(null, null);
+					var values = new NameValueCollection
+					{
+						{ "version", CheatSheet.instance.Version.ToString() },
+						{ "steamid64", steamid64 },
+						{ "id", PaintToolsSlot.CurrentSelect.browserID.ToString() },
+						{ "vote", up ? "1" : "-1" },
+					};
+					client.UploadValuesCompleted += new UploadValuesCompletedEventHandler(VoteComplete);
+					client.UploadValuesAsync(voteurl, "POST", values);
+				}
+			}
+			catch
+			{
+			}
+		}
+
+		internal static void VoteComplete(object sender, UploadValuesCompletedEventArgs e)
+		{
+			if (!e.Cancelled)
+			{
+				Main.NewText("Thanks for voting.");
+			}
+			else
+			{
+				Main.NewText("Schematics Server voting problem");
+			}
 		}
 
 		public SnapType SnapType
