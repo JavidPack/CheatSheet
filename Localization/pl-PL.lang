@@ -1,0 +1,115 @@
+# Translation by: 
+
+# Hotbar.ShowItemBrowser=Show Item Browser
+# Hotbar.ShowClearMenu=Show Clear Menu
+# Hotbar.ShowNPCBrowser=Show NPC Browser
+# Hotbar.ShowRecipeBrowser=Show Recipe Browser
+# Hotbar.ShowModExtensionCheats=Show Mod Extension Cheats
+# Hotbar.ShowPaintTools=Show Paint Tools
+# Hotbar.ExtraAccessorySlots=Extra Accessory Slots
+# Hotbar.VacuumItems=Vacuum Items
+# Hotbar.ShowNPCButcherer=Show NPC Butcherer
+# Hotbar.ShowQuickWaypoints=Show Quick Waypoints
+# Hotbar.ConfigureAvailableTools=Configure Available Tools
+
+# Butcherer.ButcherHostileNPCs=Butcher hostile NPCs
+# Butcherer.ButcherHostileAndFriendlyNPCs=Butcher hostile and friendly NPCs
+# Butcherer.ButcherFriendlyNPCs=Butcher friendly NPCs
+# Butcherer.ButcherNotification=NPCs were butchered by {0}
+
+# Vacuum.VacuumNotification=Items on the ground were vacuumed by {0}
+
+# Teleport.Dungeon=Dungeon
+# Teleport.Spawnpoint=Spawnpoint
+# Teleport.Hell=Hell
+# Teleport.Temple=Temple
+# Teleport.Random=Random
+
+# QuickClear.ClearDroppedItems=Clear dropped items
+# QuickClear.ClearProjectiles=Clear projectiles
+# QuickClear.ClearBuffs=Clear buffs
+# QuickClear.ClearDebuffs=Clear debuffs
+# QuickClear.ItemClearNotification=Items were cleared by {0}
+# QuickClear.ProjectileClearNotification=Projectiles were cleared by {0}
+
+# SpawnRate.SpawnRateMultiplier=Spawn Rate Multiplier: 1х
+# SpawnRate.SpawnRateMultiplierNew=Spawn Rate Multiplier:
+# SpawnRate.SpawnRateMultiplierText=Spawn rate and max spawns now
+# SpawnRate.SpawnRateNormalValue= the normal value
+
+# LightHack.LightHackDisabled=Light Hack: Disabled
+# LightHack.LightHack25%=Light Hack: 25%
+# LightHack.LightHack50%=Light Hack: 50%
+# LightHack.LightHack100%=Light Hack: 100%
+
+# MinionSlot.MinionSlotBooster=Minion Slot Boost: +0
+# MinionSlot.MinionSlotBoosterNew=Minion Slot Boost:
+# MinionSlot.MinionSlotBoosterText=Minion boost now at
+
+# RecipeBrowser.AllRecipes=All Recipes
+# RecipeBrowser.CycleModSpecificRecipes=Cycle Mod Specific Recipes
+
+# ConfigurationTool.ItemBrowser=Item Browser
+# ConfigurationTool.NPCBrowser=NPC Browser
+# ConfigurationTool.RecipeBrowser=Recipe Browser
+# ConfigurationTool.MinionBooster=Minion Booster
+# ConfigurationTool.Butcher=Butcher
+# ConfigurationTool.ClearMenu=Clear Menu
+# ConfigurationTool.ExtraAccessorySlots=Extra Accessory Slots
+# ConfigurationTool.ModExtensions=Mod Extensions
+# ConfigurationTool.PaintTools=Paint Tools
+# ConfigurationTool.SpawnRate=Spawn Rate
+# ConfigurationTool.Vacuum=Vacuum
+# ConfigurationTool.Waypoints=Waypoints
+# ConfigurationTool.LightHack=Light Hack
+
+# ExtendedCheatMenu.NoExtensionCheatModsInstalled=No Extension\nCheat Mods\nInstalled
+
+# ExtraAccessorySlots.ExtraAccessorySlots=Extra Accessory Slots:
+
+# MobBrowser.AllNPCs=All NPCs
+# MobBrowser.Bosses=Bosses
+# MobBrowser.TownNPCs=Town NPCs
+# MobBrowser.NetIDNPCs=NetID NPCs
+# MobBrowser.FilteredNPCs=Filtered NPCs
+# MobBrowser.CycleModSpecificNPCs=Cycle Mod Specific NPCs
+# MobBrowser.SpawnNPCNotification=Spawned {0} by {1}
+
+# ItemBrowser.AllItems=All Items
+# ItemBrowser.Weapons=Weapons
+# ItemBrowser.Tools=Tools
+# ItemBrowser.Armor=Armor
+# ItemBrowser.Accessories=Accessories
+# ItemBrowser.Blocks=Blocks
+# ItemBrowser.Ammo=Ammo
+# ItemBrowser.Potions=Potions
+# ItemBrowser.Expert=Expert
+# ItemBrowser.Furniture=Furniture
+# ItemBrowser.Pets=Pets
+# ItemBrowser.Mounts=Mounts
+# ItemBrowser.CycleModSpecificItems=Cycle Mod Specific Items
+
+# PaintTools.ExportData=Export Data
+# PaintTools.ImportData=Import Data
+# PaintTools.DeleteSelection=Delete Selection
+# PaintTools.SnapTopLeft=Snap: TopLeft
+# PaintTools.SnapTopCenter=Snap: TopCenter
+# PaintTools.SnapTopRight=Snap: TopRight
+# PaintTools.SnapLeftCenter=Snap: LeftCenter
+# PaintTools.SnapCenter=Snap: Center
+# PaintTools.SnapRightCenter=Snap: RightCenter
+# PaintTools.SnapBottomLeft=Snap: BottomLeft
+# PaintTools.SnapBottomCenter=Snap: BottomCenter
+# PaintTools.SnapBottomRight=Snap: BottomRight
+# PaintTools.PaintTiles=    Paint Tiles
+# PaintTools.EyeDropper=    Eye Dropper
+# PaintTools.Undo=    Undo Last Paint (RMB: Last 10) [
+# PaintTools.Undo2= steps]
+# PaintTools.NoUndo=There are no actions left in history to undo.
+# PaintTools.UndoLeft= actions remain in undo history.
+# PaintTools.FlipHorizontal=Flip Horizontal
+# PaintTools.FlipVertical=Flip Vertical
+# PaintTools.TransparentSelectionOn=    Toggle Transparent Selection: Off
+# PaintTools.TransparentSelectionOff=    Toggle Transparent Selection: On
+# PaintTools.PriorBrush=Use Eyedropper prior to using brush.
+# PaintTools.DataExport=Exported data to
