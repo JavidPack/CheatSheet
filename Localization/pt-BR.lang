@@ -15,6 +15,9 @@ Hotbar.ConfigureAvailableTools=Configurar Ferramentas Disponíveis
 Butcherer.ButcherHostileNPCs=Exterminar NPCs hostis
 Butcherer.ButcherHostileAndFriendlyNPCs=Exterminar NPCs hostis e amigáveis
 Butcherer.ButcherFriendlyNPCs=Exterminar NPCs amigáveis
+# Butcherer.ButcherNotification=NPCs were butchered by {0}
+
+# Vacuum.VacuumNotification=Items on the ground were vacuumed by {0}
 
 Teleport.Dungeon=Calabouço
 Teleport.Spawnpoint=Spawn
@@ -26,6 +29,8 @@ QuickClear.ClearDroppedItems=Limpar itens caídos
 QuickClear.ClearProjectiles=Limpar projéteis
 QuickClear.ClearBuffs=Limpar buffs
 QuickClear.ClearDebuffs=Limpar debuffs
+# QuickClear.ItemClearNotification=Items were cleared by {0}
+# QuickClear.ProjectileClearNotification=Projectiles were cleared by {0}
 
 SpawnRate.SpawnRateMultiplier=Multiplicador de Taxa de Spawns: 1?
 SpawnRate.SpawnRateMultiplierNew=Multiplicador de Taxa de Spawns: 
@@ -68,6 +73,7 @@ MobBrowser.TownNPCs=NPCs de Cidade
 MobBrowser.NetIDNPCs=NPCs NetID
 MobBrowser.FilteredNPCs=NPCs Filtrados
 MobBrowser.CycleModSpecificNPCs=Ciclar NPCs de Mod Específico
+# MobBrowser.SpawnNPCNotification=Spawned {0} by {1}
 
 ItemBrowser.AllItems=Todos os Itens
 ItemBrowser.Weapons=Armas
