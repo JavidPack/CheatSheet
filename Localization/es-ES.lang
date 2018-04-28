@@ -1,0 +1,115 @@
+# Translation by: 
+
+Hotbar.ShowItemBrowser=Mostrar Navegador de Items
+Hotbar.ShowClearMenu=Mostrar Limpiar Menu
+Hotbar.ShowNPCBrowser=Mostrar Navegador de NPC
+Hotbar.ShowRecipeBrowser=Mostrar Navegador de Recetas
+Hotbar.ShowModExtensionCheats=Mostrar Extensiones de Mods Trampa
+Hotbar.ShowPaintTools=Mostrar Herramientas de Pintura
+Hotbar.ExtraAccessorySlots=Espacio de Accesorio Extra
+Hotbar.VacuumItems=Aspirar Items
+Hotbar.ShowNPCButcherer=Mostrar Exterminador de NPC
+Hotbar.ShowQuickWaypoints=Mostrar Puntos de Referencia Rápidos
+Hotbar.ConfigureAvailableTools=Configurar Herramientas Disponibles
+
+Butcherer.ButcherHostileNPCs=Exterminar NPCs hóstiles
+Butcherer.ButcherHostileAndFriendlyNPCs=Exterminar NPCs hóstiles y amigables
+Butcherer.ButcherFriendlyNPCs=Exterminar NPCs amigables
+Butcherer.ButcherNotification=NPCs han sido exterminados por {0}
+
+Vacuum.VacuumNotification=Items en el suelo han sido aspirados por {0}
+
+Teleport.Dungeon=Mazmorra
+Teleport.Spawnpoint=Punto de Inicio
+Teleport.Hell=Infierno
+Teleport.Temple=Templo
+Teleport.Random=Aleatorio
+
+QuickClear.ClearDroppedItems=Limpiar items caídos
+QuickClear.ClearProjectiles=Limpiar proyectiles
+QuickClear.ClearBuffs=Limpiar estados positivos
+QuickClear.ClearDebuffs=Limpiar estados negativos
+QuickClear.ItemClearNotification=Items han sido limpiados por {0}
+QuickClear.ProjectileClearNotification=Proyectiles han sido limpiados por {0}
+
+SpawnRate.SpawnRateMultiplier=Multiplicador de Tasa de Spawns: 1х
+SpawnRate.SpawnRateMultiplierNew=Multiplicador de Tasa de Spawns: 
+SpawnRate.SpawnRateMultiplierText=Tasa de Spawns y Spawns máximos ahora 
+SpawnRate.SpawnRateNormalValue= a valor normal
+
+LightHack.LightHackDisabled=Hack de Luz: Desactivado
+LightHack.LightHack25%=Hack de Luz: 25%
+LightHack.LightHack50%=Hack de Luz: 50%
+LightHack.LightHack100%=Hack de Luz: 100%
+
+MinionSlot.MinionSlotBooster=Mejora de Espacio para Esbirros: +0
+MinionSlot.MinionSlotBoosterNew=Mejora de Espacio para Esbirros: 
+MinionSlot.MinionSlotBoosterText=Mejora de Espacio para Esbirros ahora en 
+
+RecipeBrowser.AllRecipes=Todas las Recetas
+RecipeBrowser.CycleModSpecificRecipes=Cambio por Recetas de Mod Específico
+
+ConfigurationTool.ItemBrowser=Navegador de Items
+ConfigurationTool.NPCBrowser=Navegador de NCPs
+ConfigurationTool.RecipeBrowser=Navegador de Recetas
+ConfigurationTool.MinionBooster=Mejora de Esbirros
+ConfigurationTool.Butcher=Exterminar
+ConfigurationTool.ClearMenu=Limpiar
+ConfigurationTool.ExtraAccessorySlots=Espacio de Accesorio Extra
+ConfigurationTool.ModExtensions=Extensiones de Mods
+ConfigurationTool.PaintTools=Herramientas de Pintura
+ConfigurationTool.SpawnRate=Tasa de Spawns
+ConfigurationTool.Vacuum=Aspirador
+ConfigurationTool.Waypoints=Puntos de referencia
+ConfigurationTool.LightHack=Hack de Luz
+
+ExtendedCheatMenu.NoExtensionCheatModsInstalled=No hay Mods\nMods Trampa\nInstalados
+
+ExtraAccessorySlots.ExtraAccessorySlots=Espacio de Accesorio Extra: 
+
+MobBrowser.AllNPCs=Todos los NPCs
+MobBrowser.Bosses=Jefes
+MobBrowser.TownNPCs=NPCs Ciudadanos
+MobBrowser.NetIDNPCs=NPCs NetID
+MobBrowser.FilteredNPCs=NPCs Filtrados
+MobBrowser.CycleModSpecificNPCs=Cambiar NPCs de Mod Específico
+MobBrowser.SpawnNPCNotification={1} spawneó a {0}
+
+ItemBrowser.AllItems=Todos los Items
+ItemBrowser.Weapons=Armas
+ItemBrowser.Tools=Herramientas
+ItemBrowser.Armor=Armaduras
+ItemBrowser.Accessories=Accesorios
+ItemBrowser.Blocks=Bloques
+ItemBrowser.Ammo=Munición
+ItemBrowser.Potions=Pociones
+ItemBrowser.Expert=Experto
+ItemBrowser.Furniture=Decoración
+ItemBrowser.Pets=Mascotas
+ItemBrowser.Mounts=Monturas
+ItemBrowser.CycleModSpecificItems=Cambiar Items de Mod Específico
+
+PaintTools.ExportData=Exportar Datos
+PaintTools.ImportData=Importar Datos
+PaintTools.DeleteSelection=Borrar Selección
+PaintTools.SnapTopLeft=Captura: ArribaIzquierda
+PaintTools.SnapTopCenter=Captura: ArribaCentro
+PaintTools.SnapTopRight=Captura: ArribaDerecha
+PaintTools.SnapLeftCenter=Captura: IzquierdaCentro
+PaintTools.SnapCenter=Captura: Centro
+PaintTools.SnapRightCenter=Captura: DerechaCentro
+PaintTools.SnapBottomLeft=Captura: AbajoIzquierda
+PaintTools.SnapBottomCenter=Captura: AbajoCentro
+PaintTools.SnapBottomRight=Captura: AbajoDerecha
+PaintTools.PaintTiles=    Pintar Bloques
+PaintTools.EyeDropper=    Cuenta gotas
+PaintTools.Undo=    Deshacer Última Pintura (Clic Derecho: Últimos 10) [
+PaintTools.Undo2= avances]
+PaintTools.NoUndo=No hay más acciones por deshacer.
+PaintTools.UndoLeft= acciones quedan en el historial de cambios.
+PaintTools.FlipHorizontal=Voltear Horizontal
+PaintTools.FlipVertical=Voltear Vertical
+PaintTools.TransparentSelectionOn=    Cambiar Selección Transparente: Desactivado
+PaintTools.TransparentSelectionOff=    Cambiar Selección Transparente: Activado
+PaintTools.PriorBrush=Priorizar uso de Cuenta gotas antes que Pincel.
+PaintTools.DataExport=Exportar datos a 

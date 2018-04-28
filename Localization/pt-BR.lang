@@ -1,0 +1,109 @@
+# Translation by: Aleck ♡#4397 and ����Bluezinho����#1242
+
+Hotbar.ShowItemBrowser=Mostrar Navegador de Itens
+Hotbar.ShowClearMenu=Mostrar Limpar Menu
+Hotbar.ShowNPCBrowser=Mostrar Navegador de Monstros
+Hotbar.ShowRecipeBrowser=Mostrar Navegador de Receitas
+Hotbar.ShowModExtensionCheats=Mostrar Trapaças de Extensões de Mods
+Hotbar.ShowPaintTools=Mostrar Ferramentas de Pintura
+Hotbar.ExtraAccessorySlots=Slots de Acessório Extras
+Hotbar.VacuumItems=Aspirar Itens
+Hotbar.ShowNPCButcherer=Mostrar Exterminador de NPCs
+Hotbar.ShowQuickWaypoints=Mostrar Waypoints Rápidos
+Hotbar.ConfigureAvailableTools=Configurar Ferramentas Disponíveis
+
+Butcherer.ButcherHostileNPCs=Exterminar NPCs hostis
+Butcherer.ButcherHostileAndFriendlyNPCs=Exterminar NPCs hostis e amigáveis
+Butcherer.ButcherFriendlyNPCs=Exterminar NPCs amigáveis
+
+Teleport.Dungeon=Calabouço
+Teleport.Spawnpoint=Spawn
+Teleport.Hell=Submundo
+Teleport.Temple=Templo
+Teleport.Random=Aleatório
+
+QuickClear.ClearDroppedItems=Limpar itens caídos
+QuickClear.ClearProjectiles=Limpar projéteis
+QuickClear.ClearBuffs=Limpar buffs
+QuickClear.ClearDebuffs=Limpar debuffs
+
+SpawnRate.SpawnRateMultiplier=Multiplicador de Taxa de Spawns: 1?
+SpawnRate.SpawnRateMultiplierNew=Multiplicador de Taxa de Spawns: 
+SpawnRate.SpawnRateMultiplierText=Taxa de Spawns e Spawns Máximos agora 
+SpawnRate.SpawnRateNormalValue= o valor normal
+
+LightHack.LightHackDisabled=Hack de Luz: Desligado
+LightHack.LightHack25%=Hack de Luz: 25%
+LightHack.LightHack50%=Hack de Luz: 50%
+LightHack.LightHack100%=Hack de Luz: 100%
+
+MinionSlot.MinionSlotBooster=Boost de Slot de Servos: +0
+MinionSlot.MinionSlotBoosterNew=Boost de Slot de Servos: 
+MinionSlot.MinionSlotBoosterText=Boost de servos agora em 
+
+RecipeBrowser.AllRecipes=Todas as Receitas
+RecipeBrowser.CycleModSpecificRecipes=Ciclar por Receitas de Mod Específico
+
+ConfigurationTool.ItemBrowser=Navegador de Itens
+ConfigurationTool.NPCBrowser=Navegador de NPCs
+ConfigurationTool.RecipeBrowser=Navegador de Receitas
+ConfigurationTool.MinionBooster=Booster de Servos
+ConfigurationTool.Butcher=Exterminar
+ConfigurationTool.ClearMenu=Limpar Menu
+ConfigurationTool.ExtraAccessorySlots=Slots de Acessório Extras
+ConfigurationTool.ModExtensions=Extensões de Mods
+ConfigurationTool.PaintTools=Ferramentas de Pintura
+ConfigurationTool.SpawnRate=Taxa de Spawns
+ConfigurationTool.Vacuum=Aspirador
+ConfigurationTool.Waypoints=Waypoints
+ConfigurationTool.LightHack=Hack de Luz
+
+ExtendedCheatMenu.NoExtensionCheatModsInstalled=Sem Mods de\nCheat com\nExtensões\nInstalados
+
+ExtraAccessorySlots.ExtraAccessorySlots=Slots de Acessório Extras: 
+
+MobBrowser.AllNPCs=Todos os NPCs
+MobBrowser.Bosses=Chefes
+MobBrowser.TownNPCs=NPCs de Cidade
+MobBrowser.NetIDNPCs=NPCs NetID
+MobBrowser.FilteredNPCs=NPCs Filtrados
+MobBrowser.CycleModSpecificNPCs=Ciclar NPCs de Mod Específico
+
+ItemBrowser.AllItems=Todos os Itens
+ItemBrowser.Weapons=Armas
+ItemBrowser.Tools=Ferramentas
+ItemBrowser.Armor=Armadura
+ItemBrowser.Accessories=Acessórios
+ItemBrowser.Blocks=Blocos
+ItemBrowser.Ammo=Munição
+ItemBrowser.Potions=Poções
+ItemBrowser.Expert=Expert
+ItemBrowser.Furniture=Mobília
+ItemBrowser.Pets=Pets
+ItemBrowser.Mounts=Montarias
+ItemBrowser.CycleModSpecificItems=Ciclar Itens de Mod Específico
+
+PaintTools.ExportData=Exportar Dados
+PaintTools.ImportData=Importar Dados
+PaintTools.DeleteSelection=Deletar Seleção
+PaintTools.SnapTopLeft=Snap: TopoEsquerda
+PaintTools.SnapTopCenter=Snap: TopoCentro
+PaintTools.SnapTopRight=Snap: TopoDireita
+PaintTools.SnapLeftCenter=Snap: EsquerdaCentro
+PaintTools.SnapCenter=Snap: Centro
+PaintTools.SnapRightCenter=Snap: DireitaCentro
+PaintTools.SnapBottomLeft=Snap: BaixoEsquerda
+PaintTools.SnapBottomCenter=Snap: BaixoCentro
+PaintTools.SnapBottomRight=Snap: BaixoDireita
+PaintTools.PaintTiles=    Pintar Blocos
+PaintTools.EyeDropper=    Conta-Gotas
+PaintTools.Undo=    Desfazer Última Pintura (BDM: Últimas 10) [
+PaintTools.Undo2= passos]
+PaintTools.NoUndo=Não há mais ações no histórico para desfazer.
+PaintTools.UndoLeft= ações restam no histórico.
+PaintTools.FlipHorizontal=Virar Horizontal
+PaintTools.FlipVertical=Virar Vertical
+PaintTools.TransparentSelectionOn=    Seleção Transparente: Desligado
+PaintTools.TransparentSelectionOff=    Seleção Transparente: Ligado
+PaintTools.PriorBrush=Usar Conta-Gotas antes do pincel.
+PaintTools.DataExport=Dados exportados para 

@@ -50,7 +50,7 @@ namespace CheatSheet
 		public override void Load()
 		{
 			// Since we are using hooks not in older versions, and since ItemID.Count changed, we need to do this.
-			if (ModLoader.version < new Version(0, 10))
+			if (ModLoader.version < new Version(0, 10, 1, 3))
 			{
 				throw new Exception("\nThis mod uses functionality only present in the latest tModLoader. Please update tModLoader to use this mod\n\n");
 			}
@@ -69,7 +69,7 @@ namespace CheatSheet
 
 			FieldInfo translationsField = typeof(Mod).GetField("translations", BindingFlags.Instance | BindingFlags.NonPublic);
 			translations = (Dictionary<string, ModTranslation>)translationsField.GetValue(this);
-			LoadTranslations();
+			//LoadTranslations();
 		}
 
 		public override void Unload()
@@ -89,6 +89,7 @@ namespace CheatSheet
 			// return Language.GetTextValue($"Mods.CheatSheet.{category}.{key}");
 		}
 
+		/*
 		private void LoadTranslations()
 		{
 			var modTranslationDictionary = new Dictionary<string, ModTranslation>();
@@ -120,6 +121,7 @@ namespace CheatSheet
 				AddTranslation(value);
 			}
 		}
+		*/
 
 		//public override void PreSaveAndQuit()
 		//{

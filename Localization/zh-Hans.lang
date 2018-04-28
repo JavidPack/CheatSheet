@@ -1,0 +1,115 @@
+# Translation by: 抗药又坚硬汉化组(SBMW GROUP).
+
+Hotbar.ShowItemBrowser=物品浏览器
+Hotbar.ShowClearMenu=清除菜单
+Hotbar.ShowNPCBrowser=NPC浏览器
+Hotbar.ShowRecipeBrowser=合成表
+Hotbar.ShowModExtensionCheats=扩展模组
+Hotbar.ShowPaintTools=绘制工具
+Hotbar.ExtraAccessorySlots=额外饰品栏
+Hotbar.VacuumItems=快速拾取
+Hotbar.ShowNPCButcherer=NPC清除器
+Hotbar.ShowQuickWaypoints=快速路径点
+Hotbar.ConfigureAvailableTools=设置可用工具
+
+Butcherer.ButcherHostileNPCs=清除敌对NPC
+Butcherer.ButcherHostileAndFriendlyNPCs=清除敌对与友好NPC
+Butcherer.ButcherFriendlyNPCs=清除友好NPC
+Butcherer.ButcherNotification=NPC被 {0} 清除
+
+Vacuum.VacuumNotification=地面物品被 {0} 快速拾取
+
+Teleport.Dungeon=地牢
+Teleport.Spawnpoint=出生点
+Teleport.Hell=地狱
+Teleport.Temple=神庙
+Teleport.Random=随机
+
+QuickClear.ClearDroppedItems=清除掉落物品
+QuickClear.ClearProjectiles=清除抛射物
+QuickClear.ClearBuffs=清除增益效果
+QuickClear.ClearDebuffs=清除减益效果
+QuickClear.ItemClearNotification=物品被 {0} 清除
+QuickClear.ProjectileClearNotification=抛射物被 {0} 清除
+
+SpawnRate.SpawnRateMultiplier=刷怪倍率: 1х
+SpawnRate.SpawnRateMultiplierNew=刷怪倍率: 
+SpawnRate.SpawnRateMultiplierText=刷怪率及最大怪物量变为正常值的 
+SpawnRate.SpawnRateNormalValue= 倍
+
+LightHack.LightHackDisabled=透视照明: 关闭
+LightHack.LightHack25%=透视照明: 25%
+LightHack.LightHack50%=透视照明: 50%
+LightHack.LightHack100%=透视照明: 100%
+
+MinionSlot.MinionSlotBooster=额外召唤物数量: +0
+MinionSlot.MinionSlotBoosterNew=额外召唤物数量: 
+MinionSlot.MinionSlotBoosterText=最大召唤物数量 
+
+RecipeBrowser.AllRecipes=全部合成配方
+RecipeBrowser.CycleModSpecificRecipes=选择模组
+
+ConfigurationTool.ItemBrowser=物品浏览器
+ConfigurationTool.NPCBrowser=NPC浏览器
+ConfigurationTool.RecipeBrowser=合成表
+ConfigurationTool.MinionBooster=额外召唤物数量
+ConfigurationTool.Butcher=NPC清除器
+ConfigurationTool.ClearMenu=清除菜单
+ConfigurationTool.ExtraAccessorySlots=额外饰品栏
+ConfigurationTool.ModExtensions=扩展模组
+ConfigurationTool.PaintTools=绘制工具
+ConfigurationTool.SpawnRate=刷怪率
+ConfigurationTool.Vacuum=快速拾取
+ConfigurationTool.Waypoints=路径点
+ConfigurationTool.LightHack=透视照明
+
+ExtendedCheatMenu.NoExtensionCheatModsInstalled=无扩展模组\n作弊模组\n安装
+
+ExtraAccessorySlots.ExtraAccessorySlots=额外饰品栏: 
+
+MobBrowser.AllNPCs=所有NPC
+MobBrowser.Bosses=Boss
+MobBrowser.TownNPCs=城镇NPC
+MobBrowser.NetIDNPCs=共享ID的NPC
+MobBrowser.FilteredNPCs=已筛选的NPC
+MobBrowser.CycleModSpecificNPCs=选择模组
+MobBrowser.SpawnNPCNotification={1} 已召唤 {0}
+
+ItemBrowser.AllItems=所有物品
+ItemBrowser.Weapons=武器
+ItemBrowser.Tools=工具
+ItemBrowser.Armor=盔甲
+ItemBrowser.Accessories=饰品
+ItemBrowser.Blocks=物块
+ItemBrowser.Ammo=弹药
+ItemBrowser.Potions=药水
+ItemBrowser.Expert=专家
+ItemBrowser.Furniture=家具
+ItemBrowser.Pets=宠物
+ItemBrowser.Mounts=坐骑
+ItemBrowser.CycleModSpecificItems=选择模组
+
+PaintTools.ExportData=导出数据
+PaintTools.ImportData=导入数据
+PaintTools.DeleteSelection=删除所选
+PaintTools.SnapTopLeft=鼠标位置: 左上
+PaintTools.SnapTopCenter=鼠标位置: 中上
+PaintTools.SnapTopRight=鼠标位置: 右上
+PaintTools.SnapLeftCenter=鼠标位置: 左中
+PaintTools.SnapCenter=鼠标位置: 居中
+PaintTools.SnapRightCenter=鼠标位置: 右中
+PaintTools.SnapBottomLeft=鼠标位置: 左下
+PaintTools.SnapBottomCenter=鼠标位置: 中下
+PaintTools.SnapBottomRight=鼠标位置: 右下
+PaintTools.PainTiles=    笔刷
+PaintTools.EyeDropper=    滴管
+PaintTools.Undo=    撤销上一步绘制 (右键: 撤销 10 步) [共 
+PaintTools.Undo2= 步]
+PaintTools.NoUndo=无可撤销的历史绘制.
+PaintTools.UndoLeft= 步已被撤销.
+PaintTools.FlipHorizontal=水平翻转
+PaintTools.FlipVertical=垂直翻转
+PaintTools.TransparentSelectionOn=    消除背景墙: 开
+PaintTools.TransparentSelectionOff=    消除背景墙: 关
+PaintTools.PriorBrush=使用笔刷之前请先使用吸管提取图像.
+PaintTools.DataExport=数据导出至该路径 

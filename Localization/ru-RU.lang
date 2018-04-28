@@ -1,0 +1,115 @@
+# Translation by: Terraria Phone&PC Team
+
+Hotbar.ShowItemBrowser=Показать браузер предметов
+Hotbar.ShowClearMenu=Показать меню очистки
+Hotbar.ShowNPCBrowser=Показать браузер мобов
+Hotbar.ShowRecipeBrowser=Показать браузер рецептов
+Hotbar.ShowModExtensionCheats=Показать расширения из модов
+Hotbar.ShowPaintTools=Показать инструменты копирования
+Hotbar.ExtraAccessorySlots=Дополнительные слоты для аксессуаров
+Hotbar.VacuumItems=Очистить предметы
+Hotbar.ShowNPCButcherer=Показать меню убийства мобов
+Hotbar.ShowQuickWaypoints=Показать точки телепортации
+Hotbar.ConfigureAvailableTools=Настройка доступных инструментов
+
+Butcherer.ButcherHostileNPCs=Убить враждебных мобов
+Butcherer.ButcherHostileAndFriendlyNPCs=Убить и враждебных, и дружелюбных мобов
+Butcherer.ButcherFriendlyNPCs=Убить дружелюбных мобов
+Butcherer.ButcherNotification=Мобы были убиты игроком {0}
+
+Vacuum.VacuumNotification=Предметы на земле были убраны игроком {0}
+
+Teleport.Dungeon=Данж
+Teleport.Spawnpoint=Точка спавна
+Teleport.Hell=Ад
+Teleport.Temple=Храм ящеров
+Teleport.Random=Случайно
+
+QuickClear.ClearDroppedItems=Убрать выпавшие предметы
+QuickClear.ClearProjectiles=Убрать снаряды
+QuickClear.ClearBuffs=Убрать баффы
+QuickClear.ClearDebuffs=Убрать дебаффы
+QuickClear.ItemClearNotification=Выпавшие предметы были убраны игроком {0}
+QuickClear.ProjectileClearNotification=Снаряды были убраны игроком {0}
+
+SpawnRate.SpawnRateMultiplier=Увеличение частоты спавна мобов: 1х
+SpawnRate.SpawnRateMultiplierNew=Увеличение частоты спавна мобов: 
+SpawnRate.SpawnRateMultiplierText=Частота спавна мобов теперь в 
+SpawnRate.SpawnRateNormalValue= больше обычной
+
+LightHack.LightHackDisabled=Увеличение яркости: Отключено
+LightHack.LightHack25%=Увеличение яркости: 25%
+LightHack.LightHack50%=Увеличение яркости: 50%
+LightHack.LightHack100%=Увеличение яркости: 100%
+
+MinionSlot.MinionSlotBooster=Увеличение максимального количества миньонов: +0
+MinionSlot.MinionSlotBoosterNew=Увеличение максимального количества миньонов: 
+MinionSlot.MinionSlotBoosterText=Увеличение максимального количества миньонов теперь 
+
+RecipeBrowser.AllRecipes=Все рецепты
+RecipeBrowser.CycleModSpecificRecipes=Рецепты из мода
+
+ConfigurationTool.ItemBrowser=Браузер предметов
+ConfigurationTool.NPCBrowser=Браузер мобов
+ConfigurationTool.RecipeBrowser=Браузер рецептов
+ConfigurationTool.MinionBooster=Увеличение максимального количества миньонов
+ConfigurationTool.Butcher=Убийство
+ConfigurationTool.ClearMenu=Меню очистки
+ConfigurationTool.ExtraAccessorySlots=Дополнительные слоты для аксессуаров
+ConfigurationTool.ModExtensions=Расширения из модов
+ConfigurationTool.PaintTools=Инструменты покраски
+ConfigurationTool.SpawnRate=Частота спавна мобов
+ConfigurationTool.Vacuum=Очистка предметов
+ConfigurationTool.Waypoints=Точки телепортации
+ConfigurationTool.LightHack=Увеличение яркости
+
+ExtendedCheatMenu.NoExtensionCheatModsInstalled=Не установлено\nмодов с\nрасширениями
+
+ExtraAccessorySlots.ExtraAccessorySlots=Дополнительные слоты для аксессуаров: 
+
+MobBrowser.AllNPCs=Все мобы
+MobBrowser.Bosses=Боссы
+MobBrowser.TownNPCs=Городские НИПы
+MobBrowser.NetIDNPCs=Сортировка по NetID
+MobBrowser.FilteredNPCs=Сортированные мобы
+MobBrowser.CycleModSpecificNPCs=Мобы из мода
+MobBrowser.SpawnNPCNotification=Игрок {1} заспавнил моба {0}
+
+ItemBrowser.AllItems=Все предметы
+ItemBrowser.Weapons=Оружие
+ItemBrowser.Tools=Инструменты
+ItemBrowser.Armor=Броня
+ItemBrowser.Accessories=Аксессуары
+ItemBrowser.Blocks=Блоки
+ItemBrowser.Ammo=Боеприпасы
+ItemBrowser.Potions=Зелья
+ItemBrowser.Expert=Предметы экспертного режима
+ItemBrowser.Furniture=Мебель
+ItemBrowser.Pets=Питомцы
+ItemBrowser.Mounts=Ездовые питомцы
+ItemBrowser.CycleModSpecificItems=Предметы из мода
+
+PaintTools.ExportData=Экспорт
+PaintTools.ImportData=Импорт
+PaintTools.DeleteSelection=Удалить выделение
+PaintTools.SnapTopLeft=Захват: Верхняя левая точка
+PaintTools.SnapTopCenter=Захват: Верхняя центральная точка
+PaintTools.SnapTopRight=Захват: Верхняя правая точка
+PaintTools.SnapLeftCenter=Захват: Левая центральная точка
+PaintTools.SnapCenter=Захват: Центральная точка
+PaintTools.SnapRightCenter=Захват: Правая центральная точка
+PaintTools.SnapBottomLeft=Захват: Нижняя левая точка
+PaintTools.SnapBottomCenter=Захват: Нижняя центральная точка
+PaintTools.SnapBottomRight=Захват: Нижняя правая точка
+PaintTools.PaintTiles=    Скопировать выделение
+PaintTools.EyeDropper=    Выделение
+PaintTools.Undo=    Отменить последнее действие (ПКМ: Последние 10) [
+PaintTools.Undo2= шагов]
+PaintTools.NoUndo=Нет действий, которые можно отменить.
+PaintTools.UndoLeft= действий осталось.
+PaintTools.FlipHorizontal=Отразить по горизонтали
+PaintTools.FlipVertical=Отразить по вертикали
+PaintTools.TransparentSelectionOn=    Прозрачное выделение: Включено
+PaintTools.TransparentSelectionOff=    Прозрачное выделение: Выключено
+PaintTools.PriorBrush=Сначала нужно использовать выделение.
+PaintTools.DataExport=Данные сохранены в 
