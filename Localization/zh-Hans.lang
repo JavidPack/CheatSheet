@@ -15,9 +15,9 @@ Hotbar.ConfigureAvailableTools=设置可用工具
 Butcherer.ButcherHostileNPCs=清除敌对NPC
 Butcherer.ButcherHostileAndFriendlyNPCs=清除敌对与友好NPC
 Butcherer.ButcherFriendlyNPCs=清除友好NPC
-Butcherer.ButcherNotification=NPC被 {0} 清除
+Butcherer.ButcherNotification=NPC已被 {0} 清除
 
-Vacuum.VacuumNotification=地面物品被 {0} 快速拾取
+Vacuum.VacuumNotification=地面物品已被 {0} 快速拾取
 
 Teleport.Dungeon=地牢
 Teleport.Spawnpoint=出生点
@@ -29,12 +29,12 @@ QuickClear.ClearDroppedItems=清除掉落物品
 QuickClear.ClearProjectiles=清除抛射物
 QuickClear.ClearBuffs=清除增益效果
 QuickClear.ClearDebuffs=清除减益效果
-QuickClear.ItemClearNotification=物品被 {0} 清除
-QuickClear.ProjectileClearNotification=抛射物被 {0} 清除
+QuickClear.ItemClearNotification=物品已被 {0} 清除
+QuickClear.ProjectileClearNotification=抛射物已被 {0} 清除
 
-SpawnRate.SpawnRateMultiplier=刷怪倍率: 1х
-SpawnRate.SpawnRateMultiplierNew=刷怪倍率: 
-SpawnRate.SpawnRateMultiplierText=刷怪率及最大怪物量变为正常值的 
+SpawnRate.SpawnRateMultiplier=刷怪倍数: 1х
+SpawnRate.SpawnRateMultiplierNew=刷怪倍数: 
+SpawnRate.SpawnRateMultiplierText=目前刷怪率及最大怪物量已变为正常值的
 SpawnRate.SpawnRateNormalValue= 倍
 
 LightHack.LightHackDisabled=透视照明: 关闭
@@ -47,12 +47,12 @@ MinionSlot.MinionSlotBoosterNew=额外召唤物数量:
 MinionSlot.MinionSlotBoosterText=最大召唤物数量 
 
 RecipeBrowser.AllRecipes=全部合成配方
-RecipeBrowser.CycleModSpecificRecipes=选择模组
+RecipeBrowser.CycleModSpecificRecipes=模组
 
 ConfigurationTool.ItemBrowser=物品浏览器
 ConfigurationTool.NPCBrowser=NPC浏览器
 ConfigurationTool.RecipeBrowser=合成表
-ConfigurationTool.MinionBooster=额外召唤物数量
+ConfigurationTool.MinionBooster=额外召唤物
 ConfigurationTool.Butcher=NPC清除器
 ConfigurationTool.ClearMenu=清除菜单
 ConfigurationTool.ExtraAccessorySlots=额外饰品栏
@@ -63,19 +63,19 @@ ConfigurationTool.Vacuum=快速拾取
 ConfigurationTool.Waypoints=路径点
 ConfigurationTool.LightHack=透视照明
 
-ExtendedCheatMenu.NoExtensionCheatModsInstalled=无扩展模组\n作弊模组\n安装
+ExtendedCheatMenu.NoExtensionCheatModsInstalled=无扩展模组\n作弊模组\n已安装
 
 ExtraAccessorySlots.ExtraAccessorySlots=额外饰品栏: 
 
-MobBrowser.AllNPCs=所有NPC
+MobBrowser.AllNPCs=全部NPC
 MobBrowser.Bosses=Boss
 MobBrowser.TownNPCs=城镇NPC
-MobBrowser.NetIDNPCs=共享ID的NPC
-MobBrowser.FilteredNPCs=已筛选的NPC
-MobBrowser.CycleModSpecificNPCs=选择模组
-MobBrowser.SpawnNPCNotification={1} 已召唤 {0}
+MobBrowser.NetIDNPCs=同名NPC
+MobBrowser.FilteredNPCs=筛选NPC
+MobBrowser.CycleModSpecificNPCs=模组
+MobBrowser.SpawnNPCNotification={0} 已被 {1} 召唤
 
-ItemBrowser.AllItems=所有物品
+ItemBrowser.AllItems=全部物品
 ItemBrowser.Weapons=武器
 ItemBrowser.Tools=工具
 ItemBrowser.Armor=盔甲
@@ -87,7 +87,7 @@ ItemBrowser.Expert=专家
 ItemBrowser.Furniture=家具
 ItemBrowser.Pets=宠物
 ItemBrowser.Mounts=坐骑
-ItemBrowser.CycleModSpecificItems=选择模组
+ItemBrowser.CycleModSpecificItems=模组
 
 PaintTools.ExportData=导出数据
 PaintTools.ImportData=导入数据
@@ -103,7 +103,7 @@ PaintTools.SnapBottomCenter=鼠标位置: 中下
 PaintTools.SnapBottomRight=鼠标位置: 右下
 PaintTools.PaintTiles=    笔刷
 PaintTools.EyeDropper=    滴管
-PaintTools.Undo=    撤销上一步绘制 (右键: 撤销 10 步) [共 
+PaintTools.Undo=    撤销上一步绘制 (右键: 撤销10步) [共
 PaintTools.Undo2= 步]
 PaintTools.NoUndo=无可撤销的历史绘制.
 PaintTools.UndoLeft= 步已被撤销.
@@ -112,4 +112,4 @@ PaintTools.FlipVertical=垂直翻转
 PaintTools.TransparentSelectionOn=    消除背景墙: 开
 PaintTools.TransparentSelectionOff=    消除背景墙: 关
 PaintTools.PriorBrush=使用笔刷之前请先使用吸管提取图像.
-PaintTools.DataExport=数据导出至该路径 
+PaintTools.DataExport=数据已导出至该路径  
