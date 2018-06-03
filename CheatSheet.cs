@@ -242,14 +242,18 @@ namespace CheatSheet
 
 			if (PaintToolsSlot.updateNeeded)
 			{
+				bool oneUpdated = false;
 				foreach (var item in paintToolsUI.view.slotList)
 				{
 					if(item.texture == Main.magicPixel)
 					{
 						item.texture = item.MakeThumbnail(item.stampInfo);
+						oneUpdated = true;
+						break;
 					}
 				}
-				PaintToolsSlot.updateNeeded = false;
+				if(!oneUpdated)
+					PaintToolsSlot.updateNeeded = false;
 			}
 		}
 
