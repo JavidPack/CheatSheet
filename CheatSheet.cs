@@ -236,6 +236,23 @@ namespace CheatSheet
 			}
 		}
 
+		public override void UpdateUI(GameTime gameTime)
+		{
+			base.UpdateUI(gameTime);
+
+			if (PaintToolsSlot.updateNeeded)
+			{
+				foreach (var item in paintToolsUI.view.slotList)
+				{
+					if(item.texture == Main.magicPixel)
+					{
+						item.texture = item.MakeThumbnail(item.stampInfo);
+					}
+				}
+				PaintToolsSlot.updateNeeded = false;
+			}
+		}
+
 		//public override void PostDrawFullscreenMap(ref string mouseText)
 		//{
 		//	Main.spriteBatch.DrawString(Main.fontMouseText, "Testing Testing", new Vector2(Main.screenWidth / 2, Main.screenHeight / 2), Color.Pink, 0.0f, new Vector2(), 0.8f, SpriteEffects.None, 0.0f);

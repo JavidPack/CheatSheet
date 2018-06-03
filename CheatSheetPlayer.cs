@@ -30,7 +30,7 @@ namespace CheatSheet
 			for (int i = 0; i < MaxExtraAccessories; i++)
 			{
 				ExtraAccessories[i] = new Item();
-				ExtraAccessories[i].SetDefaults();
+				ExtraAccessories[i].SetDefaults(0, true);
 			}
 		}
 

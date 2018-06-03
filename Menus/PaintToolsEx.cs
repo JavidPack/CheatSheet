@@ -22,8 +22,8 @@ namespace CheatSheet
 	internal class StampInfo
 	{
 		internal Tile[,] Tiles;
-		internal Texture2D[,] Textures;
-		internal int Width;
+		//internal Texture2D[,] Textures;
+		internal int Width; // in Pixels
 		internal int Height;
 		internal bool bFlipHorizontal;
 		internal bool bFlipVertical;
@@ -308,7 +308,7 @@ namespace CheatSheet
 			int restX = maxX % maxTile == 0 ? maxTile : maxX % maxTile;
 			int restY = maxY % maxTile == 0 ? maxTile : maxY % maxTile;
 
-			result.Textures = new Texture2D[texMaxX, texMaxY];
+			//result.Textures = new Texture2D[texMaxX, texMaxY];
 			result.Width = maxX * 16;
 			result.Height = maxY * 16;
 
@@ -324,14 +324,15 @@ namespace CheatSheet
 							tiles[i, j] = Tiles[x * maxTile + i, y * maxTile + j];
 						}
 					}
-					result.Textures[x, y] = TilesToTexture(tiles);
+					//result.Textures[x, y] = TilesToTexture(tiles);
 				}
 			}
 
 			return result;
 		}
 
-		private static Rectangle GetTileRect(Tile tile, int halfIndex = 0)
+		/*
+		private static Rectangle GetTileRect(Tile tile, int halfIndex = 0, Texture2D texture = null)
 		{
 			Rectangle result;
 
@@ -351,6 +352,14 @@ namespace CheatSheet
 				result.X = 0;
 			if (result.Y < 0)
 				result.Y = 0;
+
+			if(texture != null)
+			{
+				if (result.Y > texture.Height)
+				{
+					result = new Rectangle(0, 0, 16, 16);
+				}
+			}
 
 			return result;
 		}
@@ -403,12 +412,12 @@ namespace CheatSheet
 								else
 									textureTile = Main.tileTexture[tile.type];
 
-								Rectangle rect = GetTileRect(tile);
+								Rectangle rect = GetTileRect(tile, texture:textureTile);
 
 								if (textureTile.Width < rect.X + rect.Width)
 								{
 									int width2 = textureTile.Width - rect.X;
-									if (width2 < 0)
+									if (width2 <= 0)
 										continue;
 									rect.Width = width2;
 
@@ -456,7 +465,8 @@ namespace CheatSheet
 									textureWater = LiquidRenderer.Instance._liquidTextures[0].Offset(16, 48, 16, 16);
 								int waterSize = (tile.liquid + 1) / 16;
 								dataWater = new Color[256];
-								textureWater.GetData<Color>(0, new Rectangle(0, 16 - waterSize, 16, waterSize), dataWater, (16 - waterSize) * 16, 256 - (16 - waterSize) * 16);
+								if(waterSize > 0)
+									textureWater.GetData<Color>( 0, new Rectangle(0, 16 - waterSize, 16, waterSize), dataWater, (16 - waterSize) * 16, 256 - (16 - waterSize) * 16);
 							}
 
 							int w = x * 16;
@@ -495,6 +505,7 @@ namespace CheatSheet
 			}
 			return result;
 		}
+		*/
 
 		public static bool canDrawColorTile(Tile tile)
 		{
@@ -505,6 +516,7 @@ namespace CheatSheet
 			return tile != null && tile.wallColor() > 0 && Main.wallAltTextureDrawn[tile.wall, tile.wallColor()] && Main.wallAltTextureInit[tile.wall, tile.wallColor()];
 		}
 
+		/*
 		public static Color[] GetHalfTile(Tile tile, Texture2D textureTile)
 		{
 			Color[] result = new Color[256];
@@ -615,5 +627,6 @@ namespace CheatSheet
 			}
 			return result;
 		}
+		*/
 	}
 }

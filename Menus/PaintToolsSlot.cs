@@ -12,7 +12,7 @@ namespace CheatSheet.Menus
 		internal static PaintToolsSlot CurrentSelect;
 		public StampInfo stampInfo;
 		public bool isSelect;
-		private Texture2D texture;
+		internal Texture2D texture;
 
 		// For items from the Schematics Browser.
 		internal string browserName;
@@ -20,11 +20,56 @@ namespace CheatSheet.Menus
 		internal int rating;
 		internal int vote;
 
+		public static bool updateNeeded;
+
 		public PaintToolsSlot(StampInfo stampInfo)
 		{
 			this.stampInfo = stampInfo;
-			texture = stampInfo.Textures.Resize(slotSize);
+			texture = Main.magicPixel;
+			updateNeeded = true;
 			base.onLeftClick += (a, b) => Select();
+		}
+
+		internal Texture2D MakeThumbnail(StampInfo stampInfo)
+		{
+			int desiredWidth = 100;
+			int desiredHeight = 100;
+
+			int actualWidth = stampInfo.Width;
+			int actualHeight = stampInfo.Height;
+
+			float scale = 1;
+			Vector2 offset = new Vector2();
+			if (actualWidth > desiredWidth || actualHeight > desiredHeight)
+			{
+				if (actualHeight > actualWidth)
+				{
+					scale = (float)desiredWidth / actualHeight;
+					offset.X = (desiredWidth - actualWidth * scale) / 2;
+				}
+				else
+				{
+					scale = (float)desiredWidth / actualWidth;
+					offset.Y = (desiredHeight - actualHeight * scale) / 2;
+				}
+			}
+			offset = offset / scale;
+
+			RenderTarget2D renderTarget = new RenderTarget2D(Main.graphics.GraphicsDevice, desiredWidth, desiredHeight);
+			Main.instance.GraphicsDevice.SetRenderTarget(renderTarget);
+			Main.instance.GraphicsDevice.Clear(Color.Transparent);
+			Main.spriteBatch.Begin();
+
+			PaintToolsHotbar.DrawPreview(Main.spriteBatch, stampInfo.Tiles, offset, scale);
+
+			Main.spriteBatch.End();
+			Main.instance.GraphicsDevice.SetRenderTarget(null);
+
+			Texture2D mergedTexture = new Texture2D(Main.instance.GraphicsDevice, desiredWidth, desiredHeight);
+			Color[] content = new Color[desiredWidth * desiredHeight];
+			renderTarget.GetData<Color>(content);
+			mergedTexture.SetData<Color>(content);
+			return mergedTexture;
 		}
 
 		public void Select()
@@ -71,12 +116,14 @@ namespace CheatSheet.Menus
 
 		protected override float GetWidth()
 		{
-			return (float)texture.Width * base.Scale;
+			return 100;
+			//return (float)texture.Width * base.Scale;
 		}
 
 		protected override float GetHeight()
 		{
-			return (float)texture.Height * base.Scale;
+			return 100;
+			//return (float)texture.Height * base.Scale;
 		}
 
 		public override void Draw(SpriteBatch spriteBatch)

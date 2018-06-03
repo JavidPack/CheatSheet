@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.GameContent.Liquid;
 using Terraria.ID;
 using Terraria.ObjectData;
 
@@ -176,7 +177,7 @@ namespace CheatSheet.Menus
 				Undo();
 			}
 			//if (UndoHistory.Count > 0)
-			Main.NewText(UndoHistory.Count + CSText("UndoLeft"));
+			Main.NewText(UndoHistory.Count + " " + CSText("UndoLeft"));
 		}
 
 		private void Undo()
@@ -214,7 +215,7 @@ namespace CheatSheet.Menus
 
 		internal void UpdateUndoTooltip()
 		{
-			bUndo.Tooltip = CSText("Undo") + UndoHistory.Count + CSText("Undo2");
+			bUndo.Tooltip = CSText("Undo") + " " + UndoHistory.Count + " " + CSText("Undo2");
 		}
 
 		protected override bool IsMouseInside()
@@ -366,9 +367,9 @@ namespace CheatSheet.Menus
 				int height = StampTiles.GetLength(1);
 				Vector2 vector = Snap.GetSnapPosition(CheatSheet.instance.paintToolsUI.SnapType, width, height, constrainToAxis, constrainedX, constrainedY, false);
 
-				if (!leftMouseDown)
+				if (!leftMouseDown && !Main.LocalPlayer.mouseInterface)
 				{
-					DrawPreview(Main.spriteBatch, stampInfo, vector);
+					DrawPreview(Main.spriteBatch, stampInfo.Tiles, vector);
 				}
 
 				DrawSelectedRectangle(vector, new Vector2(width, height), leftMouseDown ? 1f : .25f, false);
@@ -555,7 +556,7 @@ namespace CheatSheet.Menus
 										StampTiles[x - minX, y - minY].CopyFrom(target);
 										if (Main.tile[x, y].type == TileID.Count)
 											StampTiles[x - minX, y - minY].ClearTile();
-										if(Main.tileContainer[Main.tile[x, y].type])
+										if (Main.tileContainer[Main.tile[x, y].type])
 											StampTiles[x - minX, y - minY].ClearTile();
 									}
 								}
@@ -783,29 +784,57 @@ namespace CheatSheet.Menus
 			StampToolActive = preHidePaintTiles;
 		}
 
-		public static void DrawPreview(SpriteBatch sb, Tile[,] BrushTiles, Vector2 position)
+		public static void DrawPreview(SpriteBatch sb, Tile[,] BrushTiles, Vector2 position, float scale = 1f)
 		{
+			Color color = Color.White;
+			color.A = 160;
 			int width = BrushTiles.GetLength(0);
 			int height = BrushTiles.GetLength(1);
-			for (int x = 0; x < width; x++)
+			for (int y = 0; y < height; y++)
 			{
-				for (int y = 0; y < height; y++)
+				for (int x = 0; x < width; x++)
 				{
 					Tile tile = BrushTiles[x, y];
-					if (tile.active())
+					if (tile.wall > 0)
 					{
+						Main.instance.LoadWall(tile.wall);
+						Texture2D textureWall;
+						if (PaintToolsEx.canDrawColorWall(tile) && tile.type < Main.wallAltTexture.GetLength(0) && Main.wallAltTexture[tile.type, tile.wallColor()] != null)
+							textureWall = Main.wallAltTexture[tile.type, tile.wallColor()];
+						else
+							textureWall = Main.wallTexture[tile.wall];
+						int wallFrame = Main.wallFrame[tile.wall] * 180;
+						Rectangle value = new Rectangle(tile.wallFrameX(), tile.wallFrameY() + wallFrame, 32, 32);
+						Vector2 pos = position + new Vector2(x * 16 - 8, y * 16 - 8);
+						sb.Draw(textureWall, pos * scale, value, color, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+					}
+					if (tile.liquid > 14)
+					{
+						Texture2D textureWater;
+						if (tile.honey())
+							textureWater = LiquidRenderer.Instance._liquidTextures[11].Offset(16, 48, 16, 16);
+						else if (tile.lava())
+							textureWater = LiquidRenderer.Instance._liquidTextures[1].Offset(16, 48, 16, 16);
+						else
+							textureWater = LiquidRenderer.Instance._liquidTextures[0].Offset(16, 48, 16, 16);
+						int waterSize = (tile.liquid + 1) / 16;
+						Vector2 pos = position + new Vector2(x * 16, y * 16 + (16 - waterSize));
+						sb.Draw(textureWater, pos * scale, new Rectangle(0, 16 - waterSize, 16, waterSize), color, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+					}
+					if (tile.active()) // Tile
+					{
+						Main.instance.LoadTiles(tile.type);
 						Texture2D texture = Main.tileTexture[tile.type];
-						Color color = Color.White;
-						color.A = 160;
 						Rectangle? value = new Rectangle(tile.frameX, tile.frameY, 16, 16/* tileData.CoordinateWidth, tileData.CoordinateHeights[j - (int)op.ObjectStart.Y]*/);
 						Vector2 pos = position + new Vector2(x * 16, y * 16);
-						sb.Draw(texture, pos, value, color, 0f, Vector2.Zero, 1f, /*spriteEffects*/SpriteEffects.None, 0f);
+						sb.Draw(texture, pos * scale, value, color, 0f, Vector2.Zero, scale, /*spriteEffects*/SpriteEffects.None, 0f);
 					}
 				}
 			}
+			// Draw deleted tiles with non transparent selection?
 		}
 
-		public static void DrawPreview(SpriteBatch sb, StampInfo info, Vector2 position)
+		/*public static void DrawPreview(SpriteBatch sb, StampInfo info, Vector2 position)
 		{
 			int maxX = info.Textures.GetLength(0);
 			int maxY = info.Textures.GetLength(1);
@@ -837,7 +866,7 @@ namespace CheatSheet.Menus
 					pos.Y += ModUtils.TextureMaxTile * 16;
 				}
 			}
-		}
+		}*/
 
 		public static void Smooth()
 		{
