@@ -85,11 +85,11 @@ namespace CheatSheet.Menus
 
 		private float spacing = 16f;
 
-		public Mod mod;
+		public CheatSheet mod;
 
 		public int lastModNameNumber = 0;
 
-		public ItemBrowser(Mod mod)
+		public ItemBrowser(CheatSheet mod)
 		{
 			categories.Clear();
 			this.itemView = new ItemView();
@@ -221,6 +221,7 @@ namespace CheatSheet.Menus
 		private void bClose_onLeftClick(object sender, EventArgs e)
 		{
 			Hide();
+			mod.hotbar.DisableAllWindows();
 			//base.Visible = false;
 		}
 

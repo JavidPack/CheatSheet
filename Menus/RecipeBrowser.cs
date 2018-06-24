@@ -35,7 +35,7 @@ namespace CheatSheet.Menus
 		};
 	
 		internal static RecipeView recipeView;
-		public Mod mod;
+		public CheatSheet mod;
 
 		//private static List<string> categoryNames = new List<string>();
 		private static UIImage[] bCategories = new UIImage[categoryIcons.Length];
@@ -63,7 +63,7 @@ namespace CheatSheet.Menus
 
 		// 270 : 16 40 ?? 16
 
-		public RecipeBrowserWindow(Mod mod)
+		public RecipeBrowserWindow(CheatSheet mod)
 		{
 			categories.Clear();
 			recipeView = new RecipeView();
@@ -359,6 +359,7 @@ namespace CheatSheet.Menus
 			}
 
 			Hide();
+			mod.hotbar.DisableAllWindows();
 			//base.Visible = false;
 		}
 

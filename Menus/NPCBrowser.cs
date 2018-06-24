@@ -52,7 +52,7 @@ namespace CheatSheet.Menus
 		private bool swapFilter = false;
 
 		public NPCView npcView;
-		public Mod mod;
+		public CheatSheet mod;
 
 		//	private static List<string> categoryNames = new List<string>();
 		private static UIImage[] bCategories = new UIImage[categoryIcons.Length];
@@ -77,7 +77,7 @@ namespace CheatSheet.Menus
 
 		// 270 : 16 40 ?? 16
 
-		public NPCBrowser(Mod mod)
+		public NPCBrowser(CheatSheet mod)
 		{
 			categories.Clear();
 			this.npcView = new NPCView();
@@ -211,6 +211,7 @@ namespace CheatSheet.Menus
 		private void bClose_onLeftClick(object sender, EventArgs e)
 		{
 			Hide();
+			mod.hotbar.DisableAllWindows();
 			//base.Visible = false;
 		}
 

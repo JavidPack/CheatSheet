@@ -33,7 +33,7 @@ namespace CheatSheet.Menus
 		internal UIImage submitButton;
 
 		public PaintToolsView view;
-		public Mod mod;
+		public CheatSheet mod;
 
 		public static List<List<int>> categories = new List<List<int>>();
 		private static Color buttonColor = new Color(190, 190, 190);
@@ -50,7 +50,7 @@ namespace CheatSheet.Menus
 
 		internal static bool needsUpdate = true;
 
-		public PaintToolsUI(Mod mod)
+		public PaintToolsUI(CheatSheet mod)
 		{
 			categories.Clear();
 			this.view = new PaintToolsView();
@@ -345,6 +345,7 @@ namespace CheatSheet.Menus
 		private void bClose_onLeftClick(object sender, EventArgs e)
 		{
 			Hide();
+			mod.hotbar.DisableAllWindows();
 		}
 	}
 

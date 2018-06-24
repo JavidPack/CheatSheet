@@ -20,7 +20,7 @@ namespace CheatSheet.Menus
 		{
 			cheatSheet = mod as CheatSheet;
 
-			configurationWindow = new ConfigurationWindow(mod);
+			configurationWindow = new ConfigurationWindow(cheatSheet);
 			configurationWindow.SetDefaultPosition(new Vector2(200, 200));
 			configurationWindow.Visible = false;
 
@@ -57,10 +57,10 @@ namespace CheatSheet.Menus
 	internal class ConfigurationWindow : UISlideWindow
 	{
 		internal static string CSText(string key, string category = "ConfigurationTool") => CheatSheet.CSText(category, key);
-		public Mod mod;
+		public CheatSheet mod;
 		private float spacing = 16f;
 
-		public ConfigurationWindow(Mod mod)
+		public ConfigurationWindow(CheatSheet mod)
 		{
 			this.mod = mod;
 			this.CanMove = true;
@@ -156,6 +156,7 @@ namespace CheatSheet.Menus
 		private void bClose_onLeftClick(object sender, EventArgs e)
 		{
 			Hide();
+			mod.hotbar.DisableAllWindows();
 		}
 
 		private void bCheckBoxTicked(object sender, EventArgs e)
