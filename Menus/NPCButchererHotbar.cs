@@ -2,6 +2,7 @@
 using CheatSheet.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using Terraria;
 using Terraria.ID;
 
@@ -9,6 +10,7 @@ namespace CheatSheet.Menus
 {
 	internal class NPCButchererHotbar : UIHotbar
 	{
+		internal static int[] DoNotButcher = { NPCID.TargetDummy, NPCID.CultistDevote, NPCID.CultistArcherBlue, NPCID.CultistTablet, NPCID.DD2LanePortal, NPCID.DD2EterniaCrystal };
 		internal static string CSText(string key, string category = "Butcherer") => CheatSheet.CSText(category, key);
 		public UIView buttonView;
 		public UIImage bButcherHostiles;
@@ -147,7 +149,7 @@ namespace CheatSheet.Menus
 
 		private static bool CheckNPC(int index)
 		{
-			return (Main.npc[index].type != NPCID.TargetDummy && Main.npc[index].type != NPCID.CultistDevote && Main.npc[index].type != NPCID.CultistArcherBlue && Main.npc[index].type != NPCID.CultistTablet);
+			return Array.IndexOf(DoNotButcher, Main.npc[index].type) == -1;
 		}
 
 		private static bool CheckNPC(NPC npc)
