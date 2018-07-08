@@ -117,6 +117,13 @@ namespace CheatSheet.Menus
 			uIImage.Tooltip = "Load Online Schematics Database";
 			this.AddChild(uIImage);
 
+			uIImage = new UIImage(Main.itemTexture[ItemID.AlphabetStatueN]);
+			position = position.Offset(uIImage.Width + this.spacing, 0);
+			uIImage.Position = position;
+			uIImage.onLeftClick += (a, b) => PaintToolsEx.LoadNextX(this.view);
+			uIImage.Tooltip = $"Load Next {CheatSheet.DefaultNumberOnlineToLoad}";
+			this.AddChild(uIImage);
+
 			infoPanel = new UIView();
 			position = position.Offset(uIImage.Width + this.spacing, 0);
 			infoPanel.Position = position;

@@ -80,6 +80,7 @@
     <Compile Include="Menus\ConfigurationTool.cs" />
     <Compile Include="Menus\EventManagerHotbar.cs" />
     <Compile Include="Menus\FullBright.cs" />
+    <Compile Include="Menus\GodMode.cs" />
     <Compile Include="Menus\LightHack.cs" />
     <Compile Include="Menus\MinionSlotBooster.cs" />
     <Compile Include="Menus\NPCButchererHotbar.cs" />

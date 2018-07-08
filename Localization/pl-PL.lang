@@ -42,6 +42,9 @@
 # LightHack.LightHack50%=Light Hack: 50%
 # LightHack.LightHack100%=Light Hack: 100%
 
+# GodMode.GodModeDisabled=God Mode Disabled
+# GodMode.GodModeEnabled=God Mode Enabled
+
 # MinionSlot.MinionSlotBooster=Minion Slot Boost: +0
 # MinionSlot.MinionSlotBoosterNew=Minion Slot Boost:
 # MinionSlot.MinionSlotBoosterText=Minion boost now at
@@ -62,6 +65,7 @@
 # ConfigurationTool.Vacuum=Vacuum
 # ConfigurationTool.Waypoints=Waypoints
 # ConfigurationTool.LightHack=Light Hack
+# ConfigurationTool.GodMode=God Mode
 
 # ExtendedCheatMenu.NoExtensionCheatModsInstalled=No Extension\nCheat Mods\nInstalled
 

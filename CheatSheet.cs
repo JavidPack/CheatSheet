@@ -236,9 +236,18 @@ namespace CheatSheet
 			}
 		}
 
+		internal const int DefaultNumberOnlineToLoad = 30;
+		public int numberOnlineToLoad = 0;
+
 		public override void UpdateUI(GameTime gameTime)
 		{
 			base.UpdateUI(gameTime);
+
+			if(PaintToolsEx.schematicsToLoad != null  && numberOnlineToLoad > 0 && CheatSheet.instance.paintToolsUI.view.childrenToRemove.Count == 0)
+			{
+				PaintToolsEx.LoadSingleSchematic();
+				//CheatSheet.instance.paintToolsUI.view.ReorderSlots();
+			}
 
 			if (PaintToolsSlot.updateNeeded)
 			{

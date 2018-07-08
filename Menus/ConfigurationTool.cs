@@ -65,7 +65,7 @@ namespace CheatSheet.Menus
 			this.mod = mod;
 			this.CanMove = true;
 			base.Width = 280;
-			base.Height = 348;
+			base.Height = 358;
 
 			Texture2D texture = mod.GetTexture("UI/closeButton");
 			UIImage uIImage = new UIImage(texture);
@@ -76,81 +76,66 @@ namespace CheatSheet.Menus
 
 			//ConfigurationLoader.Initialized();
 
-			string[] labels = new string[] { CSText("ItemBrowser"), CSText("NPCBrowser"), CSText("RecipeBrowser"), CSText("MinionBooster"), CSText("Butcher"), CSText("ClearMenu"), 
-			CSText("ExtraAccessorySlots"), CSText("ModExtensions"), CSText("PaintTools"), CSText("SpawnRate"), CSText("Vacuum"), CSText("Waypoints"), CSText("LightHack")
+			string[] labels = new string[] { CSText("ItemBrowser"), CSText("NPCBrowser"), CSText("RecipeBrowser"), CSText("MinionBooster"), CSText("Butcher"), CSText("ClearMenu"),
+			CSText("ExtraAccessorySlots"), CSText("ModExtensions"), CSText("PaintTools"), CSText("SpawnRate"), CSText("Vacuum"), CSText("Waypoints"), CSText("LightHack"), CSText("GodMode")
 			/* "Boss Downer", "Event Manager"*/
 			};
-			bool[] selecteds = new bool[] {
-				ConfigurationLoader.personalConfiguration.ItemBrowser,
-				ConfigurationLoader.personalConfiguration.NPCBrowser,
-				ConfigurationLoader.personalConfiguration.RecipeBrowser,
-				ConfigurationLoader.personalConfiguration.MinionBooster,
-				ConfigurationLoader.personalConfiguration.Butcher,
-				ConfigurationLoader.personalConfiguration.ClearMenu,
-				ConfigurationLoader.personalConfiguration.ExtraAccessorySlots,
-				ConfigurationLoader.personalConfiguration.ModExtensions,
-				ConfigurationLoader.personalConfiguration.PaintTools,
-				ConfigurationLoader.personalConfiguration.SpawnRate,
-				ConfigurationLoader.personalConfiguration.Vacuum,
-				ConfigurationLoader.personalConfiguration.Waypoints,
-				ConfigurationLoader.personalConfiguration.LightHack,
+			Func<bool>[] selecteds = new Func<bool>[] {
+				()=>ConfigurationLoader.personalConfiguration.ItemBrowser,
+				()=>ConfigurationLoader.personalConfiguration.NPCBrowser,
+				()=>ConfigurationLoader.personalConfiguration.RecipeBrowser,
+				()=>ConfigurationLoader.personalConfiguration.MinionBooster,
+				()=>ConfigurationLoader.personalConfiguration.Butcher,
+				()=>ConfigurationLoader.personalConfiguration.ClearMenu,
+				()=>ConfigurationLoader.personalConfiguration.ExtraAccessorySlots,
+				()=>ConfigurationLoader.personalConfiguration.ModExtensions,
+				()=>ConfigurationLoader.personalConfiguration.PaintTools,
+				()=>ConfigurationLoader.personalConfiguration.SpawnRate,
+				()=>ConfigurationLoader.personalConfiguration.Vacuum,
+				()=>ConfigurationLoader.personalConfiguration.Waypoints,
+				()=>ConfigurationLoader.personalConfiguration.LightHack,
+				()=>ConfigurationLoader.personalConfiguration.GodMode,
               //  ConfigurationLoader.configuration.BossDowner,
               //  ConfigurationLoader.configuration.EventManager,
             };
 
+			Action<bool>[] assignSelected = new Action<bool>[] {
+				(bool a)=>ConfigurationLoader.personalConfiguration.ItemBrowser = a,
+				(bool a)=>ConfigurationLoader.personalConfiguration.NPCBrowser = a,
+				(bool a)=>ConfigurationLoader.personalConfiguration.RecipeBrowser = a,
+				(bool a)=>ConfigurationLoader.personalConfiguration.MinionBooster = a,
+				(bool a)=>ConfigurationLoader.personalConfiguration.Butcher = a,
+				(bool a)=>ConfigurationLoader.personalConfiguration.ClearMenu = a,
+				(bool a)=>ConfigurationLoader.personalConfiguration.ExtraAccessorySlots = a,
+				(bool a)=>ConfigurationLoader.personalConfiguration.ModExtensions = a,
+				(bool a)=>ConfigurationLoader.personalConfiguration.PaintTools = a,
+				(bool a)=>ConfigurationLoader.personalConfiguration.SpawnRate = a,
+				(bool a)=>ConfigurationLoader.personalConfiguration.Vacuum = a,
+				(bool a)=>ConfigurationLoader.personalConfiguration.Waypoints = a,
+				(bool a)=>ConfigurationLoader.personalConfiguration.LightHack = a,
+				(bool a)=>ConfigurationLoader.personalConfiguration.GodMode = a,
+			};
+
 			for (int i = 0; i < labels.Length; i++)
 			{
+				int iClosure = i;
 				UICheckbox cb = new UICheckbox(labels[i]);
-				cb.Selected = selecteds[i];
+				cb.Selected = selecteds[i]();
 				cb.X = spacing;
 				cb.Y = i * 24 + spacing;
-				cb.SelectedChanged += new EventHandler(bCheckBoxTicked);
+				//cb.SelectedChanged += new EventHandler(bCheckBoxTicked);
+				cb.SelectedChanged += (a, b) =>
+				{
+					assignSelected[iClosure](cb.Selected);
+					cb.Selected = selecteds[iClosure]();
+					ConfigurationLoader.SaveSetting();
+					((CheatSheet)mod).hotbar.ChangedConfiguration();
+					ConfigurationTool.configurationWindow.selected = true;
+				};
 
 				//cb.label.ForegroundColor = Color.Red;
 				AddChild(cb);
 			}
-
-			//UICheckbox cb = new UICheckbox("Item Browser");
-			//cb.Selected = ConfigurationLoader.configuration.ItemBrowser;
-			//cb.X = 0;
-			//cb.Y = 1 * 20;
-			//cb.SelectedChanged += new EventHandler(bCheckBoxTicked);
-			//AddChild(cb);
-
-			//cb = new UICheckbox("NPC Browser");
-			//cb.Selected = ConfigurationLoader.configuration.NPCBrowser;
-			//cb.X = 0;
-			//cb.Y = 2 * 20;
-			//cb.SelectedChanged += new EventHandler(bCheckBoxTicked);
-			//AddChild(cb);
-
-			//cb = new UICheckbox("Recipe Browser");
-			//cb.Selected = ConfigurationLoader.configuration.RecipeBrowser;
-			//cb.X = 0;
-			//cb.Y = 3 * 20;
-			//cb.SelectedChanged += new EventHandler(bCheckBoxTicked);
-			//AddChild(cb);
-
-			//cb = new UICheckbox("Minion Booster");
-			//cb.Selected = ConfigurationLoader.configuration.MinionBooster;
-			//cb.X = 0;
-			//cb.Y = 4 * 20;
-			//cb.SelectedChanged += new EventHandler(bCheckBoxTicked);
-			//AddChild(cb);
-
-			//for (int j = 0; j < 7; j++)
-			//{
-			//	GenericItemSlot genericItemSlot = new GenericItemSlot();
-			//	Vector2 position = new Vector2(this.spacing, this.spacing);
-
-			//	position.X += j * 60;
-			//	position.Y += 250;
-
-			//	genericItemSlot.Position = position;
-			//	genericItemSlot.Tag = j;
-			//	RecipeBrowser.ingredients[j] = genericItemSlot;
-			//	this.AddChild(genericItemSlot, false);
-			//}
 		}
 
 		private void bClose_onLeftClick(object sender, EventArgs e)
@@ -158,74 +143,15 @@ namespace CheatSheet.Menus
 			Hide();
 		}
 
-		private void bCheckBoxTicked(object sender, EventArgs e)
+		public override void Draw(SpriteBatch spriteBatch)
 		{
-			UICheckbox checkbox = (UICheckbox)sender;
-			switch (checkbox.Text)
+			base.Draw(spriteBatch);
+
+			if (Visible && IsMouseInside())
 			{
-				case "Item Browser":
-					ConfigurationLoader.personalConfiguration.ItemBrowser = checkbox.Selected;
-					break;
-
-				case "NPC Browser":
-					ConfigurationLoader.personalConfiguration.NPCBrowser = checkbox.Selected;
-					break;
-
-				case "Recipe Browser":
-					ConfigurationLoader.personalConfiguration.RecipeBrowser = checkbox.Selected;
-					break;
-
-				case "Minion Booster":
-					ConfigurationLoader.personalConfiguration.MinionBooster = checkbox.Selected;
-					break;
-
-				case "Butcher":
-					ConfigurationLoader.personalConfiguration.Butcher = checkbox.Selected;
-					break;
-
-				case "Clear Menu":
-					ConfigurationLoader.personalConfiguration.ClearMenu = checkbox.Selected;
-					break;
-
-				case "Extra Accessory Slots":
-					ConfigurationLoader.personalConfiguration.ExtraAccessorySlots = checkbox.Selected;
-					break;
-
-				case "Mod Extensions":
-					ConfigurationLoader.personalConfiguration.ModExtensions = checkbox.Selected;
-					break;
-
-				case "Paint Tools":
-					ConfigurationLoader.personalConfiguration.PaintTools = checkbox.Selected;
-					break;
-
-				case "Spawn Rate":
-					ConfigurationLoader.personalConfiguration.SpawnRate = checkbox.Selected;
-					break;
-
-				case "Vacuum":
-					ConfigurationLoader.personalConfiguration.Vacuum = checkbox.Selected;
-					break;
-
-				case "Waypoints":
-					ConfigurationLoader.personalConfiguration.Waypoints = checkbox.Selected;
-					break;
-
-				case "Light Hack":
-					ConfigurationLoader.personalConfiguration.LightHack = checkbox.Selected;
-					break;
-				//case "Boss Downer":
-				//    ConfigurationLoader.configuration.BossDowner = checkbox.Selected;
-				//    break;
-				//case "Event Manager":
-				//    ConfigurationLoader.configuration.EventManager = checkbox.Selected;
-				//    break;
-				default:
-					break;
+				Main.LocalPlayer.mouseInterface = true;
+				Main.LocalPlayer.showItemIcon = false;
 			}
-			ConfigurationLoader.SaveSetting();
-			((CheatSheet)mod).hotbar.ChangedConfiguration();
-			ConfigurationTool.configurationWindow.selected = true;
 		}
 	}
 }

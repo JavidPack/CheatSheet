@@ -42,6 +42,9 @@ LightHack.LightHack25%=Licht Hack: 25%
 LightHack.LightHack50%=Licht Hack: 50%
 LightHack.LightHack100%=Licht Hack: 100%
 
+# GodMode.GodModeDisabled=God Mode Disabled
+# GodMode.GodModeEnabled=God Mode Enabled
+
 MinionSlot.MinionSlotBooster=Günstlings platz erhöhung: +0
 MinionSlot.MinionSlotBoosterNew=Günstlings platz erhöhung: 
 MinionSlot.MinionSlotBoosterText=Günstlings platz erhöhung nun bei 
@@ -62,6 +65,7 @@ ConfigurationTool.SpawnRate=Spawn rate
 ConfigurationTool.Vacuum=Sauger
 ConfigurationTool.Waypoints=Wegpunkte
 ConfigurationTool.LightHack=Licht Hack
+# ConfigurationTool.GodMode=God Mode
 
 ExtendedCheatMenu.NoExtensionCheatModsInstalled=Keine Erweiterungen\nCheat Modifikationen\nInstalliert
 

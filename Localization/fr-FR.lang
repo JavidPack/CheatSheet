@@ -42,6 +42,9 @@ LightHack.LightHack25%=Manipulation de la Lumière: 25%
 LightHack.LightHack50%=Manipulation de la Lumière: 50%
 LightHack.LightHack100%=Manipulation de la Lumière: 100%
 
+# GodMode.GodModeDisabled=God Mode Disabled
+# GodMode.GodModeEnabled=God Mode Enabled
+
 MinionSlot.MinionSlotBooster=Augmentation de la Capacité Maximale d'Invocations: +0
 MinionSlot.MinionSlotBoosterNew=Augmentation de la Capacité Maximale d'Invocations: 
 MinionSlot.MinionSlotBoosterText=Capacité Maximale Actuelle d'Invocations à 
@@ -62,6 +65,7 @@ ConfigurationTool.SpawnRate=Taux d'Apparition
 ConfigurationTool.Vacuum=Aspirateur d'Objets
 ConfigurationTool.Waypoints=Points de Localisation
 ConfigurationTool.LightHack=Manipulation de la Lumière
+# ConfigurationTool.GodMode=God Mode
 
 ExtendedCheatMenu.NoExtensionCheatModsInstalled=Pas d'Extensions\nde Modules de Triche\nInstallés
 

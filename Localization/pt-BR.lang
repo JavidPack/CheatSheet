@@ -42,6 +42,9 @@ LightHack.LightHack25%=Hack de Luz: 25%
 LightHack.LightHack50%=Hack de Luz: 50%
 LightHack.LightHack100%=Hack de Luz: 100%
 
+# GodMode.GodModeDisabled=God Mode Disabled
+# GodMode.GodModeEnabled=God Mode Enabled
+
 MinionSlot.MinionSlotBooster=Boost de Slot de Servos: +0
 MinionSlot.MinionSlotBoosterNew=Boost de Slot de Servos: 
 MinionSlot.MinionSlotBoosterText=Boost de servos agora em 
@@ -62,6 +65,7 @@ ConfigurationTool.SpawnRate=Taxa de Spawns
 ConfigurationTool.Vacuum=Aspirador
 ConfigurationTool.Waypoints=Waypoints
 ConfigurationTool.LightHack=Hack de Luz
+# ConfigurationTool.GodMode=God Mode
 
 ExtendedCheatMenu.NoExtensionCheatModsInstalled=Sem Mods de\nCheat com\nExtensões\nInstalados
 

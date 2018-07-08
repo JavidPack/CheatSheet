@@ -264,6 +264,7 @@ namespace CheatSheet.Menus
 			buttonView.AddChild(SpawnRateMultiplier.GetButton(mod));
 			buttonView.AddChild(MinionSlotBooster.GetButton(mod));
 			buttonView.AddChild(LightHack.GetButton(mod));
+			buttonView.AddChild(GodMode.GetButton(mod));
 			//	buttonView.AddChild(FullBright.GetButton(mod));
 			//			buttonView.AddChild(BossDowner.GetButton(mod));
 			buttonView.AddChild(ConfigurationTool.GetButton(mod));
@@ -852,7 +853,6 @@ namespace CheatSheet.Menus
 			bToggleNPCBrowser.Visible = ConfigurationLoader.personalConfiguration.NPCBrowser;
 			bToggleRecipeBrowser.Visible = ConfigurationLoader.personalConfiguration.RecipeBrowser;
 			MinionSlotBooster.button.Visible = ConfigurationLoader.personalConfiguration.MinionBooster;
-			LightHack.button.Visible = ConfigurationLoader.personalConfiguration.LightHack;
 			bToggleClearMenu.Visible = ConfigurationLoader.personalConfiguration.ClearMenu;
 			bTogglePaintTools.Visible = ConfigurationLoader.personalConfiguration.PaintTools;
 			bToggleExtendedCheat.Visible = ConfigurationLoader.personalConfiguration.ModExtensions;
@@ -861,6 +861,7 @@ namespace CheatSheet.Menus
 			bToggleNPCButcherer.Visible = ConfigurationLoader.personalConfiguration.Butcher;
 			bToggleQuickTeleport.Visible = ConfigurationLoader.personalConfiguration.Waypoints;
 			LightHack.button.Visible = ConfigurationLoader.personalConfiguration.LightHack;
+			GodMode.button.Visible = ConfigurationLoader.personalConfiguration.GodMode;
 			SpawnRateMultiplier.button.Visible = ConfigurationLoader.personalConfiguration.SpawnRate && SpawnRateMultiplier.HasPermission;
 			//BossDowner.button.Visible = ConfigurationLoader.configuration.BossDowner;
 			//bToggleEventManager.Visible = ConfigurationLoader.configuration.EventManager;

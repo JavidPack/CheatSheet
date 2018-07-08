@@ -42,6 +42,9 @@ LightHack.LightHack25%=Увеличение яркости: 25%
 LightHack.LightHack50%=Увеличение яркости: 50%
 LightHack.LightHack100%=Увеличение яркости: 100%
 
+# GodMode.GodModeDisabled=God Mode Disabled
+# GodMode.GodModeEnabled=God Mode Enabled
+
 MinionSlot.MinionSlotBooster=Увеличение максимального количества миньонов: +0
 MinionSlot.MinionSlotBoosterNew=Увеличение максимального количества миньонов: 
 MinionSlot.MinionSlotBoosterText=Увеличение максимального количества миньонов теперь 
@@ -62,6 +65,7 @@ ConfigurationTool.SpawnRate=Частота спавна мобов
 ConfigurationTool.Vacuum=Очистка предметов
 ConfigurationTool.Waypoints=Точки телепортации
 ConfigurationTool.LightHack=Увеличение яркости
+# ConfigurationTool.GodMode=God Mode
 
 ExtendedCheatMenu.NoExtensionCheatModsInstalled=Не установлено\nмодов с\nрасширениями
 

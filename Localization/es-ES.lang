@@ -42,6 +42,9 @@ LightHack.LightHack25%=Hack de Luz: 25%
 LightHack.LightHack50%=Hack de Luz: 50%
 LightHack.LightHack100%=Hack de Luz: 100%
 
+# GodMode.GodModeDisabled=God Mode Disabled
+# GodMode.GodModeEnabled=God Mode Enabled
+
 MinionSlot.MinionSlotBooster=Mejora de Espacio para Esbirros: +0
 MinionSlot.MinionSlotBoosterNew=Mejora de Espacio para Esbirros: 
 MinionSlot.MinionSlotBoosterText=Mejora de Espacio para Esbirros ahora en 
@@ -62,6 +65,7 @@ ConfigurationTool.SpawnRate=Tasa de Spawns
 ConfigurationTool.Vacuum=Aspirador
 ConfigurationTool.Waypoints=Puntos de referencia
 ConfigurationTool.LightHack=Hack de Luz
+# ConfigurationTool.GodMode=God Mode
 
 ExtendedCheatMenu.NoExtensionCheatModsInstalled=No hay Mods\nMods Trampa\nInstalados
 

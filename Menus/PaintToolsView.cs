@@ -37,6 +37,14 @@ namespace CheatSheet.Menus
 			slot.Select();
 			ReorderSlots();
 		}
+
+		public void AddEndDontSelect(PaintToolsSlot slot)
+		{
+			slotList.Add(slot);
+			//slot.Select();
+			ReorderSlots();
+		}
+
 		public void Add(PaintToolsSlot[] slots)
 		{
 			slotList.InsertRange(0, slots);
@@ -59,6 +67,20 @@ namespace CheatSheet.Menus
 					slotList[index >= slotList.Count ? index - 1 : index].Select();
 				ReorderSlots();
 			}
+		}
+
+		public void RemoveAllOnline()
+		{
+			slotList.RemoveAll(x => x.browserID > 0);
+			if (!slotList.Contains(PaintToolsSlot.CurrentSelect))
+			{
+				PaintToolsSlot.CurrentSelect = null;
+				CheatSheet.instance.paintToolsHotbar.StampTiles = new Tile[0, 0];
+				CheatSheet.instance.paintToolsHotbar.stampInfo = null;
+				CheatSheet.instance.paintToolsUI.infoPanel.Visible = false;
+				CheatSheet.instance.paintToolsUI.submitPanel.Visible = false;
+			}
+			ReorderSlots();
 		}
 
 		public void ReorderSlots()

@@ -40,7 +40,7 @@ namespace CheatSheet.UI
 
 		public List<UIView> children = new List<UIView>();
 
-		private List<UIView> childrenToRemove = new List<UIView>();
+		internal List<UIView> childrenToRemove = new List<UIView>();
 
 		private static bool mouseUpHandled = false;
 

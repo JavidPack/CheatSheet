@@ -683,6 +683,8 @@ namespace CheatSheet.Menus
 									}
 								}
 							}
+							// TODO: Experiment with WorldGen.stopDrops = true;
+							// TODO: Button to ignore TileFrame?
 							for (int i = point.X; i < point.X + width; i++)
 							{
 								for (int j = 0; j < point.Y + height; j++)

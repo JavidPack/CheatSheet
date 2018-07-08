@@ -42,6 +42,9 @@ LightHack.LightHack25%=透视照明: 25%
 LightHack.LightHack50%=透视照明: 50%
 LightHack.LightHack100%=透视照明: 100%
 
+# GodMode.GodModeDisabled=God Mode Disabled
+# GodMode.GodModeEnabled=God Mode Enabled
+
 MinionSlot.MinionSlotBooster=额外召唤物数量: +0
 MinionSlot.MinionSlotBoosterNew=额外召唤物数量: 
 MinionSlot.MinionSlotBoosterText=最大召唤物数量 
@@ -62,6 +65,7 @@ ConfigurationTool.SpawnRate=刷怪率
 ConfigurationTool.Vacuum=快速拾取
 ConfigurationTool.Waypoints=路径点
 ConfigurationTool.LightHack=透视照明
+# ConfigurationTool.GodMode=God Mode
 
 ExtendedCheatMenu.NoExtensionCheatModsInstalled=无扩展模组\n作弊模组\n已安装
 

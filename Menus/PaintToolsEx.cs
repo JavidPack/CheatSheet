@@ -38,6 +38,8 @@ namespace CheatSheet
 		private static Uri schematicsurl = new Uri("http://javid.ddns.net/tModLoader/jopojellymods/CheatSheet_Schematics_GetList.php");
 		private static bool waiting = false;
 
+		internal static Queue<JObject> schematicsToLoad;
+
 		internal static void GetSchematicsComplete(object sender, UploadValuesCompletedEventArgs e)
 		{
 			if (!e.Cancelled)
@@ -60,31 +62,35 @@ namespace CheatSheet
 				JArray schematicslist = (JArray)jsonObject["schematics"];
 				if (schematicslist != null)
 				{
-					List<PaintToolsSlot> list = new List<PaintToolsSlot>();
+					schematicsToLoad = new Queue<JObject>();
+					CheatSheet.instance.numberOnlineToLoad = CheatSheet.DefaultNumberOnlineToLoad;
+					//List<PaintToolsSlot> list = new List<PaintToolsSlot>();
 					foreach (JObject schematic in schematicslist.Children<JObject>())
 					{
-						int id = (int)schematic["id"];
-						string name = (string)schematic["name"];
-						int rating = (int)schematic["rating"];
-						int vote = (int)schematic["vote"];
-						string tiledata = (string)schematic["tiledata"];
-						try
-						{
-							Tile[,] tiles = LoadTilesFromBase64(tiledata);
-							if (tiles.GetLength(0) > 0)
-							{
-								var paintToolsSlot = new PaintToolsSlot(GetStampInfo(tiles));
-								paintToolsSlot.browserID = id;
-								paintToolsSlot.browserName = name;
-								paintToolsSlot.rating = rating;
-								paintToolsSlot.vote = vote;
-								list.Add(paintToolsSlot);
-							}
-						}
-						catch { }
+						schematicsToLoad.Enqueue(schematic);
+
+						//int id = (int)schematic["id"];
+						//string name = (string)schematic["name"];
+						//int rating = (int)schematic["rating"];
+						//int vote = (int)schematic["vote"];
+						//string tiledata = (string)schematic["tiledata"];
+						//try
+						//{
+						//	Tile[,] tiles = LoadTilesFromBase64(tiledata);
+						//	if (tiles.GetLength(0) > 0)
+						//	{
+						//		var paintToolsSlot = new PaintToolsSlot(GetStampInfo(tiles));
+						//		paintToolsSlot.browserID = id;
+						//		paintToolsSlot.browserName = name;
+						//		paintToolsSlot.rating = rating;
+						//		paintToolsSlot.vote = vote;
+						//		list.Add(paintToolsSlot);
+						//	}
+						//}
+						//catch { }
 					}
-					if (list.Count > 0)
-						CheatSheet.instance.paintToolsUI.view.Add(list.ToArray());
+					//if (list.Count > 0)
+					//	CheatSheet.instance.paintToolsUI.view.Add(list.ToArray());
 				}
 			}
 			else
@@ -92,6 +98,36 @@ namespace CheatSheet
 				Main.NewText("Schematics Server problem 2");
 			}
 			waiting = false;
+		}
+
+		internal static void LoadSingleSchematic()
+		{
+			var schematic = schematicsToLoad.Dequeue();
+
+			int id = (int)schematic["id"];
+			string name = (string)schematic["name"];
+			int rating = (int)schematic["rating"];
+			int vote = (int)schematic["vote"];
+			string tiledata = (string)schematic["tiledata"];
+			try
+			{
+				Tile[,] tiles = LoadTilesFromBase64(tiledata);
+				if (tiles.GetLength(0) > 0)
+				{
+					var paintToolsSlot = new PaintToolsSlot(GetStampInfo(tiles));
+					paintToolsSlot.browserID = id;
+					paintToolsSlot.browserName = name;
+					paintToolsSlot.rating = rating;
+					paintToolsSlot.vote = vote;
+					CheatSheet.instance.paintToolsUI.view.AddEndDontSelect(paintToolsSlot);
+				}
+			}
+			catch { }
+
+			CheatSheet.instance.numberOnlineToLoad--;
+
+			if (schematicsToLoad.Count == 0)
+				schematicsToLoad = null;
 		}
 
 		internal static void OnlineImport(PaintToolsView paintToolsView)
@@ -127,6 +163,22 @@ namespace CheatSheet
 				Main.NewText("Schematics Server problem 1");
 				waiting = false;
 			}
+		}
+
+		internal static void LoadNextX(PaintToolsView view)
+		{
+			if (waiting)
+			{
+				Main.NewText("Wait for schematics to download first.");
+				return;
+			}
+			if(PaintToolsEx.schematicsToLoad == null)
+			{
+				Main.NewText("Load online schematics database first.");
+				return;
+			}
+			CheatSheet.instance.paintToolsUI.view.RemoveAllOnline();
+			CheatSheet.instance.numberOnlineToLoad = CheatSheet.DefaultNumberOnlineToLoad;
 		}
 
 		internal static void Import(PaintToolsView paintToolsView)
