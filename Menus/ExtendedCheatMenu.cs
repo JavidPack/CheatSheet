@@ -11,11 +11,11 @@ namespace CheatSheet.Menus
 	internal class ExtendedCheatMenu : UISlideWindow
 	{
 		internal static string CSText(string key, string category = "ExtendedCheatMenu") => CheatSheet.CSText(category, key);
-		public Mod mod;
+		public CheatSheet mod;
 		private static UIImage[] buttons = new UIImage[CheatSheet.ButtonTexture.Count];
 		private float spacing = 16f;
 
-		public ExtendedCheatMenu(Mod mod)
+		public ExtendedCheatMenu(CheatSheet mod)
 		{
 			buttons = new UIImage[CheatSheet.ButtonTexture.Count];
 			this.mod = mod;
@@ -114,6 +114,7 @@ namespace CheatSheet.Menus
 		private void bClose_onLeftClick(object sender, EventArgs e)
 		{
 			Hide();
+			mod.hotbar.DisableAllWindows();
 			//base.Visible = false;
 		}
 
