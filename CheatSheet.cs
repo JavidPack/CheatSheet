@@ -534,7 +534,7 @@ namespace CheatSheet
 		/// </summary>
 		public static Item GetExtraAccessory(Player player, int index)
 		{
-			if (index < 0 || index > CheatSheetPlayer.MaxExtraAccessories) return null;
+			if (index < 0 || index >= CheatSheetPlayer.MaxExtraAccessories) return null;
 			return player.GetModPlayer<CheatSheetPlayer>().ExtraAccessories[index];
 		}
 	}
