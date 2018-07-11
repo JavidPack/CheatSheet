@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Reflection;
 using Terraria;
@@ -508,6 +509,33 @@ namespace CheatSheet
 			{
 				((CheatSheet)mod).RegisterButton(csb.texture, csb.buttonClickedAction, csb.tooltip);
 			}
+		}
+
+		/// <summary>
+		/// Returns all extra accessories for the given player
+		/// </summary>
+		public static IEnumerable<Item> GetExtraAccessories(Player player)
+		{
+			return player.GetModPlayer<CheatSheetPlayer>().ExtraAccessories;
+		}
+
+		/// <summary>
+		/// Returns all extra enabled accessories for the given player
+		/// </summary>
+		public static IEnumerable<Item> GetEnabledExtraAccessories(Player player)
+		{
+			var cheatSheetPlayer = player.GetModPlayer<CheatSheetPlayer>();
+			return cheatSheetPlayer.ExtraAccessories.Take(cheatSheetPlayer.numberExtraAccessoriesEnabled);
+		}
+
+		/// <summary>
+		/// Returns the extra accessory item at the given index
+		/// Returns null if the index is out of bounds
+		/// </summary>
+		public static Item GetExtraAccessory(Player player, int index)
+		{
+			if (index < 0 || index > CheatSheetPlayer.MaxExtraAccessories) return null;
+			return player.GetModPlayer<CheatSheetPlayer>().ExtraAccessories[index];
 		}
 	}
 
