@@ -3,6 +3,7 @@ using CheatSheet.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Linq;
 using Terraria;
 using Terraria.ID;
 
@@ -149,7 +150,7 @@ namespace CheatSheet.Menus
 
 		private static bool CheckNPC(int index)
 		{
-			return Array.IndexOf(DoNotButcher, Main.npc[index].type) == -1;
+			return !DoNotButcher.Contains(Main.npc[index].type);
 		}
 
 		private static bool CheckNPC(NPC npc)
