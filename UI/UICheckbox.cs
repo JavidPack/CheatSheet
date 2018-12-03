@@ -6,8 +6,8 @@ namespace CheatSheet.UI
 {
 	internal class UICheckbox : UIView
 	{
-		private static Texture2D checkboxTexture;
-		private static Texture2D checkmarkTexture;
+		internal static Texture2D checkboxTexture;
+		internal static Texture2D checkmarkTexture;
 
 		private bool selected = false;
 

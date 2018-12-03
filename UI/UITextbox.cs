@@ -8,7 +8,7 @@ namespace CheatSheet.UI
 	internal class UITextbox : UIView
 	{
 		private RasterizerState _rasterizerState = new RasterizerState() { ScissorTestEnable = true };
-		private static Texture2D textboxBackground;
+		internal static Texture2D textboxBackground;
 		private static Texture2D textboxFill;
 
 		private static Texture2D TextboxFill

@@ -13,7 +13,7 @@ namespace CheatSheet.UI
 			ScissorTestEnable = true
 		};
 
-		private static Texture2D ScrollbgTexture;
+		internal static Texture2D ScrollbgTexture;
 
 		private static Texture2D scrollbgFill;
 

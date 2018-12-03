@@ -13,7 +13,7 @@ namespace CheatSheet.Menus
 		public int npcType = -1;
 		public int netID = 0;
 		public NPC npc = new NPC();
-		private static NPC syncNPC;
+		//private static NPC syncNPC;
 		public string displayName = "";
 
 		public bool isBoss;
@@ -51,7 +51,7 @@ namespace CheatSheet.Menus
 			netID = npc.netID;
 			//displayName = Lang.GetNPCNameValue(npcType);
 			displayName = Lang.GetNPCNameValue(netID);
-			syncNPC = (NPC)npc.Clone();
+			//syncNPC = (NPC)npc.Clone();
 			//npcType = npc.type;
 			//	this.isBoss = npc.boss;
 			//	this.isTown = npc.townNPC;

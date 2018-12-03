@@ -10,9 +10,9 @@ namespace CheatSheet.UI
 	{
 		public delegate void ClickEventHandler(object sender, byte button);
 
-		protected static Texture2D closeTexture;
+		//internal static Texture2D closeTexture;
 
-		public static UIView exclusiveControl = null;
+		//public static UIView exclusiveControl = null;
 
 		private static bool gameMouseOverwritten = false;
 
@@ -28,9 +28,9 @@ namespace CheatSheet.UI
 
 		public static string HoverText = "";
 
-		public static Item HoverItem = new Item();
+		//public static Item HoverItem = new Item();
 
-		protected static readonly Item EmptyItem = new Item();
+		//protected static readonly Item EmptyItem = new Item();
 
 		public static bool HoverOverridden = false;
 
@@ -382,7 +382,7 @@ namespace CheatSheet.UI
 					this.children.Remove(this.childrenToRemove[0]);
 					this.childrenToRemove.RemoveAt(0);
 				}
-				if ((UIView.exclusiveControl == null && this.Parent == null) || this == UIView.exclusiveControl)
+				if ((/*UIView.exclusiveControl == null &&*/ this.Parent == null) /*|| this == UIView.exclusiveControl*/)
 				{
 					this.HandleMouseInput();
 				}
@@ -671,7 +671,7 @@ namespace CheatSheet.UI
 
 		public UIView()
 		{
-			closeTexture = CheatSheet.instance.GetTexture("UI/closeButton");
+			//closeTexture = CheatSheet.instance.GetTexture("UI/closeButton");
 		}
 
 		//public static Texture2D GetEmbeddedTexture(string name)

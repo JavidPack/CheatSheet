@@ -5,7 +5,7 @@ namespace CheatSheet.UI
 {
 	internal class UIScrollBar : UIView
 	{
-		private static Texture2D ScrollbarTexture;
+		internal static Texture2D ScrollbarTexture;
 
 		private static Texture2D scrollbarFill;
 

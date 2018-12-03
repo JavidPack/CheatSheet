@@ -25,7 +25,7 @@ namespace CheatSheet.Menus
 	internal class NPCBrowser : UISlideWindow
 	{
 		internal static string CSText(string key, string category = "MobBrowser") => CheatSheet.CSText(category, key);
-		private static NPC tooltipNpc;
+		internal static NPC tooltipNpc;
 		internal static NPC hoverNpc;
 		internal Texture2D[] textures;
 
@@ -55,7 +55,7 @@ namespace CheatSheet.Menus
 		public CheatSheet mod;
 
 		//	private static List<string> categoryNames = new List<string>();
-		private static UIImage[] bCategories = new UIImage[categoryIcons.Length];
+		internal static UIImage[] bCategories;
 
 		public static List<List<int>> categories = new List<List<int>>();
 		private static Color buttonColor = new Color(190, 190, 190);
@@ -100,6 +100,7 @@ namespace CheatSheet.Menus
 			this.textbox.Position = new Vector2(this.spacing, base.Height - this.spacing);
 			this.textbox.KeyPressed += new UITextbox.KeyPressedHandler(this.textbox_KeyPressed);
 			this.AddChild(this.textbox);
+			bCategories = new UIImage[categoryIcons.Length];
 			for (int j = 0; j < NPCBrowser.categoryIcons.Length; j++)
 			{
 				UIImage uIImage2 = new UIImage(NPCBrowser.categoryIcons[j]);
@@ -200,7 +201,7 @@ namespace CheatSheet.Menus
 			UIView.MouseRightButton = Main.mouseRight;
 			UIView.ScrollAmount = PlayerInput.ScrollWheelDeltaForUI;
 			//UIView.ScrollAmount = (Main.mouseState.ScrollWheelValue - Main.oldMouseState.ScrollWheelValue) / 2;
-			UIView.HoverItem = UIView.EmptyItem;
+			//UIView.HoverItem = UIView.EmptyItem;
 			UIView.HoverText = "";
 			UIView.HoverOverridden = false;
 			hoverNpc = null;

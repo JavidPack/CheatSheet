@@ -9,7 +9,7 @@ namespace CheatSheet
 {
 	internal class AllItemsMenu : GlobalItem
 	{
-		private static Item[] singleSlotArray;
+		internal static Item[] singleSlotArray;
 
 		public AllItemsMenu()
 		{

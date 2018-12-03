@@ -27,7 +27,7 @@ namespace CheatSheet.Menus
 
 		internal UIHotbar currentHotbar;
 
-		public static Texture2D mapTexture;
+		//public static Texture2D mapTexture;
 		public static Texture2D loginTexture;
 		public static Texture2D logoutTexture;
 
@@ -290,6 +290,7 @@ namespace CheatSheet.Menus
 			//	MasterView.gameScreen.AddChild(Hotbar.groupWindow);
 			ChangedConfiguration();
 			//this.Resize();
+			return;
 		}
 
 		private void bTogglePaintTools_onLeftClick(object sender, EventArgs e)

@@ -69,11 +69,11 @@ namespace CheatSheet.Menus
             Main.itemTexture[ItemID.AlphabetStatueM],
 		};
 
-		private ItemView itemView;
+		internal ItemView itemView;
 
 		//	private static List<string> categoryNames = new List<string>();
 
-		private static UIImage[] bCategories = new UIImage[categoryIcons.Length];
+		internal static UIImage[] bCategories;
 
 		public static List<List<int>> categories = new List<List<int>>();
 
@@ -92,6 +92,7 @@ namespace CheatSheet.Menus
 		public ItemBrowser(CheatSheet mod)
 		{
 			categories.Clear();
+			bCategories = new UIImage[categoryIcons.Length];
 			this.itemView = new ItemView();
 			this.mod = mod;
 			this.CanMove = true;
@@ -146,6 +147,7 @@ namespace CheatSheet.Menus
 			itemView.selectedCategory = ItemBrowser.categories[0].ToArray();
 			itemView.activeSlots = itemView.selectedCategory;
 			itemView.ReorderSlots();
+			return;
 		}
 
 		public override void Draw(SpriteBatch spriteBatch)

@@ -75,12 +75,41 @@ namespace CheatSheet
 
 		public override void Unload()
 		{
+			PaintToolsSlot.CurrentSelect = null;
+			AllItemsMenu.singleSlotArray = null;
+			UI.UICheckbox.checkboxTexture = null;
+			UI.UICheckbox.checkmarkTexture = null;
+			UI.UIScrollBar.ScrollbarTexture = null;
+			UI.UIScrollView.ScrollbgTexture = null;
+			UI.UITextbox.textboxBackground = null;
+			//UI.UIView.closeTexture = null;
+			ItemBrowser.bCategories = null;
+			RecipeBrowserWindow.ingredients = null;
+			RecipeBrowserWindow.bCategories = null;
+			NPCBrowser.tooltipNpc = null;
+			NPCBrowser.hoverNpc = null;
+			NPCBrowser.bCategories = null;
+			if (itemBrowser != null)
+				itemBrowser.itemView = null;
 			itemBrowser = null;
 			npcBrowser = null;
+			recipeBrowser = null;
+			hotbar.buttonView.RemoveAllChildren();
+			hotbar.buttonView = null;
+			hotbar = null;
 			instance = null;
 			ToggleCheatSheetHotbarHotKey = null;
 			RecipeBrowserWindow.recipeView = null;
 			RecipeBrowserWindow.lookupItemSlot = null;
+			ConfigurationTool.cheatSheet = null;
+			ConfigurationTool.configurationWindow = null;
+			Hotbar.loginTexture = null;
+			Hotbar.logoutTexture = null;
+			ConfigurationTool.button = null;
+			SpawnRateMultiplier.button = null;
+			MinionSlotBooster.button = null;
+			LightHack.button = null;
+			GodMode.button = null;
 		}
 
 		internal static string CSText(string category, string key)
@@ -244,7 +273,7 @@ namespace CheatSheet
 		{
 			base.UpdateUI(gameTime);
 
-			if(PaintToolsEx.schematicsToLoad != null  && numberOnlineToLoad > 0 && CheatSheet.instance.paintToolsUI.view.childrenToRemove.Count == 0)
+			if (PaintToolsEx.schematicsToLoad != null && numberOnlineToLoad > 0 && CheatSheet.instance.paintToolsUI.view.childrenToRemove.Count == 0)
 			{
 				PaintToolsEx.LoadSingleSchematic();
 				//CheatSheet.instance.paintToolsUI.view.ReorderSlots();
@@ -255,14 +284,14 @@ namespace CheatSheet
 				bool oneUpdated = false;
 				foreach (var item in paintToolsUI.view.slotList)
 				{
-					if(item.texture == Main.magicPixel)
+					if (item.texture == Main.magicPixel)
 					{
 						item.texture = item.MakeThumbnail(item.stampInfo);
 						oneUpdated = true;
 						break;
 					}
 				}
-				if(!oneUpdated)
+				if (!oneUpdated)
 					PaintToolsSlot.updateNeeded = false;
 			}
 		}

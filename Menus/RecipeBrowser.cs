@@ -33,18 +33,18 @@ namespace CheatSheet.Menus
 			Main.itemTexture[ItemID.AlphabetStatueA],
 			Main.itemTexture[ItemID.AlphabetStatueM],
 		};
-	
+
 		internal static RecipeView recipeView;
 		public CheatSheet mod;
 
 		//private static List<string> categoryNames = new List<string>();
-		private static UIImage[] bCategories = new UIImage[categoryIcons.Length];
+		internal static UIImage[] bCategories;
 
 		//private static GenericItemSlot[] lookupItem = new GenericItemSlot[1];
 		internal static RecipeQuerySlot lookupItemSlot;
 
-		private static GenericItemSlot[] ingredients = new GenericItemSlot[Recipe.maxRequirements];
-		private static GenericItemSlot[] tiles = new GenericItemSlot[Recipe.maxRequirements];
+		internal static GenericItemSlot[] ingredients;
+		//internal static GenericItemSlot[] tiles = new GenericItemSlot[Recipe.maxRequirements];
 
 		public static List<List<int>> categories = new List<List<int>>();
 		private static Color buttonColor = new Color(190, 190, 190);
@@ -66,6 +66,7 @@ namespace CheatSheet.Menus
 		public RecipeBrowserWindow(CheatSheet mod)
 		{
 			categories.Clear();
+			bCategories = new UIImage[categoryIcons.Length];
 			recipeView = new RecipeView();
 			this.mod = mod;
 			this.CanMove = true;
@@ -124,6 +125,7 @@ namespace CheatSheet.Menus
 				this.AddChild(uIImage2);
 			}
 
+			ingredients = new GenericItemSlot[Recipe.maxRequirements];
 			for (int j = 0; j < Recipe.maxRequirements; j++)
 			{
 				GenericItemSlot genericItemSlot = new GenericItemSlot();
@@ -144,6 +146,7 @@ namespace CheatSheet.Menus
 			recipeView.selectedCategory = RecipeBrowserWindow.categories[0].ToArray();
 			recipeView.activeSlots = recipeView.selectedCategory;
 			recipeView.ReorderSlots();
+			return;
 		}
 
 		private const int cols = 5;
