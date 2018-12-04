@@ -51,23 +51,6 @@ namespace CheatSheet.UI
 		protected bool rightButtonDown;
 
 		private bool mousePreviouslyIn;
-
-		private Color foregroundColor = Color.White;
-
-		private Color backgroundColor = Color.White;
-
-		private AnchorPosition anchor = AnchorPosition.TopLeft;
-
-		private Vector2 offset = Vector2.Zero;
-
-		private float scale = 1f;
-
-		private float opacity = 1f;
-
-		private bool _visible = true;
-
-		private bool _overridesMouse = true;
-
 		private string _tooltip = "";
 
 		private bool _updateWhenOutOfBounds;
@@ -90,13 +73,7 @@ namespace CheatSheet.UI
 
 		public event UIView.ClickEventHandler onMouseUp;
 
-		protected static int MouseX
-		{
-			get
-			{
-				return Main.mouseX;
-			}
-		}
+		protected static int MouseX => Main.mouseX;
 
 		protected static int MouseY
 		{
@@ -166,7 +143,7 @@ namespace CheatSheet.UI
 				{
 					return this.Parent.DrawPosition + this.Position + this.Offset - this.Parent.Origin;
 				}
-				return this.Position + this.offset;
+				return this.Position + this.Offset;
 			}
 		}
 
@@ -216,41 +193,11 @@ namespace CheatSheet.UI
 			}
 		}
 
-		public Color ForegroundColor
-		{
-			get
-			{
-				return this.foregroundColor;
-			}
-			set
-			{
-				this.foregroundColor = value;
-			}
-		}
+		public Color ForegroundColor { get; set; } = Color.White;
 
-		public Color BackgroundColor
-		{
-			get
-			{
-				return this.backgroundColor;
-			}
-			set
-			{
-				this.backgroundColor = value;
-			}
-		}
+		public Color BackgroundColor { get; set; } = Color.White;
 
-		public AnchorPosition Anchor
-		{
-			get
-			{
-				return this.anchor;
-			}
-			set
-			{
-				this.anchor = value;
-			}
-		}
+		public AnchorPosition Anchor { get; set; } = AnchorPosition.TopLeft;
 
 		public Vector2 Origin
 		{
@@ -260,65 +207,15 @@ namespace CheatSheet.UI
 			}
 		}
 
-		public Vector2 Offset
-		{
-			get
-			{
-				return this.offset;
-			}
-			set
-			{
-				this.offset = value;
-			}
-		}
+		public Vector2 Offset { get; set; } = Vector2.Zero;
 
-		public float Scale
-		{
-			get
-			{
-				return this.scale;
-			}
-			set
-			{
-				this.scale = value;
-			}
-		}
+		public float Scale { get; set; } = 1f;
 
-		public float Opacity
-		{
-			get
-			{
-				return this.opacity;
-			}
-			set
-			{
-				this.opacity = value;
-			}
-		}
+		public float Opacity { get; set; } = 1f;
 
-		public bool Visible
-		{
-			get
-			{
-				return this._visible;
-			}
-			set
-			{
-				this._visible = value;
-			}
-		}
+		public bool Visible { get; set; } = true;
 
-		public bool OverridesMouse
-		{
-			get
-			{
-				return this._overridesMouse;
-			}
-			set
-			{
-				this._overridesMouse = value;
-			}
-		}
+		public bool OverridesMouse { get; set; } = true;
 
 		public string Tooltip
 		{

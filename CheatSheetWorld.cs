@@ -15,7 +15,7 @@ namespace CheatSheet
 			{
 				try
 				{
-					(mod as CheatSheet).hotbar.bCycleExtraAccessorySlots.Tooltip = CSText("ExtraAccessorySlots") + Main.LocalPlayer.GetModPlayer<CheatSheetPlayer>(mod).numberExtraAccessoriesEnabled;
+					CheatSheet.instance.hotbar.bCycleExtraAccessorySlots.Tooltip = CSText("ExtraAccessorySlots") + Main.LocalPlayer.GetModPlayer<CheatSheetPlayer>(mod).numberExtraAccessoriesEnabled;
 					CheatSheet.instance.paintToolsHotbar.UndoHistory.Clear();
 					CheatSheet.instance.paintToolsHotbar.UpdateUndoTooltip();
 				}
@@ -25,7 +25,7 @@ namespace CheatSheet
 				}
 			}
 
-			//    ((CheatSheet)mod).hotbar.ChangedBossDowner();
+			//    CheatSheet.instance.hotbar.ChangedBossDowner();
 		}
 
 		public override void NetSend(BinaryWriter writer)

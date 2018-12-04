@@ -60,8 +60,8 @@
       <HintPath>..\..\..\Modding\tModLoader\references\ReLogic.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="tModLoaderDebug">
-      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Terraria\tModLoaderDebug.exe</HintPath>
+    <Reference Include="Terraria">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Terraria\Terraria.exe</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

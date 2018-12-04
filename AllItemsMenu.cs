@@ -21,16 +21,16 @@ namespace CheatSheet
 		//	try
 		//	{
 		//		UIView.UpdateUpdateInput();
-		//		((CheatSheet)mod).npcBrowser.Update();
-		//		((CheatSheet)mod).itemBrowser.Update();
-		//		((CheatSheet)mod).recipeBrowser.Update();
-		//		((CheatSheet)mod).extendedCheatMenu.Update();
+		//		CheatSheet.instance.npcBrowser.Update();
+		//		CheatSheet.instance.itemBrowser.Update();
+		//		CheatSheet.instance.recipeBrowser.Update();
+		//		CheatSheet.instance.extendedCheatMenu.Update();
 
-		//		((CheatSheet)mod).hotbar.Update();
-		//		((CheatSheet)mod).paintToolsHotbar.Update();
-		//		((CheatSheet)mod).quickTeleportHotbar.Update();
-		//		((CheatSheet)mod).quickClearHotbar.Update();
-		//		((CheatSheet)mod).npcButchererHotbar.Update();
+		//		CheatSheet.instance.hotbar.Update();
+		//		CheatSheet.instance.paintToolsHotbar.Update();
+		//		CheatSheet.instance.quickTeleportHotbar.Update();
+		//		CheatSheet.instance.quickClearHotbar.Update();
+		//		CheatSheet.instance.npcButchererHotbar.Update();
 		//		ConfigurationTool.configurationWindow.Update();
 		//	}
 		//	catch (Exception e)
@@ -41,39 +41,39 @@ namespace CheatSheet
 
 		public void DrawUpdateAll(SpriteBatch spriteBatch)
 		{
-			((CheatSheet)mod).itemBrowser.Draw(spriteBatch);
-			((CheatSheet)mod).npcBrowser.Draw(spriteBatch);
-			((CheatSheet)mod).recipeBrowser.Draw(spriteBatch);
-			((CheatSheet)mod).extendedCheatMenu.Draw(spriteBatch);
-			((CheatSheet)mod).paintToolsUI.Draw(spriteBatch);
+			CheatSheet.instance.itemBrowser.Draw(spriteBatch);
+			CheatSheet.instance.npcBrowser.Draw(spriteBatch);
+			CheatSheet.instance.recipeBrowser.Draw(spriteBatch);
+			CheatSheet.instance.extendedCheatMenu.Draw(spriteBatch);
+			CheatSheet.instance.paintToolsUI.Draw(spriteBatch);
 
-			//			((CheatSheet)mod).itemBrowser.Update();
+			//			CheatSheet.instance.itemBrowser.Update();
 			//	spriteBatch.End();
 			//	spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
 
-			((CheatSheet)mod).npcBrowser.Update();
-			((CheatSheet)mod).itemBrowser.Update();
-			((CheatSheet)mod).recipeBrowser.Update();
-			((CheatSheet)mod).extendedCheatMenu.Update();
+			CheatSheet.instance.npcBrowser.Update();
+			CheatSheet.instance.itemBrowser.Update();
+			CheatSheet.instance.recipeBrowser.Update();
+			CheatSheet.instance.extendedCheatMenu.Update();
 
-			((CheatSheet)mod).hotbar.Update();
-			((CheatSheet)mod).paintToolsHotbar.Update();
-			((CheatSheet)mod).paintToolsUI.Update();
-			((CheatSheet)mod).quickTeleportHotbar.Update();
-			((CheatSheet)mod).quickClearHotbar.Update();
-			((CheatSheet)mod).npcButchererHotbar.Update();
+			CheatSheet.instance.hotbar.Update();
+			CheatSheet.instance.paintToolsHotbar.Update();
+			CheatSheet.instance.paintToolsUI.Update();
+			CheatSheet.instance.quickTeleportHotbar.Update();
+			CheatSheet.instance.quickClearHotbar.Update();
+			CheatSheet.instance.npcButchererHotbar.Update();
 			ConfigurationTool.configurationWindow.Update();
 			//BossDowner.bossDownerWindow.Update();
-			//((CheatSheet)mod).eventManagerHotbar.Update();
+			//CheatSheet.instance.eventManagerHotbar.Update();
 
-			((CheatSheet)mod).hotbar.Draw(spriteBatch);
-			((CheatSheet)mod).paintToolsHotbar.Draw(spriteBatch);
-			((CheatSheet)mod).quickTeleportHotbar.Draw(spriteBatch);
-			((CheatSheet)mod).quickClearHotbar.Draw(spriteBatch);
-			((CheatSheet)mod).npcButchererHotbar.Draw(spriteBatch);
+			CheatSheet.instance.hotbar.Draw(spriteBatch);
+			CheatSheet.instance.paintToolsHotbar.Draw(spriteBatch);
+			CheatSheet.instance.quickTeleportHotbar.Draw(spriteBatch);
+			CheatSheet.instance.quickClearHotbar.Draw(spriteBatch);
+			CheatSheet.instance.npcButchererHotbar.Draw(spriteBatch);
 			ConfigurationTool.configurationWindow.Draw(spriteBatch);
 			//BossDowner.bossDownerWindow.Draw(spriteBatch);
-			//((CheatSheet)mod).eventManagerHotbar.Draw(spriteBatch);
+			//CheatSheet.instance.eventManagerHotbar.Draw(spriteBatch);
 
 			spriteBatch.End();
 			spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, null, null, null, null, Main.UIScaleMatrix);
@@ -83,8 +83,8 @@ namespace CheatSheet
 
 		public void DrawUpdatePaintTools(SpriteBatch spriteBatch)
 		{
-			((CheatSheet)mod).paintToolsHotbar.UpdateGameScale();
-			((CheatSheet)mod).paintToolsHotbar.DrawGameScale(spriteBatch);
+			CheatSheet.instance.paintToolsHotbar.UpdateGameScale();
+			CheatSheet.instance.paintToolsHotbar.DrawGameScale(spriteBatch);
 		}
 
 		internal void DrawUpdateExtraAccessories(SpriteBatch spriteBatch)
