@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Xna.Framework.Input;
 using Terraria;
 using Terraria.GameInput;
 using Terraria.ID;
@@ -195,10 +196,11 @@ namespace CheatSheet.Menus
 				}
 				needsUpdate = false;
 			}
+			var mouseState = Mouse.GetState();
 			UIView.MousePrevLeftButton = UIView.MouseLeftButton;
-			UIView.MouseLeftButton = Main.mouseLeft;
+			UIView.MouseLeftButton = mouseState.LeftButton==ButtonState.Pressed;
 			UIView.MousePrevRightButton = UIView.MouseRightButton;
-			UIView.MouseRightButton = Main.mouseRight;
+			UIView.MouseRightButton = mouseState.RightButton==ButtonState.Pressed;
 			UIView.ScrollAmount = PlayerInput.ScrollWheelDeltaForUI;
 			//UIView.ScrollAmount = (Main.mouseState.ScrollWheelValue - Main.oldMouseState.ScrollWheelValue) / 2;
 			//UIView.HoverItem = UIView.EmptyItem;
