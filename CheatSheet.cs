@@ -94,9 +94,12 @@ namespace CheatSheet
 			itemBrowser = null;
 			npcBrowser = null;
 			recipeBrowser = null;
-			hotbar.buttonView.RemoveAllChildren();
-			hotbar.buttonView = null;
-			hotbar = null;
+			if (hotbar != null)
+			{
+				hotbar.buttonView?.RemoveAllChildren();
+				hotbar.buttonView = null;
+				hotbar = null;
+			}
 			instance = null;
 			ToggleCheatSheetHotbarHotKey = null;
 			RecipeBrowserWindow.recipeView = null;
