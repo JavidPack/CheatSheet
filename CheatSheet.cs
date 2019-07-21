@@ -116,8 +116,14 @@ namespace CheatSheet
 		}
 
 		internal static string CSText(string category, string key)
-		{
-			return translations[$"Mods.CheatSheet.{category}.{key}"].GetTranslation(Language.ActiveCulture);
+		{	
+			category = category != null ? category : String.Empty;
+			key = key != null ? key : String.Empty; 
+
+			string returnTrans = translations[$"Mods.CheatSheet.{category}.{key}"].GetTranslation(Language.ActiveCulture); 
+			
+			return returnTrans != null ? returnTrans : String.Empty;
+			
 			// This isn't good until after load....can revert after fixing static initializers for string[]
 			// return Language.GetTextValue($"Mods.CheatSheet.{category}.{key}");
 		}
