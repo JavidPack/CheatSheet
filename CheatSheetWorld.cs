@@ -15,7 +15,7 @@ namespace CheatSheet
 			{
 				try
 				{
-					CheatSheet.instance.hotbar.bCycleExtraAccessorySlots.Tooltip = CSText("ExtraAccessorySlots") + Main.LocalPlayer.GetModPlayer<CheatSheetPlayer>(mod).numberExtraAccessoriesEnabled;
+					CheatSheet.instance.hotbar.bCycleExtraAccessorySlots.Tooltip = CSText("ExtraAccessorySlots") + Main.LocalPlayer.GetModPlayer<CheatSheetPlayer>().numberExtraAccessoriesEnabled;
 					CheatSheet.instance.paintToolsHotbar.UndoHistory.Clear();
 					CheatSheet.instance.paintToolsHotbar.UpdateUndoTooltip();
 				}

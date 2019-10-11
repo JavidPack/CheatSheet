@@ -134,7 +134,8 @@ namespace CheatSheet.Menus
 
 				uIImage2.Position = position;
 				uIImage2.Tag = j;
-				uIImage2.onLeftClick += new EventHandler(this.button_onLeftClick);
+				uIImage2.onLeftClick += (s, e) => buttonClick(s, e, true);
+				uIImage2.onRightClick += (s, e) => buttonClick(s, e, false);
 				uIImage2.ForegroundColor = ItemBrowser.buttonColor;
 				if (j == 0)
 				{
@@ -227,19 +228,19 @@ namespace CheatSheet.Menus
 			//base.Visible = false;
 		}
 
-		private void button_onLeftClick(object sender, EventArgs e)
+		private void buttonClick(object sender, EventArgs e, bool left)
 		{
 			UIImage uIImage = (UIImage)sender;
 			int num = (int)uIImage.Tag;
 			if (num == (int)ItemBrowserCategories.ModItems)
 			{
-				string[] mods = ModLoader.GetLoadedMods();
+				string[] mods = ModLoader.Mods.Select(m => m.Name).ToArray();
+				lastModNameNumber = left ? (lastModNameNumber + 1) % mods.Length : (mods.Length + lastModNameNumber - 1) % mods.Length;
 				string currentMod = mods[lastModNameNumber];
-				lastModNameNumber = (lastModNameNumber + 1) % mods.Length;
 				if (currentMod == "ModLoader")
 				{
+					lastModNameNumber = left ? (lastModNameNumber + 1) % mods.Length : (mods.Length + lastModNameNumber - 1) % mods.Length;
 					currentMod = mods[lastModNameNumber];
-					lastModNameNumber = (lastModNameNumber + 1) % mods.Length;
 				}
 				this.itemView.selectedCategory = ItemBrowser.categories[0].Where(x => this.itemView.allItemsSlots[x].item.modItem != null && this.itemView.allItemsSlots[x].item.modItem.mod.Name == currentMod).ToArray();
 				this.itemView.activeSlots = this.itemView.selectedCategory;

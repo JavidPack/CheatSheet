@@ -215,13 +215,15 @@ namespace CheatSheet.Menus
 			this.bTogglePaintTools.onLeftClick += new EventHandler(this.bTogglePaintTools_onLeftClick);
 			this.bCycleExtraAccessorySlots.onLeftClick += (s, e) =>
 			{
-				Main.LocalPlayer.GetModPlayer<CheatSheetPlayer>(mod).numberExtraAccessoriesEnabled = (Main.LocalPlayer.GetModPlayer<CheatSheetPlayer>(mod).numberExtraAccessoriesEnabled + 1) % (CheatSheetPlayer.MaxExtraAccessories + 1);
-				bCycleExtraAccessorySlots.Tooltip = CSText("ExtraAccessorySlots") + ": " + Main.LocalPlayer.GetModPlayer<CheatSheetPlayer>(mod).numberExtraAccessoriesEnabled;
+				CheatSheetPlayer cheatSheetPlayer = Main.LocalPlayer.GetModPlayer<CheatSheetPlayer>();
+				cheatSheetPlayer.numberExtraAccessoriesEnabled = (cheatSheetPlayer.numberExtraAccessoriesEnabled + 1) % (CheatSheetPlayer.MaxExtraAccessories + 1);
+				bCycleExtraAccessorySlots.Tooltip = CSText("ExtraAccessorySlots") + ": " + cheatSheetPlayer.numberExtraAccessoriesEnabled;
 			};
 			this.bCycleExtraAccessorySlots.onRightClick += (s, e) =>
 			{
-				Main.LocalPlayer.GetModPlayer<CheatSheetPlayer>(mod).numberExtraAccessoriesEnabled = (Main.LocalPlayer.GetModPlayer<CheatSheetPlayer>(mod).numberExtraAccessoriesEnabled == 0) ? 0 : (Main.LocalPlayer.GetModPlayer<CheatSheetPlayer>(mod).numberExtraAccessoriesEnabled - 1) % (CheatSheetPlayer.MaxExtraAccessories + 1);
-				bCycleExtraAccessorySlots.Tooltip = CSText("ExtraAccessorySlots") + ": " + Main.LocalPlayer.GetModPlayer<CheatSheetPlayer>(mod).numberExtraAccessoriesEnabled;
+				CheatSheetPlayer cheatSheetPlayer = Main.LocalPlayer.GetModPlayer<CheatSheetPlayer>();
+				cheatSheetPlayer.numberExtraAccessoriesEnabled = cheatSheetPlayer.numberExtraAccessoriesEnabled == 0 ? 0 : (cheatSheetPlayer.numberExtraAccessoriesEnabled - 1) % (CheatSheetPlayer.MaxExtraAccessories + 1);
+				bCycleExtraAccessorySlots.Tooltip = CSText("ExtraAccessorySlots") + ": " + cheatSheetPlayer.numberExtraAccessoriesEnabled;
 			};
 			this.bVacuum.onLeftClick += new EventHandler(this.bVacuum_onLeftClick);
 			this.bToggleNPCButcherer.onLeftClick += new EventHandler(this.bButcher_onLeftClick);

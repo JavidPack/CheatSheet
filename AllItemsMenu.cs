@@ -94,7 +94,7 @@ namespace CheatSheet
 				Point value = new Point(Main.mouseX, Main.mouseY);
 				Rectangle r = new Rectangle(0, 0, (int)((float)Main.inventoryBackTexture.Width * Main.inventoryScale), (int)((float)Main.inventoryBackTexture.Height * Main.inventoryScale));
 
-				CheatSheetPlayer csp = Main.LocalPlayer.GetModPlayer<CheatSheetPlayer>(mod);
+				CheatSheetPlayer csp = Main.LocalPlayer.GetModPlayer<CheatSheetPlayer>();
 				for (int i = 0; i < csp.numberExtraAccessoriesEnabled; i++)
 				{
 					Main.inventoryScale = 0.85f;

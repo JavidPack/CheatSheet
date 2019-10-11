@@ -75,6 +75,10 @@ namespace CheatSheet
 
 		public override void Unload()
 		{
+			ButtonClicked.Clear();
+			ButtonTexture.Clear();
+			ButtonTooltip.Clear();
+
 			PaintToolsSlot.CurrentSelect = null;
 			AllItemsMenu.singleSlotArray = null;
 			UI.UICheckbox.checkboxTexture = null;
@@ -260,7 +264,8 @@ namespace CheatSheet
 					hotbar = new Hotbar(this);
 					//hotbar.Position = new Microsoft.Xna.Framework.Vector2(120, 180);
 					hotbar.Visible = true;
-					hotbar.Hide();
+					if(!GetConfig<CheatSheetClientConfig>().HotbarShownByDefault)
+						hotbar.Hide();
 				}
 				catch (Exception e)
 				{
@@ -619,7 +624,7 @@ namespace CheatSheet
 			try
 			{
 				ReportData data = new ReportData(e);
-				data.additionaldata = "Loaded Mods: " + string.Join(", ", ModLoader.GetLoadedMods());
+				data.additionaldata = "Loaded Mods: " + string.Join(", ", ModLoader.Mods.Select(m => m.Name).ToArray());
 				string jsonpayload = JsonConvert.SerializeObject(data);
 				using (WebClient client = new WebClient())
 				{

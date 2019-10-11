@@ -54,29 +54,12 @@ namespace CheatSheet.UI
 		private bool drawCarrot = false;
 		private UILabel label = new UILabel();
 		private static int padding = 4;
-		private string text = "";
 
-		public string Text
-		{
-			get { return text; }
-			set { text = value; }
-		}
+		public string Text { get; set; } = "";
 
-		private int maxCharacters = 20;
+		public int MaxCharacters { get; set; } = 20;
 
-		public int MaxCharacters
-		{
-			get { return maxCharacters; }
-			set { maxCharacters = value; }
-		}
-
-		private bool passwordBox = false;
-
-		public bool PasswordBox
-		{
-			get { return passwordBox; }
-			set { passwordBox = value; }
-		}
+		public bool PasswordBox { get; set; } = false;
 
 		private string passwordString
 		{
@@ -204,7 +187,7 @@ namespace CheatSheet.UI
 			label.Position = new Vector2(padding, 0);
 
 			Vector2 size = label.font.MeasureString(Text + "|") * label.Scale;
-			if (passwordBox)
+			if (PasswordBox)
 			{
 				size = label.font.MeasureString(passwordString + "|") * label.Scale;
 			}
@@ -232,7 +215,7 @@ namespace CheatSheet.UI
 		public override void Update()
 		{
 			base.Update();
-			if (!IsMouseInside() && MouseLeftButton)
+			if (!IsMouseInside() && (MouseLeftButton || MouseRightButton))
 			{
 				Unfocus();
 			}

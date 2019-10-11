@@ -174,65 +174,65 @@ namespace CheatSheet.Menus
 
 		private static void HandleHellTeleport(Player player, bool syncData = false)
 		{
-			bool flag1 = false;
+			bool teleportDestinationFound = false;
 			bool flag2;
-			int num1 = 0;
+			int findTeleportDestinationAttempts = 0;
 			int num2 = 0;
 			int num3 = 0;
 			int Width = player.width;
 
-			Vector2 Position = new Vector2((float)num2, (float)num3) * 16f + new Vector2((float)(-(double)Width / 2.0 + 8.0), -(float)player.height);
-			while (!flag1 && num1 < 1000)
+			Vector2 teleportPosition = new Vector2((float)num2, (float)num3) * 16f + new Vector2((float)(-(double)Width / 2.0 + 8.0), -(float)player.height);
+			while (!teleportDestinationFound && findTeleportDestinationAttempts < 1000)
 			{
-				++num1;
-				int index1 = Main.rand.Next(Main.maxTilesX - 200);
-				int index2 = Main.rand.Next(Main.maxTilesY - 200, Main.maxTilesY);
-				Position = new Vector2((float)index1, (float)index2) * 16f + new Vector2((float)(-(double)Width / 2.0 + 8.0), -(float)player.height);
-				if (!Collision.SolidCollision(Position, Width, player.height))
+				++findTeleportDestinationAttempts;
+				int tileX = Main.rand.Next(Main.maxTilesX - 200);
+				int tileY = Main.rand.Next(Main.maxTilesY - 200, Main.maxTilesY);
+				teleportPosition = new Vector2(tileX, tileY) * 16f + new Vector2((float)(-Width / 2.0 + 8.0), -player.height);
+				if (!Collision.SolidCollision(teleportPosition, Width, player.height))
 				{
-					if (Main.tile[index1, index2] == null)
-						Main.tile[index1, index2] = new Tile();
-					if (((int)Main.tile[index1, index2].wall != 87 || (double)index2 <= Main.worldSurface || NPC.downedPlantBoss) && (!Main.wallDungeon[(int)Main.tile[index1, index2].wall] || (double)index2 <= Main.worldSurface || NPC.downedBoss3))
+					if (Main.tile[tileX, tileY] == null)
+						Main.tile[tileX, tileY] = new Tile();
+					if ((Main.tile[tileX, tileY].wall != 87 || tileY <= Main.worldSurface || NPC.downedPlantBoss) && (!Main.wallDungeon[Main.tile[tileX, tileY].wall] || tileY <= Main.worldSurface || NPC.downedBoss3))
 					{
 						int num4 = 0;
-						while (num4 < 100)
+						while (num4 < 100 && WorldGen.InWorld(tileX, tileY + num4, 20))
 						{
-							if (Main.tile[index1, index2 + num4] == null)
-								Main.tile[index1, index2 + num4] = new Tile();
-							Tile tile = Main.tile[index1, index2 + num4];
-							Position = new Vector2((float)index1, (float)(index2 + num4)) * 16f + new Vector2((float)(-(double)Width / 2.0 + 8.0), -(float)player.height);
-							Vector4 vector4 = Collision.SlopeCollision(Position, player.velocity, Width, player.height, player.gravDir, false);
-							flag2 = !Collision.SolidCollision(Position, Width, player.height);
+							if (Main.tile[tileX, tileY + num4] == null)
+								Main.tile[tileX, tileY + num4] = new Tile();
+							Tile tile = Main.tile[tileX, tileY + num4];
+							teleportPosition = new Vector2(tileX, tileY + num4) * 16f + new Vector2((float)(-(double)Width / 2.0 + 8.0), -player.height);
+							Vector4 vector4 = Collision.SlopeCollision(teleportPosition, player.velocity, Width, player.height, player.gravDir, false);
+							flag2 = !Collision.SolidCollision(teleportPosition, Width, player.height);
 							if ((double)vector4.Z == (double)player.velocity.X)
 							{
 								double num5 = (double)player.velocity.Y;
 							}
 							if (flag2)
 								++num4;
-							else if (!tile.active() || tile.inActive() || !Main.tileSolid[(int)tile.type])
+							else if (!tile.active() || tile.inActive() || !Main.tileSolid[tile.type])
 								++num4;
 							else
 								break;
 						}
-						if (!Collision.LavaCollision(Position, Width, player.height) && (double)Collision.HurtTiles(Position, player.velocity, Width, player.height, false).Y <= 0.0)
+						if (!Collision.LavaCollision(teleportPosition, Width, player.height) && Collision.HurtTiles(teleportPosition, player.velocity, Width, player.height, false).Y <= 0.0)
 						{
-							Collision.SlopeCollision(Position, player.velocity, Width, player.height, player.gravDir, false);
-							if (Collision.SolidCollision(Position, Width, player.height) && num4 < 99)
+							Collision.SlopeCollision(teleportPosition, player.velocity, Width, player.height, player.gravDir, false);
+							if (Collision.SolidCollision(teleportPosition, Width, player.height) && num4 < 99)
 							{
 								Vector2 Velocity1 = Vector2.UnitX * 16f;
-								if (!(Collision.TileCollision(Position - Velocity1, Velocity1, player.width, player.height, false, false, (int)player.gravDir) != Velocity1))
+								if (!(Collision.TileCollision(teleportPosition - Velocity1, Velocity1, player.width, player.height, false, false, (int)player.gravDir) != Velocity1))
 								{
 									Vector2 Velocity2 = -Vector2.UnitX * 16f;
-									if (!(Collision.TileCollision(Position - Velocity2, Velocity2, player.width, player.height, false, false, (int)player.gravDir) != Velocity2))
+									if (!(Collision.TileCollision(teleportPosition - Velocity2, Velocity2, player.width, player.height, false, false, (int)player.gravDir) != Velocity2))
 									{
 										Vector2 Velocity3 = Vector2.UnitY * 16f;
-										if (!(Collision.TileCollision(Position - Velocity3, Velocity3, player.width, player.height, false, false, (int)player.gravDir) != Velocity3))
+										if (!(Collision.TileCollision(teleportPosition - Velocity3, Velocity3, player.width, player.height, false, false, (int)player.gravDir) != Velocity3))
 										{
 											Vector2 Velocity4 = -Vector2.UnitY * 16f;
-											if (!(Collision.TileCollision(Position - Velocity4, Velocity4, player.width, player.height, false, false, (int)player.gravDir) != Velocity4))
+											if (!(Collision.TileCollision(teleportPosition - Velocity4, Velocity4, player.width, player.height, false, false, (int)player.gravDir) != Velocity4))
 											{
-												flag1 = true;
-												int num5 = index2 + num4;
+												teleportDestinationFound = true;
+												int num5 = tileY + num4;
 												break;
 											}
 										}
@@ -244,10 +244,10 @@ namespace CheatSheet.Menus
 				}
 			}
 
-			if (!flag1)
+			if (!teleportDestinationFound)
 				return;
 
-			RunTeleport(player, Position, syncData, false);
+			RunTeleport(player, teleportPosition, syncData, false);
 		}
 
 		private static void HandleTempleTeleport(Player player, bool syncData = false)
