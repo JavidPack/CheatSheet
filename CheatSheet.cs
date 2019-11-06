@@ -42,6 +42,28 @@ namespace CheatSheet
 		internal NPCButchererHotbar npcButchererHotbar;
 		internal EventManagerHotbar eventManagerHotbar;
 
+		internal Dictionary<string, bool> herosPermissions = new Dictionary<string, bool>();
+		internal const string ModifySpawnRateMultiplier_Permission = "ModifySpawnRateMultiplier";
+		internal const string ModifySpawnRateMultiplier_Display = "Modify Spawn Rate Multiplier";
+		internal const string PaintTools_Permission = "PaintTools";
+		internal const string PaintTools_Display = "Paint Tools";
+		internal const string RecipeBrowser_Permission = "RecipeBrowser";
+		internal const string RecipeBrowser_Display = "Recipe Browser";
+		internal const string MinionBooster_Permission = "MinionBooster";
+		internal const string MinionBooster_Display = "Minion Booster";
+		internal const string ClearItemNPCProjectile_Permission = "ClearItemNPCProjectile";
+		internal const string ClearItemNPCProjectile_Display = "Clear Item NPC Projectile";
+		internal const string ExtraAccessories_Permission = "ExtraAccessories";
+		internal const string ExtraAccessories_Display = "Extra Accessories";
+		internal const string Vacuum_Permission = "Vacuum";
+		internal const string Vacuum_Display = "Vacuum";
+		internal const string NPCButcher_Permission = "NPCButcher";
+		internal const string NPCButcher_Display = "NPC Butcher";
+		internal const string CheatSheetExtensions_Permission = "CheatSheetExtensions";
+		internal const string CheatSheetExtensions_Display = "Cheat Sheet Extensions";
+		internal const string QuickTeleport_Permission = "QuickTeleport";
+		internal const string QuickTeleport_Display = "Quick Teleport";
+
 		public CheatSheet()
 		{
 		}
@@ -51,7 +73,7 @@ namespace CheatSheet
 		public override void Load()
 		{
 			// Since we are using hooks not in older versions, and since ItemID.Count changed, we need to do this.
-			if (ModLoader.version < new Version(0, 10, 1, 3))
+			if (ModLoader.version < new Version(0, 11, 5))
 			{
 				throw new Exception("\nThis mod uses functionality only present in the latest tModLoader. Please update tModLoader to use this mod\n\n");
 			}
@@ -71,6 +93,18 @@ namespace CheatSheet
 			FieldInfo translationsField = typeof(Mod).GetField("translations", BindingFlags.Instance | BindingFlags.NonPublic);
 			translations = (Dictionary<string, ModTranslation>)translationsField.GetValue(this);
 			//LoadTranslations();
+
+			// set all to true on load
+			herosPermissions[PaintTools_Permission] = true;
+			herosPermissions[ModifySpawnRateMultiplier_Permission] = true;
+			herosPermissions[RecipeBrowser_Permission] = true;
+			herosPermissions[MinionBooster_Permission] = true;
+			herosPermissions[ClearItemNPCProjectile_Permission] = true;
+			herosPermissions[ExtraAccessories_Permission] = true;
+			herosPermissions[Vacuum_Permission] = true;
+			herosPermissions[NPCButcher_Permission] = true;
+			herosPermissions[CheatSheetExtensions_Permission] = true;
+			herosPermissions[QuickTeleport_Permission] = true;
 		}
 
 		public override void Unload()
@@ -179,7 +213,7 @@ namespace CheatSheet
 			}
 			catch (Exception e)
 			{
-				ErrorLogger.Log("CheatSheet->HEROsMod PostSetupContent Error: " + e.StackTrace + e.Message);
+				Logger.Error("CheatSheet->HEROsMod PostSetupContent Error: " + e.StackTrace + e.Message);
 			}
 		}
 
@@ -190,10 +224,11 @@ namespace CheatSheet
 				// Special string
 				"AddPermission",
 				// Permission Name
-				"ModifySpawnRateMultiplier",
+				ModifySpawnRateMultiplier_Permission,
 				// Permission Display Name
-				"Modify Spawn Rate Multiplier"
+				ModifySpawnRateMultiplier_Display
 			);
+
 			// Add Buttons only to non-servers (otherwise the server will crash, since textures aren't loaded on servers)
 			if (!Main.dedServ)
 			{
@@ -201,7 +236,7 @@ namespace CheatSheet
 					// Special string
 					"AddSimpleButton",
 					// Name of Permission governing the availability of the button/tool
-					"ModifySpawnRateMultiplier",
+					ModifySpawnRateMultiplier_Permission,
 					// Texture of the button. 38x38 is recommended for HERO's Mod. Also, a white outline on the icon similar to the other icons will look good.
 					Main.itemTexture[ItemID.WaterCandle],
 					// A method that will be called when the button is clicked
@@ -212,14 +247,37 @@ namespace CheatSheet
 					(Func<string>)SpawnRateMultiplier.HEROsTooltip
 				);
 			}
+
+			// Other non-tutorial permissions.
+			// For simplicity, not doing buttons in Heros, just permissions for most tools.
+			// Could implement most without sub-menus as buttons if I have time. Right and left click support in Heros desireable.
+			var permissions = new List<ValueTuple<string, string>>() {
+				(PaintTools_Permission, PaintTools_Display),
+				(RecipeBrowser_Permission, RecipeBrowser_Display),
+				(MinionBooster_Permission,MinionBooster_Display),
+				(ClearItemNPCProjectile_Permission,ClearItemNPCProjectile_Display),
+				(ExtraAccessories_Permission,ExtraAccessories_Display),
+				(Vacuum_Permission,Vacuum_Display),
+				(NPCButcher_Permission,NPCButcher_Display),
+				(CheatSheetExtensions_Permission,CheatSheetExtensions_Display),
+				(QuickTeleport_Permission,QuickTeleport_Display),
+			};
+			foreach (var permission in permissions) {
+				herosMod.Call("AddPermission", permission.Item1, permission.Item2, (Action<bool>)((hasPermission) => HEROsPermissionChanged(permission.Item1, hasPermission)));
+			}
+		}
+
+		public void HEROsPermissionChanged(string permission, bool hasPermission) {
+			herosPermissions[permission] = hasPermission;
+			// This is called a bunch at once, a little wasteful.
+			CheatSheet.instance.hotbar.ChangedConfiguration();
 		}
 
 		public override void AddRecipeGroups()
 		{
 			if (!Main.dedServ)
 			{
-				try
-				{
+				try {
 					itemBrowser = new ItemBrowser(this);
 					itemBrowser.SetDefaultPosition(new Vector2(80, 300));
 					itemBrowser.Visible = false;
@@ -264,12 +322,14 @@ namespace CheatSheet
 					hotbar = new Hotbar(this);
 					//hotbar.Position = new Microsoft.Xna.Framework.Vector2(120, 180);
 					hotbar.Visible = true;
-					if(!GetConfig<CheatSheetClientConfig>().HotbarShownByDefault)
+					if (!ModContent.GetInstance<CheatSheetClientConfig>().HotbarShownByDefault)
 						hotbar.Hide();
+					else
+						hotbar.Show();
 				}
 				catch (Exception e)
 				{
-					ErrorLogger.Log(e.ToString());
+					Logger.Error(e.ToString());
 				}
 			}
 		}
@@ -319,6 +379,9 @@ namespace CheatSheet
 				if (Main.netMode == 0)
 				{
 					SpawnRateMultiplier.HasPermission = true;
+					foreach (var key in herosPermissions.Keys.ToList()) {
+						herosPermissions[key] = true;
+					}
 				}
 				CheatSheet.instance.hotbar.ChangedConfiguration();
 			}
@@ -329,8 +392,7 @@ namespace CheatSheet
 					"CheatSheet: All Cheat Sheet",
 					delegate
 					{
-						AllItemsMenu menu = (AllItemsMenu)this.GetGlobalItem("AllItemsMenu");
-						menu.DrawUpdateAll(Main.spriteBatch);
+						GetGlobalItem<AllItemsMenu>().DrawUpdateAll(Main.spriteBatch);
 						return true;
 					},
 					InterfaceScaleType.UI)
@@ -340,8 +402,7 @@ namespace CheatSheet
 					"CheatSheet: Paint Tools",
 					delegate
 					{
-						AllItemsMenu menu = (AllItemsMenu)this.GetGlobalItem("AllItemsMenu");
-						menu.DrawUpdatePaintTools(Main.spriteBatch);
+						GetGlobalItem<AllItemsMenu>().DrawUpdatePaintTools(Main.spriteBatch);
 						return true;
 					},
 					InterfaceScaleType.Game)
@@ -355,8 +416,7 @@ namespace CheatSheet
 					"CheatSheet: Extra Accessories",
 					delegate
 					{
-						AllItemsMenu menu = (AllItemsMenu)this.GetGlobalItem("AllItemsMenu");
-						menu.DrawUpdateExtraAccessories(Main.spriteBatch);
+						GetGlobalItem<AllItemsMenu>().DrawUpdateExtraAccessories(Main.spriteBatch);
 						return true;
 					},
 					InterfaceScaleType.UI)
@@ -404,12 +464,23 @@ namespace CheatSheet
 
 		public override object Call(params object[] args)
 		{
-			string message = args[0] as string;
-			if (message == "AddButton_Test")
-			{
-				ErrorLogger.Log("Button Adding...");
-				RegisterButton(args[1] as Texture2D, args[2] as Action, args[3] as Func<string>);
-				ErrorLogger.Log("...Button Added");
+			try {
+				string message = args[0] as string;
+				if (message == "AddButton_Test")
+				{
+					Logger.Info("Button Adding...");
+					RegisterButton(args[1] as Texture2D, args[2] as Action, args[3] as Func<string>);
+					Logger.Info("...Button Added");
+				}
+				else if (message == "HideHotbar") {
+					hotbar.Hide();
+				}
+				else {
+					Logger.Error("Call Error: Unknown Message: " + message);
+				}
+			}
+			catch (Exception e) {
+				Logger.Error("Call Error: " + e.StackTrace + e.Message);
 			}
 			return null;
 		}
@@ -506,7 +577,7 @@ namespace CheatSheet
 				//	NPCSlot.HandleFilterRequest(reader.ReadInt32(), reader.ReadInt32(), true);
 				//	break;
 				default:
-					ErrorLogger.Log("CheatSheet: Unknown Message type: " + msgType);
+					Logger.Warn("Unknown Message type: " + msgType);
 					break;
 			}
 		}
@@ -620,7 +691,7 @@ namespace CheatSheet
 
 		internal static void ReportException(Exception e)
 		{
-			ErrorLogger.Log("CheatSheet: " + e.Message + e.StackTrace);
+			CheatSheet.instance.Logger.Error("CheatSheet: " + e.Message + e.StackTrace);
 			try
 			{
 				ReportData data = new ReportData(e);

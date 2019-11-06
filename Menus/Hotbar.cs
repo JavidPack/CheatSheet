@@ -740,7 +740,7 @@ namespace CheatSheet.Menus
 			}
 			catch (Exception e)
 			{
-				ErrorLogger.Log(e.ToString());
+				CheatSheet.instance.Logger.Error(e.ToString());
 			}
 		}
 
@@ -852,19 +852,29 @@ namespace CheatSheet.Menus
 		public void ChangedConfiguration()
 		{
 			DisableAllWindows();
-			bToggleItemBrowser.Visible = ConfigurationLoader.personalConfiguration.ItemBrowser;
-			bToggleNPCBrowser.Visible = ConfigurationLoader.personalConfiguration.NPCBrowser;
-			bToggleRecipeBrowser.Visible = ConfigurationLoader.personalConfiguration.RecipeBrowser;
-			MinionSlotBooster.button.Visible = ConfigurationLoader.personalConfiguration.MinionBooster;
-			bToggleClearMenu.Visible = ConfigurationLoader.personalConfiguration.ClearMenu;
-			bTogglePaintTools.Visible = ConfigurationLoader.personalConfiguration.PaintTools;
-			bToggleExtendedCheat.Visible = ConfigurationLoader.personalConfiguration.ModExtensions;
-			bCycleExtraAccessorySlots.Visible = ConfigurationLoader.personalConfiguration.ExtraAccessorySlots;
-			bVacuum.Visible = ConfigurationLoader.personalConfiguration.Vacuum;
-			bToggleNPCButcherer.Visible = ConfigurationLoader.personalConfiguration.Butcher;
-			bToggleQuickTeleport.Visible = ConfigurationLoader.personalConfiguration.Waypoints;
-			LightHack.button.Visible = ConfigurationLoader.personalConfiguration.LightHack;
-			GodMode.button.Visible = ConfigurationLoader.personalConfiguration.GodMode;
+			Mod herosMod = ModLoader.GetMod("HEROsMod");
+			bool heros = ModLoader.GetMod("HEROsMod") != null;
+			bool recentHeros = herosMod != null && herosMod.Version >= new Version(0, 2, 2);
+			bool itemBrowserPermissions = true;
+			if (Main.netMode == 1 && recentHeros && herosMod.Call("HasPermission", Main.myPlayer, "ItemBrowser") is bool resultA)
+				itemBrowserPermissions = resultA;
+			bool SpawnNPCsPermissions = true;
+			if (Main.netMode == 1 && recentHeros && herosMod.Call("HasPermission", Main.myPlayer, "SpawnNPCs") is bool resultB)
+				SpawnNPCsPermissions = resultB;
+
+			bToggleItemBrowser.Visible = ConfigurationLoader.personalConfiguration.ItemBrowser && itemBrowserPermissions;
+			bToggleNPCBrowser.Visible = ConfigurationLoader.personalConfiguration.NPCBrowser && SpawnNPCsPermissions;
+			bToggleRecipeBrowser.Visible = ConfigurationLoader.personalConfiguration.RecipeBrowser && CheatSheet.instance.herosPermissions[CheatSheet.RecipeBrowser_Permission];
+			MinionSlotBooster.button.Visible = ConfigurationLoader.personalConfiguration.MinionBooster && CheatSheet.instance.herosPermissions[CheatSheet.MinionBooster_Permission];
+			bToggleClearMenu.Visible = ConfigurationLoader.personalConfiguration.ClearMenu && CheatSheet.instance.herosPermissions[CheatSheet.ClearItemNPCProjectile_Permission];
+			bTogglePaintTools.Visible = ConfigurationLoader.personalConfiguration.PaintTools && CheatSheet.instance.herosPermissions[CheatSheet.PaintTools_Permission];
+			bToggleExtendedCheat.Visible = ConfigurationLoader.personalConfiguration.ModExtensions && CheatSheet.instance.herosPermissions[CheatSheet.CheatSheetExtensions_Permission];
+			bCycleExtraAccessorySlots.Visible = ConfigurationLoader.personalConfiguration.ExtraAccessorySlots && CheatSheet.instance.herosPermissions[CheatSheet.ExtraAccessories_Permission];
+			bVacuum.Visible = ConfigurationLoader.personalConfiguration.Vacuum && CheatSheet.instance.herosPermissions[CheatSheet.Vacuum_Permission];
+			bToggleNPCButcherer.Visible = ConfigurationLoader.personalConfiguration.Butcher && CheatSheet.instance.herosPermissions[CheatSheet.NPCButcher_Permission];
+			bToggleQuickTeleport.Visible = ConfigurationLoader.personalConfiguration.Waypoints && CheatSheet.instance.herosPermissions[CheatSheet.QuickTeleport_Permission];
+			LightHack.button.Visible = ConfigurationLoader.personalConfiguration.LightHack && !heros;
+			GodMode.button.Visible = ConfigurationLoader.personalConfiguration.GodMode && !heros;
 			SpawnRateMultiplier.button.Visible = ConfigurationLoader.personalConfiguration.SpawnRate && SpawnRateMultiplier.HasPermission;
 			//BossDowner.button.Visible = ConfigurationLoader.configuration.BossDowner;
 			//bToggleEventManager.Visible = ConfigurationLoader.configuration.EventManager;
@@ -1002,6 +1012,11 @@ namespace CheatSheet.Menus
 			//{
 			//	mod.eventManagerHotbar.Show();
 			//}
+
+			Mod herosMod = ModLoader.GetMod("HEROsMod");
+			if (herosMod != null) {
+				herosMod.Call("HideHotbar");
+			}
 		}
 	}
 }

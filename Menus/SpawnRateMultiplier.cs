@@ -79,6 +79,8 @@ namespace CheatSheet.Menus
 		// Action taken by sever receiving button
 		internal static void HandleSetSpawnRate(BinaryReader reader, int whoAmI)
 		{
+			// TODO: Don't just trust UI? Lazy.
+
 			int newSetting = reader.ReadInt32();
 			ChangeSettingLogic(newSetting);
 

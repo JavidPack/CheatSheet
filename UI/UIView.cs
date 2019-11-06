@@ -461,6 +461,9 @@ namespace CheatSheet.UI
 
 		protected virtual bool IsMouseInside()
 		{
+			if (MouseX > Main.screenWidth || MouseX < 0 || MouseY > Main.screenHeight || MouseY < 0)
+				return false;
+
 			Vector2 vector = this.DrawPosition - this.Origin;
 			return (float)UIView.MouseX >= vector.X && (float)UIView.MouseX <= vector.X + this.Width && (float)UIView.MouseY >= vector.Y && (float)UIView.MouseY <= vector.Y + this.Height;
 		}
