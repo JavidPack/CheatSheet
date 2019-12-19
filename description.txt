@@ -3,6 +3,8 @@ Press K (or whatever hotkey you've assigned to "Toggle Cheat Sheet Hotbar") or c
 
 With the config, you can set tools to only be available to the host in multiplayer if you wish.
 
+If you are using HEROsMod, you can selectively allow usage of tools in multiplayer. All the tools will be limited by the permissions assigned to your user.
+
 See below for mod details, please note some buttons have a right-click feature as an addition to left-click.
 
 Item Browser:
