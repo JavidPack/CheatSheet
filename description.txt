@@ -1,7 +1,8 @@
 ﻿Cheat Sheet is a tool for developers and those who just want to play around with any vanilla or mod item, recipe, or NPC. There are also tools to "paint" tiles to make building easier and faster.
 Press K (or whatever hotkey you've assigned to "Toggle Cheat Sheet Hotbar") or click the button at the bottom center of your screen to view the Cheat Sheet Hotbar to access all the items. Press/Click again to hide it along with the selected item.
 
-Latest version: 0.2.5.3
+With the config, you can set tools to only be available to the host in multiplayer if you wish.
+
 See below for mod details, please note some buttons have a right-click feature as an addition to left-click.
 
 Item Browser:

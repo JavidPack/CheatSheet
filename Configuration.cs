@@ -31,6 +31,8 @@ namespace CheatSheet
 				{
 					string json = r.ReadToEnd();
 					personalConfiguration = JsonConvert.DeserializeObject<PersonalConfiguration>(json);
+					if(personalConfiguration == null)
+						personalConfiguration = new PersonalConfiguration();
 				}
 			}
 

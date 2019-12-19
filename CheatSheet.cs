@@ -341,6 +341,9 @@ namespace CheatSheet
 		{
 			base.UpdateUI(gameTime);
 
+			if (Main.netMode == 1 && ModContent.GetInstance<CheatSheetServerConfig>().DisableCheatsForNonHostUsers && !IsPlayerLocalServerOwner(Main.LocalPlayer))
+				return;
+
 			if (PaintToolsEx.schematicsToLoad != null && numberOnlineToLoad > 0 && CheatSheet.instance.paintToolsUI.view.childrenToRemove.Count == 0)
 			{
 				PaintToolsEx.LoadSingleSchematic();
@@ -373,6 +376,9 @@ namespace CheatSheet
 
 		public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
 		{
+			if (Main.netMode == 1 && ModContent.GetInstance<CheatSheetServerConfig>().DisableCheatsForNonHostUsers && !IsPlayerLocalServerOwner(Main.LocalPlayer))
+				return;
+
 			if (Main.netMode != lastmode)
 			{
 				lastmode = Main.netMode;
@@ -422,6 +428,17 @@ namespace CheatSheet
 					InterfaceScaleType.UI)
 				);
 			}
+		}
+
+		public static bool IsPlayerLocalServerOwner(Player player) {
+			if(Main.netMode == 1) {
+				return Netplay.Connection.Socket.GetRemoteAddress().IsLocalHost();
+			}
+
+			for (int plr = 0; plr < Main.maxPlayers; plr++)
+				if (Netplay.Clients[plr].State == 10 && Main.player[plr] == player && Netplay.Clients[plr].Socket.GetRemoteAddress().IsLocalHost())
+					return true;
+			return false;
 		}
 
 		//public override void PostDrawInterface(SpriteBatch spriteBatch)
