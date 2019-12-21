@@ -68,8 +68,8 @@ namespace CheatSheet.Menus
 			currentBoost = boosts[currentBoostIndex];
 			if (!Main.dedServ)
 			{
-				button.Tooltip = CSText("MinionSlotBoosterNew") + boostStrings[currentBoostIndex];
-				Main.NewText(CSText("MinionSlotBoosterText") + boostStrings[currentBoostIndex]);
+				button.Tooltip = CSText("MinionSlotBoosterNew") + " " + boostStrings[currentBoostIndex];
+				Main.NewText(CSText("MinionSlotBoosterText") + " " + boostStrings[currentBoostIndex]);
 			}
 		}
 

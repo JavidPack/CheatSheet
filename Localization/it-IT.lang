@@ -17,7 +17,7 @@ Butcherer.ButcherHostileAndFriendlyNPCs=Uccidi gli NPC ostili ed amichevoli
 Butcherer.ButcherFriendlyNPCs=Uccidi gli NPC amichevoli
 Butcherer.ButcherNotification=Gli NPC sono stati uccisi da {0}
 
-Vacuum.VacuumNotification=Gli oggetti a terra sono stati attirati  by {0}
+Vacuum.VacuumNotification=Gli oggetti a terra sono stati attirati by {0}
 
 Teleport.Dungeon=Dungeon
 Teleport.Spawnpoint=Punto di rigenerazione
@@ -29,12 +29,12 @@ QuickClear.ClearDroppedItems=Cancella tutti gli oggetti rilasciati
 QuickClear.ClearProjectiles=Cancella i proiettili 
 QuickClear.ClearBuffs=Cancella i buff
 QuickClear.ClearDebuffs=Cancella i debuff
-QuickClear.ItemClearNotification=Gli item sono stati cancellati da  {0}
+QuickClear.ItemClearNotification=Gli item sono stati cancellati da {0}
 QuickClear.ProjectileClearNotification=I proiettili sono stati cancellati da {0}
 
 SpawnRate.SpawnRateMultiplier=Molriplicatore velocità spawn: 1х
-SpawnRate.SpawnRateMultiplierNew=Moltiplicatore velocità spawn:
-SpawnRate.SpawnRateMultiplierText=Velocità spawn e max spawns ora
+SpawnRate.SpawnRateMultiplierNew=Moltiplicatore velocità spawn: 
+SpawnRate.SpawnRateMultiplierText=Velocità spawn e max spawns ora 
 SpawnRate.SpawnRateNormalValue= il valore normale
 
 LightHack.LightHackDisabled=Light Hack: Disattivata
@@ -46,8 +46,8 @@ GodMode.GodModeDisabled=God Mode Disattivata
 GodMode.GodModeEnabled=God Mode Attivata
 
 MinionSlot.MinionSlotBooster=Slot minion: +0
-MinionSlot.MinionSlotBoosterNew=Slot minion:
-MinionSlot.MinionSlotBoosterText=Slot minion ora a
+MinionSlot.MinionSlotBoosterNew=Slot minion: 
+MinionSlot.MinionSlotBoosterText=Slot minion ora a 
 
 RecipeBrowser.AllRecipes=Tutte le ricette
 RecipeBrowser.CycleModSpecificRecipes=Ricette di una specifica mod

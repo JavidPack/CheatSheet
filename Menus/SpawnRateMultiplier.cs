@@ -62,8 +62,8 @@ namespace CheatSheet.Menus
 			currentMultiplier = multipliers[currentMultiplierIndex];
 			if (!Main.dedServ)
 			{
-				button.Tooltip = CSText("SpawnRateMultiplierNew") + multiplierStrings[currentMultiplierIndex];
-				Main.NewText(CSText("SpawnRateMultiplierText") + multiplierStrings[currentMultiplierIndex] + CSText("SpawnRateNormalValue"));
+				button.Tooltip = CSText("SpawnRateMultiplierNew") + " " + multiplierStrings[currentMultiplierIndex];
+				Main.NewText(CSText("SpawnRateMultiplierText") + " " + multiplierStrings[currentMultiplierIndex] + " " + CSText("SpawnRateNormalValue"));
 			}
 		}
 

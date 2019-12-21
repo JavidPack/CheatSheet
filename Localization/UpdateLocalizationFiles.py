@@ -49,7 +49,7 @@ for language in languages:
                     otherLanguage += otherLines[otherIndex]
                     otherIndex += 1
                 else:
-                    otherLanguage += "# " + englishLine.strip() + '\n'
+                    otherLanguage += "# " + englishLine.strip() + '\n' # bug: oops, strip removes spaces at end that might be needed.
                     missing += 1
             # Add English Comments back in
             elif englishLine.strip().startswith('#'):
