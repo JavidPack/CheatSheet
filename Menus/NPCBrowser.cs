@@ -58,6 +58,8 @@ namespace CheatSheet.Menus
 		//	private static List<string> categoryNames = new List<string>();
 		internal static UIImage[] bCategories;
 
+		// these 2 indexed by slot number, not npcid, to account for negative.
+		public static Dictionary<string, List<int>> ModToNPCs = new Dictionary<string, List<int>>();
 		public static List<List<int>> categories = new List<List<int>>();
 		private static Color buttonColor = new Color(190, 190, 190);
 
@@ -81,6 +83,7 @@ namespace CheatSheet.Menus
 		public NPCBrowser(CheatSheet mod)
 		{
 			categories.Clear();
+			ModToNPCs.Clear();
 			this.npcView = new NPCView();
 			this.mod = mod;
 			this.CanMove = true;
@@ -225,18 +228,20 @@ namespace CheatSheet.Menus
 			int num = (int)uIImage.Tag;
 			if (num == (int)NPCBrowserCategories.ModNPCs)
 			{
-				string[] mods = ModLoader.Mods.Select(m => m.Name).ToArray();
-				lastModNameNumber = left ? (lastModNameNumber + 1) % mods.Length : (mods.Length + lastModNameNumber - 1) % mods.Length;
-				string currentMod = mods[lastModNameNumber];
-				if (currentMod == "ModLoader")
-				{
-					lastModNameNumber = left ? (lastModNameNumber + 1) % mods.Length : (mods.Length + lastModNameNumber - 1) % mods.Length;
-					currentMod = mods[lastModNameNumber];
+				var mods = NPCBrowser.ModToNPCs.Keys.ToList();
+				mods.Sort();
+				if(mods.Count == 0) {
+					Main.NewText("No NPC have been added by mods.");
 				}
-				this.npcView.selectedCategory = NPCBrowser.categories[0].Where(x => npcView.allNPCSlot[x].npcType >= NPCID.Count && NPCLoader.GetNPC(npcView.allNPCSlot[x].npcType).mod.Name == currentMod).ToArray();
-				this.npcView.activeSlots = this.npcView.selectedCategory;
-				this.npcView.ReorderSlots();
-				bCategories[num].Tooltip = NPCBrowser.categNames[num] + ": " + currentMod;
+				else {
+					if (uIImage.ForegroundColor == NPCBrowser.buttonSelectedColor)
+						lastModNameNumber = left ? (lastModNameNumber + 1) % mods.Count : (mods.Count + lastModNameNumber - 1) % mods.Count;
+					string currentMod = mods[lastModNameNumber];
+					this.npcView.selectedCategory = NPCBrowser.categories[0].Where(x => npcView.allNPCSlot[x].npcType >= NPCID.Count && NPCLoader.GetNPC(npcView.allNPCSlot[x].npcType).mod.Name == currentMod).ToArray();
+					this.npcView.activeSlots = this.npcView.selectedCategory;
+					this.npcView.ReorderSlots();
+					bCategories[num].Tooltip = NPCBrowser.categNames[num] + ": " + currentMod;
+				}
 			}
 			else if (num == (int)NPCBrowserCategories.FilteredNPCs)
 			{
@@ -308,6 +313,13 @@ namespace CheatSheet.Menus
 					if (i == 0)
 					{
 						NPCBrowser.categories[i].Add(j);
+						if (npcView.allNPCSlot[j].npc.type >= NPCID.Count) {
+							string modName = NPCLoader.GetNPC(j).mod.Name;
+							List<int> npcInMod;
+							if (!NPCBrowser.ModToNPCs.TryGetValue(modName, out npcInMod))
+								NPCBrowser.ModToNPCs.Add(modName, npcInMod = new List<int>());
+							npcInMod.Add(j);
+						}
 					}
 					else if (i == 1 && npcView.allNPCSlot[j].npc.boss)
 					{

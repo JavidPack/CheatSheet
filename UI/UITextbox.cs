@@ -75,6 +75,10 @@ namespace CheatSheet.UI
 		{
 			textboxBackground = CheatSheet.instance.GetTexture("UI/Images.UIKit.textboxEdge");
 			this.onLeftClick += new EventHandler(UITextbox_onLeftClick);
+			this.onRightClick += (a, b) => {
+				Text = "";
+				KeyPressed?.Invoke(this, ' ');
+			};
 			label.ForegroundColor = Color.Black;
 			label.Scale = Height / label.Height;
 			label.TextOutline = false;

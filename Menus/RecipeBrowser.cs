@@ -373,14 +373,16 @@ namespace CheatSheet.Menus
 			int num = (int)uIImage.Tag;
 			if (num == (int)RecipeBrowserCategories.ModRecipes)
 			{
-				string[] mods = ModLoader.Mods.Select(m => m.Name).ToArray();
-				lastModNameNumber = left ? (lastModNameNumber + 1) % mods.Length : (mods.Length + lastModNameNumber - 1) % mods.Length;
-				string currentMod = mods[lastModNameNumber];
-				if (currentMod == "ModLoader")
-				{
-					lastModNameNumber = left ? (lastModNameNumber + 1) % mods.Length : (mods.Length + lastModNameNumber - 1) % mods.Length;
-					currentMod = mods[lastModNameNumber];
+				var mods = ModLoader.Mods.Select(x => x.Name).ToList();
+				mods = mods.Intersect(RecipeBrowserWindow.categories[0].Select(x => (recipeView.allRecipeSlot[x].recipe as ModRecipe)?.mod.Name ?? null)).ToList();
+				mods.Sort();
+				if (mods.Count == 0) {
+					Main.NewText("No Recipes have been added by mods.");
+					return;
 				}
+				if (uIImage.ForegroundColor == RecipeBrowserWindow.buttonSelectedColor)
+					lastModNameNumber = left ? (lastModNameNumber + 1) % mods.Count : (mods.Count + lastModNameNumber - 1) % mods.Count;
+				string currentMod = mods[lastModNameNumber];
 				recipeView.selectedCategory = RecipeBrowserWindow.categories[0].Where(x => recipeView.allRecipeSlot[x].recipe as ModRecipe != null && (recipeView.allRecipeSlot[x].recipe as ModRecipe).mod.Name == currentMod).ToArray();
 				recipeView.activeSlots = recipeView.selectedCategory;
 				recipeView.ReorderSlots();

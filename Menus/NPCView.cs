@@ -59,7 +59,7 @@ namespace CheatSheet.Menus
 			this.allNPCSlot = new NPCSlot[Main.npcTexture.Length + negativeSlots];
 			for (int i = 0; i < this.allNPCSlot.Length; i++)
 			{
-				int type = (i >= this.allNPCSlot.Length - negativeSlots) ? -(i - this.allNPCSlot.Length + negativeSlots) : i;
+				int type = (i >= this.allNPCSlot.Length - negativeSlots) ? -(i - this.allNPCSlot.Length + negativeSlots + 1) : i;
 				this.allNPCSlot[i] = new NPCSlot(type, i);
 			}
 			//	this.allNPCSlot = (from s in this.allNPCSlot

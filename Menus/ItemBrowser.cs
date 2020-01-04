@@ -75,6 +75,7 @@ namespace CheatSheet.Menus
 
 		internal static UIImage[] bCategories;
 
+		public static Dictionary<string, List<int>> ModToItems = new Dictionary<string, List<int>>();
 		public static List<List<int>> categories = new List<List<int>>();
 
 		private static Color buttonColor = new Color(190, 190, 190);
@@ -234,18 +235,20 @@ namespace CheatSheet.Menus
 			int num = (int)uIImage.Tag;
 			if (num == (int)ItemBrowserCategories.ModItems)
 			{
-				string[] mods = ModLoader.Mods.Select(m => m.Name).ToArray();
-				lastModNameNumber = left ? (lastModNameNumber + 1) % mods.Length : (mods.Length + lastModNameNumber - 1) % mods.Length;
-				string currentMod = mods[lastModNameNumber];
-				if (currentMod == "ModLoader")
-				{
-					lastModNameNumber = left ? (lastModNameNumber + 1) % mods.Length : (mods.Length + lastModNameNumber - 1) % mods.Length;
-					currentMod = mods[lastModNameNumber];
+				var mods = ItemBrowser.ModToItems.Keys.ToList();
+				mods.Sort();
+				if (mods.Count == 0) {
+					Main.NewText("No Items have been added by mods.");
 				}
-				this.itemView.selectedCategory = ItemBrowser.categories[0].Where(x => this.itemView.allItemsSlots[x].item.modItem != null && this.itemView.allItemsSlots[x].item.modItem.mod.Name == currentMod).ToArray();
-				this.itemView.activeSlots = this.itemView.selectedCategory;
-				this.itemView.ReorderSlots();
-				bCategories[num].Tooltip = ItemBrowser.categNames[num] + ": " + currentMod;
+				else {
+					if(uIImage.ForegroundColor == ItemBrowser.buttonSelectedColor)
+						lastModNameNumber = left ? (lastModNameNumber + 1) % mods.Count : (mods.Count + lastModNameNumber - 1) % mods.Count;
+					string currentMod = mods[lastModNameNumber];
+					this.itemView.selectedCategory = ItemBrowser.categories[0].Where(x => this.itemView.allItemsSlots[x].item.modItem != null && this.itemView.allItemsSlots[x].item.modItem.mod.Name == currentMod).ToArray();
+					this.itemView.activeSlots = this.itemView.selectedCategory;
+					this.itemView.ReorderSlots();
+					bCategories[num].Tooltip = ItemBrowser.categNames[num] + ": " + currentMod;
+				}
 			}
 			else
 			{
@@ -315,6 +318,13 @@ namespace CheatSheet.Menus
 					if (i == 0)
 					{
 						ItemBrowser.categories[i].Add(j);
+						if (j >= ItemID.Count) {
+							string modName = ItemLoader.GetItem(j).mod.Name;
+							List<int> itemInMod;
+							if (!ItemBrowser.ModToItems.TryGetValue(modName, out itemInMod))
+								ItemBrowser.ModToItems.Add(modName, itemInMod = new List<int>());
+							itemInMod.Add(j);
+						}
 					}
 					else if (i == (int)ItemBrowserCategories.Weapons && item.damage > 0)
 					{
