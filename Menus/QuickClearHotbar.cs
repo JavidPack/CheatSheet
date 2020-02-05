@@ -156,7 +156,7 @@ namespace CheatSheet.Menus
 
 		private static void HandleClearItems(bool syncData = false)
 		{
-			for (int i = 0; i < Main.item.Length; i++)
+			for (int i = 0; i < Main.maxItems; i++)
 			{
 				if (!syncData)
 				{
@@ -172,7 +172,7 @@ namespace CheatSheet.Menus
 
 		public static void HandleClearProjectiles(bool syncData = false)
 		{
-			for (int i = 0; i < Main.projectile.Length; i++)
+			for (int i = 0; i < Main.maxProjectiles; i++)
 			{
 				if (Main.projectile[i].active)
 				{

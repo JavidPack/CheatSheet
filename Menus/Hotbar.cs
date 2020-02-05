@@ -649,7 +649,7 @@ namespace CheatSheet.Menus
 				player = Main.player[whoAmI];
 			}
 			Vector2 changePos = new Vector2((int)player.position.X, (int)player.position.Y);
-			for (int i = 0; i < Main.item.Length; i++)
+			for (int i = 0; i < Main.maxItems; i++)
 			{
 				if (Main.item[i].active)
 				{

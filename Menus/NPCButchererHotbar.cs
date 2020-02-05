@@ -131,7 +131,7 @@ namespace CheatSheet.Menus
 			// 0 == hostiles
 			// 1 == hostiles & town NPCs // friendlies
 			// 2 == town NPCs // friendlies only
-			for (int i = 0; i < Main.npc.Length; i++) // Iteration
+			for (int i = 0; i < Main.maxNPCs; i++) // Iteration
 			{
 				if (Main.npc[i].active && CheckNPC(i))
 				{

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using Terraria;
 using Terraria.ModLoader;
+using Terraria.ModLoader.Config;
 
 namespace CheatSheet
 {
@@ -30,7 +31,7 @@ namespace CheatSheet
 				using (StreamReader r = new StreamReader(path))
 				{
 					string json = r.ReadToEnd();
-					personalConfiguration = JsonConvert.DeserializeObject<PersonalConfiguration>(json);
+					personalConfiguration = JsonConvert.DeserializeObject<PersonalConfiguration>(json, ConfigManager.serializerSettings);
 					if(personalConfiguration == null)
 						personalConfiguration = new PersonalConfiguration();
 				}
@@ -49,7 +50,7 @@ namespace CheatSheet
 				using (StreamReader r = new StreamReader(path))
 				{
 					string json = r.ReadToEnd();
-					serverConfiguration = JsonConvert.DeserializeObject<ServerConfiguration>(json);
+					serverConfiguration = JsonConvert.DeserializeObject<ServerConfiguration>(json, ConfigManager.serializerSettings);
 				}
 			}
 		}
@@ -64,7 +65,7 @@ namespace CheatSheet
 					Path.DirectorySeparatorChar,
 					jsonDatabaseFilenamePersonal,
 				});
-			string json = JsonConvert.SerializeObject(personalConfiguration, Formatting.Indented);
+			string json = JsonConvert.SerializeObject(personalConfiguration, ConfigManager.serializerSettings);
 			File.WriteAllText(path, json);
 
 			// If not MP client.
@@ -77,7 +78,14 @@ namespace CheatSheet
 					Path.DirectorySeparatorChar,
 					jsonDatabaseFilenameServer,
 					});
-				json = JsonConvert.SerializeObject(serverConfiguration, Formatting.Indented);
+				// ReferenceDefaultsPreservingResolver messed up with ServerConfiguration serialization. 
+				// TODO: Migrate to regular ModConfig stuff, make proper way of initializing ModConfig saves in-game for tMod.
+				json = JsonConvert.SerializeObject(serverConfiguration, new JsonSerializerSettings {
+					Formatting = Formatting.Indented,
+					DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate,
+					ObjectCreationHandling = ObjectCreationHandling.Replace,
+					NullValueHandling = NullValueHandling.Ignore,
+				});
 				File.WriteAllText(path, json);
 			}
 		}
@@ -117,22 +125,16 @@ namespace CheatSheet
 
 	internal class ServerConfiguration
 	{
-		public JSONNPC[] BannedNPCs
+		public NPCDefinition[] BannedNPCs
 		{
 			get
 			{
-				return Menus.NPCBrowser.filteredNPCSlots.Select(
-					type => NPCLoader.GetNPC(type) == null ? new JSONNPC(null, Lang.GetNPCNameValue(type), type) : new JSONNPC(NPCLoader.GetNPC(type).mod.Name, NPCLoader.GetNPC(type).Name, 0)
-				).ToArray();
+				return Menus.NPCBrowser.filteredNPCSlots.Select(type => new NPCDefinition(type)).ToArray();
 			}
 			set
 			{
-				// Vanilla are saved as Name and type, type is used, name is just for reading convenience.
-				// Modded are stored as Classname
-				List<int> loaded = value.Select(
-					jsonnpc => jsonnpc.id != 0 ? jsonnpc.id : (ModLoader.GetMod(jsonnpc.mod)?.NPCType(jsonnpc.name) ?? -100)
-				).ToList();
-				loaded.RemoveAll(x => x == -100);
+				// This will forget unloaded modnpc.
+				List<int> loaded = value.Where(x => x != null && x.mod != null && !x.IsUnloaded).Select(npc => npc.Type).Distinct().ToList();
 				Menus.NPCBrowser.filteredNPCSlots = loaded;
 				Menus.NPCBrowser.needsUpdate = true;
 			}
@@ -145,6 +147,7 @@ namespace CheatSheet
 	//			int type = mod?.NPCType(tag.GetString("name")) ?? 0;
 	//			if (type > 0)
 	//				NPC.killCount[type] = tag.GetInt("count");
+	/*
 	public class JSONNPC
 	{
 		public string mod;
@@ -168,4 +171,5 @@ namespace CheatSheet
 			return mod == "Terraria";
 		}
 	}
+	*/
 }
