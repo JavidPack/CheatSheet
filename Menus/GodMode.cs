@@ -54,6 +54,7 @@ namespace CheatSheet.Menus
 			{
 				player.statLife = player.statLifeMax2;
 				player.statMana = player.statManaMax2;
+				player.wingTime = player.wingTimeMax;
 			}
 		}
 	}
