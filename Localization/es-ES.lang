@@ -4,18 +4,18 @@ Hotbar.ShowItemBrowser=Navegador de Objetos
 Hotbar.ShowClearMenu=Menú de limpieza
 Hotbar.ShowNPCBrowser=Navegador de NPCs
 Hotbar.ShowRecipeBrowser=Navegador de Recetas
-Hotbar.ShowModExtensionCheats=Ver trucos de mods
+Hotbar.ShowModExtensionCheats=Trucos de mods
 Hotbar.ShowPaintTools=Herramientas de pintura
-Hotbar.ExtraAccessorySlots=Espacio de accesorios adicional
+Hotbar.ExtraAccessorySlots=Espacios de accesorio adicionales
 Hotbar.VacuumItems=Aspirar objetos
 Hotbar.ShowNPCButcherer=Exterminador de NPCs
 Hotbar.ShowQuickWaypoints=Ubicaciones de referencia
-Hotbar.ConfigureAvailableTools=Configurar herramientas disponibles
+Hotbar.ConfigureAvailableTools=Configurar herramientas visibles
 
 Butcherer.ButcherHostileNPCs=Exterminar NPCs hostiles
 Butcherer.ButcherHostileAndFriendlyNPCs=Exterminar NPCs hostiles y amistosos
 Butcherer.ButcherFriendlyNPCs=Exterminar NPCs amistosos
-Butcherer.ButcherNotification=Los NPCs han sido exterminados por {0}
+Butcherer.ButcherNotification=NPCs exterminados por {0}
 
 Vacuum.VacuumNotification=Los objetos del suelo han sido aspirados por {0}
 
@@ -23,7 +23,7 @@ Teleport.Dungeon=Mazmorra
 Teleport.Spawnpoint=Punto de inicio
 Teleport.Hell=Inframundo
 Teleport.Temple=Templo
-Teleport.Random=Aleatorio
+Teleport.Random=Aleatoria
 
 QuickClear.ClearDroppedItems=Limpiar objetos del suelo
 QuickClear.ClearProjectiles=Limpiar proyectiles
@@ -32,10 +32,10 @@ QuickClear.ClearDebuffs=Quitar debuffs
 QuickClear.ItemClearNotification=Los objetos han sido eliminados por {0}
 QuickClear.ProjectileClearNotification=Los proyectiles han sido eliminados por {0}
 
-SpawnRate.SpawnRateMultiplier=Multiplicador de tasa de aparición: 1х
-SpawnRate.SpawnRateMultiplierNew=Multiplicador de tasa de aparición: 
-SpawnRate.SpawnRateMultiplierText=Tasa de aparición máxima de
-SpawnRate.SpawnRateNormalValue= respecto al valor normal
+SpawnRate.SpawnRateMultiplier=Multiplicador de tasa de generación: 1х
+SpawnRate.SpawnRateMultiplierNew=Multiplicador de tasa de generación: 
+SpawnRate.SpawnRateMultiplierText=Tasa de generación máxima:
+SpawnRate.SpawnRateNormalValue=respecto al valor normal
 
 LightHack.LightHackDisabled=Hack de luz: Desactivado
 LightHack.LightHack25%=Hack de luz: 25%
@@ -50,33 +50,33 @@ MinionSlot.MinionSlotBoosterNew=Espacios adicionales para súbditos:
 MinionSlot.MinionSlotBoosterText=Se ha aumentado el número máximo de súbditos en
 
 RecipeBrowser.AllRecipes=Todas las recetas
-RecipeBrowser.CycleModSpecificRecipes=Ver recetas específicas del Mod
+RecipeBrowser.CycleModSpecificRecipes=Ver recetas específicas del mod
 
-ConfigurationTool.ItemBrowser=Mostrar Navegador de Objetos
-ConfigurationTool.NPCBrowser=Mostrar Navegador de NPCs
-ConfigurationTool.RecipeBrowser=Mostrar Navegador de Recetas
-ConfigurationTool.MinionBooster=Mostrar Mejora de súbditos
-ConfigurationTool.Butcher=Mostrar Exterminador
-ConfigurationTool.ClearMenu=Mostrar Menú de limpieza
-ConfigurationTool.ExtraAccessorySlots=Mostrar Espacios de accesorios adicionales
-ConfigurationTool.ModExtensions=Mostrar Trucos de mods
-ConfigurationTool.PaintTools=Mostrar Herramientas de pintura
-ConfigurationTool.SpawnRate=Mostrar Tasas de aparición
-ConfigurationTool.Vacuum=Mostrar Aspirador
-ConfigurationTool.Waypoints=Mostrar Ubicaciones de referencia
-ConfigurationTool.LightHack=Mostrar Hack de luz
-ConfigurationTool.GodMode=Mostrar Modo Dios
+ConfigurationTool.ItemBrowser=Ver Nav. de Objetos
+ConfigurationTool.NPCBrowser=Ver Nav. de NPCs
+ConfigurationTool.RecipeBrowser=Ver Nav. de Recetas
+ConfigurationTool.MinionBooster=Ver M. de súbditos
+ConfigurationTool.Butcher=Ver Exterminador
+ConfigurationTool.ClearMenu=Ver M. de limpieza
+ConfigurationTool.ExtraAccessorySlots=Ver E. de accesorio
+ConfigurationTool.ModExtensions=Ver Trucos de mods
+ConfigurationTool.PaintTools=Ver H. de pintura
+ConfigurationTool.SpawnRate=Ver Mult. de tasas
+ConfigurationTool.Vacuum=Ver Aspirador
+ConfigurationTool.Waypoints=Ver U. de referencia
+ConfigurationTool.LightHack=Ver Hack de luz
+ConfigurationTool.GodMode=Ver Modo dios
 
-ExtendedCheatMenu.NoExtensionCheatModsInstalled=No hay Trucos\nde Mods\ninstalados
+ExtendedCheatMenu.NoExtensionCheatModsInstalled=No hay Trucos\nde Mods\ndisponibles
 
-ExtraAccessorySlots.ExtraAccessorySlots=Espacio de accesorios adicional: 
+ExtraAccessorySlots.ExtraAccessorySlots=Espacios de accesorio adicionales: 
 
 MobBrowser.AllNPCs=Todos los NPCs
 MobBrowser.Bosses=Jefes
 MobBrowser.TownNPCs=NPCs ciudadanos
 MobBrowser.NetIDNPCs=NPCs NetID
 MobBrowser.FilteredNPCs=NPCs filtrados
-MobBrowser.CycleModSpecificNPCs=Ver NPCs específicos del Mod
+MobBrowser.CycleModSpecificNPCs=Ver NPCs específicos del mod
 MobBrowser.SpawnNPCNotification={1} ha invocado a {0}
 
 ItemBrowser.AllItems=Todos los objetos
@@ -91,7 +91,7 @@ ItemBrowser.Expert=Experto
 ItemBrowser.Furniture=Decorativos
 ItemBrowser.Pets=Mascotas
 ItemBrowser.Mounts=Monturas
-ItemBrowser.CycleModSpecificItems=Ver objetos específicos del Mod
+ItemBrowser.CycleModSpecificItems=Ver objetos específicos del mod
 
 PaintTools.ExportData=Exportar datos
 PaintTools.ImportData=Importar datos
@@ -107,13 +107,13 @@ PaintTools.SnapBottomCenter=Captura: Centro-Abajo
 PaintTools.SnapBottomRight=Captura: Abajo-Derecha
 PaintTools.PaintTiles=    Pintar bloques
 PaintTools.EyeDropper=    Cuentagotas
-PaintTools.Undo=    Deshacer última pintura (Clic derecho: Últimas 10) [
-PaintTools.Undo2= avances]
+PaintTools.Undo=    Deshacer último cambio (Clic derecho: últimos 10) [
+PaintTools.Undo2=avances]
 PaintTools.NoUndo=No hay más acciones por deshacer.
 PaintTools.UndoLeft= acciones restantes en el historial de cambios.
 PaintTools.FlipHorizontal=Giro horizontal
 PaintTools.FlipVertical=Giro vertical
 PaintTools.TransparentSelectionOn=    Modificar selección transparente: Desactivado
 PaintTools.TransparentSelectionOff=    Modificar selección transparente: Activado
-PaintTools.PriorBrush=Priorizar uso del Cuentagotas antes que el Pincel.
+PaintTools.PriorBrush=Priorizar uso del Cuentagotas antes que el Pincel
 PaintTools.DataExport=Exportar datos a 
