@@ -42,8 +42,8 @@ LightHack.LightHack25%=Hack de luz: 25%
 LightHack.LightHack50%=Hack de luz: 50%
 LightHack.LightHack100%=Hack de luz: 100%
 
-GodMode.GodModeDisabled=Modo Dios activado
-GodMode.GodModeEnabled=Modo Dios desactivado
+GodMode.GodModeDisabled=Modo dios desactivado
+GodMode.GodModeEnabled=Modo dios activado
 
 MinionSlot.MinionSlotBooster=Espacios de súbditos por defecto
 MinionSlot.MinionSlotBoosterNew=Espacios adicionales para súbditos: 
