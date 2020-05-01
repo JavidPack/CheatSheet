@@ -1,9 +1,9 @@
 # Translation by: Wolf Igmc4
 
-Hotbar.ShowItemBrowser=Navegador de Objetos
+Hotbar.ShowItemBrowser=Navegador de objetos
 Hotbar.ShowClearMenu=Menú de limpieza
 Hotbar.ShowNPCBrowser=Navegador de NPCs
-Hotbar.ShowRecipeBrowser=Navegador de Recetas
+Hotbar.ShowRecipeBrowser=Navegador de recetas
 Hotbar.ShowModExtensionCheats=Trucos de mods
 Hotbar.ShowPaintTools=Herramientas de pintura
 Hotbar.ExtraAccessorySlots=Espacios de accesorio adicionales
@@ -25,8 +25,8 @@ Teleport.Hell=Inframundo
 Teleport.Temple=Templo
 Teleport.Random=Aleatoria
 
-QuickClear.ClearDroppedItems=Limpiar objetos del suelo
-QuickClear.ClearProjectiles=Limpiar proyectiles
+QuickClear.ClearDroppedItems=Eliminar objetos del suelo
+QuickClear.ClearProjectiles=Eliminar proyectiles
 QuickClear.ClearBuffs=Quitar buffs
 QuickClear.ClearDebuffs=Quitar debuffs
 QuickClear.ItemClearNotification=Los objetos han sido eliminados por {0}
@@ -46,28 +46,28 @@ GodMode.GodModeDisabled=Modo dios desactivado
 GodMode.GodModeEnabled=Modo dios activado
 
 MinionSlot.MinionSlotBooster=Espacios de súbditos por defecto
-MinionSlot.MinionSlotBoosterNew=Espacios adicionales para súbditos: 
-MinionSlot.MinionSlotBoosterText=Se ha aumentado el número máximo de súbditos en
+MinionSlot.MinionSlotBoosterNew=Espacios de súbditos adicionales:
+MinionSlot.MinionSlotBoosterText=Número de súbditos máximos aumentado en
 
 RecipeBrowser.AllRecipes=Todas las recetas
 RecipeBrowser.CycleModSpecificRecipes=Ver recetas específicas del mod
 
-ConfigurationTool.ItemBrowser=Ver Nav. de Objetos
-ConfigurationTool.NPCBrowser=Ver Nav. de NPCs
-ConfigurationTool.RecipeBrowser=Ver Nav. de Recetas
-ConfigurationTool.MinionBooster=Ver M. de súbditos
-ConfigurationTool.Butcher=Ver Exterminador
-ConfigurationTool.ClearMenu=Ver M. de limpieza
-ConfigurationTool.ExtraAccessorySlots=Ver E. de accesorio
-ConfigurationTool.ModExtensions=Ver Trucos de mods
-ConfigurationTool.PaintTools=Ver H. de pintura
-ConfigurationTool.SpawnRate=Ver Mult. de tasas
-ConfigurationTool.Vacuum=Ver Aspirador
-ConfigurationTool.Waypoints=Ver U. de referencia
-ConfigurationTool.LightHack=Ver Hack de luz
-ConfigurationTool.GodMode=Ver Modo dios
+ConfigurationTool.ItemBrowser=Nav. de objetos
+ConfigurationTool.NPCBrowser=Nav. de NPCs
+ConfigurationTool.RecipeBrowser=Nav. de recetas
+ConfigurationTool.MinionBooster=Añadir súbditos
+ConfigurationTool.Butcher=Exterminador
+ConfigurationTool.ClearMenu=Menú de limpieza
+ConfigurationTool.ExtraAccessorySlots=Añadir accesorios
+ConfigurationTool.ModExtensions=Trucos de mods
+ConfigurationTool.PaintTools=Pintura y diseños
+ConfigurationTool.SpawnRate=Multiplicador de tasas
+ConfigurationTool.Vacuum=Aspirador
+ConfigurationTool.Waypoints=Ub. de referencia
+ConfigurationTool.LightHack=Hack de luz
+ConfigurationTool.GodMode=Modo dios
 
-ExtendedCheatMenu.NoExtensionCheatModsInstalled=No hay Trucos\nde Mods\ndisponibles
+ExtendedCheatMenu.NoExtensionCheatModsInstalled=No hay trucos\nde mods\ndisponibles
 
 ExtraAccessorySlots.ExtraAccessorySlots=Espacios de accesorio adicionales: 
 
@@ -107,13 +107,13 @@ PaintTools.SnapBottomCenter=Captura: Centro-Abajo
 PaintTools.SnapBottomRight=Captura: Abajo-Derecha
 PaintTools.PaintTiles=    Pintar bloques
 PaintTools.EyeDropper=    Cuentagotas
-PaintTools.Undo=    Deshacer último cambio (Clic derecho: últimos 10) [
+PaintTools.Undo=    Deshacer último cambio (clic derecho: últimos 10) [
 PaintTools.Undo2=avances]
 PaintTools.NoUndo=No hay más acciones por deshacer.
-PaintTools.UndoLeft= acciones restantes en el historial de cambios.
+PaintTools.UndoLeft= acciones restantes en el historial de cambios
 PaintTools.FlipHorizontal=Giro horizontal
 PaintTools.FlipVertical=Giro vertical
 PaintTools.TransparentSelectionOn=    Modificar selección transparente: Desactivado
 PaintTools.TransparentSelectionOff=    Modificar selección transparente: Activado
-PaintTools.PriorBrush=Priorizar uso del Cuentagotas antes que el Pincel
+PaintTools.PriorBrush=Priorizar uso del Cuentagotas sobre el Pincel
 PaintTools.DataExport=Exportar datos a 
