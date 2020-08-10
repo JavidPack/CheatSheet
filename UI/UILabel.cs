@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Graphics;
 using Terraria;
+using Terraria.GameContent;
 
 namespace CheatSheet.UI
 {
@@ -21,7 +22,7 @@ namespace CheatSheet.UI
 		{
 			get
 			{
-				return Main.fontDeathText;
+				return FontAssets.DeathText.Value;
 			}
 		}
 

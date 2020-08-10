@@ -33,7 +33,7 @@ namespace CheatSheet.UI
 
 		public UIScrollBar()
 		{
-			ScrollbarTexture = CheatSheet.instance.GetTexture("UI/Images.UIKit.scrollbarEdge");
+			ScrollbarTexture = CheatSheet.instance.GetTexture("UI/Images.UIKit.scrollbarEdge").Value;
 		}
 
 		protected override float GetHeight()

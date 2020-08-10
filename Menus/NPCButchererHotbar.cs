@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Linq;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ID;
 
 namespace CheatSheet.Menus
@@ -32,9 +33,9 @@ namespace CheatSheet.Menus
 			base.Visible = false;
 
 			// Button images
-			bButcherHostiles = new UIImage(Main.itemTexture[ItemID.DemonHeart]);
-			bButcherBoth = new UIImage(Main.itemTexture[ItemID.CrimsonHeart]);
-			bButcherTownNPCs = new UIImage(Main.itemTexture[ItemID.Heart]);
+			bButcherHostiles = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.DemonHeart].Value);
+			bButcherBoth = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.CrimsonHeart].Value);
+			bButcherTownNPCs = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.Heart].Value);
 
 			// Button tooltips
 			bButcherHostiles.Tooltip = CSText("ButcherHostileNPCs");
@@ -219,7 +220,7 @@ namespace CheatSheet.Menus
 				Main.LocalPlayer.mouseInterface = true;
 			}
 
-			float x = Main.fontMouseText.MeasureString(UIView.HoverText).X;
+			float x = FontAssets.MouseText.Value.MeasureString(UIView.HoverText).X;
 			Vector2 vector = new Vector2((float)Main.mouseX, (float)Main.mouseY) + new Vector2(16f);
 			if (vector.Y > (float)(Main.screenHeight - 30))
 			{
@@ -229,7 +230,7 @@ namespace CheatSheet.Menus
 			{
 				vector.X = (float)(Main.screenWidth - 460);
 			}
-			Utils.DrawBorderStringFourWay(spriteBatch, Main.fontMouseText, UIView.HoverText, vector.X, vector.Y, new Color((int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor), Color.Black, Vector2.Zero, 1f);
+			Utils.DrawBorderStringFourWay(spriteBatch, FontAssets.MouseText.Value, UIView.HoverText, vector.X, vector.Y, new Color((int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor), Color.Black, Vector2.Zero, 1f);
 		}
 
 		protected override bool IsMouseInside()

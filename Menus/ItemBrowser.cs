@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -53,20 +54,20 @@ namespace CheatSheet.Menus
 
 		private static Texture2D[] categoryIcons = new Texture2D[]
 		{
-			Main.itemTexture[ItemID.AlphabetStatueA],
-			Main.itemTexture[ItemID.SilverBroadsword],
-			Main.itemTexture[ItemID.SilverPickaxe],
-			Main.itemTexture[ItemID.SilverChainmail],
-			Main.itemTexture[ItemID.HermesBoots],
-			Main.itemTexture[ItemID.DirtBlock],
-			Main.itemTexture[ItemID.FlamingArrow],
-			Main.itemTexture[ItemID.GreaterHealingPotion],
-			Main.itemTexture[ItemID.WormScarf],
-			Main.itemTexture[ItemID.Dresser],
-			Main.itemTexture[ItemID.ZephyrFish],
-			Main.itemTexture[ItemID.SlimySaddle],
-        //    Main.itemTexture[ItemID.FallenStar],
-            Main.itemTexture[ItemID.AlphabetStatueM],
+			Terraria.GameContent.TextureAssets.Item[ItemID.AlphabetStatueA].Value,
+			Terraria.GameContent.TextureAssets.Item[ItemID.SilverBroadsword].Value,
+			Terraria.GameContent.TextureAssets.Item[ItemID.SilverPickaxe].Value,
+			Terraria.GameContent.TextureAssets.Item[ItemID.SilverChainmail].Value,
+			Terraria.GameContent.TextureAssets.Item[ItemID.HermesBoots].Value,
+			Terraria.GameContent.TextureAssets.Item[ItemID.DirtBlock].Value,
+			Terraria.GameContent.TextureAssets.Item[ItemID.FlamingArrow].Value,
+			Terraria.GameContent.TextureAssets.Item[ItemID.GreaterHealingPotion].Value,
+			Terraria.GameContent.TextureAssets.Item[ItemID.WormScarf].Value,
+			Terraria.GameContent.TextureAssets.Item[ItemID.Dresser].Value,
+			Terraria.GameContent.TextureAssets.Item[ItemID.ZephyrFish].Value,
+			Terraria.GameContent.TextureAssets.Item[ItemID.SlimySaddle].Value,
+        //    Terraria.GameContent.TextureAssets.Item[ItemID.FallenStar].Value,
+            Terraria.GameContent.TextureAssets.Item[ItemID.AlphabetStatueM].Value,
 		};
 
 		internal ItemView itemView;
@@ -102,7 +103,7 @@ namespace CheatSheet.Menus
 			this.itemView.Position = new Vector2(this.spacing, base.Height - this.spacing - this.itemView.Height);
 			this.AddChild(this.itemView);
 			this.ParseList2();
-			Texture2D texture = mod.GetTexture("UI/closeButton");
+			Texture2D texture = mod.GetTexture("UI/closeButton").Value;
 			UIImage uIImage = new UIImage(texture/*UIView.GetEmbeddedTexture("Images.closeButton.png")*/);
 			uIImage.Anchor = AnchorPosition.TopRight;
 			uIImage.Position = new Vector2(base.Width - this.spacing, this.spacing);
@@ -159,10 +160,10 @@ namespace CheatSheet.Menus
 			if (Visible && IsMouseInside())
 			{
 				Main.LocalPlayer.mouseInterface = true;
-				Main.LocalPlayer.showItemIcon = false;
+				Main.LocalPlayer.cursorItemIconEnabled = false;
 			}
 
-			float x = Main.fontMouseText.MeasureString(UIView.HoverText).X;
+			float x = FontAssets.MouseText.Value.MeasureString(UIView.HoverText).X;
 			Vector2 vector = new Vector2((float)Main.mouseX, (float)Main.mouseY) + new Vector2(16f);
 			if (vector.Y > (float)(Main.screenHeight - 30))
 			{
@@ -172,7 +173,7 @@ namespace CheatSheet.Menus
 			{
 				vector.X = (float)(Main.screenWidth - 460);
 			}
-			Utils.DrawBorderStringFourWay(spriteBatch, Main.fontMouseText, UIView.HoverText, vector.X, vector.Y, new Color((int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor), Color.Black, Vector2.Zero, 1f);
+			Utils.DrawBorderStringFourWay(spriteBatch, FontAssets.MouseText.Value, UIView.HoverText, vector.X, vector.Y, new Color((int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor), Color.Black, Vector2.Zero, 1f);
 		}
 
 		public override void Update()
@@ -244,7 +245,7 @@ namespace CheatSheet.Menus
 					if(uIImage.ForegroundColor == ItemBrowser.buttonSelectedColor)
 						lastModNameNumber = left ? (lastModNameNumber + 1) % mods.Count : (mods.Count + lastModNameNumber - 1) % mods.Count;
 					string currentMod = mods[lastModNameNumber];
-					this.itemView.selectedCategory = ItemBrowser.categories[0].Where(x => this.itemView.allItemsSlots[x].item.modItem != null && this.itemView.allItemsSlots[x].item.modItem.mod.Name == currentMod).ToArray();
+					this.itemView.selectedCategory = ItemBrowser.categories[0].Where(x => this.itemView.allItemsSlots[x].item.modItem != null && this.itemView.allItemsSlots[x].item.modItem.Mod.Name == currentMod).ToArray();
 					this.itemView.activeSlots = this.itemView.selectedCategory;
 					this.itemView.ReorderSlots();
 					bCategories[num].Tooltip = ItemBrowser.categNames[num] + ": " + currentMod;
@@ -319,7 +320,7 @@ namespace CheatSheet.Menus
 					{
 						ItemBrowser.categories[i].Add(j);
 						if (j >= ItemID.Count) {
-							string modName = ItemLoader.GetItem(j).mod.Name;
+							string modName = ItemLoader.GetItem(j).Mod.Name;
 							List<int> itemInMod;
 							if (!ItemBrowser.ModToItems.TryGetValue(modName, out itemInMod))
 								ItemBrowser.ModToItems.Add(modName, itemInMod = new List<int>());

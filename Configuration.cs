@@ -141,7 +141,7 @@ namespace CheatSheet
 		}
 	}
 
-	//["mod"] = NPCLoader.GetNPC(type).mod.Name,
+	//["mod"] = NPCLoader.GetNPC(type).Mod.Name,
 	//["name"] = Main.npcName[type],
 	//Mod mod = ModLoader.GetMod(tag.GetString("mod"));
 	//			int type = mod?.NPCType(tag.GetString("name")) ?? 0;

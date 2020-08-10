@@ -4,6 +4,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
+using Terraria.Chat;
+using Terraria.GameContent;
 using Terraria.GameContent.Achievements;
 using Terraria.ID;
 
@@ -38,16 +40,16 @@ namespace CheatSheet.Menus
 			base.Visible = false;
 
 			// Button images
-			bGoblinInvasion = new UIImage(Main.itemTexture[ItemID.GoblinBattleStandard]);
-			bBloodmoon = new UIImage(Main.itemTexture[ItemID.PiggyBank]);
-			bSlimerain = new UIImage(Main.itemTexture[ItemID.RoyalGel]);
-			bFrostlegion = new UIImage(Main.itemTexture[ItemID.SnowGlobe]);
-			bSolarEclipse = new UIImage(Main.itemTexture[ItemID.SolarTablet]);
-			bPirateInvasion = new UIImage(Main.itemTexture[ItemID.PirateMap]);
-			bPumpkinMoon = new UIImage(Main.itemTexture[ItemID.PumpkinMoonMedallion]);
-			bFrostMoon = new UIImage(Main.itemTexture[ItemID.NaughtyPresent]);
-			bMartianMadness = new UIImage(Main.itemTexture[ItemID.MartianSaucerTrophy]);
-			bStopEvents = new UIImage(Main.itemTexture[ItemID.AlphabetStatueX]);
+			bGoblinInvasion = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.GoblinBattleStandard].Value);
+			bBloodmoon = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.PiggyBank].Value);
+			bSlimerain = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.RoyalGel].Value);
+			bFrostlegion = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.SnowGlobe].Value);
+			bSolarEclipse = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.SolarTablet].Value);
+			bPirateInvasion = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.PirateMap].Value);
+			bPumpkinMoon = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.PumpkinMoonMedallion].Value);
+			bFrostMoon = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.NaughtyPresent].Value);
+			bMartianMadness = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.MartianSaucerTrophy].Value);
+			bStopEvents = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.AlphabetStatueX].Value);
 
 			// Button tooltips
 			bGoblinInvasion.Tooltip = "Summon a Goblin Invasion";
@@ -151,7 +153,7 @@ namespace CheatSheet.Menus
 			Main.stopMoonEvent();
 			if (Main.netMode != 1)
 			{
-				Main.NewText(Lang.misc[34].Value, (byte)50, byte.MaxValue, (byte)130, false);
+				Main.NewText(Lang.misc[34].Value, (byte)50, byte.MaxValue, (byte)130);
 				Main.startSnowMoon();
 			}
 			else
@@ -165,7 +167,7 @@ namespace CheatSheet.Menus
 			// REQUIRED
 			if (Main.netMode != 1)
 			{
-				Main.NewText(Lang.misc[31].Value, (byte)50, byte.MaxValue, (byte)130, false);
+				Main.NewText(Lang.misc[31].Value, (byte)50, byte.MaxValue, (byte)130);
 				Main.startPumpkinMoon();
 			}
 			else
@@ -193,11 +195,11 @@ namespace CheatSheet.Menus
 				{
 					if (Main.netMode == 0)
 					{
-						Main.NewText(Lang.misc[20].Value, (byte)50, byte.MaxValue, (byte)130, false);
+						Main.NewText(Lang.misc[20].Value, (byte)50, byte.MaxValue, (byte)130);
 					}
 					else if (Main.netMode == 2)
 					{
-						NetMessage.BroadcastChatMessage(Lang.misc[20].ToNetworkText(), new Color(50, 255, 130), -1);
+						ChatHelper.BroadcastChatMessage(Lang.misc[20].ToNetworkText(), new Color(50, 255, 130), -1);
 					}
 				}
 				if (Main.netMode == 2)
@@ -237,9 +239,9 @@ namespace CheatSheet.Menus
 			Main.bloodMoon = true;
 			AchievementsHelper.NotifyProgressionEvent(4);
 			if (Main.netMode == 0)
-				Main.NewText(Lang.misc[8].Value, 50, 255, 130, false);
+				Main.NewText(Lang.misc[8].Value, 50, 255, 130);
 			else if (Main.netMode == 2)
-				NetMessage.BroadcastChatMessage(Lang.misc[8].ToNetworkText(), new Microsoft.Xna.Framework.Color(50, 255, 130), -1);
+				ChatHelper.BroadcastChatMessage(Lang.misc[8].ToNetworkText(), new Microsoft.Xna.Framework.Color(50, 255, 130), -1);
 		}
 
 		private void bGoblinInvasion_onLeftClick(object sender, EventArgs e)
@@ -308,7 +310,7 @@ namespace CheatSheet.Menus
 				Main.LocalPlayer.mouseInterface = true;
 			}
 
-			float x = Main.fontMouseText.MeasureString(UIView.HoverText).X;
+			float x = FontAssets.MouseText.Value.MeasureString(UIView.HoverText).X;
 			Vector2 vector = new Vector2((float)Main.mouseX, (float)Main.mouseY) + new Vector2(16f);
 			if (vector.Y > (float)(Main.screenHeight - 30))
 			{
@@ -318,7 +320,7 @@ namespace CheatSheet.Menus
 			{
 				vector.X = (float)(Main.screenWidth - 460);
 			}
-			Utils.DrawBorderStringFourWay(spriteBatch, Main.fontMouseText, UIView.HoverText, vector.X, vector.Y, new Color((int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor), Color.Black, Vector2.Zero, 1f);
+			Utils.DrawBorderStringFourWay(spriteBatch, FontAssets.MouseText.Value, UIView.HoverText, vector.X, vector.Y, new Color((int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor), Color.Black, Vector2.Zero, 1f);
 		}
 
 		protected override bool IsMouseInside()

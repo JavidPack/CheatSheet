@@ -5,7 +5,10 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Terraria;
+using Terraria.GameContent;
+using Terraria.GameContent.Drawing;
 using Terraria.GameContent.Liquid;
 using Terraria.ID;
 using Terraria.ObjectData;
@@ -46,6 +49,8 @@ namespace CheatSheet.Menus
 		internal int lastMouseTileX = -1;
 		internal int lastMouseTileY = -1;
 
+		static MethodInfo GetTileDrawTextureMethodInfo;
+
 		public PaintToolsHotbar(CheatSheet mod)
 		{
 			this.mod = mod;
@@ -55,14 +60,14 @@ namespace CheatSheet.Menus
 			base.Visible = false;
 			//base.UpdateWhenOutOfBounds = true;
 
-			//		bDecreaseBrushSize = new UIImage(Main.itemTexture[ItemID.CopperShortsword]);
-			//		bIncreaseBrushSize = new UIImage(Main.itemTexture[ItemID.CrossNecklace]);
-			bStampTiles = new UIImage(Main.itemTexture[ItemID.Paintbrush]);
-			bUndo = new UIImage(Main.itemTexture[ItemID.AlphabetStatueU]);
-			bEyeDropper = new UIImage(Main.itemTexture[ItemID.EmptyDropper]);
-			bFlipHorizontal = new UIImage(mod.GetTexture("CustomUI/Horizontal"));
-			bFlipVertical = new UIImage(mod.GetTexture("CustomUI/Vertical"));
-			bToggleTransparentSelection = new UIImage(Main.buffTexture[BuffID.Invisibility]);
+			//		bDecreaseBrushSize = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.CopperShortsword].Value);
+			//		bIncreaseBrushSize = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.CrossNecklace].Value);
+			bStampTiles = new UIImage(TextureAssets.Item[ItemID.Paintbrush].Value);
+			bUndo = new UIImage(TextureAssets.Item[ItemID.AlphabetStatueU].Value);
+			bEyeDropper = new UIImage(TextureAssets.Item[ItemID.EmptyDropper].Value);
+			bFlipHorizontal = new UIImage(mod.GetTexture("CustomUI/Horizontal").Value);
+			bFlipVertical = new UIImage(mod.GetTexture("CustomUI/Vertical").Value);
+			bToggleTransparentSelection = new UIImage(TextureAssets.Buff[BuffID.Invisibility].Value);
 
 			//		this.bIncreaseBrushSize.Tooltip = "    Increase Brush Size";
 			//		this.bDecreaseBrushSize.Tooltip = "    Decrease Brush Size";
@@ -291,7 +296,7 @@ namespace CheatSheet.Menus
 				}
 			}
 
-			float x = Main.fontMouseText.MeasureString(UIView.HoverText).X;
+			float x = FontAssets.MouseText.Value.MeasureString(UIView.HoverText).X;
 			Vector2 vector = new Vector2((float)Main.mouseX, (float)Main.mouseY) + new Vector2(16f);
 			if (vector.Y > (float)(Main.screenHeight - 30))
 			{
@@ -301,7 +306,7 @@ namespace CheatSheet.Menus
 			{
 				vector.X = (float)(Main.screenWidth - 460);
 			}
-			Utils.DrawBorderStringFourWay(spriteBatch, Main.fontMouseText, UIView.HoverText, vector.X, vector.Y, new Color((int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor), Color.Black, Vector2.Zero, 1f);
+			Utils.DrawBorderStringFourWay(spriteBatch, FontAssets.MouseText.Value, UIView.HoverText, vector.X, vector.Y, new Color((int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor), Color.Black, Vector2.Zero, 1f);
 		}
 
 		public void DrawGameScale(SpriteBatch spriteBatch)
@@ -387,19 +392,19 @@ namespace CheatSheet.Menus
 			Color color = buffColor(Color.White, r, g, b, a);
 			if (drawBack)
 			{
-				Main.spriteBatch.Draw(Main.magicPixel, upperLeftScreen, new Microsoft.Xna.Framework.Rectangle?(value), color * scale, 0f, Vector2.Zero, 16f * brushSize, SpriteEffects.None, 0f);
+				Main.spriteBatch.Draw(TextureAssets.MagicPixel.Value, upperLeftScreen, new Microsoft.Xna.Framework.Rectangle?(value), color * scale, 0f, Vector2.Zero, 16f * brushSize, SpriteEffects.None, 0f);
 			}
 			b = 0.3f;
 			g = 0.95f;
 			scale = (a = 1f);
 			color = buffColor(Color.White, r, g, b, a);
-			Main.spriteBatch.Draw(Main.magicPixel, upperLeftScreen + Vector2.UnitX * -2f, new Microsoft.Xna.Framework.Rectangle?(value), color * scale, 0f, Vector2.Zero, new Vector2(2f, 16f * brushSize.Y), SpriteEffects.None, 0f);
-			Main.spriteBatch.Draw(Main.magicPixel, upperLeftScreen + Vector2.UnitX * 16f * brushSize.X, new Microsoft.Xna.Framework.Rectangle?(value), color * scale, 0f, Vector2.Zero, new Vector2(2f, 16f * brushSize.Y), SpriteEffects.None, 0f);
-			Main.spriteBatch.Draw(Main.magicPixel, upperLeftScreen + Vector2.UnitY * -2f, new Microsoft.Xna.Framework.Rectangle?(value), color * scale, 0f, Vector2.Zero, new Vector2(16f * brushSize.X, 2f), SpriteEffects.None, 0f);
-			Main.spriteBatch.Draw(Main.magicPixel, upperLeftScreen + Vector2.UnitY * 16f * brushSize.Y, new Microsoft.Xna.Framework.Rectangle?(value), color * scale, 0f, Vector2.Zero, new Vector2(16f * brushSize.X, 2f), SpriteEffects.None, 0f);
+			Main.spriteBatch.Draw(TextureAssets.MagicPixel.Value, upperLeftScreen + Vector2.UnitX * -2f, new Microsoft.Xna.Framework.Rectangle?(value), color * scale, 0f, Vector2.Zero, new Vector2(2f, 16f * brushSize.Y), SpriteEffects.None, 0f);
+			Main.spriteBatch.Draw(TextureAssets.MagicPixel.Value, upperLeftScreen + Vector2.UnitX * 16f * brushSize.X, new Microsoft.Xna.Framework.Rectangle?(value), color * scale, 0f, Vector2.Zero, new Vector2(2f, 16f * brushSize.Y), SpriteEffects.None, 0f);
+			Main.spriteBatch.Draw(TextureAssets.MagicPixel.Value, upperLeftScreen + Vector2.UnitY * -2f, new Microsoft.Xna.Framework.Rectangle?(value), color * scale, 0f, Vector2.Zero, new Vector2(16f * brushSize.X, 2f), SpriteEffects.None, 0f);
+			Main.spriteBatch.Draw(TextureAssets.MagicPixel.Value, upperLeftScreen + Vector2.UnitY * 16f * brushSize.Y, new Microsoft.Xna.Framework.Rectangle?(value), color * scale, 0f, Vector2.Zero, new Vector2(16f * brushSize.X, 2f), SpriteEffects.None, 0f);
 
 			Vector2 pos = Main.MouseScreen.Offset(48, 24);
-			Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, $"{brushSize.X} x {brushSize.Y}", pos.X, pos.Y, Color.White, Color.Black, Vector2.Zero, 1f);
+			Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, $"{brushSize.X} x {brushSize.Y}", pos.X, pos.Y, Color.White, Color.Black, Vector2.Zero, 1f);
 		}
 
 		private void bToggleEyeDropper_onLeftClick(object sender, EventArgs e)
@@ -477,7 +482,7 @@ namespace CheatSheet.Menus
 				if (EyeDropperActive)
 				{
 					//		Main.LocalPlayer.showItemIconText = "Click to select pallete";
-					player.showItemIcon2 = ItemID.EmptyDropper;
+					player.cursorItemIconID = ItemID.EmptyDropper;
 					if (leftMouseDown)
 					{
 						Point point = (Main.MouseWorld).ToTileCoordinates();
@@ -577,7 +582,7 @@ namespace CheatSheet.Menus
 				}
 				if (StampToolActive)
 				{
-					player.showItemIcon2 = ItemID.Paintbrush;
+					player.cursorItemIconID = ItemID.Paintbrush;
 					//		Main.LocalPlayer.showItemIconText = "Click to paint";
 					if (leftMouseDown && stampInfo != null)
 					{
@@ -713,7 +718,7 @@ namespace CheatSheet.Menus
 						constrainedStartY = -1;
 					}
 				}
-				Main.LocalPlayer.showItemIcon = true;
+				Main.LocalPlayer.cursorItemIconEnabled = true;
 			}
 		}
 
@@ -801,10 +806,20 @@ namespace CheatSheet.Menus
 					{
 						Main.instance.LoadWall(tile.wall);
 						Texture2D textureWall;
-						if (PaintToolsEx.canDrawColorWall(tile) && tile.type < Main.wallAltTexture.GetLength(0) && Main.wallAltTexture[tile.type, tile.wallColor()] != null)
-							textureWall = Main.wallAltTexture[tile.type, tile.wallColor()];
-						else
-							textureWall = Main.wallTexture[tile.wall];
+						//			if (PaintToolsEx.canDrawColorWall(tile) && tile.type < Main.wallAltTexture.GetLength(0) && Main.wallAltTexture[tile.type, tile.wallColor()] != null)
+						//				textureWall = Main.wallAltTexture[tile.type, tile.wallColor()];
+						//			else
+						//				textureWall = TextureAssets.Wall[tile.wall].Value;
+
+						if (GetTileDrawTextureMethodInfo == null)
+						{
+							GetTileDrawTextureMethodInfo = typeof(WallDrawing).GetMethod("GetTileDrawTexture", BindingFlags.Instance | BindingFlags.NonPublic);
+						}
+
+						textureWall = (Texture2D)GetTileDrawTextureMethodInfo.Invoke( Main.instance.WallsRenderer, new object[] { tile, -1, -1});
+
+						//textureWall = WallDrawing.GetTileDrawTexture(tile, -1, -1); // x/y unused
+
 						int wallFrame = Main.wallFrame[tile.wall] * 180;
 						Rectangle value = new Rectangle(tile.wallFrameX(), tile.wallFrameY() + wallFrame, 32, 32);
 						Vector2 pos = position + new Vector2(x * 16 - 8, y * 16 - 8);
@@ -814,11 +829,11 @@ namespace CheatSheet.Menus
 					{
 						Texture2D textureWater;
 						if (tile.honey())
-							textureWater = LiquidRenderer.Instance._liquidTextures[11].Offset(16, 48, 16, 16);
+							textureWater = LiquidRenderer.Instance._liquidTextures[11].Value.Offset(16, 48, 16, 16);
 						else if (tile.lava())
-							textureWater = LiquidRenderer.Instance._liquidTextures[1].Offset(16, 48, 16, 16);
+							textureWater = LiquidRenderer.Instance._liquidTextures[1].Value.Offset(16, 48, 16, 16);
 						else
-							textureWater = LiquidRenderer.Instance._liquidTextures[0].Offset(16, 48, 16, 16);
+							textureWater = LiquidRenderer.Instance._liquidTextures[0].Value.Offset(16, 48, 16, 16);
 						int waterSize = (tile.liquid + 1) / 16;
 						Vector2 pos = position + new Vector2(x * 16, y * 16 + (16 - waterSize));
 						sb.Draw(textureWater, pos * scale, new Rectangle(0, 16 - waterSize, 16, waterSize), color, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
@@ -826,7 +841,7 @@ namespace CheatSheet.Menus
 					if (tile.active()) // Tile
 					{
 						Main.instance.LoadTiles(tile.type);
-						Texture2D texture = Main.tileTexture[tile.type];
+						Texture2D texture = TextureAssets.Tile[tile.type].Value;
 						Rectangle? value = new Rectangle(tile.frameX, tile.frameY, 16, 16/* tileData.CoordinateWidth, tileData.CoordinateHeights[j - (int)op.ObjectStart.Y]*/);
 						Vector2 pos = position + new Vector2(x * 16, y * 16);
 						sb.Draw(texture, pos * scale, value, color, 0f, Vector2.Zero, scale, /*spriteEffects*/SpriteEffects.None, 0f);

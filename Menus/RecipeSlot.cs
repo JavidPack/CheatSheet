@@ -4,13 +4,14 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Graphics;
 using System;
 using Terraria;
+using Terraria.GameContent;
 
 namespace CheatSheet.Menus
 {
 	internal class RecipeSlot : UIView
 	{
-		public static Texture2D backgroundTexture = Main.inventoryBack9Texture;
-		public static Texture2D selectedBackgroundTexture = Main.inventoryBack15Texture;
+		public static Texture2D backgroundTexture = TextureAssets.InventoryBack9.Value;
+		public static Texture2D selectedBackgroundTexture = TextureAssets.InventoryBack15.Value;
 
 		public int recipeIndex = -1;
 		public Recipe recipe;
@@ -45,7 +46,7 @@ namespace CheatSheet.Menus
 			//UIView.HoverText = recipe.createItem.name;
 			Main.hoverItemName = recipe.createItem.Name;
 			Main.HoverItem = recipe.createItem.Clone();
-			Main.HoverItem.SetNameOverride(Main.HoverItem.Name + (Main.HoverItem.modItem != null ? " [" + Main.HoverItem.modItem.mod.Name + "]" : ""));
+			Main.HoverItem.SetNameOverride(Main.HoverItem.Name + (Main.HoverItem.modItem != null ? " [" + Main.HoverItem.modItem.Mod.Name + "]" : ""));
 			//UIView.HoverItem = this.item.Clone();
 			//	hovering = true;
 		}
@@ -74,7 +75,7 @@ namespace CheatSheet.Menus
 			{
 				spriteBatch.Draw(RecipeSlot.backgroundTexture, base.DrawPosition, null, Color.White, 0f, Vector2.Zero, base.Scale, SpriteEffects.None, 0f);
 			}
-			Texture2D texture2D = Main.itemTexture[this.recipe.createItem.type];
+			Texture2D texture2D = Terraria.GameContent.TextureAssets.Item[this.recipe.createItem.type].Value;
 			Rectangle rectangle2;
 			if (Main.itemAnimations[recipe.createItem.type] != null)
 			{
@@ -108,7 +109,7 @@ namespace CheatSheet.Menus
 			}
 			if (this.recipe.createItem.stack > 1)
 			{
-				spriteBatch.DrawString(Main.fontItemStack, this.recipe.createItem.stack.ToString(), new Vector2(base.DrawPosition.X + 10f * base.Scale, base.DrawPosition.Y + 26f * base.Scale), Color.White, 0f, Vector2.Zero, base.Scale, SpriteEffects.None, 0f);
+				spriteBatch.DrawString(FontAssets.ItemStack.Value, this.recipe.createItem.stack.ToString(), new Vector2(base.DrawPosition.X + 10f * base.Scale, base.DrawPosition.Y + 26f * base.Scale), Color.White, 0f, Vector2.Zero, base.Scale, SpriteEffects.None, 0f);
 			}
 			base.Draw(spriteBatch);
 		}

@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.Map;
 using Terraria.ModLoader;
@@ -30,8 +31,8 @@ namespace CheatSheet.Menus
 
 		private static Texture2D[] categoryIcons = new Texture2D[]
 		{
-			Main.itemTexture[ItemID.AlphabetStatueA],
-			Main.itemTexture[ItemID.AlphabetStatueM],
+			Terraria.GameContent.TextureAssets.Item[ItemID.AlphabetStatueA].Value,
+			Terraria.GameContent.TextureAssets.Item[ItemID.AlphabetStatueM].Value,
 		};
 
 		internal static RecipeView recipeView;
@@ -75,7 +76,7 @@ namespace CheatSheet.Menus
 			recipeView.Position = new Vector2(this.spacing, this.spacing + 40);
 			this.AddChild(recipeView);
 			this.InitializeRecipeCategories();
-			Texture2D texture = mod.GetTexture("UI/closeButton");
+			Texture2D texture = mod.GetTexture("UI/closeButton").Value;
 			UIImage uIImage = new UIImage(texture);
 			uIImage.Anchor = AnchorPosition.TopRight;
 			uIImage.Position = new Vector2(base.Width - this.spacing, this.spacing);
@@ -159,7 +160,7 @@ namespace CheatSheet.Menus
 			if (Visible && IsMouseInside())
 			{
 				Main.LocalPlayer.mouseInterface = true;
-				Main.LocalPlayer.showItemIcon = false;
+				Main.LocalPlayer.cursorItemIconEnabled = false;
 			}
 
 			if (Visible && Recipe.numRecipes > recipeView.allRecipeSlot.Length)
@@ -179,7 +180,7 @@ namespace CheatSheet.Menus
 				recipeView.ReorderSlots();
 			}
 
-			float x = Main.fontMouseText.MeasureString(UIView.HoverText).X;
+			float x = FontAssets.MouseText.Value.MeasureString(UIView.HoverText).X;
 			Vector2 vector = new Vector2((float)Main.mouseX, (float)Main.mouseY) + new Vector2(16f);
 			if (vector.Y > (float)(Main.screenHeight - 30))
 			{
@@ -189,7 +190,7 @@ namespace CheatSheet.Menus
 			{
 				vector.X = (float)(Main.screenWidth - 460);
 			}
-			Utils.DrawBorderStringFourWay(spriteBatch, Main.fontMouseText, UIView.HoverText, vector.X, vector.Y, new Color((int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor), Color.Black, Vector2.Zero, 1f);
+			Utils.DrawBorderStringFourWay(spriteBatch, FontAssets.MouseText.Value, UIView.HoverText, vector.X, vector.Y, new Color((int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor), Color.Black, Vector2.Zero, 1f);
 
 			float positionX = this.X + spacing;
 			float positionY = this.Y + 270;//320;
@@ -199,7 +200,7 @@ namespace CheatSheet.Menus
 				Color color3 = new Color((int)((byte)((float)Main.mouseTextColor)), (int)((byte)((float)Main.mouseTextColor)), (int)((byte)((float)Main.mouseTextColor)), (int)((byte)((float)Main.mouseTextColor)));
 
 				text4 = Lang.inter[21] + " " + Main.guideItem.Name;
-				spriteBatch.DrawString(Main.fontMouseText, Lang.inter[22].Value, new Vector2((float)positionX, (float)(positionY)), color3, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+				spriteBatch.DrawString(FontAssets.MouseText.Value, Lang.inter[22].Value, new Vector2((float)positionX, (float)(positionY)), color3, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
 				//	int num60 = Main.focusRecipe;
 				int num61 = 0;
 				int num62 = 0;
@@ -208,9 +209,10 @@ namespace CheatSheet.Menus
 					int num63 = (num62 + 1) * 26;
 					if (selectedRecipe.requiredTile[num62] == -1)
 					{
-						if (num62 == 0 && !selectedRecipe.needWater && !selectedRecipe.needHoney && !selectedRecipe.needLava)
+						//if (num62 == 0 && !selectedRecipe.needWater && !selectedRecipe.needHoney && !selectedRecipe.needLava)
+						if (num62 == 0 && selectedRecipe.Conditions.Count == 0)
 						{
-							spriteBatch.DrawString(Main.fontMouseText, Lang.inter[23].Value, new Vector2((float)positionX, (float)(positionY + num63)), color3, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+							spriteBatch.DrawString(FontAssets.MouseText.Value, Lang.inter[23].Value, new Vector2((float)positionX, (float)(positionY + num63)), color3, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
 							break;
 						}
 						break;
@@ -218,31 +220,38 @@ namespace CheatSheet.Menus
 					else
 					{
 						num61++;
-						spriteBatch.DrawString(Main.fontMouseText, Lang.GetMapObjectName(MapHelper.TileToLookup(selectedRecipe.requiredTile[num62], 0)), new Vector2((float)positionX, (float)(positionY + num63)), color3, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+						spriteBatch.DrawString(FontAssets.MouseText.Value, Lang.GetMapObjectName(MapHelper.TileToLookup(selectedRecipe.requiredTile[num62], 0)), new Vector2((float)positionX, (float)(positionY + num63)), color3, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
 						num62++;
 					}
 				}
+				foreach (var condition in selectedRecipe.Conditions)
+				{
+					int y = (num61 + 1) * 26;
+					spriteBatch.DrawString(FontAssets.MouseText.Value, condition.Description, new Vector2((float)positionX, (float)(positionY + y)), color3, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+				}
+				/*
 				if (selectedRecipe.needWater)
 				{
 					int num64 = (num61 + 1) * 26;
-					spriteBatch.DrawString(Main.fontMouseText, Lang.inter[53].Value, new Vector2((float)positionX, (float)(positionY + num64)), color3, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+					spriteBatch.DrawString(FontAssets.MouseText.Value, Lang.inter[53].Value, new Vector2((float)positionX, (float)(positionY + num64)), color3, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
 				}
 				if (selectedRecipe.needHoney)
 				{
 					int num65 = (num61 + 1) * 26;
-					spriteBatch.DrawString(Main.fontMouseText, Lang.inter[58].Value, new Vector2((float)positionX, (float)(positionY + num65)), color3, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+					spriteBatch.DrawString(FontAssets.MouseText.Value, Lang.inter[58].Value, new Vector2((float)positionX, (float)(positionY + num65)), color3, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
 				}
 				if (selectedRecipe.needLava)
 				{
 					int num66 = (num61 + 1) * 26;
-					spriteBatch.DrawString(Main.fontMouseText, Lang.inter[56].Value, new Vector2((float)positionX, (float)(positionY + num66)), color3, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+					spriteBatch.DrawString(FontAssets.MouseText.Value, Lang.inter[56].Value, new Vector2((float)positionX, (float)(positionY + num66)), color3, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
 				}
+				*/
 			}
 			//else
 			//{
 			//	text4 = Lang.inter[24];
 			//}
-			//spriteBatch.DrawString(Main.fontMouseText, text4, new Vector2((float)(positionX + 50), (float)(positionY + 12)), new Microsoft.Xna.Framework.Color((int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor), 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+			//spriteBatch.DrawString(FontAssets.MouseText.Value, text4, new Vector2((float)(positionX + 50), (float)(positionY + 12)), new Microsoft.Xna.Framework.Color((int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor), 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
 		}
 
 		public override void Update()
@@ -281,6 +290,7 @@ namespace CheatSheet.Menus
 						{
 							Main.HoverItem.SetNameOverride(name);
 						}
+						/*
 						if (selectedRecipe.anyIronBar && selectedRecipe.requiredItem[i].type == 22)
 						{
 							Main.HoverItem.SetNameOverride(Lang.misc[37] + " " + Lang.GetItemNameValue(22));
@@ -301,6 +311,7 @@ namespace CheatSheet.Menus
 						{
 							Main.HoverItem.SetNameOverride(Lang.misc[37] + " " + Lang.misc[38]);
 						}
+						*/
 						//else
 						//{
 						//	ModRecipe recipe = selectedRecipe as ModRecipe;
@@ -347,7 +358,7 @@ namespace CheatSheet.Menus
 
 				Player player = Main.LocalPlayer;
 				lookupItemSlot.item.position = player.Center;
-				Item item = player.GetItem(player.whoAmI, lookupItemSlot.item, false, true);
+				Item item = player.GetItem(player.whoAmI, lookupItemSlot.item, GetItemSettings.GetItemInDropItemCheck);
 				if (item.stack > 0)
 				{
 					int num = Item.NewItem((int)player.position.X, (int)player.position.Y, player.width, player.height, item.type, item.stack, false, (int)lookupItemSlot.item.prefix, true, false);
@@ -374,7 +385,7 @@ namespace CheatSheet.Menus
 			if (num == (int)RecipeBrowserCategories.ModRecipes)
 			{
 				var mods = ModLoader.Mods.Select(x => x.Name).ToList();
-				mods = mods.Intersect(RecipeBrowserWindow.categories[0].Select(x => (recipeView.allRecipeSlot[x].recipe as ModRecipe)?.mod.Name ?? null)).ToList();
+				mods = mods.Intersect(RecipeBrowserWindow.categories[0].Select(x => (recipeView.allRecipeSlot[x].recipe /*as ModRecipe*/)?.Mod?.Name ?? null)).ToList();
 				mods.Sort();
 				if (mods.Count == 0) {
 					Main.NewText("No Recipes have been added by mods.");
@@ -383,7 +394,7 @@ namespace CheatSheet.Menus
 				if (uIImage.ForegroundColor == RecipeBrowserWindow.buttonSelectedColor)
 					lastModNameNumber = left ? (lastModNameNumber + 1) % mods.Count : (mods.Count + lastModNameNumber - 1) % mods.Count;
 				string currentMod = mods[lastModNameNumber];
-				recipeView.selectedCategory = RecipeBrowserWindow.categories[0].Where(x => recipeView.allRecipeSlot[x].recipe as ModRecipe != null && (recipeView.allRecipeSlot[x].recipe as ModRecipe).mod.Name == currentMod).ToArray();
+				recipeView.selectedCategory = RecipeBrowserWindow.categories[0].Where(x => recipeView.allRecipeSlot[x].recipe.Mod /*as ModRecipe*/ != null && (recipeView.allRecipeSlot[x].recipe/* as ModRecipe*/).Mod.Name == currentMod).ToArray();
 				recipeView.activeSlots = recipeView.selectedCategory;
 				recipeView.ReorderSlots();
 				bCategories[num].Tooltip = RecipeBrowserWindow.categNames[num] + ": " + currentMod;

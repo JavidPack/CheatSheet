@@ -39,8 +39,8 @@ namespace CheatSheet.UI
 
 		public UICheckbox(string text)
 		{
-			checkboxTexture = CheatSheet.instance.GetTexture("UI/checkBox");
-			checkmarkTexture = CheatSheet.instance.GetTexture("UI/checkMark");
+			checkboxTexture = CheatSheet.instance.GetTexture("UI/checkBox").Value;
+			checkmarkTexture = CheatSheet.instance.GetTexture("UI/checkMark").Value;
 
 			label = new UILabel(text);
 			label.Scale = .5f;

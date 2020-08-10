@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
+using Terraria.GameContent;
 
 namespace CheatSheet.Menus
 {
@@ -25,7 +26,7 @@ namespace CheatSheet.Menus
 		public PaintToolsSlot(StampInfo stampInfo)
 		{
 			this.stampInfo = stampInfo;
-			texture = Main.magicPixel;
+			texture = TextureAssets.MagicPixel.Value;
 			updateNeeded = true;
 			base.onLeftClick += (a, b) => Select();
 		}
@@ -141,7 +142,7 @@ namespace CheatSheet.Menus
 			float scale2 = 0.6f;
 			Color color = PaintToolsHotbar.buffColor(Color.White, r, g, b, a);
 			if (isSelect)
-				spriteBatch.Draw(Main.magicPixel, rectangle, color * scale2);
+				spriteBatch.Draw(TextureAssets.MagicPixel.Value, rectangle, color * scale2);
 
 			SpriteEffects effects = SpriteEffects.None;
 			if (stampInfo.bFlipHorizontal)
@@ -157,10 +158,10 @@ namespace CheatSheet.Menus
 				g = 0.95f;
 				scale2 = (a = 1f);
 				color = PaintToolsHotbar.buffColor(Color.White, r, g, b, a);
-				spriteBatch.Draw(Main.magicPixel, new Rectangle(pos.X, pos.Y, rectangle.Width, 2), color * scale2);
-				spriteBatch.Draw(Main.magicPixel, new Rectangle(pos.X, pos.Y, 2, rectangle.Height), color * scale2);
-				spriteBatch.Draw(Main.magicPixel, new Rectangle(pos.X + rectangle.Width - 2, pos.Y, 2, rectangle.Height), color * scale2);
-				spriteBatch.Draw(Main.magicPixel, new Rectangle(pos.X, pos.Y + rectangle.Height - 2, rectangle.Width, 2), color * scale2);
+				spriteBatch.Draw(TextureAssets.MagicPixel.Value, new Rectangle(pos.X, pos.Y, rectangle.Width, 2), color * scale2);
+				spriteBatch.Draw(TextureAssets.MagicPixel.Value, new Rectangle(pos.X, pos.Y, 2, rectangle.Height), color * scale2);
+				spriteBatch.Draw(TextureAssets.MagicPixel.Value, new Rectangle(pos.X + rectangle.Width - 2, pos.Y, 2, rectangle.Height), color * scale2);
+				spriteBatch.Draw(TextureAssets.MagicPixel.Value, new Rectangle(pos.X, pos.Y + rectangle.Height - 2, rectangle.Width, 2), color * scale2);
 			}
 
 			base.Draw(spriteBatch);
