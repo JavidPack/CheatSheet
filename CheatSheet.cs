@@ -235,6 +235,7 @@ namespace CheatSheet
 			// Add Buttons only to non-servers (otherwise the server will crash, since textures aren't loaded on servers)
 			if (!Main.dedServ)
 			{
+				Main.instance.LoadItem(ItemID.WaterCandle);
 				herosMod.Call(
 					// Special string
 					"AddSimpleButton",
@@ -280,6 +281,11 @@ namespace CheatSheet
 		{
 			if (!Main.dedServ)
 			{
+				for (int i = 0; i < ItemLoader.ItemCount; i++)
+				{
+					Main.instance.LoadItem(i);
+				}
+
 				try {
 					itemBrowser = new ItemBrowser(this);
 					itemBrowser.SetDefaultPosition(new Vector2(80, 300));

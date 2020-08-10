@@ -93,6 +93,31 @@ namespace CheatSheet.Menus
 
 		public ItemBrowser(CheatSheet mod)
 		{
+			var a = new[] { ItemID.AlphabetStatueA, ItemID.SilverBroadsword, ItemID.SilverPickaxe, ItemID.SilverChainmail, ItemID.HermesBoots, ItemID.DirtBlock, ItemID.FlamingArrow, ItemID.GreaterHealingPotion, ItemID.WormScarf, ItemID.Dresser, ItemID.SlimySaddle, ItemID.AlphabetStatueM};
+            foreach (var item in a)
+            {
+				Main.instance.LoadItem(item);
+            }
+			categoryIcons = new Texture2D[]
+			{
+				TextureAssets.Item[ItemID.AlphabetStatueA].Value,
+				TextureAssets.Item[ItemID.SilverBroadsword].Value,
+				TextureAssets.Item[ItemID.SilverPickaxe].Value,
+				TextureAssets.Item[ItemID.SilverChainmail].Value,
+				TextureAssets.Item[ItemID.HermesBoots].Value,
+				TextureAssets.Item[ItemID.DirtBlock].Value,
+				TextureAssets.Item[ItemID.FlamingArrow].Value,
+				TextureAssets.Item[ItemID.GreaterHealingPotion].Value,
+				TextureAssets.Item[ItemID.WormScarf].Value,
+				TextureAssets.Item[ItemID.Dresser].Value,
+				TextureAssets.Item[ItemID.ZephyrFish].Value,
+				TextureAssets.Item[ItemID.SlimySaddle].Value,
+			//  TextureAssets.Item[ItemID.FallenStar].Value,
+				TextureAssets.Item[ItemID.AlphabetStatueM].Value,
+			};
+
+
+
 			categories.Clear();
 			bCategories = new UIImage[categoryIcons.Length];
 			this.itemView = new ItemView();
