@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using Terraria;
 using Terraria.GameContent.Liquid;
 using Terraria.ID;
+using Terraria.ModLoader;
 using Terraria.ObjectData;
 
 namespace CheatSheet.Menus
@@ -797,7 +798,7 @@ namespace CheatSheet.Menus
 				for (int x = 0; x < width; x++)
 				{
 					Tile tile = BrushTiles[x, y];
-					if (tile.wall > 0)
+					if (tile.wall > 0 && tile.wall < WallLoader.WallCount)
 					{
 						Main.instance.LoadWall(tile.wall);
 						Texture2D textureWall;
@@ -823,7 +824,7 @@ namespace CheatSheet.Menus
 						Vector2 pos = position + new Vector2(x * 16, y * 16 + (16 - waterSize));
 						sb.Draw(textureWater, pos * scale, new Rectangle(0, 16 - waterSize, 16, waterSize), color, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
 					}
-					if (tile.active()) // Tile
+					if (tile.active() && tile.type < TileLoader.TileCount) // Tile
 					{
 						Main.instance.LoadTiles(tile.type);
 						Texture2D texture = Main.tileTexture[tile.type];

@@ -16,6 +16,7 @@ using System.Collections.Specialized;
 using Newtonsoft.Json.Linq;
 using Terraria.DataStructures;
 using System.Linq;
+using Terraria.ModLoader;
 
 namespace CheatSheet
 {
@@ -183,13 +184,21 @@ namespace CheatSheet
 
 		internal static void Import(PaintToolsView paintToolsView)
 		{
-			try
-			{
+			try {
 				List<PaintToolsSlot> list = new List<PaintToolsSlot>();
-				foreach (var line in File.ReadAllLines(importPath, Encoding.UTF8))
-				{
+				foreach (var line in File.ReadAllLines(importPath, Encoding.UTF8)) {
 					Tile[,] tiles = JsonConvert.DeserializeObject<Tile[,]>(File.ReadAllText(line, Encoding.UTF8));
-					list.Add(new PaintToolsSlot(GetStampInfo(tiles)));
+					for (int i = 0; i < tiles.GetLength(0); i++) { 
+						for (int j = 0; j < tiles.GetLength(1); j++) { 
+							if(tiles[i, j].wall >= WallLoader.WallCount) {
+								tiles[i, j].wall = 0;
+							}
+							if (tiles[i, j].type >= TileLoader.TileCount) {
+								tiles[i, j].type = 0;
+							}
+						}
+					}
+							list.Add(new PaintToolsSlot(GetStampInfo(tiles)));
 				}
 				paintToolsView.Add(list.ToArray());
 			}
