@@ -9,6 +9,13 @@ namespace CheatSheet
 {
 	internal static class ModUtils
 	{
+		internal static Texture2D GetItemTexture(int id)
+		{
+			Main.instance.LoadItem(id);
+
+			return TextureAssets.Item[id].Value;
+		}
+
 		// TODO: Temp until tmod is fixed
 		internal static bool AcceptedByItemGroups(this Recipe recipe, int invType, int reqType)
 		{

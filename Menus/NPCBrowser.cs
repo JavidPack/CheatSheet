@@ -43,12 +43,12 @@ namespace CheatSheet.Menus
 
 		private static Texture2D[] categoryIcons = new Texture2D[]
 		{
-			Terraria.GameContent.TextureAssets.Item[ItemID.AlphabetStatueA].Value,
-			Terraria.GameContent.TextureAssets.Item[ItemID.AlphabetStatueB].Value,
-			Terraria.GameContent.TextureAssets.Item[ItemID.AlphabetStatueT].Value,
-			Terraria.GameContent.TextureAssets.Item[ItemID.AlphabetStatueN].Value,
-			Terraria.GameContent.TextureAssets.Item[ItemID.AlphabetStatueF].Value,
-			Terraria.GameContent.TextureAssets.Item[ItemID.AlphabetStatueM].Value,
+			ModUtils.GetItemTexture(ItemID.AlphabetStatueA),
+			ModUtils.GetItemTexture(ItemID.AlphabetStatueB),
+			ModUtils.GetItemTexture(ItemID.AlphabetStatueT),
+			ModUtils.GetItemTexture(ItemID.AlphabetStatueN),
+			ModUtils.GetItemTexture(ItemID.AlphabetStatueF),
+			ModUtils.GetItemTexture(ItemID.AlphabetStatueM),
 		};
 
 		private bool swapFilter = false;
