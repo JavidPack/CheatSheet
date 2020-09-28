@@ -208,8 +208,7 @@ namespace CheatSheet
 			ConfigurationLoader.Initialized();
 			try
 			{
-				Mod herosMod = ModLoader.GetMod("HEROsMod");
-				if (herosMod != null)
+				if (ModLoader.TryGetMod("HEROsMod", out Mod herosMod))
 				{
 					SetupHEROsModIntegration(herosMod);
 				}

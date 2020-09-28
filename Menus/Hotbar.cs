@@ -853,9 +853,9 @@ namespace CheatSheet.Menus
 		public void ChangedConfiguration()
 		{
 			DisableAllWindows();
-			Mod herosMod = ModLoader.GetMod("HEROsMod");
-			bool heros = ModLoader.GetMod("HEROsMod") != null;
-			bool recentHeros = herosMod != null && herosMod.Version >= new Version(0, 2, 2);
+
+			bool heros = ModLoader.TryGetMod("HEROsMod",out Mod herosMod);
+			bool recentHeros = heros && herosMod.Version >= new Version(0, 2, 2);
 			bool itemBrowserPermissions = true;
 			if (Main.netMode == 1 && recentHeros && herosMod.Call("HasPermission", Main.myPlayer, "ItemBrowser") is bool resultA)
 				itemBrowserPermissions = resultA;
@@ -1014,8 +1014,7 @@ namespace CheatSheet.Menus
 			//	mod.eventManagerHotbar.Show();
 			//}
 
-			Mod herosMod = ModLoader.GetMod("HEROsMod");
-			if (herosMod != null) {
+			if (ModLoader.TryGetMod("HEROsMod",out Mod herosMod)) {
 				herosMod.Call("HideHotbar");
 			}
 		}
