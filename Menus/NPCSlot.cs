@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
+using Terraria.GameContent;
 
 namespace CheatSheet.Menus
 {
@@ -22,8 +23,8 @@ namespace CheatSheet.Menus
 
 		public int index = 0;
 
-		public static Texture2D backgroundTexture = Main.inventoryBack9Texture;
-		public static Texture2D filteredBackgroundTexture = Main.inventoryBack5Texture;
+		public static Texture2D backgroundTexture = TextureAssets.InventoryBack9.Value;
+		public static Texture2D filteredBackgroundTexture = TextureAssets.InventoryBack5.Value;
 
 		public bool functionalSlot;
 		private bool rightClicking;
@@ -92,7 +93,7 @@ namespace CheatSheet.Menus
 
 		private void Slot2_onHover(object sender, EventArgs e)
 		{
-			UIView.HoverText = displayName + (npc.modNPC != null ? " [" + npc.modNPC.mod.Name + "]" : "") + (isFiltered ? " [DISABLED]" : "");
+			UIView.HoverText = displayName + (npc.modNPC != null ? " [" + npc.modNPC.Mod.Name + "]" : "") + (isFiltered ? " [DISABLED]" : "");
 			NPCBrowser.hoverNpc = npc;
 			//UIView.HoverItem = this.item.Clone();
 			//	hovering = true;
@@ -254,9 +255,9 @@ namespace CheatSheet.Menus
 			Texture2D useBackgroundTexture = isFiltered ? filteredBackgroundTexture : backgroundTexture;
 
 			spriteBatch.Draw(useBackgroundTexture, base.DrawPosition, null, base.BackgroundColor, 0f, Vector2.Zero, base.Scale, SpriteEffects.None, 0f);
-			Texture2D texture2D = Main.npcTexture[npcType];
+			Texture2D texture2D = TextureAssets.Npc[npcType].Value;
 			Rectangle rectangle2;
-			rectangle2 = new Rectangle(0, 0, Main.npcTexture[npcType].Width, Main.npcTexture[npcType].Height / Main.npcFrameCount[npcType]);
+			rectangle2 = new Rectangle(0, 0, TextureAssets.Npc[npcType].Value.Width, TextureAssets.Npc[npcType].Value.Height / Main.npcFrameCount[npcType]);
 
 			float num = 1f;
 			float num2 = (float)Slot.backgroundTexture.Width * base.Scale * 0.6f;

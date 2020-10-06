@@ -96,7 +96,7 @@ namespace CheatSheet.UI
 
 		public UIScrollView()
 		{
-			ScrollbgTexture = CheatSheet.instance.GetTexture("UI/Images.UIKit.scrollbgEdge");
+			ScrollbgTexture = CheatSheet.instance.GetTexture("UI/Images.UIKit.scrollbgEdge").Value;
 			this.scrollBar.onMouseDown += new UIView.ClickEventHandler(this.scrollBar_onMouseDown);
 			this.AddChild(this.scrollBar);
 		}

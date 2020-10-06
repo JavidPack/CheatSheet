@@ -1,6 +1,7 @@
 ﻿using CheatSheet.UI;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -34,7 +35,7 @@ namespace CheatSheet.Menus
 
 		public static UIImage GetButton(Mod mod)
 		{
-			button = new UIImage(Main.buffTexture[BuffID.Summoning]);
+			button = new UIImage(TextureAssets.Buff[BuffID.Summoning].Value);
 			button.Tooltip = CSText("MinionSlotBooster");
 			button.onRightClick += (s, e) =>
 			{

@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
+using Terraria.GameContent;
 
 namespace CheatSheet.Menus
 {
@@ -56,7 +57,7 @@ namespace CheatSheet.Menus
 		{
 			base.Width = (this.slotSize + (float)this.slotSpace) * (float)this.slotColumns + (float)this.slotSpace + 20f;
 			base.Height = 200f;
-			this.allNPCSlot = new NPCSlot[Main.npcTexture.Length + negativeSlots];
+			this.allNPCSlot = new NPCSlot[TextureAssets.Npc.Length + negativeSlots];
 			for (int i = 0; i < this.allNPCSlot.Length; i++)
 			{
 				int type = (i >= this.allNPCSlot.Length - negativeSlots) ? -(i - this.allNPCSlot.Length + negativeSlots + 1) : i;

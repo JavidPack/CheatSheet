@@ -23,7 +23,7 @@ namespace CheatSheet.Menus
 			bossDownerWindow.SetDefaultPosition(new Vector2(200, 200));
 			bossDownerWindow.Visible = false;
 
-			button = new UIImage(Main.itemTexture[ItemID.MechanicalSkull]);
+			button = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.MechanicalSkull].Value);
 			button.Tooltip = "Open Boss Downer";
 			button.onLeftClick += new EventHandler(bBossDownerToggle_onLeftClick);
 			//+= (s, e) =>
@@ -65,7 +65,7 @@ namespace CheatSheet.Menus
 			base.Width = 450;
 			base.Height = 357;
 
-			Texture2D texture = mod.GetTexture("UI/closeButton");
+			Texture2D texture = mod.GetTexture("UI/closeButton").Value;
 			UIImage uIImage = new UIImage(texture);
 			uIImage.Anchor = AnchorPosition.TopRight;
 			uIImage.Position = new Vector2(base.Width - this.spacing, this.spacing);

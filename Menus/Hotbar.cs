@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -116,20 +117,20 @@ namespace CheatSheet.Menus
 			//	this.AddChild(this.timeWindow);
 			//	this.AddChild(this.npcSpawnWindow);
 			//	this.AddChild(this.weatherWindow);
-			Hotbar.loginTexture = mod.GetTexture("UI/Images.login");// UIView.GetEmbeddedTexture("Images.login.png");
-			Hotbar.logoutTexture = mod.GetTexture("UI/Images.logout"); //UIView.GetEmbeddedTexture("Images.logout.png");
+			Hotbar.loginTexture = mod.GetTexture("UI/Images.login").Value;// UIView.GetEmbeddedTexture("Images.login.png");
+			Hotbar.logoutTexture = mod.GetTexture("UI/Images.logout").Value; //UIView.GetEmbeddedTexture("Images.logout.png");
 																	   //	this.bLogin = new UIImage(Hotbar.loginTexture);
 																	   //		bLogin = new UIImage(mod.GetTexture("UI/Images.login"));
 			base.Visible = false;
 			base.UpdateWhenOutOfBounds = true;
 			//	Hotbar.groupWindow = new GroupManagementWindow();
-			this.button = new UIImage(mod.GetTexture("UI/Images.CollapseBar.CollapseButtonHorizontal"));//new UIImage(UIView.GetEmbeddedTexture("Images.CollapseBar.CollapseButtonHorizontal.png"));
+			this.button = new UIImage(mod.GetTexture("UI/Images.CollapseBar.CollapseButtonHorizontal").Value);//new UIImage(UIView.GetEmbeddedTexture("Images.CollapseBar.CollapseButtonHorizontal.png"));
 			this.button.UpdateWhenOutOfBounds = true;
-			this.arrow = new UIImage(mod.GetTexture("UI/Images.CollapseBar.CollapseArrowHorizontal"));  //new UIImage(UIView.GetEmbeddedTexture("Images.CollapseBar.CollapseArrowHorizontal.png"));
+			this.arrow = new UIImage(mod.GetTexture("UI/Images.CollapseBar.CollapseArrowHorizontal").Value);  //new UIImage(UIView.GetEmbeddedTexture("Images.CollapseBar.CollapseArrowHorizontal.png"));
 
 			//		bToggleEnemies = new UIImage(mod.GetTexture("UI/Images.npcIcon"));
-			//		bToggleBlockReach = new UIImage(Main.itemTexture[407]);
-			//		bFlyCamera = new UIImage(Main.itemTexture[493]);
+			//		bToggleBlockReach = new UIImage(Terraria.GameContent.TextureAssets.Item[407].Value);
+			//		bFlyCamera = new UIImage(Terraria.GameContent.TextureAssets.Item[493].Value);
 			//		bRevealMap = new UIImage(mod.GetTexture("UI/Images.canIcon"));// Hotbar.mapTexture);
 			//		bWaypoints = new UIImage(mod.GetTexture("UI/Images.waypointIcon"));
 			//		bGroupManager = new UIImage(mod.GetTexture("UI/Images.manageGroups"));
@@ -141,17 +142,17 @@ namespace CheatSheet.Menus
 
 			//	Main.instance.LoadNPC(NPCID.KingSlime);
 
-			bToggleItemBrowser = new UIImage(Main.itemTexture[ItemID.WorkBench]);
-			bToggleNPCBrowser = new UIImage(mod.GetTexture("UI/Images.npcIcon"));
-			bToggleClearMenu = new UIImage(Main.itemTexture[ItemID.TrashCan]);
-			bToggleRecipeBrowser = new UIImage(Main.itemTexture[ItemID.CookingPot]);
-			bToggleExtendedCheat = new UIImage(Main.itemTexture[ItemID.CellPhone]);
-			bTogglePaintTools = new UIImage(Main.itemTexture[ItemID.Paintbrush]);
-			bCycleExtraAccessorySlots = new UIImage(Main.itemTexture[ItemID.DemonHeart]);
-			bVacuum = new UIImage(mod.GetTexture("UI/Images.bVacuum"));
-			bToggleNPCButcherer = new UIImage(Main.itemTexture[ItemID.Skull]);
-			bToggleQuickTeleport = new UIImage(Main.itemTexture[ItemID.WoodenDoor]);
-			//bToggleEventManager = new UIImage(Main.itemTexture[ItemID.PirateMap]);
+			bToggleItemBrowser = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.WorkBench].Value);
+			bToggleNPCBrowser = new UIImage(mod.GetTexture("UI/Images.npcIcon").Value);
+			bToggleClearMenu = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.TrashCan].Value);
+			bToggleRecipeBrowser = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.CookingPot].Value);
+			bToggleExtendedCheat = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.CellPhone].Value);
+			bTogglePaintTools = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.Paintbrush].Value);
+			bCycleExtraAccessorySlots = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.DemonHeart].Value);
+			bVacuum = new UIImage(mod.GetTexture("UI/Images.bVacuum").Value);
+			bToggleNPCButcherer = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.Skull].Value);
+			bToggleQuickTeleport = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.WoodenDoor].Value);
+			//bToggleEventManager = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.PirateMap].Value);
 
 			this.arrow.UpdateWhenOutOfBounds = true;
 			this.button.Anchor = AnchorPosition.Top;
@@ -344,10 +345,10 @@ namespace CheatSheet.Menus
 			if (Visible && (IsMouseInside() || button.MouseInside))
 			{
 				Main.LocalPlayer.mouseInterface = true;
-				Main.LocalPlayer.showItemIcon = false;
+				Main.LocalPlayer.cursorItemIconEnabled = false;
 			}
 
-			float x = Main.fontMouseText.MeasureString(UIView.HoverText).X;
+			float x = FontAssets.MouseText.Value.MeasureString(UIView.HoverText).X;
 			Vector2 vector = new Vector2((float)Main.mouseX, (float)Main.mouseY) + new Vector2(16f);
 			if (vector.Y > (float)(Main.screenHeight - 30))
 			{
@@ -357,7 +358,7 @@ namespace CheatSheet.Menus
 			{
 				vector.X = (float)(Main.screenWidth - 460);
 			}
-			Utils.DrawBorderStringFourWay(spriteBatch, Main.fontMouseText, UIView.HoverText, vector.X, vector.Y, new Color((int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor), Color.Black, Vector2.Zero, 1f);
+			Utils.DrawBorderStringFourWay(spriteBatch, FontAssets.MouseText.Value, UIView.HoverText, vector.X, vector.Y, new Color((int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor), Color.Black, Vector2.Zero, 1f);
 		}
 
 		private void bToggleRecipeBrowser_onLeftClick(object sender, EventArgs e)
@@ -852,9 +853,9 @@ namespace CheatSheet.Menus
 		public void ChangedConfiguration()
 		{
 			DisableAllWindows();
-			Mod herosMod = ModLoader.GetMod("HEROsMod");
-			bool heros = ModLoader.GetMod("HEROsMod") != null;
-			bool recentHeros = herosMod != null && herosMod.Version >= new Version(0, 2, 2);
+
+			bool heros = ModLoader.TryGetMod("HEROsMod",out Mod herosMod);
+			bool recentHeros = heros && herosMod.Version >= new Version(0, 2, 2);
 			bool itemBrowserPermissions = true;
 			if (Main.netMode == 1 && recentHeros && herosMod.Call("HasPermission", Main.myPlayer, "ItemBrowser") is bool resultA)
 				itemBrowserPermissions = resultA;
@@ -1013,8 +1014,7 @@ namespace CheatSheet.Menus
 			//	mod.eventManagerHotbar.Show();
 			//}
 
-			Mod herosMod = ModLoader.GetMod("HEROsMod");
-			if (herosMod != null) {
+			if (ModLoader.TryGetMod("HEROsMod",out Mod herosMod)) {
 				herosMod.Call("HideHotbar");
 			}
 		}
@@ -1092,7 +1092,7 @@ namespace CheatSheet.Menus
 //				Main.LocalPlayer.showItemIcon = false;
 //			}
 
-//			float x = Main.fontMouseText.MeasureString(UIView.HoverText).X;
+//			float x = FontAssets.MouseText.Value.MeasureString(UIView.HoverText).X;
 //			Vector2 vector = new Vector2((float)Main.mouseX, (float)Main.mouseY) + new Vector2(16f);
 //			if (vector.Y > (float)(Main.screenHeight - 30))
 //			{
@@ -1102,7 +1102,7 @@ namespace CheatSheet.Menus
 //			{
 //				vector.X = (float)(Main.screenWidth - 460);
 //			}
-//			Utils.DrawBorderStringFourWay(spriteBatch, Main.fontMouseText, UIView.HoverText, vector.X, vector.Y, new Color((int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor), Color.Black, Vector2.Zero, 1f);
+//			Utils.DrawBorderStringFourWay(spriteBatch, FontAssets.MouseText.Value, UIView.HoverText, vector.X, vector.Y, new Color((int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor), Color.Black, Vector2.Zero, 1f);
 //		}
 
 //		public override void Update()

@@ -3,6 +3,7 @@ using CheatSheet.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ID;
 
 namespace CheatSheet.Menus
@@ -31,11 +32,11 @@ namespace CheatSheet.Menus
 			base.Visible = false;
 			//base.UpdateWhenOutOfBounds = true;
 
-			bDungeon = new UIImage(Main.itemTexture[ItemID.DungeonDoor]);
-			bSpawn = new UIImage(Main.itemTexture[ItemID.WoodenDoor]);
-			bHell = new UIImage(Main.itemTexture[ItemID.ObsidianDoor]);
-			bTemple = new UIImage(Main.itemTexture[ItemID.LihzahrdDoor]);
-			bRandom = new UIImage(Main.itemTexture[ItemID.SpookyDoor]);
+			bDungeon = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.DungeonDoor].Value);
+			bSpawn = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.WoodenDoor].Value);
+			bHell = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.ObsidianDoor].Value);
+			bTemple = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.LihzahrdDoor].Value);
+			bRandom = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.SpookyDoor].Value);
 
 			bDungeon.Tooltip = CSText("Dungeon");
 			bSpawn.Tooltip = CSText("Spawnpoint");
@@ -344,7 +345,7 @@ namespace CheatSheet.Menus
 				Main.LocalPlayer.mouseInterface = true;
 			}
 
-			float x = Main.fontMouseText.MeasureString(UIView.HoverText).X;
+			float x = FontAssets.MouseText.Value.MeasureString(UIView.HoverText).X;
 			Vector2 vector = new Vector2((float)Main.mouseX, (float)Main.mouseY) + new Vector2(16f);
 			if (vector.Y > (float)(Main.screenHeight - 30))
 			{
@@ -354,7 +355,7 @@ namespace CheatSheet.Menus
 			{
 				vector.X = (float)(Main.screenWidth - 460);
 			}
-			Utils.DrawBorderStringFourWay(spriteBatch, Main.fontMouseText, UIView.HoverText, vector.X, vector.Y, new Color((int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor), Color.Black, Vector2.Zero, 1f);
+			Utils.DrawBorderStringFourWay(spriteBatch, FontAssets.MouseText.Value, UIView.HoverText, vector.X, vector.Y, new Color((int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor), Color.Black, Vector2.Zero, 1f);
 		}
 
 		private void DisableAllWindows()

@@ -567,7 +567,7 @@ namespace CheatSheet
 			return result;
 		}
 		*/
-
+		/*
 		public static bool canDrawColorTile(Tile tile)
 		{
 			return tile != null && tile.color() > 0 && (int)tile.color() < Main.numTileColors && Main.tileAltTextureDrawn[(int)tile.type, (int)tile.color()] && Main.tileAltTextureInit[(int)tile.type, (int)tile.color()];
@@ -576,6 +576,7 @@ namespace CheatSheet
 		{
 			return tile != null && tile.wallColor() > 0 && Main.wallAltTextureDrawn[tile.wall, tile.wallColor()] && Main.wallAltTextureInit[tile.wall, tile.wallColor()];
 		}
+		*/
 
 		/*
 		public static Color[] GetHalfTile(Tile tile, Texture2D textureTile)

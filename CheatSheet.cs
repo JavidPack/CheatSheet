@@ -11,10 +11,13 @@ using System.Linq;
 using System.Net;
 using System.Reflection;
 using Terraria;
+using Terraria.Chat;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
+using Terraria.UI.Chat;
 
 // TODO: move windows below inventory
 // TODO: Filter recipes with unobtainables.
@@ -205,8 +208,7 @@ namespace CheatSheet
 			ConfigurationLoader.Initialized();
 			try
 			{
-				Mod herosMod = ModLoader.GetMod("HEROsMod");
-				if (herosMod != null)
+				if (ModLoader.TryGetMod("HEROsMod", out Mod herosMod))
 				{
 					SetupHEROsModIntegration(herosMod);
 				}
@@ -232,13 +234,14 @@ namespace CheatSheet
 			// Add Buttons only to non-servers (otherwise the server will crash, since textures aren't loaded on servers)
 			if (!Main.dedServ)
 			{
+				Main.instance.LoadItem(ItemID.WaterCandle);
 				herosMod.Call(
 					// Special string
 					"AddSimpleButton",
 					// Name of Permission governing the availability of the button/tool
 					ModifySpawnRateMultiplier_Permission,
 					// Texture of the button. 38x38 is recommended for HERO's Mod. Also, a white outline on the icon similar to the other icons will look good.
-					Main.itemTexture[ItemID.WaterCandle],
+					Terraria.GameContent.TextureAssets.Item[ItemID.WaterCandle].Value,
 					// A method that will be called when the button is clicked
 					(Action)SpawnRateMultiplier.HEROsButtonPressed,
 					// A method that will be called when the player's permissions have changed
@@ -277,6 +280,11 @@ namespace CheatSheet
 		{
 			if (!Main.dedServ)
 			{
+				for (int i = 0; i < ItemLoader.ItemCount; i++)
+				{
+					Main.instance.LoadItem(i);
+				}
+
 				try {
 					itemBrowser = new ItemBrowser(this);
 					itemBrowser.SetDefaultPosition(new Vector2(80, 300));
@@ -355,7 +363,7 @@ namespace CheatSheet
 				bool oneUpdated = false;
 				foreach (var item in paintToolsUI.view.slotList)
 				{
-					if (item.texture == Main.magicPixel)
+					if (item.texture == TextureAssets.MagicPixel.Value)
 					{
 						item.texture = item.MakeThumbnail(item.stampInfo);
 						oneUpdated = true;
@@ -369,7 +377,7 @@ namespace CheatSheet
 
 		//public override void PostDrawFullscreenMap(ref string mouseText)
 		//{
-		//	Main.spriteBatch.DrawString(Main.fontMouseText, "Testing Testing", new Vector2(Main.screenWidth / 2, Main.screenHeight / 2), Color.Pink, 0.0f, new Vector2(), 0.8f, SpriteEffects.None, 0.0f);
+		//	Main.spriteBatch.DrawString(FontAssets.MouseText.Value, "Testing Testing", new Vector2(Main.screenWidth / 2, Main.screenHeight / 2), Color.Pink, 0.0f, new Vector2(), 0.8f, SpriteEffects.None, 0.0f);
 		//}
 
 		private int lastmode = -1;
@@ -398,7 +406,7 @@ namespace CheatSheet
 					"CheatSheet: All Cheat Sheet",
 					delegate
 					{
-						GetGlobalItem<AllItemsMenu>().DrawUpdateAll(Main.spriteBatch);
+						ModContent.GetInstance<AllItemsMenu>().DrawUpdateAll(Main.spriteBatch);
 						return true;
 					},
 					InterfaceScaleType.UI)
@@ -408,7 +416,7 @@ namespace CheatSheet
 					"CheatSheet: Paint Tools",
 					delegate
 					{
-						GetGlobalItem<AllItemsMenu>().DrawUpdatePaintTools(Main.spriteBatch);
+						ModContent.GetInstance<AllItemsMenu>().DrawUpdatePaintTools(Main.spriteBatch);
 						return true;
 					},
 					InterfaceScaleType.Game)
@@ -422,7 +430,7 @@ namespace CheatSheet
 					"CheatSheet: Extra Accessories",
 					delegate
 					{
-						GetGlobalItem<AllItemsMenu>().DrawUpdateExtraAccessories(Main.spriteBatch);
+						ModContent.GetInstance<AllItemsMenu>().DrawUpdateExtraAccessories(Main.spriteBatch);
 						return true;
 					},
 					InterfaceScaleType.UI)
@@ -443,7 +451,7 @@ namespace CheatSheet
 
 		//public override void PostDrawInterface(SpriteBatch spriteBatch)
 		//{
-		//	//Main.spriteBatch.DrawString(Main.fontMouseText, "Drawn Always", new Vector2(Main.screenWidth/2, Main.screenHeight/2 + 20), Color.Aquamarine, 0.0f, new Vector2(), 0.8f, SpriteEffects.None, 0.0f);
+		//	//Main.spriteBatch.DrawString(FontAssets.MouseText.Value, "Drawn Always", new Vector2(Main.screenWidth/2, Main.screenHeight/2 + 20), Color.Aquamarine, 0.0f, new Vector2(), 0.8f, SpriteEffects.None, 0.0f);
 		//	AllItemsMenu menu = (AllItemsMenu)this.GetGlobalItem("AllItemsMenu");
 		//	menu.DrawUpdateAll(spriteBatch);
 		//}
@@ -514,7 +522,7 @@ namespace CheatSheet
 					int netID = reader.ReadInt32();
 					NPCSlot.HandleNPC(npcType, netID, true, whoAmI);
 					key = "Mods.CheatSheet.MobBrowser.SpawnNPCNotification";
-					NetMessage.BroadcastChatMessage(NetworkText.FromKey(key, netID, Netplay.Clients[whoAmI].Name), Color.Azure);
+					ChatHelper.BroadcastChatMessage(NetworkText.FromKey(key, netID, Netplay.Clients[whoAmI].Name), Color.Azure);
 					//message = "Spawned " + netID + " by " + Netplay.Clients[whoAmI].Name;
 					//NetMessage.SendData(25, -1, -1, message, 255, Color.Azure.R, Color.Azure.G, Color.Azure.B, 0);
 					break;
@@ -539,14 +547,14 @@ namespace CheatSheet
 					}
 					//message += Netplay.Clients[whoAmI].Name;
 					QuickClearHotbar.HandleQuickClear(clearType, true, whoAmI);
-					NetMessage.BroadcastChatMessage(NetworkText.FromKey(key, Netplay.Clients[whoAmI].Name), Color.Azure);
+					ChatHelper.BroadcastChatMessage(NetworkText.FromKey(key, Netplay.Clients[whoAmI].Name), Color.Azure);
 					//NetMessage.SendData(25, -1, -1, message, 255, Color.Azure.R, Color.Azure.G, Color.Azure.B, 0);
 					break;
 
 				case CheatSheetMessageType.VacuumItems:
 					Hotbar.HandleVacuum(true, whoAmI);
 					key = "Mods.CheatSheet.Vacuum.VacuumNotification";
-					NetMessage.BroadcastChatMessage(NetworkText.FromKey(key, Netplay.Clients[whoAmI].Name), Color.Azure);
+					ChatHelper.BroadcastChatMessage(NetworkText.FromKey(key, Netplay.Clients[whoAmI].Name), Color.Azure);
 					//message = "Items on the ground were vacuumed by " + Netplay.Clients[whoAmI].Name;
 					//NetMessage.SendData(25, -1, -1, message, 255, Color.Azure.R, Color.Azure.G, Color.Azure.B, 0);
 					break;
@@ -554,7 +562,7 @@ namespace CheatSheet
 				case CheatSheetMessageType.ButcherNPCs:
 					NPCButchererHotbar.HandleButcher(reader.ReadInt32(), true);
 					key = "Mods.CheatSheet.Butcherer.ButcherNotification";
-					NetMessage.BroadcastChatMessage(NetworkText.FromKey(key, Netplay.Clients[whoAmI].Name), Color.Azure);
+					ChatHelper.BroadcastChatMessage(NetworkText.FromKey(key, Netplay.Clients[whoAmI].Name), Color.Azure);
 					//message = "NPCs were butchered by " + Netplay.Clients[whoAmI].Name;
 					//NetMessage.SendData(25, -1, -1, message, 255, Color.Azure.R, Color.Azure.G, Color.Azure.B, 0);
 					break;
@@ -740,7 +748,7 @@ namespace CheatSheet
 				tmodversion = ModLoader.version.ToString();
 				modversion = CheatSheet.instance.Version.ToString();
 				mod = "CheatSheet";
-				platform = ModLoader.compressedPlatformRepresentation;
+				platform = ModLoader.CompressedPlatformRepresentation;
 			}
 
 			public ReportData(Exception e) : this()

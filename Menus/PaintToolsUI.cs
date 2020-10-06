@@ -1,5 +1,6 @@
 ﻿using CheatSheet.CustomUI;
 using CheatSheet.UI;
+using IL.Terraria.GameContent;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json.Linq;
@@ -61,7 +62,7 @@ namespace CheatSheet.Menus
 			this.view.Position = new Vector2(this.spacing, 55f);
 			this.AddChild(this.view);
 
-			Texture2D texture = mod.GetTexture("UI/closeButton");
+			Texture2D texture = mod.GetTexture("UI/closeButton").Value;
 			UIImage uIImage = new UIImage(texture);
 			uIImage.Anchor = AnchorPosition.TopRight;
 			uIImage.Position = new Vector2(base.Width - this.spacing, this.spacing);
@@ -70,7 +71,7 @@ namespace CheatSheet.Menus
 
 			var snaptexture = mod.GetTexture("UI/Snap");
 			btnSnap = new UIImageListButton(
-				(new ImageList(mod.GetTexture("UI/Snap"), 28, 28)).listTexture,
+				(new ImageList(mod.GetTexture("UI/Snap").Value, 28, 28)).listTexture,
 				new List<object>() {
 					SnapType.TopLeft, SnapType.TopCenter, SnapType.TopRight,
 					SnapType.LeftCenter, SnapType.Center, SnapType.RightCenter,
@@ -89,35 +90,35 @@ namespace CheatSheet.Menus
 
 			var position = btnSnap.Position;
 
-			uIImage = new UIImage(Main.itemTexture[ItemID.TrashCan]);
+			uIImage = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.TrashCan].Value);
 			position = position.Offset(btnSnap.Width + this.spacing, 0);
 			uIImage.Position = position;
 			uIImage.onLeftClick += (a, b) => view.RemoveSelectedItem();
 			uIImage.Tooltip = CSText("DeleteSelection");
 			this.AddChild(uIImage);
 
-			uIImage = new UIImage(Main.itemTexture[ItemID.AlphabetStatueI]);
+			uIImage = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.AlphabetStatueI].Value);
 			position = position.Offset(uIImage.Width + this.spacing, 0);
 			uIImage.Position = position;
 			uIImage.onLeftClick += (a, b) => PaintToolsEx.Import(this.view);
 			uIImage.Tooltip = CSText("ImportData");
 			this.AddChild(uIImage);
 
-			uIImage = new UIImage(Main.itemTexture[ItemID.AlphabetStatueE]);
+			uIImage = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.AlphabetStatueE].Value);
 			position = position.Offset(uIImage.Width + this.spacing, 0);
 			uIImage.Position = position;
 			uIImage.onLeftClick += (a, b) => PaintToolsEx.Export(this.view);
 			uIImage.Tooltip = CSText("ExportData");
 			this.AddChild(uIImage);
 
-			uIImage = new UIImage(Main.itemTexture[ItemID.AlphabetStatueW]);
+			uIImage = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.AlphabetStatueW].Value);
 			position = position.Offset(uIImage.Width + this.spacing, 0);
 			uIImage.Position = position;
 			uIImage.onLeftClick += (a, b) => PaintToolsEx.OnlineImport(this.view);
 			uIImage.Tooltip = "Load Online Schematics Database";
 			this.AddChild(uIImage);
 
-			uIImage = new UIImage(Main.itemTexture[ItemID.AlphabetStatueN]);
+			uIImage = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.AlphabetStatueN].Value);
 			position = position.Offset(uIImage.Width + this.spacing, 0);
 			uIImage.Position = position;
 			uIImage.onLeftClick += (a, b) => PaintToolsEx.LoadNextX(this.view);
@@ -138,13 +139,13 @@ namespace CheatSheet.Menus
 			infoMessage.Position = new Vector2(30, 10);
 			infoPanel.AddChild(infoMessage);
 
-			upVoteButton = new UIImage(CheatSheet.instance.GetTexture("UI/VoteUp"));
+			upVoteButton = new UIImage(CheatSheet.instance.GetTexture("UI/VoteUp").Value);
 			upVoteButton.Position = new Vector2(0, 0);
 			upVoteButton.onLeftClick += (a, b) => Vote(true);
 			upVoteButton.Tooltip = "Vote Up";
 			infoPanel.AddChild(upVoteButton);
 
-			downVoteButton = new UIImage(CheatSheet.instance.GetTexture("UI/VoteDown"));
+			downVoteButton = new UIImage(CheatSheet.instance.GetTexture("UI/VoteDown").Value);
 			downVoteButton.Position = new Vector2(0, 24);
 			downVoteButton.onLeftClick += (a, b) => Vote(false);
 			downVoteButton.Tooltip = "Vote Down";
@@ -169,7 +170,7 @@ namespace CheatSheet.Menus
 			submitInput.Width = 200;
 			submitPanel.AddChild(submitInput);
 
-			submitButton = new UIImage(Terraria.Graphics.TextureManager.Load("Images/UI/ButtonCloudActive"));
+			submitButton = new UIImage(Main.Assets.Request<Texture2D>("Images/UI/ButtonCloudActive").Value);
 			submitButton.Position = new Vector2(178, -2);
 			submitButton.onLeftClick += (a, b) => Submit();
 			submitButton.Tooltip = "Submit to Schematics Browser";
@@ -345,7 +346,7 @@ namespace CheatSheet.Menus
 			if (Visible && IsMouseInside())
 			{
 				Main.LocalPlayer.mouseInterface = true;
-				Main.LocalPlayer.showItemIcon = false;
+				Main.LocalPlayer.cursorItemIconEnabled = false;
 			}
 		}
 

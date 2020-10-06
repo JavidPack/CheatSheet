@@ -515,7 +515,7 @@ namespace CheatSheet.UI
 				// Debug Draw UIView area.
 				//if(Parent != null)
 				//{
-				//	spriteBatch.Draw(Main.magicPixel, new Rectangle((int)(Position.X + Parent.X), (int)(Position.Y + Parent.Y), (int)Width, (int)Height), foregroundColor * 0.6f);
+				//	spriteBatch.Draw(TextureAssets.MagicPixel.Value, new Rectangle((int)(Position.X + Parent.X), (int)(Position.Y + Parent.Y), (int)Width, (int)Height), foregroundColor * 0.6f);
 				//}
 			}
 		}

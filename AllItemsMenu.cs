@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ModLoader;
 using Terraria.UI;
 
@@ -92,7 +93,7 @@ namespace CheatSheet
 			if (Main.playerInventory && Main.EquipPage == 0)
 			{
 				Point value = new Point(Main.mouseX, Main.mouseY);
-				Rectangle r = new Rectangle(0, 0, (int)((float)Main.inventoryBackTexture.Width * Main.inventoryScale), (int)((float)Main.inventoryBackTexture.Height * Main.inventoryScale));
+				Rectangle r = new Rectangle(0, 0, (int)((float)TextureAssets.InventoryBack.Value.Width * Main.inventoryScale), (int)((float)TextureAssets.InventoryBack.Value.Height * Main.inventoryScale));
 
 				CheatSheetPlayer csp = Main.LocalPlayer.GetModPlayer<CheatSheetPlayer>();
 				for (int i = 0; i < csp.numberExtraAccessoriesEnabled; i++)

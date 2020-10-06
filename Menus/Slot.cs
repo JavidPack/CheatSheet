@@ -5,6 +5,8 @@ using Microsoft.Xna.Framework.Input;
 using ReLogic.Graphics;
 using System;
 using Terraria;
+using Terraria.Audio;
+using Terraria.GameContent;
 
 namespace CheatSheet.Menus
 {
@@ -14,7 +16,7 @@ namespace CheatSheet.Menus
 
 		public int index = -1;
 
-		public static Texture2D backgroundTexture = Main.inventoryBack9Texture;
+		public static Texture2D backgroundTexture = TextureAssets.InventoryBack9.Value;
 
 		public bool functionalSlot;
 		private bool rightClicking;
@@ -64,7 +66,7 @@ namespace CheatSheet.Menus
 						{
 							if (j == 0)
 							{
-								Main.PlaySound(18, -1, -1, 1);
+								SoundEngine.PlaySound(18, -1, -1, 1);
 							}
 							if (Main.mouseItem.type == 0)
 							{
@@ -102,7 +104,7 @@ namespace CheatSheet.Menus
 			//UIView.HoverItem = this.item.Clone();
 
 			//Main.craftingHide = true;
-			Main.hoverItemName = this.item.Name;// + (item.modItem != null ? " " + item.modItem.mod.Name : "???");
+			Main.hoverItemName = this.item.Name;// + (item.modItem != null ? " " + item.modItem.Mod.Name : "???");
 												//if (item.stack > 1)
 												//{
 												//	object hoverItemName = Main.hoverItemName;
@@ -115,7 +117,7 @@ namespace CheatSheet.Menus
 												//		});
 												//}
 			Main.HoverItem = item.Clone();
-			Main.HoverItem.SetNameOverride(Main.HoverItem.Name + (Main.HoverItem.modItem != null ? " [" + Main.HoverItem.modItem.mod.Name + "]" : ""));
+			Main.HoverItem.SetNameOverride(Main.HoverItem.Name + (Main.HoverItem.modItem != null ? " [" + Main.HoverItem.modItem.Mod.Name + "]" : ""));
 		}
 
 		private void Slot2_onLeftClick(object sender, EventArgs e)
@@ -141,7 +143,7 @@ namespace CheatSheet.Menus
 				Main.mouseItem.netDefaults(item.netID);
 				Main.mouseItem.stack = Main.mouseItem.maxStack;
 				Main.playerInventory = true;
-				Main.PlaySound(18, -1, -1, 1);
+				SoundEngine.PlaySound(18, -1, -1, 1);
 			}
 		}
 
@@ -226,7 +228,7 @@ namespace CheatSheet.Menus
 
 						if (j == 0)
 						{
-							Main.PlaySound(18, -1, -1, 1);
+							SoundEngine.PlaySound(18, -1, -1, 1);
 						}
 						if (Main.mouseItem.type == 0)
 						{
@@ -257,7 +259,7 @@ namespace CheatSheet.Menus
 		public override void Draw(SpriteBatch spriteBatch)
 		{
 			spriteBatch.Draw(Slot.backgroundTexture, base.DrawPosition, null, Color.White, 0f, Vector2.Zero, base.Scale, SpriteEffects.None, 0f);
-			Texture2D texture2D = Main.itemTexture[this.item.type];
+			Texture2D texture2D = Terraria.GameContent.TextureAssets.Item[this.item.type].Value;
 			Rectangle rectangle2;
 			if (Main.itemAnimations[item.type] != null)
 			{
@@ -291,7 +293,7 @@ namespace CheatSheet.Menus
 			}
 			if (this.item.stack > 1)
 			{
-				spriteBatch.DrawString(Main.fontItemStack, this.item.stack.ToString(), new Vector2(base.DrawPosition.X + 10f * base.Scale, base.DrawPosition.Y + 26f * base.Scale), Color.White, 0f, Vector2.Zero, base.Scale, SpriteEffects.None, 0f);
+				spriteBatch.DrawString(FontAssets.ItemStack.Value, this.item.stack.ToString(), new Vector2(base.DrawPosition.X + 10f * base.Scale, base.DrawPosition.Y + 26f * base.Scale), Color.White, 0f, Vector2.Zero, base.Scale, SpriteEffects.None, 0f);
 			}
 			base.Draw(spriteBatch);
 		}

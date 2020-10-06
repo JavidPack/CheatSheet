@@ -24,7 +24,7 @@ namespace CheatSheet.Menus
 			configurationWindow.SetDefaultPosition(new Vector2(200, 200));
 			configurationWindow.Visible = false;
 
-			button = new UIImage(Main.itemTexture[ItemID.Cog]);
+			button = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.Cog].Value);
 			button.Tooltip = CSText("ConfigureAvailableTools");
 			button.onLeftClick += new EventHandler(bConfigurationToggle_onLeftClick);
 			//+= (s, e) =>
@@ -67,7 +67,7 @@ namespace CheatSheet.Menus
 			base.Width = 280;
 			base.Height = 358;
 
-			Texture2D texture = mod.GetTexture("UI/closeButton");
+			Texture2D texture = mod.GetTexture("UI/closeButton").Value;
 			UIImage uIImage = new UIImage(texture);
 			uIImage.Anchor = AnchorPosition.TopRight;
 			uIImage.Position = new Vector2(base.Width - this.spacing, this.spacing);
@@ -151,7 +151,7 @@ namespace CheatSheet.Menus
 			if (Visible && IsMouseInside())
 			{
 				Main.LocalPlayer.mouseInterface = true;
-				Main.LocalPlayer.showItemIcon = false;
+				Main.LocalPlayer.cursorItemIconEnabled = false;
 			}
 		}
 	}

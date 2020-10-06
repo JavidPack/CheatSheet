@@ -1,12 +1,56 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.OS;
 using Terraria;
+using Terraria.GameContent;
 
 namespace CheatSheet
 {
 	internal static class ModUtils
 	{
+		internal static Texture2D GetItemTexture(int id)
+		{
+			Main.instance.LoadItem(id);
+
+			return TextureAssets.Item[id].Value;
+		}
+
+		// TODO: Temp until tmod is fixed
+		internal static bool AcceptedByItemGroups(this Recipe recipe, int invType, int reqType)
+		{
+			for (int i = 0; i < Recipe.maxRequirements; i++)
+			{
+				int num = recipe.acceptedGroups[i];
+				if (num == -1)
+					break;
+
+				if (RecipeGroup.recipeGroups[num].ContainsItem(invType) && RecipeGroup.recipeGroups[num].ContainsItem(reqType))
+					return true;
+			}
+
+			return false;
+		}
+
+		internal static bool ProcessGroupsForText(this Recipe recipe, int type, out string theText)
+		{
+			for (int i = 0; i < Recipe.maxRequirements; i++)
+			{
+				int num = recipe.acceptedGroups[i];
+				if (num == -1)
+					break;
+
+				if (RecipeGroup.recipeGroups[num].ContainsItem(type))
+				{
+					theText = RecipeGroup.recipeGroups[num].GetText();
+					return true;
+				}
+			}
+
+			theText = "";
+			return false;
+		}
+
 		internal const int TextureMaxTile = 128;
 
 		/*
@@ -68,7 +112,8 @@ namespace CheatSheet
 					heights[y + 1] = heights[y] + height;
 
 					Texture2D texture2;
-					if (Terraria.ModLoader.ModLoader.windows)
+					if(Platform.IsWindows)
+					//if (Terraria.ModLoader.ModLoader.windows)
 					{
 						using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
 						{

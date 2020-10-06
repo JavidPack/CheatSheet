@@ -73,7 +73,7 @@ namespace CheatSheet.UI
 
 		public UITextbox()
 		{
-			textboxBackground = CheatSheet.instance.GetTexture("UI/Images.UIKit.textboxEdge");
+			textboxBackground = CheatSheet.instance.GetTexture("UI/Images.UIKit.textboxEdge").Value;
 			this.onLeftClick += new EventHandler(UITextbox_onLeftClick);
 			this.onRightClick += (a, b) => {
 				Text = "";

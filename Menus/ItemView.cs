@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.UI;
 
 namespace CheatSheet.Menus
@@ -63,7 +64,7 @@ namespace CheatSheet.Menus
 		{
 			base.Width = (this.slotSize + (float)this.slotSpace) * (float)this.slotColumns + (float)this.slotSpace + 20f;
 			base.Height = 300f;
-			this.allItemsSlots = new Slot[Main.itemTexture.Length];
+			this.allItemsSlots = new Slot[TextureAssets.Item.Length];
 			for (int i = 0; i < this.allItemsSlots.Length; i++)
 			{
 				this.allItemsSlots[i] = new Slot(i);

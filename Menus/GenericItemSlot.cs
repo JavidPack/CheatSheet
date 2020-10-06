@@ -4,12 +4,13 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Graphics;
 using System;
 using Terraria;
+using Terraria.GameContent;
 
 namespace CheatSheet.Menus
 {
 	internal class GenericItemSlot : UIView
 	{
-		public static Texture2D backgroundTexture = Main.inventoryBack9Texture;
+		public static Texture2D backgroundTexture = TextureAssets.InventoryBack9.Value;
 
 		public Item item = null;
 
@@ -37,7 +38,7 @@ namespace CheatSheet.Menus
 
 				Main.hoverItemName = this.item.Name;
 				Main.HoverItem = item.Clone();
-				Main.HoverItem.SetNameOverride(Main.HoverItem.Name + (Main.HoverItem.modItem != null ? " [" + Main.HoverItem.modItem.mod.Name + "]" : ""));
+				Main.HoverItem.SetNameOverride(Main.HoverItem.Name + (Main.HoverItem.modItem != null ? " [" + Main.HoverItem.modItem.Mod.Name + "]" : ""));
 			}
 		}
 
@@ -46,7 +47,7 @@ namespace CheatSheet.Menus
 			if (item != null)
 			{
 				spriteBatch.Draw(Slot.backgroundTexture, base.DrawPosition, null, Color.White, 0f, Vector2.Zero, base.Scale, SpriteEffects.None, 0f);
-				Texture2D texture2D = Main.itemTexture[this.item.type];
+				Texture2D texture2D = Terraria.GameContent.TextureAssets.Item[this.item.type].Value;
 				Rectangle rectangle2;
 				if (Main.itemAnimations[item.type] != null)
 				{
@@ -80,7 +81,7 @@ namespace CheatSheet.Menus
 				}
 				if (this.item.stack > 1)
 				{
-					spriteBatch.DrawString(Main.fontItemStack, this.item.stack.ToString(), new Vector2(base.DrawPosition.X + 10f * base.Scale, base.DrawPosition.Y + 26f * base.Scale), Color.White, 0f, Vector2.Zero, base.Scale, SpriteEffects.None, 0f);
+					spriteBatch.DrawString(FontAssets.ItemStack.Value, this.item.stack.ToString(), new Vector2(base.DrawPosition.X + 10f * base.Scale, base.DrawPosition.Y + 26f * base.Scale), Color.White, 0f, Vector2.Zero, base.Scale, SpriteEffects.None, 0f);
 				}
 			}
 			base.Draw(spriteBatch);

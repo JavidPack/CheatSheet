@@ -29,7 +29,7 @@ namespace CheatSheet.Menus
 
 		public static UIImage GetButton(Mod mod)
 		{
-			button = new UIImage(Main.itemTexture[ItemID.JimsWings]);
+			button = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.JimsWings].Value);
 			button.onLeftClick += (s, e) =>
 			{
 				Enabled = !Enabled;
