@@ -21,7 +21,7 @@ namespace CheatSheet.Menus
 
 		private int slotColumns = 8;
 
-		private float slotSize = (float)Slot.backgroundTexture.Width * 0.85f;
+		private float slotSize = (float)Slot.backgroundTexture.Width() * 0.85f;
 
 		private int slotRows = 6;
 
