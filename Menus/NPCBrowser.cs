@@ -41,7 +41,7 @@ namespace CheatSheet.Menus
 			CSText("CycleModSpecificNPCs")
 		};
 
-		private static Texture2D[] categoryIcons = new Texture2D[]
+		private static Texture2D[] categoryIcons = Main.dedServ ? null : new Texture2D[]
 		{
 			ModUtils.GetItemTexture(ItemID.AlphabetStatueA),
 			ModUtils.GetItemTexture(ItemID.AlphabetStatueB),
