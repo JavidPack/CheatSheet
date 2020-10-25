@@ -26,7 +26,7 @@ namespace CheatSheet.Menus
 
 		public int negativeSlots = 65; // number of netIDs < 0
 
-		private float slotSize = (float)Slot.backgroundTexture.Width * 0.85f;
+		private float slotSize = (float)Slot.backgroundTexture.Width() * 0.85f;
 
 		private int slotRows = 6;
 

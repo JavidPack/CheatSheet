@@ -1,6 +1,7 @@
 ﻿using CheatSheet.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using ReLogic.Graphics;
 using System;
 using Terraria;
@@ -10,8 +11,8 @@ namespace CheatSheet.Menus
 {
 	internal class RecipeQuerySlot : UIView
 	{
-		public static Texture2D backgroundTexture = TextureAssets.InventoryBack9.Value;
-		public static Texture2D backgroundTextureFake = TextureAssets.InventoryBack8.Value;
+		public static Asset<Texture2D> backgroundTexture = TextureAssets.InventoryBack9;
+		public static Asset<Texture2D> backgroundTextureFake = TextureAssets.InventoryBack8;
 
 		public Item item = new Item();
 		internal bool real = true;
@@ -25,12 +26,12 @@ namespace CheatSheet.Menus
 
 		protected override float GetWidth()
 		{
-			return (float)GenericItemSlot.backgroundTexture.Width * base.Scale;
+			return (float)GenericItemSlot.backgroundTexture.Width() * base.Scale;
 		}
 
 		protected override float GetHeight()
 		{
-			return (float)GenericItemSlot.backgroundTexture.Height * base.Scale;
+			return (float)GenericItemSlot.backgroundTexture.Height() * base.Scale;
 		}
 
 		private void Slot_OnHover(object sender, EventArgs e)
@@ -78,7 +79,7 @@ namespace CheatSheet.Menus
 		{
 			//if (item != null)
 			{
-				spriteBatch.Draw(real ? backgroundTexture : backgroundTextureFake, base.DrawPosition, null, Color.White, 0f, Vector2.Zero, base.Scale, SpriteEffects.None, 0f);
+				spriteBatch.Draw((real ? backgroundTexture : backgroundTextureFake).Value, base.DrawPosition, null, Color.White, 0f, Vector2.Zero, base.Scale, SpriteEffects.None, 0f);
 				Texture2D texture2D = Terraria.GameContent.TextureAssets.Item[this.item.type].Value;
 				Rectangle rectangle2;
 				if (Main.itemAnimations[item.type] != null)
@@ -90,7 +91,7 @@ namespace CheatSheet.Menus
 					rectangle2 = texture2D.Frame(1, 1, 0, 0);
 				}
 				float num = 1f;
-				float num2 = (float)Slot.backgroundTexture.Width * base.Scale * 0.6f;
+				float num2 = (float)Slot.backgroundTexture.Width() * base.Scale * 0.6f;
 				if ((float)rectangle2.Width > num2 || (float)rectangle2.Height > num2)
 				{
 					if (rectangle2.Width > rectangle2.Height)
@@ -103,8 +104,8 @@ namespace CheatSheet.Menus
 					}
 				}
 				Vector2 drawPosition = base.DrawPosition;
-				drawPosition.X += (float)Slot.backgroundTexture.Width * base.Scale / 2f - (float)rectangle2.Width * num / 2f;
-				drawPosition.Y += (float)Slot.backgroundTexture.Height * base.Scale / 2f - (float)rectangle2.Height * num / 2f;
+				drawPosition.X += (float)Slot.backgroundTexture.Width() * base.Scale / 2f - (float)rectangle2.Width * num / 2f;
+				drawPosition.Y += (float)Slot.backgroundTexture.Height() * base.Scale / 2f - (float)rectangle2.Height * num / 2f;
 				this.item.GetColor(Color.White);
 				spriteBatch.Draw(texture2D, drawPosition, new Rectangle?(rectangle2), this.item.GetAlpha(Color.White), 0f, Vector2.Zero, num, SpriteEffects.None, 0f);
 				if (this.item.color != default(Color))

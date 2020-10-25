@@ -208,8 +208,7 @@ namespace CheatSheet
 			ConfigurationLoader.Initialized();
 			try
 			{
-				Mod herosMod = ModLoader.GetMod("HEROsMod");
-				if (herosMod != null)
+				if (ModLoader.TryGetMod("HEROsMod", out Mod herosMod))
 				{
 					SetupHEROsModIntegration(herosMod);
 				}
@@ -407,7 +406,7 @@ namespace CheatSheet
 					"CheatSheet: All Cheat Sheet",
 					delegate
 					{
-						GetGlobalItem<AllItemsMenu>().DrawUpdateAll(Main.spriteBatch);
+						ModContent.GetInstance<AllItemsMenu>().DrawUpdateAll(Main.spriteBatch);
 						return true;
 					},
 					InterfaceScaleType.UI)
@@ -417,7 +416,7 @@ namespace CheatSheet
 					"CheatSheet: Paint Tools",
 					delegate
 					{
-						GetGlobalItem<AllItemsMenu>().DrawUpdatePaintTools(Main.spriteBatch);
+						ModContent.GetInstance<AllItemsMenu>().DrawUpdatePaintTools(Main.spriteBatch);
 						return true;
 					},
 					InterfaceScaleType.Game)
@@ -431,7 +430,7 @@ namespace CheatSheet
 					"CheatSheet: Extra Accessories",
 					delegate
 					{
-						GetGlobalItem<AllItemsMenu>().DrawUpdateExtraAccessories(Main.spriteBatch);
+						ModContent.GetInstance<AllItemsMenu>().DrawUpdateExtraAccessories(Main.spriteBatch);
 						return true;
 					},
 					InterfaceScaleType.UI)
