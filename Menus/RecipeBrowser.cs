@@ -62,6 +62,9 @@ namespace CheatSheet.Menus
 		public Recipe selectedRecipe = null;
 		internal bool selectedRecipeChanged = false;
 
+		// TODO: needs to support recipes with more than 14 ingredients since vanilla now does
+		public const int maxRequirements = 14;
+
 		// 270 : 16 40 ?? 16
 
 		public RecipeBrowserWindow(CheatSheet mod)
@@ -127,8 +130,8 @@ namespace CheatSheet.Menus
 				this.AddChild(uIImage2);
 			}
 
-			ingredients = new GenericItemSlot[Recipe.maxRequirements];
-			for (int j = 0; j < Recipe.maxRequirements; j++)
+			ingredients = new GenericItemSlot[maxRequirements];
+			for (int j = 0; j < maxRequirements; j++)
 			{
 				GenericItemSlot genericItemSlot = new GenericItemSlot();
 				Vector2 position = new Vector2(this.spacing, this.spacing);
@@ -204,7 +207,7 @@ namespace CheatSheet.Menus
 				//	int num60 = Main.focusRecipe;
 				int num61 = 0;
 				int num62 = 0;
-				while (num62 < Recipe.maxRequirements)
+				while (num62 < maxRequirements)
 				{
 					int num63 = (num62 + 1) * 26;
 					if (selectedRecipe.requiredTile[num62] == -1)
@@ -279,7 +282,7 @@ namespace CheatSheet.Menus
 
 				selectedRecipeChanged = false;
 				string oldname = Main.HoverItem.Name;
-				for (int i = 0; i < Recipe.maxRequirements; i++)
+				for (int i = 0; i < maxRequirements; i++)
 				{
 					if (selectedRecipe.requiredItem[i].type > 0)
 					{
