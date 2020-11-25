@@ -376,7 +376,7 @@ namespace CheatSheet.Menus
 					{
 						ItemBrowser.categories[i].Add(j);
 					}
-					else if (i == (int)ItemBrowserCategories.Potions && (item.UseSound != null && item.UseSound.Style == 3))
+					else if (i == (int)ItemBrowserCategories.Potions && item.buffType != 0 && item.buffTime > 2)
 					{
 						ItemBrowser.categories[i].Add(j);
 					}
