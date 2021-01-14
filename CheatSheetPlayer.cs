@@ -21,10 +21,10 @@ namespace CheatSheet
 
 			//VanillaUpdateAccessory is now ApplyEquipFunctional
 			for (int i = 0; i < numberExtraAccessoriesEnabled; i++)
-            {
+			{
 				Player.ApplyEquipFunctional(ExtraAccessories[i], false);
-            }
-        }
+			}
+		}
 
 		public override void Initialize()
 		{
