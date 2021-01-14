@@ -270,7 +270,7 @@ namespace CheatSheet.Menus
 					if(uIImage.ForegroundColor == ItemBrowser.buttonSelectedColor)
 						lastModNameNumber = left ? (lastModNameNumber + 1) % mods.Count : (mods.Count + lastModNameNumber - 1) % mods.Count;
 					string currentMod = mods[lastModNameNumber];
-					this.itemView.selectedCategory = ItemBrowser.categories[0].Where(x => this.itemView.allItemsSlots[x].item.modItem != null && this.itemView.allItemsSlots[x].item.modItem.Mod.Name == currentMod).ToArray();
+					this.itemView.selectedCategory = ItemBrowser.categories[0].Where(x => this.itemView.allItemsSlots[x].item.ModItem != null && this.itemView.allItemsSlots[x].item.ModItem.Mod.Name == currentMod).ToArray();
 					this.itemView.activeSlots = this.itemView.selectedCategory;
 					this.itemView.ReorderSlots();
 					bCategories[num].Tooltip = ItemBrowser.categNames[num] + ": " + currentMod;

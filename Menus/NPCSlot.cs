@@ -94,7 +94,7 @@ namespace CheatSheet.Menus
 
 		private void Slot2_onHover(object sender, EventArgs e)
 		{
-			UIView.HoverText = displayName + (npc.modNPC != null ? " [" + npc.modNPC.Mod.Name + "]" : "") + (isFiltered ? " [DISABLED]" : "");
+			UIView.HoverText = displayName + (npc.ModNPC != null ? " [" + npc.ModNPC.Mod.Name + "]" : "") + (isFiltered ? " [DISABLED]" : "");
 			NPCBrowser.hoverNpc = npc;
 			//UIView.HoverItem = this.item.Clone();
 			//	hovering = true;

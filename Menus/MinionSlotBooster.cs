@@ -12,7 +12,7 @@ namespace CheatSheet.Menus
 	{
 		public override void PostUpdateEquips()
 		{
-			player.maxMinions += MinionSlotBooster.currentBoost;
+			Player.maxMinions += MinionSlotBooster.currentBoost;
 		}
 	}
 
