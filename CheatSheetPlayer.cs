@@ -12,16 +12,18 @@ namespace CheatSheet
 		public Item[] ExtraAccessories = new Item[MaxExtraAccessories];
 		public int numberExtraAccessoriesEnabled = 0;
 
-		public override void UpdateEquips(ref bool wallSpeedBuff, ref bool tileSpeedBuff, ref bool tileRangeBuff)
+		public override void UpdateEquips(/*ref bool wallSpeedBuff, ref bool tileSpeedBuff, ref bool tileRangeBuff*/)
 		{
 			for (int i = 0; i < numberExtraAccessoriesEnabled; i++)
 			{
-				player.VanillaUpdateEquip(ExtraAccessories[i]);
+				Player.VanillaUpdateEquip(ExtraAccessories[i]);
 			}
-			for (int i = 0; i < numberExtraAccessoriesEnabled; i++)
-			{
-				player.VanillaUpdateAccessory(player.whoAmI, ExtraAccessories[i], false, ref wallSpeedBuff, ref tileSpeedBuff, ref tileRangeBuff);
-			}
+
+			//TODO Where did VanillaUpdateAccessory go?
+			//for (int i = 0; i < numberExtraAccessoriesEnabled; i++)
+			//{
+			//	Player.VanillaUpdateAccessory(Player.whoAmI, ExtraAccessories[i], false, ref wallSpeedBuff, ref tileSpeedBuff, ref tileRangeBuff);
+			//}
 		}
 
 		public override void Initialize()
