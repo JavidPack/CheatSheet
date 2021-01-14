@@ -45,7 +45,7 @@ namespace CheatSheet.Menus
 		internal static RecipeQuerySlot lookupItemSlot;
 
 		internal static GenericItemSlot[] ingredients;
-		//internal static GenericItemSlot[] tiles = new GenericItemSlot[Recipe.maxRequirements];
+		//internal static GenericItemSlot[] tiles = new GenericItemSlot[maxRequirementsOld];
 
 		public static List<List<int>> categories = new List<List<int>>();
 		private static Color buttonColor = new Color(190, 190, 190);
@@ -61,6 +61,8 @@ namespace CheatSheet.Menus
 
 		public Recipe selectedRecipe = null;
 		internal bool selectedRecipeChanged = false;
+
+		public const int maxRequirementsOld = 15;
 
 		// 270 : 16 40 ?? 16
 
@@ -127,8 +129,9 @@ namespace CheatSheet.Menus
 				this.AddChild(uIImage2);
 			}
 
-			ingredients = new GenericItemSlot[Recipe.maxRequirements];
-			for (int j = 0; j < Recipe.maxRequirements; j++)
+			//TODO dynamic UI based on the recipe length
+			ingredients = new GenericItemSlot[maxRequirementsOld];
+			for (int j = 0; j < maxRequirementsOld; j++)
 			{
 				GenericItemSlot genericItemSlot = new GenericItemSlot();
 				Vector2 position = new Vector2(this.spacing, this.spacing);
@@ -204,10 +207,22 @@ namespace CheatSheet.Menus
 				//	int num60 = Main.focusRecipe;
 				int num61 = 0;
 				int num62 = 0;
-				while (num62 < Recipe.maxRequirements)
+
+				//1.4 Fix cause idk how this code works exactly
+				int[] requiredTile = selectedRecipe.requiredTile.ToArray();
+				Array.Resize(ref requiredTile, maxRequirementsOld);
+                for (int i = Math.Max(0, selectedRecipe.requiredTile.Count - 1); i < requiredTile.Length; i++)
+                {
+					if (requiredTile[i] == 0)
+                    {
+						requiredTile[i] = -1;
+					}
+                }
+
+				while (num62 < maxRequirementsOld)
 				{
 					int num63 = (num62 + 1) * 26;
-					if (selectedRecipe.requiredTile[num62] == -1)
+					if (requiredTile[num62] == -1)
 					{
 						//if (num62 == 0 && !selectedRecipe.needWater && !selectedRecipe.needHoney && !selectedRecipe.needLava)
 						if (num62 == 0 && selectedRecipe.Conditions.Count == 0)
@@ -220,7 +235,7 @@ namespace CheatSheet.Menus
 					else
 					{
 						num61++;
-						spriteBatch.DrawString(FontAssets.MouseText.Value, Lang.GetMapObjectName(MapHelper.TileToLookup(selectedRecipe.requiredTile[num62], 0)), new Vector2((float)positionX, (float)(positionY + num63)), color3, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+						spriteBatch.DrawString(FontAssets.MouseText.Value, Lang.GetMapObjectName(MapHelper.TileToLookup(requiredTile[num62], 0)), new Vector2((float)positionX, (float)(positionY + num63)), color3, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
 						num62++;
 					}
 				}
@@ -279,9 +294,9 @@ namespace CheatSheet.Menus
 
 				selectedRecipeChanged = false;
 				string oldname = Main.HoverItem.Name;
-				for (int i = 0; i < Recipe.maxRequirements; i++)
+				for (int i = 0; i < ingredients.Length; i++)
 				{
-					if (selectedRecipe.requiredItem[i].type > 0)
+					if (i < selectedRecipe.requiredItem.Count && selectedRecipe.requiredItem[i].type > 0)
 					{
 						ingredients[i].item = selectedRecipe.requiredItem[i];
 
