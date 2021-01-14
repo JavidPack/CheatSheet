@@ -30,7 +30,7 @@ namespace CheatSheet
 			return base.PreAI(npc);
 		}
 
-        public override bool PreKill(NPC npc)
+		public override bool PreKill(NPC npc)
 		{
 			return !isFiltered;
 		}

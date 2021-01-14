@@ -211,13 +211,13 @@ namespace CheatSheet.Menus
 				//1.4 Fix cause idk how this code works exactly
 				int[] requiredTile = selectedRecipe.requiredTile.ToArray();
 				Array.Resize(ref requiredTile, maxRequirementsOld);
-                for (int i = Math.Max(0, selectedRecipe.requiredTile.Count - 1); i < requiredTile.Length; i++)
-                {
+				for (int i = Math.Max(0, selectedRecipe.requiredTile.Count - 1); i < requiredTile.Length; i++)
+				{
 					if (requiredTile[i] == 0)
-                    {
+					{
 						requiredTile[i] = -1;
 					}
-                }
+				}
 
 				while (num62 < maxRequirementsOld)
 				{
