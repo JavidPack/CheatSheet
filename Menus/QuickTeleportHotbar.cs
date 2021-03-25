@@ -210,7 +210,7 @@ namespace CheatSheet.Menus
 							}
 							if (flag2)
 								++num4;
-							else if (!tile.active() || tile.inActive() || !Main.tileSolid[tile.type])
+							else if (!tile.IsActive || tile.IsActuated /* Not sure if this is right */ || !Main.tileSolid[tile.type])
 								++num4;
 							else
 								break;
