@@ -9,7 +9,7 @@ namespace CheatSheet.Menus
 {
 	internal class GenericItemSlot : UIView
 	{
-		public static Texture2D backgroundTexture = Main.inventoryBack9Texture;
+		public static Texture2D backgroundTexture;
 
 		public Item item = null;
 

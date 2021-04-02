@@ -9,8 +9,8 @@ namespace CheatSheet.Menus
 {
 	internal class RecipeQuerySlot : UIView
 	{
-		public static Texture2D backgroundTexture = Main.inventoryBack9Texture;
-		public static Texture2D backgroundTextureFake = Main.inventoryBack8Texture;
+		public static Texture2D backgroundTexture;
+		public static Texture2D backgroundTextureFake;
 
 		public Item item = new Item();
 		internal bool real = true;

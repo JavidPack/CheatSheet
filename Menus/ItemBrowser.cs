@@ -33,6 +33,7 @@ namespace CheatSheet.Menus
 	internal class ItemBrowser : UISlideWindow
 	{
 		internal static string CSText(string key, string category = "ItemBrowser") => CheatSheet.CSText(category, key);
+		// TODO: static stuff like this is bad when unload/cancel happens before translations are ready.
 		private static string[] categNames = new string[]
 		{
 			CSText("AllItems"),

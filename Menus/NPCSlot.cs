@@ -22,8 +22,8 @@ namespace CheatSheet.Menus
 
 		public int index = 0;
 
-		public static Texture2D backgroundTexture = Main.inventoryBack9Texture;
-		public static Texture2D filteredBackgroundTexture = Main.inventoryBack5Texture;
+		public static Texture2D backgroundTexture;
+		public static Texture2D filteredBackgroundTexture;
 
 		public bool functionalSlot;
 		private bool rightClicking;

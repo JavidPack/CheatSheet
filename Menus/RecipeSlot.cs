@@ -9,8 +9,8 @@ namespace CheatSheet.Menus
 {
 	internal class RecipeSlot : UIView
 	{
-		public static Texture2D backgroundTexture = Main.inventoryBack9Texture;
-		public static Texture2D selectedBackgroundTexture = Main.inventoryBack15Texture;
+		public static Texture2D backgroundTexture;
+		public static Texture2D selectedBackgroundTexture;
 
 		public int recipeIndex = -1;
 		public Recipe recipe;

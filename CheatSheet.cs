@@ -105,6 +105,15 @@ namespace CheatSheet
 			herosPermissions[NPCButcher_Permission] = true;
 			herosPermissions[CheatSheetExtensions_Permission] = true;
 			herosPermissions[QuickTeleport_Permission] = true;
+
+			GenericItemSlot.backgroundTexture = Main.inventoryBack9Texture;
+			NPCSlot.backgroundTexture = Main.inventoryBack9Texture;
+			NPCSlot.filteredBackgroundTexture = Main.inventoryBack5Texture;
+			RecipeQuerySlot.backgroundTexture = Main.inventoryBack9Texture;
+			RecipeQuerySlot.backgroundTextureFake = Main.inventoryBack8Texture;
+			RecipeSlot.backgroundTexture = Main.inventoryBack9Texture;
+			RecipeSlot.selectedBackgroundTexture = Main.inventoryBack15Texture;
+			Slot.backgroundTexture = Main.inventoryBack9Texture;
 		}
 
 		public override void Unload()
@@ -113,6 +122,14 @@ namespace CheatSheet
 			ButtonTexture.Clear();
 			ButtonTooltip.Clear();
 
+			GenericItemSlot.backgroundTexture = null;
+			NPCSlot.backgroundTexture = null;
+			NPCSlot.filteredBackgroundTexture = null;
+			RecipeQuerySlot.backgroundTexture = null;
+			RecipeQuerySlot.backgroundTextureFake = null;
+			RecipeSlot.backgroundTexture = null;
+			RecipeSlot.selectedBackgroundTexture = null;
+			Slot.backgroundTexture = null;
 			PaintToolsSlot.CurrentSelect = null;
 			AllItemsMenu.singleSlotArray = null;
 			UI.UICheckbox.checkboxTexture = null;
@@ -155,6 +172,8 @@ namespace CheatSheet
 
 		internal static string CSText(string category, string key)
 		{
+			if (translations == null)
+				return "";
 			return translations[$"Mods.CheatSheet.{category}.{key}"].GetTranslation(Language.ActiveCulture);
 			// This isn't good until after load....can revert after fixing static initializers for string[]
 			// return Language.GetTextValue($"Mods.CheatSheet.{category}.{key}");
