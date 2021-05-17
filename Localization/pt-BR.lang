@@ -1,53 +1,53 @@
-# Translation by: Aleck ♡#4397 and ����Bluezinho����#1242
+# Translation by: Aleck ♡#4397,����Bluezinho����#1242 and Pixelnando#7284
 
 Hotbar.ShowItemBrowser=Mostrar Navegador de Itens
 Hotbar.ShowClearMenu=Mostrar Limpar Menu
 Hotbar.ShowNPCBrowser=Mostrar Navegador de Monstros
 Hotbar.ShowRecipeBrowser=Mostrar Navegador de Receitas
-Hotbar.ShowModExtensionCheats=Mostrar Trapaças de Extensões de Mods
+Hotbar.ShowModExtensionCheats=Mostrar Trapaças de Mods de Extensão
 Hotbar.ShowPaintTools=Mostrar Ferramentas de Pintura
-Hotbar.ExtraAccessorySlots=Slots de Acessório Extras
+Hotbar.ExtraAccessorySlots=Espaços de Acessório Extras
 Hotbar.VacuumItems=Aspirar Itens
 Hotbar.ShowNPCButcherer=Mostrar Exterminador de NPCs
-Hotbar.ShowQuickWaypoints=Mostrar Waypoints Rápidos
+Hotbar.ShowQuickWaypoints=Mostrar Localizações Rápidas
 Hotbar.ConfigureAvailableTools=Configurar Ferramentas Disponíveis
 
 Butcherer.ButcherHostileNPCs=Exterminar NPCs hostis
 Butcherer.ButcherHostileAndFriendlyNPCs=Exterminar NPCs hostis e amigáveis
 Butcherer.ButcherFriendlyNPCs=Exterminar NPCs amigáveis
-# Butcherer.ButcherNotification=NPCs were butchered by {0}
+Butcherer.ButcherNotification=NPCs foram exterminados por {0}
 
-# Vacuum.VacuumNotification=Items on the ground were vacuumed by {0}
+Vacuum.VacuumNotification=Os itens no chão foram aspirados por {0}
 
 Teleport.Dungeon=Calabouço
-Teleport.Spawnpoint=Spawn
+Teleport.Spawnpoint=Entrada
 Teleport.Hell=Submundo
 Teleport.Temple=Templo
 Teleport.Random=Aleatório
 
 QuickClear.ClearDroppedItems=Limpar itens caídos
 QuickClear.ClearProjectiles=Limpar projéteis
-QuickClear.ClearBuffs=Limpar buffs
-QuickClear.ClearDebuffs=Limpar debuffs
-# QuickClear.ItemClearNotification=Items were cleared by {0}
-# QuickClear.ProjectileClearNotification=Projectiles were cleared by {0}
+QuickClear.ClearBuffs=Limpar efeitos
+QuickClear.ClearDebuffs=Limpar efeitos negativos
+QuickClear.ItemClearNotification=Itens foram limpos por {0}
+QuickClear.ProjectileClearNotification=Projéteis foram limpos por {0}
 
-SpawnRate.SpawnRateMultiplier=Multiplicador de Taxa de Spawns: 1?
-SpawnRate.SpawnRateMultiplierNew=Multiplicador de Taxa de Spawns: 
-SpawnRate.SpawnRateMultiplierText=Taxa de Spawns e Spawns Máximos agora 
+SpawnRate.SpawnRateMultiplier=Multiplicador de Taxa de Surgimento: 1x
+SpawnRate.SpawnRateMultiplierNew=Multiplicador de Taxa de Surgimento: 
+SpawnRate.SpawnRateMultiplierText=Taxa de surgimentos e surgimentos máximos agora 
 SpawnRate.SpawnRateNormalValue= o valor normal
 
-LightHack.LightHackDisabled=Hack de Luz: Desligado
-LightHack.LightHack25%=Hack de Luz: 25%
-LightHack.LightHack50%=Hack de Luz: 50%
-LightHack.LightHack100%=Hack de Luz: 100%
+LightHack.LightHackDisabled=Hack de Iluminação: Desligado
+LightHack.LightHack25%=Hack de Iluminação: 25%
+LightHack.LightHack50%=Hack de Iluminação: 50%
+LightHack.LightHack100%=Hack de Iluminação: 100%
 
-# GodMode.GodModeDisabled=God Mode Disabled
-# GodMode.GodModeEnabled=God Mode Enabled
+GodMode.GodModeDisabled=Modo Deus Desativado
+GodMode.GodModeEnabled=Modo Deus Ativado
 
-MinionSlot.MinionSlotBooster=Boost de Slot de Servos: +0
-MinionSlot.MinionSlotBoosterNew=Boost de Slot de Servos: 
-MinionSlot.MinionSlotBoosterText=Boost de servos agora em 
+MinionSlot.MinionSlotBooster=Reforço de Espaço de Lacaios: +0
+MinionSlot.MinionSlotBoosterNew=Reforço de Espaço de Lacaios: 
+MinionSlot.MinionSlotBoosterText=Reforço de Lacaios agora em
 
 RecipeBrowser.AllRecipes=Todas as Receitas
 RecipeBrowser.CycleModSpecificRecipes=Ciclar por Receitas de Mod Específico
@@ -55,21 +55,21 @@ RecipeBrowser.CycleModSpecificRecipes=Ciclar por Receitas de Mod Específico
 ConfigurationTool.ItemBrowser=Navegador de Itens
 ConfigurationTool.NPCBrowser=Navegador de NPCs
 ConfigurationTool.RecipeBrowser=Navegador de Receitas
-ConfigurationTool.MinionBooster=Booster de Servos
+ConfigurationTool.MinionBooster=Reforço de Lacaios
 ConfigurationTool.Butcher=Exterminar
 ConfigurationTool.ClearMenu=Limpar Menu
-ConfigurationTool.ExtraAccessorySlots=Slots de Acessório Extras
+ConfigurationTool.ExtraAccessorySlots=Espaços de Acessório Extras
 ConfigurationTool.ModExtensions=Extensões de Mods
 ConfigurationTool.PaintTools=Ferramentas de Pintura
-ConfigurationTool.SpawnRate=Taxa de Spawns
+ConfigurationTool.SpawnRate=Taxa de Surgimento
 ConfigurationTool.Vacuum=Aspirador
-ConfigurationTool.Waypoints=Waypoints
-ConfigurationTool.LightHack=Hack de Luz
-# ConfigurationTool.GodMode=God Mode
+ConfigurationTool.Waypoints=Localizações
+ConfigurationTool.LightHack=Hack de Iluminação
+ConfigurationTool.GodMode=Modo Deus
 
-ExtendedCheatMenu.NoExtensionCheatModsInstalled=Sem Mods de\nCheat com\nExtensões\nInstalados
+ExtendedCheatMenu.NoExtensionCheatModsInstalled=Nenhum Mod de\nExtensão de\nTrapaças\nInstalado
 
-ExtraAccessorySlots.ExtraAccessorySlots=Slots de Acessório Extras: 
+ExtraAccessorySlots.ExtraAccessorySlots=Espaços de Acessório Extras: 
 
 MobBrowser.AllNPCs=Todos os NPCs
 MobBrowser.Bosses=Chefes
@@ -77,7 +77,7 @@ MobBrowser.TownNPCs=NPCs de Cidade
 MobBrowser.NetIDNPCs=NPCs NetID
 MobBrowser.FilteredNPCs=NPCs Filtrados
 MobBrowser.CycleModSpecificNPCs=Ciclar NPCs de Mod Específico
-# MobBrowser.SpawnNPCNotification=Spawned {0} by {1}
+MobBrowser.SpawnNPCNotification=Invocado {0} por {1}
 
 ItemBrowser.AllItems=Todos os Itens
 ItemBrowser.Weapons=Armas
@@ -87,9 +87,9 @@ ItemBrowser.Accessories=Acessórios
 ItemBrowser.Blocks=Blocos
 ItemBrowser.Ammo=Munição
 ItemBrowser.Potions=Poções
-ItemBrowser.Expert=Expert
+ItemBrowser.Expert=Perito
 ItemBrowser.Furniture=Mobília
-ItemBrowser.Pets=Pets
+ItemBrowser.Pets=Animais de Estimação
 ItemBrowser.Mounts=Montarias
 ItemBrowser.CycleModSpecificItems=Ciclar Itens de Mod Específico
 
@@ -111,9 +111,9 @@ PaintTools.Undo=    Desfazer Última Pintura (BDM: Últimas 10) [
 PaintTools.Undo2= passos]
 PaintTools.NoUndo=Não há mais ações no histórico para desfazer.
 PaintTools.UndoLeft= ações restam no histórico.
-PaintTools.FlipHorizontal=Virar Horizontal
-PaintTools.FlipVertical=Virar Vertical
+PaintTools.FlipHorizontal=Inverter Horizontal
+PaintTools.FlipVertical=Inverter Vertical
 PaintTools.TransparentSelectionOn=    Seleção Transparente: Desligado
 PaintTools.TransparentSelectionOff=    Seleção Transparente: Ligado
-PaintTools.PriorBrush=Usar Conta-Gotas antes do pincel.
+PaintTools.PriorBrush=Use o Conta-Gotas antes de usar o pincel.
 PaintTools.DataExport=Dados exportados para 
