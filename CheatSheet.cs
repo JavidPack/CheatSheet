@@ -281,68 +281,72 @@ namespace CheatSheet
 
 		public override void AddRecipeGroups()
 		{
-			if (!Main.dedServ)
+			System.Collections.Concurrent.ConcurrentQueue<Action> glQueue = (System.Collections.Concurrent.ConcurrentQueue<Action>)typeof(Terraria.ModLoader.Engine.GLCallLocker).GetField("actionQueue", BindingFlags.NonPublic | BindingFlags.Static).GetValue(null);
+			glQueue.Enqueue(() =>
 			{
-				for (int i = 0; i < ItemLoader.ItemCount; i++)
+				if (!Main.dedServ)
 				{
-					Main.instance.LoadItem(i);
+					for (int i = 0; i < ItemLoader.ItemCount; i++)
+					{
+						Main.instance.LoadItem(i);
+					}
+
+					try {
+						itemBrowser = new ItemBrowser(this);
+						itemBrowser.SetDefaultPosition(new Vector2(80, 300));
+						itemBrowser.Visible = false;
+
+						npcBrowser = new NPCBrowser(this);
+						npcBrowser.SetDefaultPosition(new Vector2(30, 180));
+						npcBrowser.Visible = false;
+
+						recipeBrowser = new RecipeBrowserWindow(this);
+						recipeBrowser.SetDefaultPosition(new Vector2(30, 180));
+						recipeBrowser.Visible = false;
+
+						extendedCheatMenu = new ExtendedCheatMenu(this);
+						extendedCheatMenu.SetDefaultPosition(new Vector2(120, 180));
+						extendedCheatMenu.Visible = false;
+
+						paintToolsHotbar = new PaintToolsHotbar(this);
+						//	paintToolsHotbar.SetDefaultPosition(new Microsoft.Xna.Framework.Vector2(120, 180));
+						paintToolsHotbar.Visible = false;
+						paintToolsHotbar.Hide();
+
+						paintToolsUI = new PaintToolsUI(this);
+						paintToolsUI.SetDefaultPosition(new Vector2(30, 180));
+						paintToolsUI.Visible = false;
+
+						quickTeleportHotbar = new QuickTeleportHotbar(this);
+						quickTeleportHotbar.Visible = false;
+						quickTeleportHotbar.Hide();
+
+						quickClearHotbar = new QuickClearHotbar(this);
+						quickClearHotbar.Visible = false;
+						quickClearHotbar.Hide();
+
+						npcButchererHotbar = new NPCButchererHotbar(this);
+						npcButchererHotbar.Visible = false;
+						npcButchererHotbar.Hide();
+
+						//eventManagerHotbar = new EventManagerHotbar(this);
+						//eventManagerHotbar.Visible = false;
+						//eventManagerHotbar.Hide();
+
+						hotbar = new Hotbar(this);
+						//hotbar.Position = new Microsoft.Xna.Framework.Vector2(120, 180);
+						hotbar.Visible = true;
+						if (!ModContent.GetInstance<CheatSheetClientConfig>().HotbarShownByDefault)
+							hotbar.Hide();
+						else
+							hotbar.Show();
+					}
+					catch (Exception e)
+					{
+						Logger.Error(e.ToString());
+					}
 				}
-
-				try {
-					itemBrowser = new ItemBrowser(this);
-					itemBrowser.SetDefaultPosition(new Vector2(80, 300));
-					itemBrowser.Visible = false;
-
-					npcBrowser = new NPCBrowser(this);
-					npcBrowser.SetDefaultPosition(new Vector2(30, 180));
-					npcBrowser.Visible = false;
-
-					recipeBrowser = new RecipeBrowserWindow(this);
-					recipeBrowser.SetDefaultPosition(new Vector2(30, 180));
-					recipeBrowser.Visible = false;
-
-					extendedCheatMenu = new ExtendedCheatMenu(this);
-					extendedCheatMenu.SetDefaultPosition(new Vector2(120, 180));
-					extendedCheatMenu.Visible = false;
-
-					paintToolsHotbar = new PaintToolsHotbar(this);
-					//	paintToolsHotbar.SetDefaultPosition(new Microsoft.Xna.Framework.Vector2(120, 180));
-					paintToolsHotbar.Visible = false;
-					paintToolsHotbar.Hide();
-
-					paintToolsUI = new PaintToolsUI(this);
-					paintToolsUI.SetDefaultPosition(new Vector2(30, 180));
-					paintToolsUI.Visible = false;
-
-					quickTeleportHotbar = new QuickTeleportHotbar(this);
-					quickTeleportHotbar.Visible = false;
-					quickTeleportHotbar.Hide();
-
-					quickClearHotbar = new QuickClearHotbar(this);
-					quickClearHotbar.Visible = false;
-					quickClearHotbar.Hide();
-
-					npcButchererHotbar = new NPCButchererHotbar(this);
-					npcButchererHotbar.Visible = false;
-					npcButchererHotbar.Hide();
-
-					//eventManagerHotbar = new EventManagerHotbar(this);
-					//eventManagerHotbar.Visible = false;
-					//eventManagerHotbar.Hide();
-
-					hotbar = new Hotbar(this);
-					//hotbar.Position = new Microsoft.Xna.Framework.Vector2(120, 180);
-					hotbar.Visible = true;
-					if (!ModContent.GetInstance<CheatSheetClientConfig>().HotbarShownByDefault)
-						hotbar.Hide();
-					else
-						hotbar.Show();
-				}
-				catch (Exception e)
-				{
-					Logger.Error(e.ToString());
-				}
-			}
+			});
 		}
 
 		public static bool IsPlayerLocalServerOwner(Player player) {
