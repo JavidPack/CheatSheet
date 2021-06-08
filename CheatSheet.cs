@@ -30,7 +30,7 @@ namespace CheatSheet
 {
 	internal class CheatSheet : Mod
 	{
-		internal static ModHotkey ToggleCheatSheetHotbarHotKey;
+		internal static ModKeybind ToggleCheatSheetHotbarHotKey;
 		internal static CheatSheet instance;
 		internal static Dictionary<string, ModTranslation> translations; // reference to private field.
 		internal Hotbar hotbar;
@@ -89,7 +89,7 @@ namespace CheatSheet
 			ButtonTexture.Clear();
 			ButtonTooltip.Clear();
 
-			ToggleCheatSheetHotbarHotKey = HotkeyLoader.RegisterHotkey(this, "Toggle Cheat Sheet Hotbar", "K");
+			ToggleCheatSheetHotbarHotKey = KeybindLoader.RegisterKeybind(this, "Toggle Cheat Sheet Hotbar", "K");
 
 			if (Main.rand == null)
 			{
