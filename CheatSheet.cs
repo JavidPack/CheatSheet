@@ -96,7 +96,7 @@ namespace CheatSheet
 				Main.rand = new Terraria.Utilities.UnifiedRandom();
 			}
 
-			FieldInfo translationsField = typeof(Mod).GetField("translations", BindingFlags.Instance | BindingFlags.NonPublic);
+			FieldInfo translationsField = typeof(LocalizationLoader).GetField("translations", BindingFlags.Static | BindingFlags.NonPublic);
 			translations = (Dictionary<string, ModTranslation>)translationsField.GetValue(this);
 			//LoadTranslations();
 
