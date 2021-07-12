@@ -260,7 +260,15 @@ namespace CheatSheet.Menus
 		public override void Draw(SpriteBatch spriteBatch)
 		{
 			spriteBatch.Draw(Slot.backgroundTexture.Value, base.DrawPosition, null, Color.White, 0f, Vector2.Zero, base.Scale, SpriteEffects.None, 0f);
-			Texture2D texture2D = Terraria.GameContent.TextureAssets.Item[this.item.type].Value;
+
+			Texture2D texture2D = ModUtils.GetItemTexture(this.item.type).Value;
+
+			if (texture2D == null)
+			{
+				base.Draw(spriteBatch);
+				return;
+            }
+
 			Rectangle rectangle2;
 			if (Main.itemAnimations[item.type] != null)
 			{

@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Newtonsoft.Json;
+using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -237,14 +238,13 @@ namespace CheatSheet
 			// Add Buttons only to non-servers (otherwise the server will crash, since textures aren't loaded on servers)
 			if (!Main.dedServ)
 			{
-				Main.instance.LoadItem(ItemID.WaterCandle);
 				herosMod.Call(
 					// Special string
 					"AddSimpleButton",
 					// Name of Permission governing the availability of the button/tool
 					ModifySpawnRateMultiplier_Permission,
 					// Texture of the button. 38x38 is recommended for HERO's Mod. Also, a white outline on the icon similar to the other icons will look good.
-					Terraria.GameContent.TextureAssets.Item[ItemID.WaterCandle].Value,
+					ModUtils.GetItemTexture(ItemID.WaterCandle).Value, //TODO change when heros updates
 					// A method that will be called when the button is clicked
 					(Action)SpawnRateMultiplier.HEROsButtonPressed,
 					// A method that will be called when the player's permissions have changed
@@ -281,72 +281,72 @@ namespace CheatSheet
 
 		public override void AddRecipeGroups()
 		{
-			System.Collections.Concurrent.ConcurrentQueue<Action> glQueue = (System.Collections.Concurrent.ConcurrentQueue<Action>)typeof(Terraria.ModLoader.Engine.GLCallLocker).GetField("actionQueue", BindingFlags.NonPublic | BindingFlags.Static).GetValue(null);
-			glQueue.Enqueue(() =>
+			//System.Collections.Concurrent.ConcurrentQueue<Action> glQueue = (System.Collections.Concurrent.ConcurrentQueue<Action>)typeof(Terraria.ModLoader.Engine.GLCallLocker).GetField("actionQueue", BindingFlags.NonPublic | BindingFlags.Static).GetValue(null);
+			//glQueue.Enqueue(() =>
+			//{
+			if (!Main.dedServ)
 			{
-				if (!Main.dedServ)
-				{
-					for (int i = 0; i < ItemLoader.ItemCount; i++)
-					{
-						Main.instance.LoadItem(i);
-					}
+				//for (int i = 0; i < ItemLoader.ItemCount; i++)
+				//{
+				//	Main.instance.LoadItem(i);
+				//}
 
-					try {
-						itemBrowser = new ItemBrowser(this);
-						itemBrowser.SetDefaultPosition(new Vector2(80, 300));
-						itemBrowser.Visible = false;
+				try {
+					itemBrowser = new ItemBrowser(this);
+					itemBrowser.SetDefaultPosition(new Vector2(80, 300));
+					itemBrowser.Visible = false;
 
-						npcBrowser = new NPCBrowser(this);
-						npcBrowser.SetDefaultPosition(new Vector2(30, 180));
-						npcBrowser.Visible = false;
+					npcBrowser = new NPCBrowser(this);
+					npcBrowser.SetDefaultPosition(new Vector2(30, 180));
+					npcBrowser.Visible = false;
 
-						recipeBrowser = new RecipeBrowserWindow(this);
-						recipeBrowser.SetDefaultPosition(new Vector2(30, 180));
-						recipeBrowser.Visible = false;
+					recipeBrowser = new RecipeBrowserWindow(this);
+					recipeBrowser.SetDefaultPosition(new Vector2(30, 180));
+					recipeBrowser.Visible = false;
 
-						extendedCheatMenu = new ExtendedCheatMenu(this);
-						extendedCheatMenu.SetDefaultPosition(new Vector2(120, 180));
-						extendedCheatMenu.Visible = false;
+					extendedCheatMenu = new ExtendedCheatMenu(this);
+					extendedCheatMenu.SetDefaultPosition(new Vector2(120, 180));
+					extendedCheatMenu.Visible = false;
 
-						paintToolsHotbar = new PaintToolsHotbar(this);
-						//	paintToolsHotbar.SetDefaultPosition(new Microsoft.Xna.Framework.Vector2(120, 180));
-						paintToolsHotbar.Visible = false;
-						paintToolsHotbar.Hide();
+					paintToolsHotbar = new PaintToolsHotbar(this);
+					//	paintToolsHotbar.SetDefaultPosition(new Microsoft.Xna.Framework.Vector2(120, 180));
+					paintToolsHotbar.Visible = false;
+					paintToolsHotbar.Hide();
 
-						paintToolsUI = new PaintToolsUI(this);
-						paintToolsUI.SetDefaultPosition(new Vector2(30, 180));
-						paintToolsUI.Visible = false;
+					paintToolsUI = new PaintToolsUI(this);
+					paintToolsUI.SetDefaultPosition(new Vector2(30, 180));
+					paintToolsUI.Visible = false;
 
-						quickTeleportHotbar = new QuickTeleportHotbar(this);
-						quickTeleportHotbar.Visible = false;
-						quickTeleportHotbar.Hide();
+					quickTeleportHotbar = new QuickTeleportHotbar(this);
+					quickTeleportHotbar.Visible = false;
+					quickTeleportHotbar.Hide();
 
-						quickClearHotbar = new QuickClearHotbar(this);
-						quickClearHotbar.Visible = false;
-						quickClearHotbar.Hide();
+					quickClearHotbar = new QuickClearHotbar(this);
+					quickClearHotbar.Visible = false;
+					quickClearHotbar.Hide();
 
-						npcButchererHotbar = new NPCButchererHotbar(this);
-						npcButchererHotbar.Visible = false;
-						npcButchererHotbar.Hide();
+					npcButchererHotbar = new NPCButchererHotbar(this);
+					npcButchererHotbar.Visible = false;
+					npcButchererHotbar.Hide();
 
-						//eventManagerHotbar = new EventManagerHotbar(this);
-						//eventManagerHotbar.Visible = false;
-						//eventManagerHotbar.Hide();
+					//eventManagerHotbar = new EventManagerHotbar(this);
+					//eventManagerHotbar.Visible = false;
+					//eventManagerHotbar.Hide();
 
-						hotbar = new Hotbar(this);
-						//hotbar.Position = new Microsoft.Xna.Framework.Vector2(120, 180);
-						hotbar.Visible = true;
-						if (!ModContent.GetInstance<CheatSheetClientConfig>().HotbarShownByDefault)
-							hotbar.Hide();
-						else
-							hotbar.Show();
-					}
-					catch (Exception e)
-					{
-						Logger.Error(e.ToString());
-					}
+					hotbar = new Hotbar(this);
+					//hotbar.Position = new Microsoft.Xna.Framework.Vector2(120, 180);
+					hotbar.Visible = true;
+					if (!ModContent.GetInstance<CheatSheetClientConfig>().HotbarShownByDefault)
+						hotbar.Hide();
+					else
+						hotbar.Show();
 				}
-			});
+				catch (Exception e)
+				{
+					Logger.Error(e.ToString());
+				}
+			}
+			//});
 		}
 
 		public static bool IsPlayerLocalServerOwner(Player player) {
@@ -384,7 +384,7 @@ namespace CheatSheet
 
 		private KeyboardState PreviousKeyState;
 
-		public void RegisterButton(Texture2D texture, Action buttonClickedAction, Func<string> tooltip)
+		public void RegisterButton(Asset<Texture2D> texture, Action buttonClickedAction, Func<string> tooltip)
 		{
 			ButtonClicked.Add(buttonClickedAction);
 			ButtonTexture.Add(texture);
@@ -395,7 +395,7 @@ namespace CheatSheet
 		}
 
 		internal static List<Action> ButtonClicked = new List<Action>();
-		internal static List<Texture2D> ButtonTexture = new List<Texture2D>();
+		internal static List<Asset<Texture2D>> ButtonTexture = new List<Asset<Texture2D>>();
 		internal static List<Func<string>> ButtonTooltip = new List<Func<string>>();
 
 		public override object Call(params object[] args)
@@ -405,7 +405,7 @@ namespace CheatSheet
 				if (message == "AddButton_Test")
 				{
 					Logger.Info("Button Adding...");
-					RegisterButton(args[1] as Texture2D, args[2] as Action, args[3] as Func<string>);
+					RegisterButton(args[1] as Asset<Texture2D>, args[2] as Action, args[3] as Func<string>);
 					Logger.Info("...Button Added");
 				}
 				else if (message == "HideHotbar") {
@@ -539,7 +539,7 @@ namespace CheatSheet
 
 	public static class CheatSheetInterface
 	{
-		public static void RegisterButton(Mod mod, Texture2D texture, Action buttonClickedAction, Func<string> tooltip)
+		public static void RegisterButton(Mod mod, Asset<Texture2D> texture, Action buttonClickedAction, Func<string> tooltip)
 		{
 			if (!Main.dedServ && mod != null && mod is CheatSheet)
 			{
@@ -585,11 +585,11 @@ namespace CheatSheet
 
 	public class CheatSheetButton
 	{
-		internal Texture2D texture;
+		internal Asset<Texture2D> texture;
 
 		//internal Action buttonClickedAction;
 		//internal Func<string> tooltip;
-		public CheatSheetButton(Texture2D texture/*, Action buttonClickedAction, Func<string> tooltip*/)
+		public CheatSheetButton(Asset<Texture2D> texture/*, Action buttonClickedAction, Func<string> tooltip*/)
 		{
 			this.texture = texture;
 			//	this.buttonClickedAction = buttonClickedAction;

@@ -40,16 +40,26 @@ namespace CheatSheet.Menus
 			base.Visible = false;
 
 			// Button images
-			bGoblinInvasion = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.GoblinBattleStandard].Value);
-			bBloodmoon = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.PiggyBank].Value);
-			bSlimerain = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.RoyalGel].Value);
-			bFrostlegion = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.SnowGlobe].Value);
-			bSolarEclipse = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.SolarTablet].Value);
-			bPirateInvasion = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.PirateMap].Value);
-			bPumpkinMoon = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.PumpkinMoonMedallion].Value);
-			bFrostMoon = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.NaughtyPresent].Value);
-			bMartianMadness = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.MartianSaucerTrophy].Value);
-			bStopEvents = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.AlphabetStatueX].Value);
+			bGoblinInvasion = new UIImage(ModUtils.GetItemTexture(ItemID.GoblinBattleStandard));
+
+			bBloodmoon = new UIImage(ModUtils.GetItemTexture(ItemID.PiggyBank));
+
+			bSlimerain = new UIImage(ModUtils.GetItemTexture(ItemID.RoyalGel));
+
+			bFrostlegion = new UIImage(ModUtils.GetItemTexture(ItemID.SnowGlobe));
+
+			bSolarEclipse = new UIImage(ModUtils.GetItemTexture(ItemID.SolarTablet));
+
+			bPirateInvasion = new UIImage(ModUtils.GetItemTexture(ItemID.PirateMap));
+
+			bPumpkinMoon = new UIImage(ModUtils.GetItemTexture(ItemID.PumpkinMoonMedallion));
+
+			bFrostMoon = new UIImage(ModUtils.GetItemTexture(ItemID.NaughtyPresent));
+
+			bMartianMadness = new UIImage(ModUtils.GetItemTexture(ItemID.MartianSaucerTrophy));
+
+			bStopEvents = new UIImage(ModUtils.GetItemTexture(ItemID.AlphabetStatueX));
+
 
 			// Button tooltips
 			bGoblinInvasion.Tooltip = "Summon a Goblin Invasion";

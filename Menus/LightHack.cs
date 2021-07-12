@@ -18,7 +18,8 @@ namespace CheatSheet.Menus
 
 		public static UIImage GetButton(Mod mod)
 		{
-			button = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.UltrabrightTorch].Value);
+			button = new UIImage(ModUtils.GetItemTexture(ItemID.UltrabrightTorch));
+
 			button.Tooltip = LightStrengthStrings[LightStrength];
 			button.onRightClick += (s, e) =>
 			{

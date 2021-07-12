@@ -32,11 +32,16 @@ namespace CheatSheet.Menus
 			base.Visible = false;
 			//base.UpdateWhenOutOfBounds = true;
 
-			bDungeon = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.DungeonDoor].Value);
-			bSpawn = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.WoodenDoor].Value);
-			bHell = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.ObsidianDoor].Value);
-			bTemple = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.LihzahrdDoor].Value);
-			bRandom = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.SpookyDoor].Value);
+			bDungeon = new UIImage(ModUtils.GetItemTexture(ItemID.DungeonDoor));
+
+			bSpawn = new UIImage(ModUtils.GetItemTexture(ItemID.WoodenDoor));
+
+			bHell = new UIImage(ModUtils.GetItemTexture(ItemID.ObsidianDoor));
+
+			bTemple = new UIImage(ModUtils.GetItemTexture(ItemID.LihzahrdDoor));
+
+			bRandom = new UIImage(ModUtils.GetItemTexture(ItemID.SpookyDoor));
+
 
 			bDungeon.Tooltip = CSText("Dungeon");
 			bSpawn.Tooltip = CSText("Spawnpoint");

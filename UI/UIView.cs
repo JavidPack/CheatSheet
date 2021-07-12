@@ -571,7 +571,7 @@ namespace CheatSheet.UI
 
 		public UIView()
 		{
-			//closeTexture = CheatSheet.instance.GetTexture("UI/closeButton");
+			//closeTexture = CheatSheet.instance.Assets.Request<Texture2D>("UI/closeButton");
 		}
 
 		//public static Texture2D GetEmbeddedTexture(string name)

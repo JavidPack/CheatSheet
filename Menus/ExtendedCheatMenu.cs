@@ -2,6 +2,7 @@
 using CheatSheet.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
 using Terraria;
 using Terraria.GameContent;
@@ -46,20 +47,21 @@ namespace CheatSheet.Menus
 
 				for (int j = 0; j < CheatSheet.ButtonTexture.Count; j++)
 				{
-					UIImage button = new UIImage(CheatSheet.ButtonTexture[j]);
+                    Asset<Texture2D> textureAsset = CheatSheet.ButtonTexture[j];
+                    UIImage button = new UIImage(textureAsset);
 					Vector2 position = new Vector2(this.spacing + 1, this.spacing + 1);
-					button.Scale = 38f / Math.Max(CheatSheet.ButtonTexture[j].Width, CheatSheet.ButtonTexture[j].Height);
+					button.Scale = 38f / Math.Max(textureAsset.Width(), textureAsset.Height());
 
 					position.X += (float)(j / rows * 40);
 					position.Y += (float)(j % rows * 40);
 
-					if (CheatSheet.ButtonTexture[j].Height > CheatSheet.ButtonTexture[j].Width)
+					if (textureAsset.Height() > textureAsset.Width())
 					{
-						position.X += (38 - CheatSheet.ButtonTexture[j].Width) / 2;
+						position.X += (38 - textureAsset.Width()) / 2;
 					}
-					else if (CheatSheet.ButtonTexture[j].Height < CheatSheet.ButtonTexture[j].Width)
+					else if (textureAsset.Height() < textureAsset.Width())
 					{
-						position.Y += (38 - CheatSheet.ButtonTexture[j].Height) / 2;
+						position.Y += (38 - textureAsset.Height()) / 2;
 					}
 
 					button.Position = position;
@@ -76,7 +78,7 @@ namespace CheatSheet.Menus
 				Height += 40 * rows;
 			}
 
-			Texture2D texture = mod.GetTexture("UI/closeButton").Value;
+			Asset<Texture2D> texture = mod.Assets.Request<Texture2D>("UI/closeButton");
 			UIImage uIImage = new UIImage(texture);
 			uIImage.Anchor = AnchorPosition.TopRight;
 			uIImage.Position = new Vector2(base.Width - this.spacing / 2, this.spacing / 2);

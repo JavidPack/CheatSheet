@@ -2,6 +2,7 @@
 using CheatSheet.Menus;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using ReLogic.OS;
 using Terraria;
 using Terraria.GameContent;
@@ -10,11 +11,11 @@ namespace CheatSheet
 {
 	internal static class ModUtils
 	{
-		internal static Texture2D GetItemTexture(int id)
+		internal static Asset<Texture2D> GetItemTexture(int id)
 		{
 			Main.instance.LoadItem(id);
 
-			return TextureAssets.Item[id].Value;
+			return TextureAssets.Item[id];
 		}
 
 		// TODO: Temp until tmod is fixed

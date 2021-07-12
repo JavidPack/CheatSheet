@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using Terraria;
@@ -13,7 +14,7 @@ namespace CheatSheet.UI
 			ScissorTestEnable = true
 		};
 
-		internal static Texture2D ScrollbgTexture;
+		internal static Asset<Texture2D> ScrollbgTexture;
 
 		private static Texture2D scrollbgFill;
 
@@ -37,14 +38,16 @@ namespace CheatSheet.UI
 		{
 			get
 			{
-				if (UIScrollView.scrollbgFill == null)
+				if (UIScrollView.scrollbgFill == null && UIScrollView.ScrollbgTexture.Value != null)
 				{
-					Color[] array = new Color[UIScrollView.ScrollbgTexture.Width * UIScrollView.ScrollbgTexture.Height];
-					UIScrollView.ScrollbgTexture.GetData<Color>(array);
-					Color[] array2 = new Color[UIScrollView.ScrollbgTexture.Width];
+					int width = UIScrollView.ScrollbgTexture.Width();
+					int height = UIScrollView.ScrollbgTexture.Height();
+					Color[] array = new Color[width * height];
+					UIScrollView.ScrollbgTexture.Value.GetData<Color>(array);
+					Color[] array2 = new Color[width];
 					for (int i = 0; i < array2.Length; i++)
 					{
-						array2[i] = array[i + (UIScrollView.ScrollbgTexture.Height - 1) * UIScrollView.ScrollbgTexture.Width];
+						array2[i] = array[i + (height - 1) * width];
 					}
 					UIScrollView.scrollbgFill = new Texture2D(UIView.graphics, array2.Length, 1);
 					UIScrollView.scrollbgFill.SetData<Color>(array2);
@@ -96,7 +99,7 @@ namespace CheatSheet.UI
 
 		public UIScrollView()
 		{
-			ScrollbgTexture = CheatSheet.instance.GetTexture("UI/Images.UIKit.scrollbgEdge").Value;
+			ScrollbgTexture = CheatSheet.instance.Assets.Request<Texture2D>("UI/Images.UIKit.scrollbgEdge");
 			this.scrollBar.onMouseDown += new UIView.ClickEventHandler(this.scrollBar_onMouseDown);
 			this.AddChild(this.scrollBar);
 		}
@@ -219,13 +222,17 @@ namespace CheatSheet.UI
 		private void DrawScrollbg(SpriteBatch spriteBatch)
 		{
 			Vector2 drawPosition = base.DrawPosition;
-			float num = base.Height - (float)(UIScrollView.ScrollbgTexture.Height * 2);
-			drawPosition.X += base.Width - (float)UIScrollView.ScrollbgTexture.Width;
-			spriteBatch.Draw(UIScrollView.ScrollbgTexture, drawPosition, null, Color.White, 0f, base.Origin, 1f, SpriteEffects.None, 0f);
-			drawPosition.Y += (float)UIScrollView.ScrollbgTexture.Height;
-			spriteBatch.Draw(UIScrollView.ScrollbgFill, drawPosition - base.Origin, null, Color.White, 0f, Vector2.Zero, new Vector2(1f, num), SpriteEffects.None, 0f);
+			float num = base.Height - (float)(UIScrollView.ScrollbgTexture.Height() * 2);
+			drawPosition.X += base.Width - (float)UIScrollView.ScrollbgTexture.Width();
+			spriteBatch.Draw(UIScrollView.ScrollbgTexture.Value, drawPosition, null, Color.White, 0f, base.Origin, 1f, SpriteEffects.None, 0f);
+			drawPosition.Y += (float)UIScrollView.ScrollbgTexture.Height();
+			
+			if (UIScrollView.ScrollbgFill != null)
+            {
+				spriteBatch.Draw(UIScrollView.ScrollbgFill, drawPosition - base.Origin, null, Color.White, 0f, Vector2.Zero, new Vector2(1f, num), SpriteEffects.None, 0f);
+			}
 			drawPosition.Y += num;
-			spriteBatch.Draw(UIScrollView.ScrollbgTexture, drawPosition, null, Color.White, 0f, base.Origin, 1f, SpriteEffects.FlipVertically, 0f);
+			spriteBatch.Draw(UIScrollView.ScrollbgTexture.Value, drawPosition, null, Color.White, 0f, base.Origin, 1f, SpriteEffects.FlipVertically, 0f);
 		}
 
 		public override void Draw(SpriteBatch spriteBatch)

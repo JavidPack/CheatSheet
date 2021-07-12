@@ -60,14 +60,22 @@ namespace CheatSheet.Menus
 			base.Visible = false;
 			//base.UpdateWhenOutOfBounds = true;
 
-			//		bDecreaseBrushSize = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.CopperShortsword].Value);
-			//		bIncreaseBrushSize = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.CrossNecklace].Value);
-			bStampTiles = new UIImage(TextureAssets.Item[ItemID.Paintbrush].Value);
-			bUndo = new UIImage(TextureAssets.Item[ItemID.AlphabetStatueU].Value);
-			bEyeDropper = new UIImage(TextureAssets.Item[ItemID.EmptyDropper].Value);
-			bFlipHorizontal = new UIImage(mod.GetTexture("CustomUI/Horizontal").Value);
-			bFlipVertical = new UIImage(mod.GetTexture("CustomUI/Vertical").Value);
-			bToggleTransparentSelection = new UIImage(TextureAssets.Buff[BuffID.Invisibility].Value);
+			//		bDecreaseBrushSize = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.CopperShortsword]);
+
+			//		bIncreaseBrushSize = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.CrossNecklace]);
+
+			bStampTiles = new UIImage(ModUtils.GetItemTexture(ItemID.Paintbrush));
+
+			bUndo = new UIImage(ModUtils.GetItemTexture(ItemID.AlphabetStatueU));
+
+			bEyeDropper = new UIImage(ModUtils.GetItemTexture(ItemID.EmptyDropper));
+
+			bFlipHorizontal = new UIImage(mod.Assets.Request<Texture2D>("CustomUI/Horizontal"));
+
+			bFlipVertical = new UIImage(mod.Assets.Request<Texture2D>("CustomUI/Vertical"));
+
+			bToggleTransparentSelection = new UIImage(TextureAssets.Buff[BuffID.Invisibility]);
+
 
 			//		this.bIncreaseBrushSize.Tooltip = "    Increase Brush Size";
 			//		this.bDecreaseBrushSize.Tooltip = "    Decrease Brush Size";

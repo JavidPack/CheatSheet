@@ -2,6 +2,7 @@
 using CheatSheet.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using ReLogic.Graphics;
 using System;
 using System.Collections.Generic;
@@ -29,11 +30,7 @@ namespace CheatSheet.Menus
 			CSText("CycleModSpecificRecipes")
 		};
 
-		private static Texture2D[] categoryIcons = new Texture2D[]
-		{
-			Terraria.GameContent.TextureAssets.Item[ItemID.AlphabetStatueA].Value,
-			Terraria.GameContent.TextureAssets.Item[ItemID.AlphabetStatueM].Value,
-		};
+		private static Asset<Texture2D>[] categoryIcons;
 
 		internal static RecipeView recipeView;
 		public CheatSheet mod;
@@ -69,6 +66,11 @@ namespace CheatSheet.Menus
 		public RecipeBrowserWindow(CheatSheet mod)
 		{
 			categories.Clear();
+			categoryIcons = new Asset<Texture2D>[]
+			{
+				ModUtils.GetItemTexture(ItemID.AlphabetStatueA),
+				ModUtils.GetItemTexture(ItemID.AlphabetStatueM),
+			};
 			bCategories = new UIImage[categoryIcons.Length];
 			recipeView = new RecipeView();
 			this.mod = mod;
@@ -78,7 +80,7 @@ namespace CheatSheet.Menus
 			recipeView.Position = new Vector2(this.spacing, this.spacing + 40);
 			this.AddChild(recipeView);
 			this.InitializeRecipeCategories();
-			Texture2D texture = mod.GetTexture("UI/closeButton").Value;
+			Asset<Texture2D> texture = mod.Assets.Request<Texture2D>("UI/closeButton");
 			UIImage uIImage = new UIImage(texture);
 			uIImage.Anchor = AnchorPosition.TopRight;
 			uIImage.Position = new Vector2(base.Width - this.spacing, this.spacing);
@@ -101,18 +103,19 @@ namespace CheatSheet.Menus
 			{
 				UIImage uIImage2 = new UIImage(RecipeBrowserWindow.categoryIcons[j]);
 				Vector2 position = new Vector2(this.spacing + 48, this.spacing);
-				uIImage2.Scale = 32f / Math.Max(categoryIcons[j].Width, categoryIcons[j].Height);
+                Asset<Texture2D> iconAsset = categoryIcons[j];
+                uIImage2.Scale = 32f / Math.Max(iconAsset.Width(), iconAsset.Height());
 
 				position.X += (float)(j % 6 * 40);
 				position.Y += (float)(j / 6 * 40);
 
-				if (categoryIcons[j].Height > categoryIcons[j].Width)
+				if (iconAsset.Height() > iconAsset.Width())
 				{
-					position.X += (32 - categoryIcons[j].Width) / 2;
+					position.X += (32 - iconAsset.Width()) / 2;
 				}
-				else if (categoryIcons[j].Height < categoryIcons[j].Width)
+				else if (iconAsset.Height() < iconAsset.Width())
 				{
-					position.Y += (32 - categoryIcons[j].Height) / 2;
+					position.Y += (32 - iconAsset.Height()) / 2;
 				}
 
 				uIImage2.Position = position;

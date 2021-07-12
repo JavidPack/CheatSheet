@@ -35,7 +35,8 @@ namespace CheatSheet.Menus
 
 		public static UIImage GetButton(Mod mod)
 		{
-			button = new UIImage(TextureAssets.Buff[BuffID.Summoning].Value);
+			button = new UIImage(TextureAssets.Buff[BuffID.Summoning]);
+
 			button.Tooltip = CSText("MinionSlotBooster");
 			button.onRightClick += (s, e) =>
 			{

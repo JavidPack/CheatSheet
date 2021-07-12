@@ -2,6 +2,7 @@
 using CheatSheet.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
 using Terraria;
 using Terraria.ID;
@@ -23,7 +24,8 @@ namespace CheatSheet.Menus
 			bossDownerWindow.SetDefaultPosition(new Vector2(200, 200));
 			bossDownerWindow.Visible = false;
 
-			button = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.MechanicalSkull].Value);
+			button = new UIImage(ModUtils.GetItemTexture(ItemID.MechanicalSkull));
+
 			button.Tooltip = "Open Boss Downer";
 			button.onLeftClick += new EventHandler(bBossDownerToggle_onLeftClick);
 			//+= (s, e) =>
@@ -65,7 +67,7 @@ namespace CheatSheet.Menus
 			base.Width = 450;
 			base.Height = 357;
 
-			Texture2D texture = mod.GetTexture("UI/closeButton").Value;
+			Asset<Texture2D> texture = mod.Assets.Request<Texture2D>("UI/closeButton");
 			UIImage uIImage = new UIImage(texture);
 			uIImage.Anchor = AnchorPosition.TopRight;
 			uIImage.Position = new Vector2(base.Width - this.spacing, this.spacing);
