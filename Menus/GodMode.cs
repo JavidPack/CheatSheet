@@ -29,7 +29,8 @@ namespace CheatSheet.Menus
 
 		public static UIImage GetButton(Mod mod)
 		{
-			button = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.JimsWings].Value);
+			button = new UIImage(ModUtils.GetItemTexture(ItemID.JimsWings));
+
 			button.onLeftClick += (s, e) =>
 			{
 				Enabled = !Enabled;
@@ -52,9 +53,9 @@ namespace CheatSheet.Menus
 		{
 			if (GodMode.Enabled)
 			{
-				player.statLife = player.statLifeMax2;
-				player.statMana = player.statManaMax2;
-				player.wingTime = player.wingTimeMax;
+				Player.statLife = Player.statLifeMax2;
+				Player.statMana = Player.statManaMax2;
+				Player.wingTime = Player.wingTimeMax;
 			}
 		}
 	}

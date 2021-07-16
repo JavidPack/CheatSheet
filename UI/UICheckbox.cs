@@ -1,13 +1,15 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
+using Terraria;
 
 namespace CheatSheet.UI
 {
 	internal class UICheckbox : UIView
 	{
-		internal static Texture2D checkboxTexture;
-		internal static Texture2D checkmarkTexture;
+		internal static Asset<Texture2D> checkboxTexture;
+		internal static Asset<Texture2D> checkmarkTexture;
 
 		private bool selected = false;
 
@@ -39,12 +41,12 @@ namespace CheatSheet.UI
 
 		public UICheckbox(string text)
 		{
-			checkboxTexture = CheatSheet.instance.GetTexture("UI/checkBox").Value;
-			checkmarkTexture = CheatSheet.instance.GetTexture("UI/checkMark").Value;
+			checkboxTexture = CheatSheet.instance.Assets.Request<Texture2D>("UI/checkBox");
+			checkmarkTexture = CheatSheet.instance.Assets.Request<Texture2D>("UI/checkMark");
 
 			label = new UILabel(text);
 			label.Scale = .5f;
-			label.Position = new Vector2(checkboxTexture.Width + spacing, 0);
+			label.Position = new Vector2(checkboxTexture.Width() + spacing, 0);
 			this.AddChild(label);
 			this.onLeftClick += new EventHandler(UICheckbox_onLeftClick);
 		}
@@ -61,15 +63,15 @@ namespace CheatSheet.UI
 
 		protected override float GetWidth()
 		{
-			return checkboxTexture.Width + spacing + label.Width;
+			return checkboxTexture.Width() + spacing + label.Width;
 		}
 
 		public override void Draw(SpriteBatch spriteBatch)
 		{
-			Vector2 pos = DrawPosition + new Vector2(0, (float)label.Height / 2 - (float)checkboxTexture.Height / 1.2f);
-			spriteBatch.Draw(checkboxTexture, pos, null, Color.White, 0f, Origin, 1f, SpriteEffects.None, 0f);
+			Vector2 pos = DrawPosition + new Vector2(0, (float)label.Height / 2 - (float)checkboxTexture.Height() / 1.2f);
+			spriteBatch.Draw(checkboxTexture.Value, pos, null, Color.White, 0f, Origin, 1f, SpriteEffects.None, 0f);
 			if (Selected)
-				spriteBatch.Draw(checkmarkTexture, pos, null, Color.White, 0f, Origin, 1f, SpriteEffects.None, 0f);
+				spriteBatch.Draw(checkboxTexture.Value, pos, null, Color.White, 0f, Origin, 1f, SpriteEffects.None, 0f);
 
 			base.Draw(spriteBatch);
 		}

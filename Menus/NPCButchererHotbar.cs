@@ -33,9 +33,12 @@ namespace CheatSheet.Menus
 			base.Visible = false;
 
 			// Button images
-			bButcherHostiles = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.DemonHeart].Value);
-			bButcherBoth = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.CrimsonHeart].Value);
-			bButcherTownNPCs = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.Heart].Value);
+			bButcherHostiles = new UIImage(ModUtils.GetItemTexture(ItemID.DemonHeart));
+
+			bButcherBoth = new UIImage(ModUtils.GetItemTexture(ItemID.CrimsonHeart));
+
+			bButcherTownNPCs = new UIImage(ModUtils.GetItemTexture(ItemID.Heart));
+
 
 			// Button tooltips
 			bButcherHostiles.Tooltip = CSText("ButcherHostileNPCs");

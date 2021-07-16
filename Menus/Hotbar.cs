@@ -2,6 +2,7 @@
 using CheatSheet.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
 using Terraria;
 using Terraria.GameContent;
@@ -29,8 +30,8 @@ namespace CheatSheet.Menus
 		internal UIHotbar currentHotbar;
 
 		//public static Texture2D mapTexture;
-		public static Texture2D loginTexture;
-		public static Texture2D logoutTexture;
+		public static Asset<Texture2D> loginTexture;
+		public static Asset<Texture2D> logoutTexture;
 
 		public UIView buttonView;
 
@@ -117,42 +118,57 @@ namespace CheatSheet.Menus
 			//	this.AddChild(this.timeWindow);
 			//	this.AddChild(this.npcSpawnWindow);
 			//	this.AddChild(this.weatherWindow);
-			Hotbar.loginTexture = mod.GetTexture("UI/Images.login").Value;// UIView.GetEmbeddedTexture("Images.login.png");
-			Hotbar.logoutTexture = mod.GetTexture("UI/Images.logout").Value; //UIView.GetEmbeddedTexture("Images.logout.png");
+			Hotbar.loginTexture = mod.Assets.Request<Texture2D>("UI/Images.login");// UIView.GetEmbeddedTexture("Images.login.png");
+			Hotbar.logoutTexture = mod.Assets.Request<Texture2D>("UI/Images.logout"); //UIView.GetEmbeddedTexture("Images.logout.png");
 																	   //	this.bLogin = new UIImage(Hotbar.loginTexture);
-																	   //		bLogin = new UIImage(mod.GetTexture("UI/Images.login"));
+																	   //		bLogin = new UIImage(mod.Assets.Request<Texture2D>("UI/Images.login"));
 			base.Visible = false;
 			base.UpdateWhenOutOfBounds = true;
 			//	Hotbar.groupWindow = new GroupManagementWindow();
-			this.button = new UIImage(mod.GetTexture("UI/Images.CollapseBar.CollapseButtonHorizontal").Value);//new UIImage(UIView.GetEmbeddedTexture("Images.CollapseBar.CollapseButtonHorizontal.png"));
-			this.button.UpdateWhenOutOfBounds = true;
-			this.arrow = new UIImage(mod.GetTexture("UI/Images.CollapseBar.CollapseArrowHorizontal").Value);  //new UIImage(UIView.GetEmbeddedTexture("Images.CollapseBar.CollapseArrowHorizontal.png"));
+			this.button = new UIImage(mod.Assets.Request<Texture2D>("UI/Images.CollapseBar.CollapseButtonHorizontal"));//new UIImage(UIView.GetEmbeddedTexture("Images.CollapseBar.CollapseButtonHorizontal.png"));
 
-			//		bToggleEnemies = new UIImage(mod.GetTexture("UI/Images.npcIcon"));
-			//		bToggleBlockReach = new UIImage(Terraria.GameContent.TextureAssets.Item[407].Value);
-			//		bFlyCamera = new UIImage(Terraria.GameContent.TextureAssets.Item[493].Value);
-			//		bRevealMap = new UIImage(mod.GetTexture("UI/Images.canIcon"));// Hotbar.mapTexture);
-			//		bWaypoints = new UIImage(mod.GetTexture("UI/Images.waypointIcon"));
-			//		bGroupManager = new UIImage(mod.GetTexture("UI/Images.manageGroups"));
-			//		bOnlinePlayers = new UIImage(mod.GetTexture("UI/Images.connectedPlayers"));
-			//		bTime = new UIImage(mod.GetTexture("UI/Images.sunIcon"));
+			this.button.UpdateWhenOutOfBounds = true;
+			this.arrow = new UIImage(mod.Assets.Request<Texture2D>("UI/Images.CollapseBar.CollapseArrowHorizontal"));  //new UIImage(UIView.GetEmbeddedTexture("Images.CollapseBar.CollapseArrowHorizontal.png"));
+
+
+			//		bToggleEnemies = new UIImage(mod.Assets.Request<Texture2D>("UI/Images.npcIcon"));
+			//		bToggleBlockReach = new UIImage(ModUtils.GetItemTexture(407));
+
+			//		bFlyCamera = new UIImage(ModUtils.GetItemTexture(493));
+
+			//		bRevealMap = new UIImage(mod.Assets.Request<Texture2D>("UI/Images.canIcon"));// Hotbar.mapTexture);
+			//		bWaypoints = new UIImage(mod.Assets.Request<Texture2D>("UI/Images.waypointIcon"));
+			//		bGroupManager = new UIImage(mod.Assets.Request<Texture2D>("UI/Images.manageGroups"));
+			//		bOnlinePlayers = new UIImage(mod.Assets.Request<Texture2D>("UI/Images.connectedPlayers"));
+			//		bTime = new UIImage(mod.Assets.Request<Texture2D>("UI/Images.sunIcon"));
 			//		bWeatherWindow = new UIImage(Main.npcHeadTexture[2]);// WeatherControlWindow.rainTexture);
-			//		bBackupWorld = new UIImage(mod.GetTexture("UI/Images.UIKit.saveIcon"));
-			//		bCTFSettings = new UIImage(mod.GetTexture("UI/Images.CTF.redFlag"));
+			//		bBackupWorld = new UIImage(mod.Assets.Request<Texture2D>("UI/Images.UIKit.saveIcon"));
+			//		bCTFSettings = new UIImage(mod.Assets.Request<Texture2D>("UI/Images.CTF.redFlag"));
 
 			//	Main.instance.LoadNPC(NPCID.KingSlime);
 
-			bToggleItemBrowser = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.WorkBench].Value);
-			bToggleNPCBrowser = new UIImage(mod.GetTexture("UI/Images.npcIcon").Value);
-			bToggleClearMenu = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.TrashCan].Value);
-			bToggleRecipeBrowser = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.CookingPot].Value);
-			bToggleExtendedCheat = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.CellPhone].Value);
-			bTogglePaintTools = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.Paintbrush].Value);
-			bCycleExtraAccessorySlots = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.DemonHeart].Value);
-			bVacuum = new UIImage(mod.GetTexture("UI/Images.bVacuum").Value);
-			bToggleNPCButcherer = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.Skull].Value);
-			bToggleQuickTeleport = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.WoodenDoor].Value);
-			//bToggleEventManager = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.PirateMap].Value);
+			bToggleItemBrowser = new UIImage(ModUtils.GetItemTexture(ItemID.WorkBench));
+
+			bToggleNPCBrowser = new UIImage(mod.Assets.Request<Texture2D>("UI/Images.npcIcon"));
+
+			bToggleClearMenu = new UIImage(ModUtils.GetItemTexture(ItemID.TrashCan));
+
+			bToggleRecipeBrowser = new UIImage(ModUtils.GetItemTexture(ItemID.CookingPot));
+
+			bToggleExtendedCheat = new UIImage(ModUtils.GetItemTexture(ItemID.CellPhone));
+
+			bTogglePaintTools = new UIImage(ModUtils.GetItemTexture(ItemID.Paintbrush));
+
+			bCycleExtraAccessorySlots = new UIImage(ModUtils.GetItemTexture(ItemID.DemonHeart));
+
+			bVacuum = new UIImage(mod.Assets.Request<Texture2D>("UI/Images.bVacuum"));
+
+			bToggleNPCButcherer = new UIImage(ModUtils.GetItemTexture(ItemID.Skull));
+
+			bToggleQuickTeleport = new UIImage(ModUtils.GetItemTexture(ItemID.WoodenDoor));
+
+			//bToggleEventManager = new UIImage(ModUtils.GetItemTexture(ItemID.PirateMap));
+
 
 			this.arrow.UpdateWhenOutOfBounds = true;
 			this.button.Anchor = AnchorPosition.Top;
@@ -1046,7 +1062,7 @@ namespace CheatSheet.Menus
 //			this.CanMove = true;
 //			base.Width = 40 + spacing * 2;
 //			base.Height = 400f;
-//			Texture2D texture = mod.GetTexture("UI/closeButton");
+//			Texture2D texture = mod.Assets.Request<Texture2D>("UI/closeButton");
 //			UIImage uIImage = new UIImage(texture);
 //			uIImage.Anchor = AnchorPosition.TopRight;
 //			uIImage.Position = new Vector2(base.Width - this.spacing / 2, this.spacing / 2);

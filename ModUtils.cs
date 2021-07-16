@@ -1,6 +1,8 @@
 ﻿using System;
+using CheatSheet.Menus;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using ReLogic.OS;
 using Terraria;
 using Terraria.GameContent;
@@ -9,17 +11,17 @@ namespace CheatSheet
 {
 	internal static class ModUtils
 	{
-		internal static Texture2D GetItemTexture(int id)
+		internal static Asset<Texture2D> GetItemTexture(int id)
 		{
 			Main.instance.LoadItem(id);
 
-			return TextureAssets.Item[id].Value;
+			return TextureAssets.Item[id];
 		}
 
 		// TODO: Temp until tmod is fixed
 		internal static bool AcceptedByItemGroups(this Recipe recipe, int invType, int reqType)
 		{
-			for (int i = 0; i < Recipe.maxRequirements; i++)
+			for (int i = 0; i < RecipeBrowserWindow.maxRequirementsOld; i++)
 			{
 				int num = recipe.acceptedGroups[i];
 				if (num == -1)
@@ -34,7 +36,7 @@ namespace CheatSheet
 
 		internal static bool ProcessGroupsForText(this Recipe recipe, int type, out string theText)
 		{
-			for (int i = 0; i < Recipe.maxRequirements; i++)
+			for (int i = 0; i < recipe.acceptedGroups.Count; i++)
 			{
 				int num = recipe.acceptedGroups[i];
 				if (num == -1)

@@ -60,14 +60,22 @@ namespace CheatSheet.Menus
 			base.Visible = false;
 			//base.UpdateWhenOutOfBounds = true;
 
-			//		bDecreaseBrushSize = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.CopperShortsword].Value);
-			//		bIncreaseBrushSize = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.CrossNecklace].Value);
-			bStampTiles = new UIImage(TextureAssets.Item[ItemID.Paintbrush].Value);
-			bUndo = new UIImage(TextureAssets.Item[ItemID.AlphabetStatueU].Value);
-			bEyeDropper = new UIImage(TextureAssets.Item[ItemID.EmptyDropper].Value);
-			bFlipHorizontal = new UIImage(mod.GetTexture("CustomUI/Horizontal").Value);
-			bFlipVertical = new UIImage(mod.GetTexture("CustomUI/Vertical").Value);
-			bToggleTransparentSelection = new UIImage(TextureAssets.Buff[BuffID.Invisibility].Value);
+			//		bDecreaseBrushSize = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.CopperShortsword]);
+
+			//		bIncreaseBrushSize = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.CrossNecklace]);
+
+			bStampTiles = new UIImage(ModUtils.GetItemTexture(ItemID.Paintbrush));
+
+			bUndo = new UIImage(ModUtils.GetItemTexture(ItemID.AlphabetStatueU));
+
+			bEyeDropper = new UIImage(ModUtils.GetItemTexture(ItemID.EmptyDropper));
+
+			bFlipHorizontal = new UIImage(mod.Assets.Request<Texture2D>("CustomUI/Horizontal"));
+
+			bFlipVertical = new UIImage(mod.Assets.Request<Texture2D>("CustomUI/Vertical"));
+
+			bToggleTransparentSelection = new UIImage(TextureAssets.Buff[BuffID.Invisibility]);
+
 
 			//		this.bIncreaseBrushSize.Tooltip = "    Increase Brush Size";
 			//		this.bDecreaseBrushSize.Tooltip = "    Decrease Brush Size";
@@ -548,7 +556,7 @@ namespace CheatSheet.Menus
 										if (Main.tile[x, y].type == TileID.Count)
 										{
 										}
-										if (Main.tile[x, y].active())
+										if (Main.tile[x, y].IsActive)
 										{
 											WorldGen.TileFrame(x, y, true, false);
 										}
@@ -676,7 +684,7 @@ namespace CheatSheet.Menus
 										int cycledY = ((y + point.Y - startTileY) % height + height) % height;
 										if (TransparentSelectionEnabled) // What about just walls?
 										{
-											if (StampTiles[cycledX, cycledY].active())
+											if (StampTiles[cycledX, cycledY].IsActive)
 											{
 												target.CopyFrom(StampTiles[cycledX, cycledY]);
 											}
@@ -695,7 +703,7 @@ namespace CheatSheet.Menus
 								for (int j = 0; j < point.Y + height; j++)
 								{
 									WorldGen.SquareTileFrame(i, j, false); // Need to do this after stamp so neighbors are correct.
-									if (Main.netMode == 1 && Framing.GetTileSafely(i, j).liquid > 0)
+									if (Main.netMode == 1 && Framing.GetTileSafely(i, j).LiquidAmount > 0)
 									{
 										NetMessage.sendWater(i, j); // Does it matter that this is before sendtilesquare?
 									}
@@ -821,24 +829,24 @@ namespace CheatSheet.Menus
 						//textureWall = WallDrawing.GetTileDrawTexture(tile, -1, -1); // x/y unused
 
 						int wallFrame = Main.wallFrame[tile.wall] * 180;
-						Rectangle value = new Rectangle(tile.wallFrameX(), tile.wallFrameY() + wallFrame, 32, 32);
+						Rectangle value = new Rectangle(tile.WallFrameX, tile.WallFrameY + wallFrame, 32, 32);
 						Vector2 pos = position + new Vector2(x * 16 - 8, y * 16 - 8);
 						sb.Draw(textureWall, pos * scale, value, color, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
 					}
-					if (tile.liquid > 14)
+					if (tile.LiquidAmount > 14)
 					{
 						Texture2D textureWater;
-						if (tile.honey())
+						if (tile.LiquidType == LiquidID.Honey)
 							textureWater = LiquidRenderer.Instance._liquidTextures[11].Value.Offset(16, 48, 16, 16);
-						else if (tile.lava())
+						else if (tile.LiquidType == LiquidID.Lava)
 							textureWater = LiquidRenderer.Instance._liquidTextures[1].Value.Offset(16, 48, 16, 16);
 						else
 							textureWater = LiquidRenderer.Instance._liquidTextures[0].Value.Offset(16, 48, 16, 16);
-						int waterSize = (tile.liquid + 1) / 16;
+						int waterSize = (tile.LiquidAmount + 1) / 16;
 						Vector2 pos = position + new Vector2(x * 16, y * 16 + (16 - waterSize));
 						sb.Draw(textureWater, pos * scale, new Rectangle(0, 16 - waterSize, 16, waterSize), color, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
 					}
-					if (tile.active()) // Tile
+					if (tile.IsActive) // Tile
 					{
 						Main.instance.LoadTiles(tile.type);
 						Texture2D texture = TextureAssets.Tile[tile.type].Value;
@@ -896,15 +904,15 @@ namespace CheatSheet.Menus
 				{
 					if (Main.tile[k, l].type != 48 && Main.tile[k, l].type != 137 && Main.tile[k, l].type != 232 && Main.tile[k, l].type != 191 && Main.tile[k, l].type != 151 && Main.tile[k, l].type != 274)
 					{
-						if (!Main.tile[k, l - 1].active())
+						if (!Main.tile[k, l - 1].IsActive)
 						{
 							if (WorldGen.SolidTile(k, l) && TileID.Sets.CanBeClearedDuringGeneration[(int)Main.tile[k, l].type])
 							{
-								if (!Main.tile[k - 1, l].halfBrick() && !Main.tile[k + 1, l].halfBrick() && Main.tile[k - 1, l].slope() == 0 && Main.tile[k + 1, l].slope() == 0)
+								if (!Main.tile[k - 1, l].IsHalfBlock && !Main.tile[k + 1, l].IsHalfBlock && Main.tile[k - 1, l].Slope == 0 && Main.tile[k + 1, l].Slope == 0)
 								{
 									if (WorldGen.SolidTile(k, l + 1))
 									{
-										if (!WorldGen.SolidTile(k - 1, l) && !Main.tile[k - 1, l + 1].halfBrick() && WorldGen.SolidTile(k - 1, l + 1) && WorldGen.SolidTile(k + 1, l) && !Main.tile[k + 1, l - 1].active())
+										if (!WorldGen.SolidTile(k - 1, l) && !Main.tile[k - 1, l + 1].IsHalfBlock && WorldGen.SolidTile(k - 1, l + 1) && WorldGen.SolidTile(k + 1, l) && !Main.tile[k + 1, l - 1].IsActive)
 										{
 											if (WorldGen.genRand.Next(2) == 0)
 											{
@@ -915,7 +923,7 @@ namespace CheatSheet.Menus
 												WorldGen.PoundTile(k, l);
 											}
 										}
-										else if (!WorldGen.SolidTile(k + 1, l) && !Main.tile[k + 1, l + 1].halfBrick() && WorldGen.SolidTile(k + 1, l + 1) && WorldGen.SolidTile(k - 1, l) && !Main.tile[k - 1, l - 1].active())
+										else if (!WorldGen.SolidTile(k + 1, l) && !Main.tile[k + 1, l + 1].IsHalfBlock && WorldGen.SolidTile(k + 1, l + 1) && WorldGen.SolidTile(k - 1, l) && !Main.tile[k - 1, l - 1].IsActive)
 										{
 											if (WorldGen.genRand.Next(2) == 0)
 											{
@@ -926,21 +934,21 @@ namespace CheatSheet.Menus
 												WorldGen.PoundTile(k, l);
 											}
 										}
-										else if (WorldGen.SolidTile(k + 1, l + 1) && WorldGen.SolidTile(k - 1, l + 1) && !Main.tile[k + 1, l].active() && !Main.tile[k - 1, l].active())
+										else if (WorldGen.SolidTile(k + 1, l + 1) && WorldGen.SolidTile(k - 1, l + 1) && !Main.tile[k + 1, l].IsActive && !Main.tile[k - 1, l].IsActive)
 										{
 											WorldGen.PoundTile(k, l);
 										}
 										if (WorldGen.SolidTile(k, l))
 										{
-											if (WorldGen.SolidTile(k - 1, l) && WorldGen.SolidTile(k + 1, l + 2) && !Main.tile[k + 1, l].active() && !Main.tile[k + 1, l + 1].active() && !Main.tile[k - 1, l - 1].active())
+											if (WorldGen.SolidTile(k - 1, l) && WorldGen.SolidTile(k + 1, l + 2) && !Main.tile[k + 1, l].IsActive && !Main.tile[k + 1, l + 1].IsActive && !Main.tile[k - 1, l - 1].IsActive)
 											{
 												WorldGen.KillTile(k, l, false, false, false);
 											}
-											else if (WorldGen.SolidTile(k + 1, l) && WorldGen.SolidTile(k - 1, l + 2) && !Main.tile[k - 1, l].active() && !Main.tile[k - 1, l + 1].active() && !Main.tile[k + 1, l - 1].active())
+											else if (WorldGen.SolidTile(k + 1, l) && WorldGen.SolidTile(k - 1, l + 2) && !Main.tile[k - 1, l].IsActive && !Main.tile[k - 1, l + 1].IsActive && !Main.tile[k + 1, l - 1].IsActive)
 											{
 												WorldGen.KillTile(k, l, false, false, false);
 											}
-											else if (!Main.tile[k - 1, l + 1].active() && !Main.tile[k - 1, l].active() && WorldGen.SolidTile(k + 1, l) && WorldGen.SolidTile(k, l + 2))
+											else if (!Main.tile[k - 1, l + 1].IsActive && !Main.tile[k - 1, l].IsActive && WorldGen.SolidTile(k + 1, l) && WorldGen.SolidTile(k, l + 2))
 											{
 												if (WorldGen.genRand.Next(5) == 0)
 												{
@@ -955,7 +963,7 @@ namespace CheatSheet.Menus
 													WorldGen.SlopeTile(k, l, 2);
 												}
 											}
-											else if (!Main.tile[k + 1, l + 1].active() && !Main.tile[k + 1, l].active() && WorldGen.SolidTile(k - 1, l) && WorldGen.SolidTile(k, l + 2))
+											else if (!Main.tile[k + 1, l + 1].IsActive && !Main.tile[k + 1, l].IsActive && WorldGen.SolidTile(k - 1, l) && WorldGen.SolidTile(k, l + 2))
 											{
 												if (WorldGen.genRand.Next(5) == 0)
 												{
@@ -972,15 +980,15 @@ namespace CheatSheet.Menus
 											}
 										}
 									}
-									if (WorldGen.SolidTile(k, l) && !Main.tile[k - 1, l].active() && !Main.tile[k + 1, l].active())
+									if (WorldGen.SolidTile(k, l) && !Main.tile[k - 1, l].IsActive && !Main.tile[k + 1, l].IsActive)
 									{
 										WorldGen.KillTile(k, l, false, false, false);
 									}
 								}
 							}
-							else if (!Main.tile[k, l].active() && Main.tile[k, l + 1].type != 151 && Main.tile[k, l + 1].type != 274)
+							else if (!Main.tile[k, l].IsActive && Main.tile[k, l + 1].type != 151 && Main.tile[k, l + 1].type != 274)
 							{
-								if (Main.tile[k + 1, l].type != 190 && Main.tile[k + 1, l].type != 48 && Main.tile[k + 1, l].type != 232 && WorldGen.SolidTile(k - 1, l + 1) && WorldGen.SolidTile(k + 1, l) && !Main.tile[k - 1, l].active() && !Main.tile[k + 1, l - 1].active())
+								if (Main.tile[k + 1, l].type != 190 && Main.tile[k + 1, l].type != 48 && Main.tile[k + 1, l].type != 232 && WorldGen.SolidTile(k - 1, l + 1) && WorldGen.SolidTile(k + 1, l) && !Main.tile[k - 1, l].IsActive && !Main.tile[k + 1, l - 1].IsActive)
 								{
 									WorldGen.PlaceTile(k, l, (int)Main.tile[k, l + 1].type, false, false, -1, 0);
 									if (WorldGen.genRand.Next(2) == 0)
@@ -992,7 +1000,7 @@ namespace CheatSheet.Menus
 										WorldGen.PoundTile(k, l);
 									}
 								}
-								if (Main.tile[k - 1, l].type != 190 && Main.tile[k - 1, l].type != 48 && Main.tile[k - 1, l].type != 232 && WorldGen.SolidTile(k + 1, l + 1) && WorldGen.SolidTile(k - 1, l) && !Main.tile[k + 1, l].active() && !Main.tile[k - 1, l - 1].active())
+								if (Main.tile[k - 1, l].type != 190 && Main.tile[k - 1, l].type != 48 && Main.tile[k - 1, l].type != 232 && WorldGen.SolidTile(k + 1, l + 1) && WorldGen.SolidTile(k - 1, l) && !Main.tile[k + 1, l].IsActive && !Main.tile[k - 1, l - 1].IsActive)
 								{
 									WorldGen.PlaceTile(k, l, (int)Main.tile[k, l + 1].type, false, false, -1, 0);
 									if (WorldGen.genRand.Next(2) == 0)
@@ -1006,7 +1014,7 @@ namespace CheatSheet.Menus
 								}
 							}
 						}
-						else if (!Main.tile[k, l + 1].active() && WorldGen.genRand.Next(2) == 0 && WorldGen.SolidTile(k, l) && !Main.tile[k - 1, l].halfBrick() && !Main.tile[k + 1, l].halfBrick() && Main.tile[k - 1, l].slope() == 0 && Main.tile[k + 1, l].slope() == 0 && WorldGen.SolidTile(k, l - 1))
+						else if (!Main.tile[k, l + 1].IsActive && WorldGen.genRand.Next(2) == 0 && WorldGen.SolidTile(k, l) && !Main.tile[k - 1, l].IsHalfBlock && !Main.tile[k + 1, l].IsHalfBlock && Main.tile[k - 1, l].Slope == SlopeType.Solid && Main.tile[k + 1, l].Slope == SlopeType.Solid && WorldGen.SolidTile(k, l - 1))
 						{
 							if (WorldGen.SolidTile(k - 1, l) && !WorldGen.SolidTile(k + 1, l) && WorldGen.SolidTile(k - 1, l - 1))
 							{
@@ -1024,23 +1032,23 @@ namespace CheatSheet.Menus
 			{
 				for (int n = 20; n < Main.maxTilesY - 20; n++)
 				{
-					if (WorldGen.genRand.Next(2) == 0 && !Main.tile[m, n - 1].active() && Main.tile[m, n].type != 137 && Main.tile[m, n].type != 48 && Main.tile[m, n].type != 232 && Main.tile[m, n].type != 191 && Main.tile[m, n].type != 151 && Main.tile[m, n].type != 274 && Main.tile[m, n].type != 75 && Main.tile[m, n].type != 76 && WorldGen.SolidTile(m, n) && Main.tile[m - 1, n].type != 137 && Main.tile[m + 1, n].type != 137)
+					if (WorldGen.genRand.Next(2) == 0 && !Main.tile[m, n - 1].IsActive && Main.tile[m, n].type != 137 && Main.tile[m, n].type != 48 && Main.tile[m, n].type != 232 && Main.tile[m, n].type != 191 && Main.tile[m, n].type != 151 && Main.tile[m, n].type != 274 && Main.tile[m, n].type != 75 && Main.tile[m, n].type != 76 && WorldGen.SolidTile(m, n) && Main.tile[m - 1, n].type != 137 && Main.tile[m + 1, n].type != 137)
 					{
-						if (WorldGen.SolidTile(m, n + 1) && WorldGen.SolidTile(m + 1, n) && !Main.tile[m - 1, n].active())
+						if (WorldGen.SolidTile(m, n + 1) && WorldGen.SolidTile(m + 1, n) && !Main.tile[m - 1, n].IsActive)
 						{
 							WorldGen.SlopeTile(m, n, 2);
 						}
-						if (WorldGen.SolidTile(m, n + 1) && WorldGen.SolidTile(m - 1, n) && !Main.tile[m + 1, n].active())
+						if (WorldGen.SolidTile(m, n + 1) && WorldGen.SolidTile(m - 1, n) && !Main.tile[m + 1, n].IsActive)
 						{
 							WorldGen.SlopeTile(m, n, 1);
 						}
 					}
-					if (Main.tile[m, n].slope() == 1 && !WorldGen.SolidTile(m - 1, n))
+					if (Main.tile[m, n].Slope == SlopeType.SlopeDownLeft && !WorldGen.SolidTile(m - 1, n))
 					{
 						WorldGen.SlopeTile(m, n, 0);
 						WorldGen.PoundTile(m, n);
 					}
-					if (Main.tile[m, n].slope() == 2 && !WorldGen.SolidTile(m + 1, n))
+					if (Main.tile[m, n].Slope == SlopeType.SlopeDownRight && !WorldGen.SolidTile(m + 1, n))
 					{
 						WorldGen.SlopeTile(m, n, 0);
 						WorldGen.PoundTile(m, n);

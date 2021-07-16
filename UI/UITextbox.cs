@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
 using Terraria;
 
@@ -8,21 +9,23 @@ namespace CheatSheet.UI
 	internal class UITextbox : UIView
 	{
 		private RasterizerState _rasterizerState = new RasterizerState() { ScissorTestEnable = true };
-		internal static Texture2D textboxBackground;
+		internal static Asset<Texture2D> textboxBackground;
 		private static Texture2D textboxFill;
 
 		private static Texture2D TextboxFill
 		{
 			get
 			{
-				if (textboxFill == null)
+				if (textboxFill == null && textboxBackground.Value != null)
 				{
-					Color[] edgeColors = new Color[textboxBackground.Width * textboxBackground.Height];
-					textboxBackground.GetData(edgeColors);
-					Color[] fillColors = new Color[textboxBackground.Height];
+					int width = textboxBackground.Width();
+					int height = textboxBackground.Height();
+					Color[] edgeColors = new Color[width * height];
+					textboxBackground.Value.GetData(edgeColors);
+					Color[] fillColors = new Color[height];
 					for (int y = 0; y < fillColors.Length; y++)
 					{
-						fillColors[y] = edgeColors[textboxBackground.Width - 1 + y * textboxBackground.Width];
+						fillColors[y] = edgeColors[width - 1 + y * width];
 					}
 					textboxFill = new Texture2D(UIView.graphics, 1, fillColors.Length);
 					textboxFill.SetData(fillColors);
@@ -73,7 +76,7 @@ namespace CheatSheet.UI
 
 		public UITextbox()
 		{
-			textboxBackground = CheatSheet.instance.GetTexture("UI/Images.UIKit.textboxEdge").Value;
+			textboxBackground = CheatSheet.instance.Assets.Request<Texture2D>("UI/Images.UIKit.textboxEdge");
 			this.onLeftClick += new EventHandler(UITextbox_onLeftClick);
 			this.onRightClick += (a, b) => {
 				Text = "";
@@ -213,7 +216,7 @@ namespace CheatSheet.UI
 
 		protected override float GetHeight()
 		{
-			return textboxBackground.Height;
+			return textboxBackground.Height();
 		}
 
 		public override void Update()
@@ -257,13 +260,16 @@ namespace CheatSheet.UI
 				Main.instance.DrawWindowsIMEPanel(new Vector2(98f, (float)(Main.screenHeight - 36)), 0f);
 			}
 
-			spriteBatch.Draw(textboxBackground, DrawPosition, null, Color.White, 0f, Origin, 1f, SpriteEffects.None, 0f);
-			int fillWidth = (int)Width - 2 * textboxBackground.Width;
+			spriteBatch.Draw(textboxBackground.Value, DrawPosition, null, Color.White, 0f, Origin, 1f, SpriteEffects.None, 0f);
+			int fillWidth = (int)Width - 2 * textboxBackground.Width();
 			Vector2 pos = DrawPosition;
-			pos.X += textboxBackground.Width;
-			spriteBatch.Draw(TextboxFill, pos - Origin, null, Color.White, 0f, Vector2.Zero, new Vector2(fillWidth, 1f), SpriteEffects.None, 0f);
+			pos.X += textboxBackground.Width();
+			if (TextboxFill != null)
+            {
+				spriteBatch.Draw(TextboxFill, pos - Origin, null, Color.White, 0f, Vector2.Zero, new Vector2(fillWidth, 1f), SpriteEffects.None, 0f);
+			}
 			pos.X += fillWidth;
-			spriteBatch.Draw(textboxBackground, pos, null, Color.White, 0f, Origin, 1f, SpriteEffects.FlipHorizontally, 0f);
+			spriteBatch.Draw(textboxBackground.Value, pos, null, Color.White, 0f, Origin, 1f, SpriteEffects.FlipHorizontally, 0f);
 			string drawString = Text;
 			if (PasswordBox) drawString = passwordString;
 			if (drawCarrot && focused) drawString += "|";

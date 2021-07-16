@@ -33,10 +33,14 @@ namespace CheatSheet.Menus
 			base.Visible = false;
 
 			// Button images
-			bItems = new UIImage(TextureAssets.Item[ItemID.WoodenSword].Value);
-			bProjectiles = new UIImage(TextureAssets.Item[ItemID.WoodenArrow].Value);
-			bBuffs = new UIImage(TextureAssets.Buff[BuffID.Honey].Value);
-			bDebuffs = new UIImage(TextureAssets.Buff[BuffID.Poisoned].Value);
+			bItems = new UIImage(ModUtils.GetItemTexture(ItemID.WoodenSword));
+
+			bProjectiles = new UIImage(ModUtils.GetItemTexture(ItemID.WoodenArrow));
+
+			bBuffs = new UIImage(ModUtils.GetItemTexture(BuffID.Honey));
+
+			bDebuffs = new UIImage(ModUtils.GetItemTexture(BuffID.Poisoned));
+
 
 			// Button tooltips
 			bItems.Tooltip = CSText("ClearDroppedItems");

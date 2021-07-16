@@ -1,25 +1,27 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
+using Terraria;
 
 namespace CheatSheet.UI
 {
 	internal class UIImage : UIView
 	{
-		private Texture2D texture;
+		private Asset<Texture2D> textureAsset;
 
 		private SpriteEffects _spriteEfftct;
 
 		private Rectangle? sourceRectangle = null;
 
-		public Texture2D Texture
+		public Asset<Texture2D> TextureAsset
 		{
 			get
 			{
-				return this.texture;
+				return this.textureAsset;
 			}
 			set
 			{
-				this.texture = value;
+				this.textureAsset = value;
 			}
 		}
 
@@ -27,7 +29,7 @@ namespace CheatSheet.UI
 		{
 			get
 			{
-				return (float)this.texture.Width;
+				return (float)this.textureAsset.Width();
 			}
 		}
 
@@ -35,7 +37,7 @@ namespace CheatSheet.UI
 		{
 			get
 			{
-				return (float)this.texture.Height;
+				return (float)this.textureAsset.Height();
 			}
 		}
 
@@ -115,9 +117,9 @@ namespace CheatSheet.UI
 			}
 		}
 
-		public UIImage(Texture2D texture)
+		public UIImage(Asset<Texture2D> textureAsset)
 		{
-			this.Texture = texture;
+			this.TextureAsset = textureAsset;
 		}
 
 		public UIImage()
@@ -146,7 +148,11 @@ namespace CheatSheet.UI
 		{
 			if (base.Visible)
 			{
-				spriteBatch.Draw(this.texture, base.DrawPosition, this.sourceRectangle, base.ForegroundColor * base.Opacity, 0f, base.Origin / base.Scale, base.Scale, this.SpriteEffect, 0f);
+				Texture2D texture = this.textureAsset.Value;
+				if (texture != null)
+                {
+					spriteBatch.Draw(texture, base.DrawPosition, this.sourceRectangle, base.ForegroundColor * base.Opacity, 0f, base.Origin / base.Scale, base.Scale, this.SpriteEffect, 0f);
+				}
 			}
 			base.Draw(spriteBatch);
 		}

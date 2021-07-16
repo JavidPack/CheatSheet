@@ -94,7 +94,7 @@ namespace CheatSheet.Menus
 
 		private void Slot2_onHover(object sender, EventArgs e)
 		{
-			UIView.HoverText = displayName + (npc.modNPC != null ? " [" + npc.modNPC.Mod.Name + "]" : "") + (isFiltered ? " [DISABLED]" : "");
+			UIView.HoverText = displayName + (npc.ModNPC != null ? " [" + npc.ModNPC.Mod.Name + "]" : "") + (isFiltered ? " [DISABLED]" : "");
 			NPCBrowser.hoverNpc = npc;
 			//UIView.HoverItem = this.item.Clone();
 			//	hovering = true;
@@ -257,8 +257,15 @@ namespace CheatSheet.Menus
 
 			spriteBatch.Draw(useBackgroundTexture, base.DrawPosition, null, base.BackgroundColor, 0f, Vector2.Zero, base.Scale, SpriteEffects.None, 0f);
 			Texture2D texture2D = TextureAssets.Npc[npcType].Value;
+
+			if (texture2D == null)
+            {
+				base.Draw(spriteBatch);
+				return;
+			}
+
 			Rectangle rectangle2;
-			rectangle2 = new Rectangle(0, 0, TextureAssets.Npc[npcType].Value.Width, TextureAssets.Npc[npcType].Value.Height / Main.npcFrameCount[npcType]);
+			rectangle2 = new Rectangle(0, 0, texture2D.Width, texture2D.Height / Main.npcFrameCount[npcType]);
 
 			float num = 1f;
 			float num2 = (float)Slot.backgroundTexture.Width() * base.Scale * 0.6f;
