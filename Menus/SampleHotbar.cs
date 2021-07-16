@@ -28,7 +28,7 @@ namespace CheatSheet.Menus
 			base.Visible = false;
 
 			// Button images
-			bSampleButton = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.Paintbrush]);
+			bSampleButton = new UIImage(ModUtils.GetItemTexture(ItemID.Paintbrush));
 
 
 			// Button tooltips

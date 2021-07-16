@@ -28,7 +28,7 @@ namespace CheatSheet.Menus
 
 		public static UIImage GetButton(Mod mod)
 		{
-			button = new UIImage(Terraria.GameContent.TextureAssets.Item[ItemID.WaterCandle]);
+			button = new UIImage(ModUtils.GetItemTexture(ItemID.WaterCandle));
 
 			button.Tooltip = CSText("SpawnRateMultiplier");
 			button.onRightClick += (s, e) =>
