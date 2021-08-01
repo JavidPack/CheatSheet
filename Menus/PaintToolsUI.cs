@@ -70,18 +70,20 @@ namespace CheatSheet.Menus
 			uIImage.onLeftClick += new EventHandler(this.bClose_onLeftClick);
 			this.AddChild(uIImage);
 
-			var snaptexture = mod.Assets.Request<Texture2D>("UI/Snap"); //TODO figure out ImageList
+			//UIImageListButton needs the textures immediately
+			var immediate = AssetRequestMode.ImmediateLoad;
+			var snaptexture = mod.Assets.Request<Texture2D>("UI/Snap", immediate); //TODO figure out ImageList
 			var snapTextures = new List<Asset<Texture2D>>
 			{
-				mod.Assets.Request<Texture2D>("UI/Snap00"),
-				mod.Assets.Request<Texture2D>("UI/Snap10"),
-				mod.Assets.Request<Texture2D>("UI/Snap20"),
-				mod.Assets.Request<Texture2D>("UI/Snap01"),
-				mod.Assets.Request<Texture2D>("UI/Snap11"),
-				mod.Assets.Request<Texture2D>("UI/Snap21"),
-				mod.Assets.Request<Texture2D>("UI/Snap02"),
-				mod.Assets.Request<Texture2D>("UI/Snap12"),
-				mod.Assets.Request<Texture2D>("UI/Snap22"),
+				mod.Assets.Request<Texture2D>("UI/Snap00", immediate),
+				mod.Assets.Request<Texture2D>("UI/Snap10", immediate),
+				mod.Assets.Request<Texture2D>("UI/Snap20", immediate),
+				mod.Assets.Request<Texture2D>("UI/Snap01", immediate),
+				mod.Assets.Request<Texture2D>("UI/Snap11", immediate),
+				mod.Assets.Request<Texture2D>("UI/Snap21", immediate),
+				mod.Assets.Request<Texture2D>("UI/Snap02", immediate),
+				mod.Assets.Request<Texture2D>("UI/Snap12", immediate),
+				mod.Assets.Request<Texture2D>("UI/Snap22", immediate),
 			};
 			btnSnap = new UIImageListButton(
 				//(new ImageList(snaptexture.Value, 28, 28)).listTexture,

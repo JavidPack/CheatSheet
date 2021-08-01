@@ -76,7 +76,7 @@ namespace CheatSheet.UI
 
 		public UITextbox()
 		{
-			textboxBackground = CheatSheet.instance.Assets.Request<Texture2D>("UI/Images.UIKit.textboxEdge");
+			textboxBackground = CheatSheet.instance.Assets.Request<Texture2D>("UI/Images.UIKit.textboxEdge", AssetRequestMode.ImmediateLoad);
 			this.onLeftClick += new EventHandler(UITextbox_onLeftClick);
 			this.onRightClick += (a, b) => {
 				Text = "";
