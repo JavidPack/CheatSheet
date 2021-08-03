@@ -76,7 +76,7 @@ namespace CheatSheet.Menus
 			{
 				spriteBatch.Draw(RecipeSlot.backgroundTexture.Value, base.DrawPosition, null, Color.White, 0f, Vector2.Zero, base.Scale, SpriteEffects.None, 0f);
 			}
-			Texture2D texture2D = Terraria.GameContent.TextureAssets.Item[this.recipe.createItem.type].Value;
+			Texture2D texture2D = ModUtils.GetItemTexture(this.recipe.createItem.type).Value;
 			Rectangle rectangle2;
 			if (Main.itemAnimations[recipe.createItem.type] != null)
 			{
