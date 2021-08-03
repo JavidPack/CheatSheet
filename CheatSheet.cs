@@ -244,7 +244,7 @@ namespace CheatSheet
 					// Name of Permission governing the availability of the button/tool
 					ModifySpawnRateMultiplier_Permission,
 					// Texture of the button. 38x38 is recommended for HERO's Mod. Also, a white outline on the icon similar to the other icons will look good.
-					ModUtils.GetItemTexture(ItemID.WaterCandle).Value, //TODO change when heros updates
+					ModUtils.GetItemTexture(ItemID.WaterCandle),
 					// A method that will be called when the button is clicked
 					(Action)SpawnRateMultiplier.HEROsButtonPressed,
 					// A method that will be called when the player's permissions have changed
