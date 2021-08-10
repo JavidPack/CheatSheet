@@ -35,23 +35,7 @@ namespace CheatSheet.Menus
 	internal class ItemBrowser : UISlideWindow
 	{
 		internal static string CSText(string key, string category = "ItemBrowser") => CheatSheet.CSText(category, key);
-		private static string[] categNames = new string[]
-		{
-			CSText("AllItems"),
-			CSText("Weapons"),
-			CSText("Tools"),
-			CSText("Armor"),
-			CSText("Accessories"),
-			CSText("Blocks"),
-			CSText("Ammo"),
-			CSText("Potions"),
-			CSText("Expert"),
-			CSText("Furniture"),
-			CSText("Pets"),
-			CSText("Mounts"),
-      //      "Crafting Materials",
-            CSText("CycleModSpecificItems"),
-		};
+		private static string[] categNames;
 
 		private static Asset<Texture2D>[] categoryIcons;
 
@@ -162,6 +146,33 @@ namespace CheatSheet.Menus
 			itemView.activeSlots = itemView.selectedCategory;
 			itemView.ReorderSlots();
 			return;
+		}
+
+		public static void LoadStatic()
+        {
+			categNames = new string[]
+			{
+				CSText("AllItems"),
+				CSText("Weapons"),
+				CSText("Tools"),
+				CSText("Armor"),
+				CSText("Accessories"),
+				CSText("Blocks"),
+				CSText("Ammo"),
+				CSText("Potions"),
+				CSText("Expert"),
+				CSText("Furniture"),
+				CSText("Pets"),
+				CSText("Mounts"),
+		  //      "Crafting Materials",
+				CSText("CycleModSpecificItems"),
+			};
+		}
+
+		public static void UnloadStatic()
+		{
+			categNames = null;
+			bCategories = null;
 		}
 
 		public override void Draw(SpriteBatch spriteBatch)

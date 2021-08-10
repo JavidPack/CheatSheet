@@ -7,6 +7,7 @@ using System.Linq;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.ModLoader;
+using Terraria.ModLoader.IO;
 using Terraria.UI;
 
 namespace CheatSheet
@@ -54,20 +55,20 @@ namespace CheatSheet
 
 		public override void NetSend(BinaryWriter writer)
 		{
-			writer.Write(NPCBrowser.filteredNPCSlots.Count);
+			writer.WriteVarInt((int)NPCBrowser.filteredNPCSlots.Count);
 			foreach (var item in NPCBrowser.filteredNPCSlots)
 			{
-				writer.Write((int)item);
+				writer.WriteVarInt((int)item);
 			}
 		}
 
 		public override void NetReceive(BinaryReader reader)
 		{
 			NPCBrowser.filteredNPCSlots.Clear();
-			int numFiltered = reader.ReadInt32();
+			int numFiltered = reader.ReadVarInt();
 			for (int i = 0; i < numFiltered; i++)
 			{
-				NPCBrowser.filteredNPCSlots.Add(reader.ReadInt32());
+				NPCBrowser.filteredNPCSlots.Add(reader.ReadVarInt());
 			}
 			NPCBrowser.needsUpdate = true;
 		}

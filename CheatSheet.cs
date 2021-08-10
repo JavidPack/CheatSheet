@@ -128,7 +128,7 @@ namespace CheatSheet
 			UI.UIScrollView.ScrollbgTexture = null;
 			UI.UITextbox.textboxBackground = null;
 			//UI.UIView.closeTexture = null;
-			ItemBrowser.bCategories = null;
+			ItemBrowser.UnloadStatic();
 			RecipeBrowserWindow.ingredients = null;
 			RecipeBrowserWindow.bCategories = null;
 			NPCBrowser.tooltipNpc = null;
@@ -292,6 +292,7 @@ namespace CheatSheet
 				//}
 
 				try {
+					ItemBrowser.LoadStatic();
 					itemBrowser = new ItemBrowser(this);
 					itemBrowser.SetDefaultPosition(new Vector2(80, 300));
 					itemBrowser.Visible = false;
