@@ -1,0 +1,158 @@
+Mods: {
+	CheatSheet: {
+		Hotbar: {
+			ShowItemBrowser: Navegador de objetos
+			ShowClearMenu: Menú de limpieza
+			ShowNPCBrowser: Navegador de NPCs
+			ShowRecipeBrowser: Navegador de recetas
+			ShowModExtensionCheats: Trucos de mods
+			ShowPaintTools: Herramientas de pintura
+			ExtraAccessorySlots: Espacios de accesorio adicionales
+			VacuumItems: Aspirar objetos
+			ShowNPCButcherer: Exterminador de NPCs
+			ShowQuickWaypoints: Ubicaciones de referencia
+			ConfigureAvailableTools: Configurar herramientas visibles
+		}
+
+		Butcherer: {
+			ButcherHostileNPCs: Exterminar NPCs hostiles
+			ButcherHostileAndFriendlyNPCs: Exterminar NPCs hostiles y amistosos
+			ButcherFriendlyNPCs: Exterminar NPCs amistosos
+			ButcherNotification: NPCs exterminados por {0}
+		}
+
+		Vacuum: {
+			VacuumNotification: Los objetos del suelo han sido aspirados por {0}
+		}
+
+		Teleport: {
+			Dungeon: Mazmorra
+			Spawnpoint: Punto de inicio
+			Hell: Inframundo
+			Temple: Templo
+			Random: Aleatoria
+		}
+
+		QuickClear: {
+			ClearDroppedItems: Eliminar objetos del suelo
+			ClearProjectiles: Eliminar proyectiles
+			ClearBuffs: Quitar buffs
+			ClearDebuffs: Quitar debuffs
+			ItemClearNotification: Los objetos han sido eliminados por {0}
+			ProjectileClearNotification: Los proyectiles han sido eliminados por {0}
+		}
+
+		SpawnRate: {
+			SpawnRateMultiplier: Multiplicador de tasa de generación: 1х
+			SpawnRateMultiplierNew: "Multiplicador de tasa de generación: "
+			SpawnRateMultiplierText: Tasa de generación máxima:
+			SpawnRateNormalValue: respecto al valor normal
+		}
+
+		LightHack: {
+			LightHackDisabled: Hack de luz: Desactivado
+			LightHack25%: Hack de luz: 25%
+			LightHack50%: Hack de luz: 50%
+			LightHack100%: Hack de luz: 100%
+		}
+
+		GodMode: {
+			GodModeDisabled: Modo dios desactivado
+			GodModeEnabled: Modo dios activado
+		}
+
+		MinionSlot: {
+			MinionSlotBooster: Espacios de súbditos por defecto
+			MinionSlotBoosterNew: Espacios de súbditos adicionales:
+			MinionSlotBoosterText: Número de súbditos máximos aumentado en
+		}
+
+		RecipeBrowser: {
+			AllRecipes: Todas las recetas
+			CycleModSpecificRecipes: Ver recetas específicas del mod
+		}
+
+		ConfigurationTool: {
+			ItemBrowser: Nav. de objetos
+			NPCBrowser: Nav. de NPCs
+			RecipeBrowser: Nav. de recetas
+			MinionBooster: Añadir súbditos
+			Butcher: Exterminador
+			ClearMenu: Menú de limpieza
+			ExtraAccessorySlots: Añadir accesorios
+			ModExtensions: Trucos de mods
+			PaintTools: Pintura y diseños
+			SpawnRate: Multiplicador de tasas
+			Vacuum: Aspirador
+			Waypoints: Ub. de referencia
+			LightHack: Hack de luz
+			GodMode: Modo dios
+		}
+
+		ExtendedCheatMenu: {
+			NoExtensionCheatModsInstalled:
+				'''
+				No hay trucos
+				de mods
+				disponibles
+				'''
+		}
+
+		ExtraAccessorySlots: {
+			ExtraAccessorySlots: "Espacios de accesorio adicionales: "
+		}
+
+		MobBrowser: {
+			AllNPCs: Todos los NPCs
+			Bosses: Jefes
+			TownNPCs: NPCs ciudadanos
+			NetIDNPCs: NPCs NetID
+			FilteredNPCs: NPCs filtrados
+			CycleModSpecificNPCs: Ver NPCs específicos del mod
+			SpawnNPCNotification: "{1} ha invocado a {0}"
+		}
+
+		ItemBrowser: {
+			AllItems: Todos los objetos
+			Weapons: Armas
+			Tools: Herramientas
+			Armor: Armaduras
+			Accessories: Accesorios
+			Blocks: Bloques
+			Ammo: Munición
+			Potions: Pociones
+			Expert: Experto
+			Furniture: Decorativos
+			Pets: Mascotas
+			Mounts: Monturas
+			CycleModSpecificItems: Ver objetos específicos del mod
+		}
+
+		PaintTools: {
+			ExportData: Exportar datos
+			ImportData: Importar datos
+			DeleteSelection: Borrar selección
+			SnapTopLeft: Captura: Arriba-Izquierda
+			SnapTopCenter: Captura: Centro-Arriba
+			SnapTopRight: Captura: Arriba-Derecha
+			SnapLeftCenter: Captura: Centro-Izquierda
+			SnapCenter: Captura: Centro
+			SnapRightCenter: Captura: Centro-Derecha
+			SnapBottomLeft: Captura: Abajo-Izquierda
+			SnapBottomCenter: Captura: Centro-Abajo
+			SnapBottomRight: Captura: Abajo-Derecha
+			PaintTiles: "    Pintar bloques"
+			EyeDropper: "    Cuentagotas"
+			Undo: "    Deshacer último cambio (clic derecho: últimos 10) ["
+			Undo2: avances]
+			NoUndo: No hay más acciones por deshacer.
+			UndoLeft: " acciones restantes en el historial de cambios"
+			FlipHorizontal: Giro horizontal
+			FlipVertical: Giro vertical
+			TransparentSelectionOn: "    Modificar selección transparente: Desactivado"
+			TransparentSelectionOff: "    Modificar selección transparente: Activado"
+			PriorBrush: Priorizar uso del Cuentagotas sobre el Pincel
+			DataExport: "Exportar datos a "
+		}
+	}
+}

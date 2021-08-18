@@ -1,0 +1,158 @@
+Mods: {
+	CheatSheet: {
+		Hotbar: {
+			ShowItemBrowser: Браузер Предметов
+			ShowClearMenu: Меню очистки
+			ShowNPCBrowser: Браузер НИП'ов
+			ShowRecipeBrowser: Браузер Рецептов
+			ShowModExtensionCheats: Браузер Расширений
+			ShowPaintTools: Инструменты Копирования
+			ExtraAccessorySlots: Доп. слоты Аксессуаров
+			VacuumItems: Предметный Магнит
+			ShowNPCButcherer: Уничтожитель Существ
+			ShowQuickWaypoints: Быстр. Точки Телепортации
+			ConfigureAvailableTools: Настройка Панели
+		}
+
+		Butcherer: {
+			ButcherHostileNPCs: Убить враждебных существ
+			ButcherHostileAndFriendlyNPCs: Убить враждебный существ и городских НИП'ов
+			ButcherFriendlyNPCs: Убить городских НИП'ов
+			ButcherNotification: Существа/НИП'ы были убиты игроком {0}
+		}
+
+		Vacuum: {
+			VacuumNotification: Предметы, лежащие на земле были притянуты игроком {0}
+		}
+
+		Teleport: {
+			Dungeon: Подземелье
+			Spawnpoint: Точка Возрождения
+			Hell: Ад
+			Temple: Храм Ящеров
+			Random: Случайные Координаты
+		}
+
+		QuickClear: {
+			ClearDroppedItems: Удалить предметы, лежащие на земле
+			ClearProjectiles: Удалить снаряды
+			ClearBuffs: Удалить баффы
+			ClearDebuffs: Удалить дебаффы
+			ItemClearNotification: Предметы, лежащие на земле удалены игроком {0}
+			ProjectileClearNotification: Снаряды удалены игроком {0}
+		}
+
+		SpawnRate: {
+			SpawnRateMultiplier: Рейт Спавна Существ: 1х
+			SpawnRateMultiplierNew: "Рейт Спавна Существ: "
+			SpawnRateMultiplierText: "Рейт Спавна Существ теперь в "
+			SpawnRateNormalValue: " больше обычной"
+		}
+
+		LightHack: {
+			LightHackDisabled: Хак Освещения: Отключен
+			LightHack25%: Хак Освещения: 25%
+			LightHack50%: Хак Освещения: 50%
+			LightHack100%: Хак Освещения: 100%
+		}
+
+		GodMode: {
+			GodModeDisabled: Режим Бога отключен
+			GodModeEnabled: Режим Бога включен
+		}
+
+		MinionSlot: {
+			MinionSlotBooster: Количество доп. Миньонов: +0
+			MinionSlotBoosterNew: "Количество доп. Миньонов: "
+			MinionSlotBoosterText: "Количество доп. Миньонов теперь "
+		}
+
+		RecipeBrowser: {
+			AllRecipes: Все рецепты
+			CycleModSpecificRecipes: Рецепты из модификаций
+		}
+
+		ConfigurationTool: {
+			ItemBrowser: Браузер Предметов
+			NPCBrowser: Браузер НИП'ов
+			RecipeBrowser: Браузер Рецептов
+			MinionBooster: Бустер доп. Миньонов
+			Butcher: Уничтожитель Существ
+			ClearMenu: Меню очистки
+			ExtraAccessorySlots: Доп. слоты Аксессуаров
+			ModExtensions: Расширения
+			PaintTools: Инструменты Копирования
+			SpawnRate: Рейт Спавна Существ
+			Vacuum: Предметный Магнит
+			Waypoints: Точки Телепортации
+			LightHack: Хак Освещения
+			GodMode: Режим Бога
+		}
+
+		ExtendedCheatMenu: {
+			NoExtensionCheatModsInstalled:
+				'''
+				Не обнаружено
+				установленных
+				расширений
+				'''
+		}
+
+		ExtraAccessorySlots: {
+			ExtraAccessorySlots: "Доп. слоты Аксессуаров: "
+		}
+
+		MobBrowser: {
+			AllNPCs: Все существа
+			Bosses: Боссы
+			TownNPCs: Городские НИП'ы
+			NetIDNPCs: NetID Существа
+			FilteredNPCs: Отсортированные Существа
+			CycleModSpecificNPCs: Существа из модификаций
+			SpawnNPCNotification: "{0} был призван игроком {1}"
+		}
+
+		ItemBrowser: {
+			AllItems: Все предметы
+			Weapons: Оружие
+			Tools: Инструменты
+			Armor: Броня
+			Accessories: Аксессуары
+			Blocks: Блоки
+			Ammo: Аммуниция
+			Potions: Зелья
+			Expert: Эксперт режим
+			Furniture: Фурнитура
+			Pets: Питомцы
+			Mounts: Маунты
+			CycleModSpecificItems: Предметы из модификаций
+		}
+
+		PaintTools: {
+			ExportData: Экспорт
+			ImportData: Импорт
+			DeleteSelection: Удалить выделение
+			SnapTopLeft: Snap: Левый Верхний угол
+			SnapTopCenter: Snap: По центру Верхнего края
+			SnapTopRight: Snap: Правый Верхний угол
+			SnapLeftCenter: Snap: По центру Левого края
+			SnapCenter: Snap: По Центру
+			SnapRightCenter: Snap: По центру Правого края
+			SnapBottomLeft: Snap: Нижний Левый угол
+			SnapBottomCenter: Snap: По центру Нижнего края
+			SnapBottomRight: Snap: Нижний Правый угол
+			PaintTiles: "    Скопировать выделение"
+			EyeDropper: "    Выделение"
+			Undo: "    Отменить последнюю покраску (Пкм: Последние 10) ["
+			Undo2: " шагов]"
+			NoUndo: В истории не обнаружено действий, которые можно было бы отменить.
+			UndoLeft: " действий осталось в истории для отмены."
+			FlipHorizontal: Отразить по Горизонтали
+			FlipVertical: Отразить по Вертикали
+			TransparentSelectionOn: "    Переключить Прозрачное Выделение: Выкл."
+			TransparentSelectionOff: "    Переключить Прозрачное Выделение: Вкл."
+			PriorBrush: Сначала нужно использовать выделение.
+			DataExport: "Экспорт в "
+		}
+	}
+}

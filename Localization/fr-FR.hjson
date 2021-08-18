@@ -1,0 +1,152 @@
+Mods: {
+	CheatSheet: {
+		Hotbar: {
+			ShowItemBrowser: Voir le Navigateur D'Objets
+			ShowClearMenu: Voir le Menu de Débarrassage
+			ShowNPCBrowser: Voir le Navigateur de PNJ
+			ShowRecipeBrowser: Voir le Navigateur de Recettes
+			ShowModExtensionCheats: Voir les Menus de Triche Rajoutés par D'Autres Modules
+			ShowPaintTools: Voir les Outils de Peinture
+			ExtraAccessorySlots: Emplacements D'Accessoire Supplémentaires
+			VacuumItems: Aspirer Tout les Objets
+			ShowNPCButcherer: Voir l'Eradicateur de PNJ
+			ShowQuickWaypoints: Voir les Points de Localisation Rapide
+			ConfigureAvailableTools: Configurer les Outils Disponibles
+		}
+
+		Butcherer: {
+			ButcherHostileNPCs: Eradiquer les PNJ Hostiles
+			ButcherHostileAndFriendlyNPCs: Eradiquer les PNJ Hostiles et Amicaux
+			ButcherFriendlyNPCs: Eradiquer les PNJ Amicaux
+			ButcherNotification: Des PNJ ont été éradiqués par {0}
+		}
+
+		Vacuum: {
+			VacuumNotification: Les objets au sol ont été aspirés par {0}
+		}
+
+		Teleport: {
+			Dungeon: Donjon
+			Spawnpoint: Point D'origine
+			Hell: Enfer
+			Temple: Temple
+			Random: Aléatoire
+		}
+
+		QuickClear: {
+			ClearDroppedItems: Se Débarrasser des Objets au Sol
+			ClearProjectiles: Se Débarrasser des Projectiles
+			ClearBuffs: Se Débarrasser des Effets Positifs
+			ClearDebuffs: Se Débarrasser des Effets Négatifs
+			ItemClearNotification: Des objets ont été débarrassés par {0}
+			ProjectileClearNotification: Des projectiles ont été débarrassés par {0}
+		}
+
+		SpawnRate: {
+			SpawnRateMultiplier: Multipicateur du Taux d'Apparition: 1х
+			SpawnRateMultiplierNew: "Multiplicateur du Taux d'Apparition: "
+			SpawnRateMultiplierText: "Le Taux Actuel d'Apparition est de "
+			SpawnRateNormalValue: " Fois la Valeur de Base"
+		}
+
+		LightHack: {
+			LightHackDisabled: Manipulation de la Lumière: Désactivée
+			LightHack25%: Manipulation de la Lumière: 25%
+			LightHack50%: Manipulation de la Lumière: 50%
+			LightHack100%: Manipulation de la Lumière: 100%
+		}
+
+		MinionSlot: {
+			MinionSlotBooster: Augmentation de la Capacité Maximale d'Invocations: +0
+			MinionSlotBoosterNew: "Augmentation de la Capacité Maximale d'Invocations: "
+			MinionSlotBoosterText: "Capacité Maximale Actuelle d'Invocations à "
+		}
+
+		RecipeBrowser: {
+			AllRecipes: Toutes les Recettes
+			CycleModSpecificRecipes: Afficher les Recettes Spécifiques par Module
+		}
+
+		ConfigurationTool: {
+			ItemBrowser: Navigateur D'Objets
+			NPCBrowser: Navigateur de PNJ
+			RecipeBrowser: Navigateur de Recettes
+			MinionBooster: Augmentation de la Capacité Maximale d'Invocations
+			Butcher: Eradicateur
+			ClearMenu: Menu de Débarrassage
+			ExtraAccessorySlots: Emplacements D'Accessoire Supplémentaires
+			ModExtensions: Extensions de Modules
+			PaintTools: Outils de Peinture
+			SpawnRate: Taux d'Apparition
+			Vacuum: Aspirateur d'Objets
+			Waypoints: Points de Localisation
+			LightHack: Manipulation de la Lumière
+		}
+
+		ExtendedCheatMenu: {
+			NoExtensionCheatModsInstalled:
+				'''
+				Pas d'Extensions
+				de Modules de Triche
+				Installés
+				'''
+		}
+
+		ExtraAccessorySlots: {
+			ExtraAccessorySlots: "Emplacements D'Accessoire Supplémentaires: "
+		}
+
+		MobBrowser: {
+			AllNPCs: Tout les PNJ
+			Bosses: Boss
+			TownNPCs: Habitants
+			NetIDNPCs: PNJ par NetID
+			FilteredNPCs: PNJ Filtrés
+			CycleModSpecificNPCs: Afficher les PNJ Spécifiques par Module
+			SpawnNPCNotification: "{0} a été invoqué par {1}"
+		}
+
+		ItemBrowser: {
+			AllItems: Tout les Objets
+			Weapons: Armes
+			Tools: Outils
+			Armor: Armures
+			Accessories: Accessoires
+			Blocks: Blocs
+			Ammo: Munitions
+			Potions: Potions
+			Expert: Expert
+			Furniture: Mobilier
+			Pets: Animaux de Companie
+			Mounts: Montures
+			CycleModSpecificItems: Afficher les Objets Spécifiques par Module
+		}
+
+		PaintTools: {
+			ExportData: Exporter
+			ImportData: Importer
+			DeleteSelection: Supprimer la Sélection
+			SnapTopLeft: Snap: Coin en Haut à Gauche
+			SnapTopCenter: Snap: Haut Central
+			SnapTopRight: Snap: Coin en Haut à Droite
+			SnapLeftCenter: Snap: Gauche Centrale
+			SnapCenter: Snap: Centre
+			SnapRightCenter: Snap: Droite Centrale
+			SnapBottomLeft: Snap: Coin en Bas à Gauche
+			SnapBottomCenter: Snap: Bas Central
+			SnapBottomRight: Snap: Coin en Bas à Droite
+			PaintTiles: "    Tuiles de Peinture"
+			EyeDropper: "    Compte-Goutte"
+			Undo: "    Annuler la Dernière Action (Clic Droit: 10 Dernières) ["
+			Undo2: " étapes]"
+			NoUndo: Il n'y a pas d'actions restantes à annuler.
+			UndoLeft: " actions restantes dans l'historique."
+			FlipHorizontal: Tourner à l'Horizontale
+			FlipVertical: Tourner à la Verticale
+			TransparentSelectionOn: "    Activer la Sélection Transparente: Off"
+			TransparentSelectionOff: "    Activer la Sélection Transparente: On"
+			PriorBrush: Utiliser le Compte-Goutte Avant le Pinceau.
+			DataExport: "Exporter dans "
+		}
+	}
+}
