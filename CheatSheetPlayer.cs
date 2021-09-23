@@ -36,16 +36,13 @@ namespace CheatSheet
 			}
 		}
 
-		public override TagCompound Save()
+		public override void SaveData(TagCompound tag)
 		{
-			return new TagCompound
-			{
-				["ExtraAccessories"] = ExtraAccessories.Select(ItemIO.Save).ToList(),
-				["NumberExtraAccessoriesEnabled"] = numberExtraAccessoriesEnabled
-			};
+			tag.Add("ExtraAccessories", ExtraAccessories.Select(ItemIO.Save).ToList());
+			tag.Add("NumberExtraAccessoriesEnabled", numberExtraAccessoriesEnabled);
 		}
 
-		public override void Load(TagCompound tag)
+		public override void LoadData(TagCompound tag)
 		{
 			tag.GetList<TagCompound>("ExtraAccessories").Select(ItemIO.Load).ToList().CopyTo(ExtraAccessories);
 			numberExtraAccessoriesEnabled = tag.GetInt("NumberExtraAccessoriesEnabled");
