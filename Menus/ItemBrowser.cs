@@ -172,6 +172,9 @@ namespace CheatSheet.Menus
 		public static void UnloadStatic()
 		{
 			categNames = null;
+			categories.Clear();
+			categoryIcons = null;
+			ModToItems.Clear();
 			bCategories = null;
 		}
 

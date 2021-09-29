@@ -24,11 +24,7 @@ namespace CheatSheet.Menus
 	internal class RecipeBrowserWindow : UISlideWindow
 	{
 		internal static string CSText(string key, string category = "RecipeBrowser") => CheatSheet.CSText(category, key);
-		private static string[] categNames = new string[]
-		{
-			CSText("AllRecipes"),
-			CSText("CycleModSpecificRecipes")
-		};
+		private static string[] categNames;
 
 		private static Asset<Texture2D>[] categoryIcons;
 
@@ -60,6 +56,26 @@ namespace CheatSheet.Menus
 		internal bool selectedRecipeChanged = false;
 
 		public const int maxRequirementsOld = 15;
+
+		public static void LoadStatic()
+		{
+			categNames = new string[]
+			{
+				CSText("AllRecipes"),
+				CSText("CycleModSpecificRecipes")
+			};
+		}
+
+		public static void UnloadStatic()
+		{
+			categNames = null;
+			categories.Clear();
+			recipeView = null;
+			categoryIcons = null;
+			bCategories = null;
+			lookupItemSlot = null;
+			ingredients = null;
+		}
 
 		// 270 : 16 40 ?? 16
 

@@ -32,25 +32,9 @@ namespace CheatSheet.Menus
 		internal static NPC hoverNpc;
 		internal Asset<Texture2D>[] textures;
 
-		private static string[] categNames = new string[]
-		{
-			CSText("AllNPCs"),
-			CSText("Bosses"),
-			CSText("TownNPCs"),
-			CSText("NetIDNPCs"),
-			CSText("FilteredNPCs"),
-			CSText("CycleModSpecificNPCs")
-		};
+		private static string[] categNames;
 
-		private static Asset<Texture2D>[] categoryIcons = Main.dedServ ? null : new Asset<Texture2D>[]
-		{
-			ModUtils.GetItemTexture(ItemID.AlphabetStatueA),
-			ModUtils.GetItemTexture(ItemID.AlphabetStatueB),
-			ModUtils.GetItemTexture(ItemID.AlphabetStatueT),
-			ModUtils.GetItemTexture(ItemID.AlphabetStatueN),
-			ModUtils.GetItemTexture(ItemID.AlphabetStatueF),
-			ModUtils.GetItemTexture(ItemID.AlphabetStatueM),
-		};
+		private static Asset<Texture2D>[] categoryIcons;
 
 		private bool swapFilter = false;
 
@@ -81,6 +65,42 @@ namespace CheatSheet.Menus
 		internal static bool needsUpdate = true;
 
 		// 270 : 16 40 ?? 16
+
+		public static void LoadStatic()
+		{
+			categNames = new string[]
+			{
+				CSText("AllNPCs"),
+				CSText("Bosses"),
+				CSText("TownNPCs"),
+				CSText("NetIDNPCs"),
+				CSText("FilteredNPCs"),
+				CSText("CycleModSpecificNPCs")
+			};
+
+			categoryIcons = Main.dedServ ? null : new Asset<Texture2D>[]
+			{
+				ModUtils.GetItemTexture(ItemID.AlphabetStatueA),
+				ModUtils.GetItemTexture(ItemID.AlphabetStatueB),
+				ModUtils.GetItemTexture(ItemID.AlphabetStatueT),
+				ModUtils.GetItemTexture(ItemID.AlphabetStatueN),
+				ModUtils.GetItemTexture(ItemID.AlphabetStatueF),
+				ModUtils.GetItemTexture(ItemID.AlphabetStatueM),
+			};
+		}
+
+		public static void UnloadStatic()
+		{
+			categNames = null;
+			categories.Clear();
+			ModToNPCs.Clear();
+			categoryIcons = null;
+			bCategories = null;
+
+			tooltipNpc = null;
+			hoverNpc = null;
+			filteredNPCSlots.Clear();
+		}
 
 		public NPCBrowser(CheatSheet mod)
 		{

@@ -129,11 +129,8 @@ namespace CheatSheet
 			UI.UITextbox.textboxBackground = null;
 			//UI.UIView.closeTexture = null;
 			ItemBrowser.UnloadStatic();
-			RecipeBrowserWindow.ingredients = null;
-			RecipeBrowserWindow.bCategories = null;
-			NPCBrowser.tooltipNpc = null;
-			NPCBrowser.hoverNpc = null;
-			NPCBrowser.bCategories = null;
+			NPCBrowser.UnloadStatic();
+			RecipeBrowserWindow.UnloadStatic();
 			if (itemBrowser != null)
 				itemBrowser.itemView = null;
 			itemBrowser = null;
@@ -156,8 +153,8 @@ namespace CheatSheet
 			ConfigurationTool.button = null;
 			SpawnRateMultiplier.button = null;
 			MinionSlotBooster.button = null;
-			LightHack.button = null;
-			GodMode.button = null;
+			LightHack.UnloadStatic();
+			GodMode.UnloadStatic();
 		}
 
 		internal static string CSText(string category, string key)
@@ -297,10 +294,12 @@ namespace CheatSheet
 					itemBrowser.SetDefaultPosition(new Vector2(80, 300));
 					itemBrowser.Visible = false;
 
+					NPCBrowser.LoadStatic();
 					npcBrowser = new NPCBrowser(this);
 					npcBrowser.SetDefaultPosition(new Vector2(30, 180));
 					npcBrowser.Visible = false;
 
+					RecipeBrowserWindow.LoadStatic();
 					recipeBrowser = new RecipeBrowserWindow(this);
 					recipeBrowser.SetDefaultPosition(new Vector2(30, 180));
 					recipeBrowser.Visible = false;
@@ -333,6 +332,9 @@ namespace CheatSheet
 					//eventManagerHotbar = new EventManagerHotbar(this);
 					//eventManagerHotbar.Visible = false;
 					//eventManagerHotbar.Hide();
+
+					LightHack.LoadStatic(); //Has to be before new Hotbar()
+					GodMode.LoadStatic(); //Has to be before new Hotbar()
 
 					hotbar = new Hotbar(this);
 					//hotbar.Position = new Microsoft.Xna.Framework.Vector2(120, 180);

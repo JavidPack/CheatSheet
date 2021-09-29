@@ -11,7 +11,7 @@ namespace CheatSheet.Menus
 	class GodMode
 	{
 		internal static string CSText(string key, string category = "GodMode") => CheatSheet.CSText(category, key);
-		private static string[] GodModeStateStrings = new string[] { CSText("GodModeDisabled"), CSText("GodModeEnabled")};
+		private static string[] GodModeStateStrings;
 		public static UIImage button;
 
 
@@ -22,9 +22,25 @@ namespace CheatSheet.Menus
 			set
 			{
 				_enabled = value;
-				button.Tooltip = CSText(_enabled ? "GodModeEnabled" : "GodModeDisabled");
+				button.Tooltip = GodModeStateStrings[_enabled ? 1 : 0];
 				button.ForegroundColor = _enabled ? Color.White : Color.LightSkyBlue;
 			}
+		}
+
+		public static void LoadStatic()
+		{
+			GodModeStateStrings = new string[]
+			{
+				CSText("GodModeDisabled"),
+				CSText("GodModeEnabled")
+			};
+		}
+
+		public static void UnloadStatic()
+		{
+			GodModeStateStrings = null;
+
+			button = null;
 		}
 
 		public static UIImage GetButton(Mod mod)

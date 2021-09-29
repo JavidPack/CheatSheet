@@ -11,10 +11,37 @@ namespace CheatSheet.Menus
 	{
 		internal static string CSText(string key, string category = "LightHack") => CheatSheet.CSText(category, key);
 		internal static int LightStrength;
-		internal static float[] LightStrengthValues = new float[] { 0, .25f, .5f, 1f };
-		private static string[] LightStrengthStrings = new string[] { CSText("LightHackDisabled"), CSText("LightHack25%"), CSText("LightHack50%"), CSText("LightHack100%")};
+		internal static float[] LightStrengthValues;
+		private static string[] LightStrengthStrings;
 
 		public static UIImage button;
+
+		public static void LoadStatic()
+		{
+			LightStrengthValues = new float[]
+			{
+				0,
+				.25f,
+				.5f,
+				1f
+			};
+
+			LightStrengthStrings = new string[]
+			{
+				CSText("LightHackDisabled"),
+				CSText("LightHack25%"),
+				CSText("LightHack50%"),
+				CSText("LightHack100%")
+			};
+		}
+
+		public static void UnloadStatic()
+		{
+			LightStrengthValues = null;
+			LightStrengthStrings = null;
+
+			button = null;
+		}
 
 		public static UIImage GetButton(Mod mod)
 		{
@@ -47,9 +74,10 @@ namespace CheatSheet.Menus
 		{
 			if (LightHack.LightStrength > 0)
 			{
-				r = MathHelper.Clamp(r + LightHack.LightStrengthValues[LightHack.LightStrength], 0, 1);
-				g = MathHelper.Clamp(g + LightHack.LightStrengthValues[LightHack.LightStrength], 0, 1);
-				b = MathHelper.Clamp(b + LightHack.LightStrengthValues[LightHack.LightStrength], 0, 1);
+                float strength = LightHack.LightStrengthValues[LightHack.LightStrength];
+                r = MathHelper.Clamp(r + strength, 0, 1);
+				g = MathHelper.Clamp(g + strength, 0, 1);
+				b = MathHelper.Clamp(b + strength, 0, 1);
 			}
 		}
 	}
