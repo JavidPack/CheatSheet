@@ -75,7 +75,7 @@ namespace CheatSheet.Menus
 
 				foreach (var group in RecipeGroup.recipeGroups)
 				{
-					if (group.Value.ValidItems.Contains(type))
+					if (group.Value.ContainsItem(type))
 					{
 						groups.Add(group.Key);
 					}
@@ -93,10 +93,11 @@ namespace CheatSheet.Menus
 			{
 				if (type != 0)
 				{
-					Recipe curRecipe = allRecipeSlot[activeSlots[i]].recipe;
+                    RecipeSlot recipeSlot = allRecipeSlot[activeSlots[i]];
+                    Recipe curRecipe = recipeSlot.recipe;
 					//Main.NewText("Recipe " + i);
 					// if my item is in a recipe group, i should add that to required items.
-					bool inGroup = allRecipeSlot[activeSlots[i]].recipe.acceptedGroups.Intersect(groups).Any();
+					bool inGroup = recipeSlot.recipe.acceptedGroups.Intersect(groups).Any();
 
 			//		inGroup |= curRecipe.useWood(type, type) || curRecipe.useSand(type, type) || curRecipe.useFragment(type, type) || curRecipe.useIronBar(type, type) || curRecipe.usePressurePlate(type, type);
 
@@ -110,8 +111,8 @@ namespace CheatSheet.Menus
 
 					if (!inGroup)
 					{
-						// contine if neither result or ingredients contains item
-						if (!(allRecipeSlot[activeSlots[i]].recipe.createItem.type == type || allRecipeSlot[activeSlots[i]].recipe.requiredItem.Any(ing => ing.type == type)))
+						// continue if neither result or ingredients contains item
+						if (!(recipeSlot.recipe.createItem.type == type || recipeSlot.recipe.requiredItem.Any(ing => ing.type == type)))
 						{
 							continue;
 						}
