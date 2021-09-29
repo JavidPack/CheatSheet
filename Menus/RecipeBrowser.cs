@@ -312,32 +312,39 @@ namespace CheatSheet.Menus
 				//}
 
 				selectedRecipeChanged = false;
-                ref Item hoverItem = ref Main.HoverItem;
-                string oldname = hoverItem.Name;
+				string oldname = Main.HoverItem.Name;
 				for (int i = 0; i < ingredients.Length; i++)
 				{
-                    if (i < selectedRecipe.requiredItem.Count && selectedRecipe.requiredItem[i] is Item item && item.type > 0)
+					if (i < selectedRecipe.requiredItem.Count && selectedRecipe.requiredItem[i].type > 0)
 					{
-                        GenericItemSlot genericItemSlot = ingredients[i];
-                        genericItemSlot.item = item;
+						ingredients[i].item = selectedRecipe.requiredItem[i];
 
 						string name;
-						if (selectedRecipe.ProcessGroupsForText(item.type, out name))
+						if (selectedRecipe.ProcessGroupsForText(selectedRecipe.requiredItem[i].type, out name))
 						{
-                            hoverItem.SetNameOverride(name);
+							Main.HoverItem.SetNameOverride(name);
 						}
-
 						/*
-						//if (recipe.HasRecipeGroup(RecipeGroupID.IronBar) && testItem.type == 22)
-						//	hoverItem.SetNameOverride(Lang.misc[37].Value + " " + Lang.GetItemNameValue(22));
-						//else if (recipe.HasRecipeGroup(RecipeGroupID.Wood) && testItem.type == 9)
-						//	hoverItem.SetNameOverride(Lang.misc[37].Value + " " + Lang.GetItemNameValue(9));
-						//else if (recipe.HasRecipeGroup(RecipeGroupID.Sand) && testItem.type == 169)
-						//	hoverItem.SetNameOverride(Lang.misc[37].Value + " " + Lang.GetItemNameValue(169));
-						//else if (recipe.HasRecipeGroup(RecipeGroupID.Fragment) && testItem.type == 3458)
-						//	hoverItem.SetNameOverride(Lang.misc[37].Value + " " + Lang.misc[51].Value);
-						//else if (recipe.HasRecipeGroup(RecipeGroupID.PressurePlate) && testItem.type == 542)
-						//	hoverItem.SetNameOverride(Lang.misc[37].Value + " " + Lang.misc[38].Value);
+						if (selectedRecipe.anyIronBar && selectedRecipe.requiredItem[i].type == 22)
+						{
+							Main.HoverItem.SetNameOverride(Lang.misc[37] + " " + Lang.GetItemNameValue(22));
+						}
+						else if (selectedRecipe.anyWood && selectedRecipe.requiredItem[i].type == 9)
+						{
+							Main.HoverItem.SetNameOverride(Lang.misc[37] + " " + Lang.GetItemNameValue(9));
+						}
+						else if (selectedRecipe.anySand && selectedRecipe.requiredItem[i].type == 169)
+						{
+							Main.HoverItem.SetNameOverride(Lang.misc[37] + " " + Lang.GetItemNameValue(169));
+						}
+						else if (selectedRecipe.anyFragment && selectedRecipe.requiredItem[i].type == 3458)
+						{
+							Main.HoverItem.SetNameOverride(Lang.misc[37] + " " + Lang.misc[51]);
+						}
+						else if (selectedRecipe.anyPressurePlate && selectedRecipe.requiredItem[i].type == 542)
+						{
+							Main.HoverItem.SetNameOverride(Lang.misc[37] + " " + Lang.misc[38]);
+						}
 						*/
 						//else
 						//{
@@ -348,10 +355,10 @@ namespace CheatSheet.Menus
 						//	}
 						//}
 
-						if (hoverItem.Name != oldname)
+						if (Main.HoverItem.Name != oldname)
 						{
-							genericItemSlot.item.SetNameOverride(hoverItem.Name);
-                            hoverItem.SetNameOverride(oldname);
+							Main.HoverItem.SetNameOverride(oldname);
+							ingredients[i].item.SetNameOverride(Main.HoverItem.Name);
 						}
 					}
 					else

@@ -5,7 +5,6 @@ using ReLogic.Content;
 using ReLogic.Graphics;
 using System;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.GameContent;
 
 namespace CheatSheet.Menus
@@ -79,16 +78,14 @@ namespace CheatSheet.Menus
 			}
 			Texture2D texture2D = ModUtils.GetItemTexture(this.recipe.createItem.type).Value;
 			Rectangle rectangle2;
-            DrawAnimation drawAnimation = Main.itemAnimations[recipe.createItem.type];
-            if (drawAnimation != null)
+			if (Main.itemAnimations[recipe.createItem.type] != null)
 			{
-				rectangle2 = drawAnimation.GetFrame(texture2D);
+				rectangle2 = Main.itemAnimations[recipe.createItem.type].GetFrame(texture2D);
 			}
 			else
 			{
 				rectangle2 = texture2D.Frame(1, 1, 0, 0);
 			}
-
 			float num = 1f;
 			float num2 = (float)RecipeSlot.backgroundTexture.Width() * base.Scale * 0.6f;
 			if ((float)rectangle2.Width > num2 || (float)rectangle2.Height > num2)

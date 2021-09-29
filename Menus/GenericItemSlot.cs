@@ -5,7 +5,6 @@ using ReLogic.Content;
 using ReLogic.Graphics;
 using System;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.GameContent;
 
 namespace CheatSheet.Menus
@@ -35,19 +34,13 @@ namespace CheatSheet.Menus
 		{
 			if (item != null)
 			{
-				SetItemName();
+				//	UIView.HoverText = this.item.name;
+				//	UIView.HoverItem = this.item.Clone();
+
+				Main.hoverItemName = this.item.Name;
+				Main.HoverItem = item.Clone();
+				Main.HoverItem.SetNameOverride(Main.HoverItem.Name + (Main.HoverItem.ModItem != null ? " [" + Main.HoverItem.ModItem.Mod.Name + "]" : ""));
 			}
-		}
-
-		protected virtual void SetItemName()
-        {
-			//	UIView.HoverText = this.item.name;
-			//	UIView.HoverItem = this.item.Clone();
-
-			Main.hoverItemName = this.item.Name;
-            ref Item hoverItem = ref Main.HoverItem;
-            hoverItem = item.Clone();
-            hoverItem.SetNameOverride(hoverItem.Name + (hoverItem.ModItem != null ? " [" + hoverItem.ModItem.Mod.Name + "]" : ""));
 		}
 
 		public override void Draw(SpriteBatch spriteBatch)
@@ -57,10 +50,9 @@ namespace CheatSheet.Menus
 				spriteBatch.Draw(Slot.backgroundTexture.Value, base.DrawPosition, null, Color.White, 0f, Vector2.Zero, base.Scale, SpriteEffects.None, 0f);
 				Texture2D texture2D = ModUtils.GetItemTexture(item.type).Value;
 				Rectangle rectangle2;
-                DrawAnimation drawAnimation = Main.itemAnimations[item.type];
-                if (drawAnimation != null)
+				if (Main.itemAnimations[item.type] != null)
 				{
-					rectangle2 = drawAnimation.GetFrame(texture2D);
+					rectangle2 = Main.itemAnimations[item.type].GetFrame(texture2D);
 				}
 				else
 				{
