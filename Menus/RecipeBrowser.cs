@@ -357,8 +357,8 @@ namespace CheatSheet.Menus
 
 						if (Main.HoverItem.Name != oldname)
 						{
-							Main.HoverItem.SetNameOverride(oldname);
 							ingredients[i].item.SetNameOverride(Main.HoverItem.Name);
+							Main.HoverItem.SetNameOverride(oldname);
 						}
 					}
 					else
