@@ -74,8 +74,8 @@ namespace CheatSheet.Menus
 		{
 			if (LightHack.LightStrength > 0)
 			{
-                float strength = LightHack.LightStrengthValues[LightHack.LightStrength];
-                r = MathHelper.Clamp(r + strength, 0, 1);
+				float strength = LightHack.LightStrengthValues[LightHack.LightStrength];
+				r = MathHelper.Clamp(r + strength, 0, 1);
 				g = MathHelper.Clamp(g + strength, 0, 1);
 				b = MathHelper.Clamp(b + strength, 0, 1);
 			}
