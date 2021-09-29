@@ -81,10 +81,6 @@ namespace CheatSheet.Menus
 					}
 				}
 			}
-			foreach (var item in groups)
-			{
-				Main.NewText("Group " + item);
-			}
 
 			base.ScrollPosition = 0f;
 			base.ClearContent();
