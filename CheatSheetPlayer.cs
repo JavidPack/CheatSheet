@@ -12,15 +12,17 @@ namespace CheatSheet
 		public Item[] ExtraAccessories = new Item[MaxExtraAccessories];
 		public int numberExtraAccessoriesEnabled = 0;
 
-		public override void UpdateEquips(ref bool wallSpeedBuff, ref bool tileSpeedBuff, ref bool tileRangeBuff)
+		public override void UpdateEquips()
 		{
 			for (int i = 0; i < numberExtraAccessoriesEnabled; i++)
 			{
-				player.VanillaUpdateEquip(ExtraAccessories[i]);
+				Player.VanillaUpdateEquip(ExtraAccessories[i]);
 			}
+
+			//VanillaUpdateAccessory is now ApplyEquipFunctional
 			for (int i = 0; i < numberExtraAccessoriesEnabled; i++)
 			{
-				player.VanillaUpdateAccessory(player.whoAmI, ExtraAccessories[i], false, ref wallSpeedBuff, ref tileSpeedBuff, ref tileRangeBuff);
+				Player.ApplyEquipFunctional(ExtraAccessories[i], false);
 			}
 		}
 
@@ -34,16 +36,13 @@ namespace CheatSheet
 			}
 		}
 
-		public override TagCompound Save()
+		public override void SaveData(TagCompound tag)
 		{
-			return new TagCompound
-			{
-				["ExtraAccessories"] = ExtraAccessories.Select(ItemIO.Save).ToList(),
-				["NumberExtraAccessoriesEnabled"] = numberExtraAccessoriesEnabled
-			};
+			tag.Add("ExtraAccessories", ExtraAccessories.Select(ItemIO.Save).ToList());
+			tag.Add("NumberExtraAccessoriesEnabled", numberExtraAccessoriesEnabled);
 		}
 
-		public override void Load(TagCompound tag)
+		public override void LoadData(TagCompound tag)
 		{
 			tag.GetList<TagCompound>("ExtraAccessories").Select(ItemIO.Load).ToList().CopyTo(ExtraAccessories);
 			numberExtraAccessoriesEnabled = tag.GetInt("NumberExtraAccessoriesEnabled");

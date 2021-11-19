@@ -1,0 +1,154 @@
+Mods: {
+	CheatSheet: {
+		Hotbar: {
+			ShowItemBrowser: Mostra il menù degli oggetti
+			ShowClearMenu: "Mostra il cestino "
+			ShowNPCBrowser: "Mostra il menù degli NPC  "
+			ShowRecipeBrowser: Mostra il menù delle ricette
+			ShowModExtensionCheats: "Mostra il menù delle estensioni "
+			ShowPaintTools: Mostra il menù delle schematic
+			ExtraAccessorySlots: Slot accessori extra
+			VacuumItems: "Attira tutti gli oggetti "
+			ShowNPCButcherer: Mostra il killer di NPC
+			ShowQuickWaypoints: "Mostra i teletrasporti veloci "
+			ConfigureAvailableTools: "Configura gli strumenti disponibili "
+		}
+
+		Butcherer: {
+			ButcherHostileNPCs: "Uccidi gli NPC ostili "
+			ButcherHostileAndFriendlyNPCs: "Uccidi gli NPC ostili ed amichevoli "
+			ButcherFriendlyNPCs: Uccidi gli NPC amichevoli
+			ButcherNotification: Gli NPC sono stati uccisi da {0}
+		}
+
+		Vacuum: {
+			VacuumNotification: Gli oggetti a terra sono stati attirati by {0}
+		}
+
+		Teleport: {
+			Dungeon: Dungeon
+			Spawnpoint: Punto di rigenerazione
+			Hell: Inferno
+			Temple: Tempio
+			Random: Casuale
+		}
+
+		QuickClear: {
+			ClearDroppedItems: "Cancella tutti gli oggetti rilasciati "
+			ClearProjectiles: "Cancella i proiettili "
+			ClearBuffs: Cancella i buff
+			ClearDebuffs: Cancella i debuff
+			ItemClearNotification: Gli item sono stati cancellati da {0}
+			ProjectileClearNotification: I proiettili sono stati cancellati da {0}
+		}
+
+		SpawnRate: {
+			SpawnRateMultiplier: Molriplicatore velocità spawn: 1х
+			SpawnRateMultiplierNew: "Moltiplicatore velocità spawn: "
+			SpawnRateMultiplierText: "Velocità spawn e max spawns ora "
+			SpawnRateNormalValue: " il valore normale"
+		}
+
+		LightHack: {
+			LightHackDisabled: Light Hack: Disattivata
+			LightHack25%: Light Hack: 25%
+			LightHack50%: Light Hack: 50%
+			LightHack100%: Light Hack: 100%
+		}
+
+		GodMode: {
+			GodModeDisabled: God Mode Disattivata
+			GodModeEnabled: God Mode Attivata
+		}
+
+		MinionSlot: {
+			MinionSlotBooster: Slot minion: +0
+			MinionSlotBoosterNew: "Slot minion: "
+			MinionSlotBoosterText: "Slot minion ora a "
+		}
+
+		RecipeBrowser: {
+			AllRecipes: Tutte le ricette
+			CycleModSpecificRecipes: Ricette di una specifica mod
+		}
+
+		ConfigurationTool: {
+			ItemBrowser: Item
+			NPCBrowser: "NPC "
+			RecipeBrowser: Ricette
+			MinionBooster: Aumento slot minion
+			Butcher: Killer
+			ClearMenu: Cestino
+			ExtraAccessorySlots: "Slot extra accessori "
+			ModExtensions: "Estensioni mod "
+			PaintTools: "Strumenti schematic "
+			SpawnRate: Velocità di spawn
+			Vacuum: "Attira oggetti "
+			Waypoints: "Teletrasporti "
+			LightHack: Modifica la luce
+			GodMode: God Mode
+		}
+
+		ExtendedCheatMenu: {
+			NoExtensionCheatModsInstalled:
+				'''
+				Nessuna estensione
+				Cheat Mods
+				Installata
+				'''
+		}
+
+		MobBrowser: {
+			AllNPCs: Tutti gli NPC
+			Bosses: Boss
+			TownNPCs: NPC Amichevoli
+			NetIDNPCs: NPC ostili
+			FilteredNPCs: Filtered NPC Filtrati
+			CycleModSpecificNPCs: NPC di una mod specifica
+			SpawnNPCNotification: Spawnnati{0} da {1}
+		}
+
+		ItemBrowser: {
+			AllItems: Tutti gli oggetti
+			Weapons: Armi
+			Tools: "Strumenti "
+			Armor: Armature
+			Accessories: Accessori
+			Blocks: Blocchi
+			Ammo: Munizioni
+			Potions: Pozioni
+			Expert: Esperto
+			Furniture: Arredamento
+			Pets: Animali
+			Mounts: Cavalcature
+			CycleModSpecificItems: Oggetti di una specifica mod
+		}
+
+		PaintTools: {
+			ExportData: Esporta
+			ImportData: Importa
+			DeleteSelection: Cancella selezione
+			SnapTopLeft: Snap: In alto a sinistra
+			SnapTopCenter: Snap: In alto centrale
+			SnapTopRight: Snap: In altro a destra
+			SnapLeftCenter: Snap: A sinistra centrale
+			SnapCenter: "Snap: Centrato "
+			SnapRightCenter: "Snap: Centrato a destra "
+			SnapBottomLeft: Snap: In basso a sinistra
+			SnapBottomCenter: "Snap: Centrato in basso "
+			SnapBottomRight: Snap: In basso a destra
+			PaintTiles: "      Disegni "
+			EyeDropper: "    Contagocce"
+			Undo: "    Annulla l'ultimo disegno (RMB: Ultimi 10) ["
+			Undo2: " passaggi]"
+			NoUndo: Non ci sono più azioni da annullare.
+			UndoLeft: " azioni rimanenti."
+			FlipHorizontal: Ruota orizzontalmente
+			FlipVertical: Ruota verticalmente
+			TransparentSelectionOn: "    Attiva selezione trasparente: Off"
+			TransparentSelectionOff: "    Attiva selezione trasparente: On"
+			PriorBrush: Usa il contagocce prima di usare il pennello.
+			DataExport: Dati esportati in
+		}
+	}
+}

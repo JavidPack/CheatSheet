@@ -2,6 +2,7 @@ using CheatSheet.CustomUI;
 using CheatSheet.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,41 +35,9 @@ namespace CheatSheet.Menus
 	internal class ItemBrowser : UISlideWindow
 	{
 		internal static string CSText(string key, string category = "ItemBrowser") => CheatSheet.CSText(category, key);
-		private static string[] categNames = new string[]
-		{
-			CSText("AllItems"),
-			CSText("Weapons"),
-			CSText("Tools"),
-			CSText("Armor"),
-			CSText("Accessories"),
-			CSText("Blocks"),
-			CSText("Ammo"),
-			CSText("Potions"),
-			CSText("Expert"),
-			CSText("Furniture"),
-			CSText("Pets"),
-			CSText("Mounts"),
-      //      "Crafting Materials",
-            CSText("CycleModSpecificItems"),
-		};
+		private static string[] categNames;
 
-		private static Texture2D[] categoryIcons = new Texture2D[]
-		{
-			Terraria.GameContent.TextureAssets.Item[ItemID.AlphabetStatueA].Value,
-			Terraria.GameContent.TextureAssets.Item[ItemID.SilverBroadsword].Value,
-			Terraria.GameContent.TextureAssets.Item[ItemID.SilverPickaxe].Value,
-			Terraria.GameContent.TextureAssets.Item[ItemID.SilverChainmail].Value,
-			Terraria.GameContent.TextureAssets.Item[ItemID.HermesBoots].Value,
-			Terraria.GameContent.TextureAssets.Item[ItemID.DirtBlock].Value,
-			Terraria.GameContent.TextureAssets.Item[ItemID.FlamingArrow].Value,
-			Terraria.GameContent.TextureAssets.Item[ItemID.GreaterHealingPotion].Value,
-			Terraria.GameContent.TextureAssets.Item[ItemID.WormScarf].Value,
-			Terraria.GameContent.TextureAssets.Item[ItemID.Dresser].Value,
-			Terraria.GameContent.TextureAssets.Item[ItemID.ZephyrFish].Value,
-			Terraria.GameContent.TextureAssets.Item[ItemID.SlimySaddle].Value,
-        //    Terraria.GameContent.TextureAssets.Item[ItemID.FallenStar].Value,
-            Terraria.GameContent.TextureAssets.Item[ItemID.AlphabetStatueM].Value,
-		};
+		private static Asset<Texture2D>[] categoryIcons;
 
 		internal ItemView itemView;
 
@@ -93,30 +62,30 @@ namespace CheatSheet.Menus
 
 		public ItemBrowser(CheatSheet mod)
 		{
-			var a = new[] { ItemID.AlphabetStatueA, ItemID.SilverBroadsword, ItemID.SilverPickaxe, ItemID.SilverChainmail, ItemID.HermesBoots, ItemID.DirtBlock, ItemID.FlamingArrow, ItemID.GreaterHealingPotion, ItemID.WormScarf, ItemID.Dresser, ItemID.SlimySaddle, ItemID.AlphabetStatueM};
-            foreach (var item in a)
-            {
-				Main.instance.LoadItem(item);
-            }
-			categoryIcons = new Texture2D[]
+			var itemIDs = new int[]
 			{
-				TextureAssets.Item[ItemID.AlphabetStatueA].Value,
-				TextureAssets.Item[ItemID.SilverBroadsword].Value,
-				TextureAssets.Item[ItemID.SilverPickaxe].Value,
-				TextureAssets.Item[ItemID.SilverChainmail].Value,
-				TextureAssets.Item[ItemID.HermesBoots].Value,
-				TextureAssets.Item[ItemID.DirtBlock].Value,
-				TextureAssets.Item[ItemID.FlamingArrow].Value,
-				TextureAssets.Item[ItemID.GreaterHealingPotion].Value,
-				TextureAssets.Item[ItemID.WormScarf].Value,
-				TextureAssets.Item[ItemID.Dresser].Value,
-				TextureAssets.Item[ItemID.ZephyrFish].Value,
-				TextureAssets.Item[ItemID.SlimySaddle].Value,
-			//  TextureAssets.Item[ItemID.FallenStar].Value,
-				TextureAssets.Item[ItemID.AlphabetStatueM].Value,
+				ItemID.AlphabetStatueA,
+				ItemID.SilverBroadsword,
+				ItemID.SilverPickaxe,
+				ItemID.SilverChainmail,
+				ItemID.HermesBoots,
+				ItemID.DirtBlock,
+				ItemID.FlamingArrow,
+				ItemID.GreaterHealingPotion,
+				ItemID.WormScarf,
+				ItemID.Dresser,
+				ItemID.ZephyrFish,
+				ItemID.SlimySaddle,
+			//  ItemID.FallenStar,
+				ItemID.AlphabetStatueM,
 			};
+			var categoryIconsList = new List<Asset<Texture2D>>();
 
-
+			foreach (var id in itemIDs)
+			{
+				categoryIconsList.Add(ModUtils.GetItemTexture(id));
+			}
+			categoryIcons = categoryIconsList.ToArray();
 
 			categories.Clear();
 			bCategories = new UIImage[categoryIcons.Length];
@@ -128,7 +97,7 @@ namespace CheatSheet.Menus
 			this.itemView.Position = new Vector2(this.spacing, base.Height - this.spacing - this.itemView.Height);
 			this.AddChild(this.itemView);
 			this.ParseList2();
-			Texture2D texture = mod.GetTexture("UI/closeButton").Value;
+			Asset<Texture2D> texture = mod.Assets.Request<Texture2D>("UI/closeButton");
 			UIImage uIImage = new UIImage(texture/*UIView.GetEmbeddedTexture("Images.closeButton.png")*/);
 			uIImage.Anchor = AnchorPosition.TopRight;
 			uIImage.Position = new Vector2(base.Width - this.spacing, this.spacing);
@@ -143,20 +112,21 @@ namespace CheatSheet.Menus
 			this.AddChild(this.textbox);
 			for (int j = 0; j < ItemBrowser.categoryIcons.Length; j++)
 			{
-				UIImage uIImage2 = new UIImage(ItemBrowser.categoryIcons[j]);
+				Asset<Texture2D> asset = categoryIcons[j];
+				UIImage uIImage2 = new UIImage(asset);
 				Vector2 position = new Vector2(this.spacing, this.spacing);
-				uIImage2.Scale = 32f / Math.Max(categoryIcons[j].Width, categoryIcons[j].Height);
+                uIImage2.Scale = 32f / Math.Max(asset.Width(), asset.Height());
 
 				position.X += (float)(j % 12 * 40);
 				position.Y += (float)(j / 12 * 40);
 
-				if (categoryIcons[j].Height > categoryIcons[j].Width)
+				if (asset.Height() > asset.Width())
 				{
-					position.X += (32 - categoryIcons[j].Width) / 2;
+					position.X += (32 - asset.Width()) / 2;
 				}
-				else if (categoryIcons[j].Height < categoryIcons[j].Width)
+				else if (asset.Height() < asset.Width())
 				{
-					position.Y += (32 - categoryIcons[j].Height) / 2;
+					position.Y += (32 - asset.Height()) / 2;
 				}
 
 				uIImage2.Position = position;
@@ -176,6 +146,36 @@ namespace CheatSheet.Menus
 			itemView.activeSlots = itemView.selectedCategory;
 			itemView.ReorderSlots();
 			return;
+		}
+
+		public static void LoadStatic()
+        {
+			categNames = new string[]
+			{
+				CSText("AllItems"),
+				CSText("Weapons"),
+				CSText("Tools"),
+				CSText("Armor"),
+				CSText("Accessories"),
+				CSText("Blocks"),
+				CSText("Ammo"),
+				CSText("Potions"),
+				CSText("Expert"),
+				CSText("Furniture"),
+				CSText("Pets"),
+				CSText("Mounts"),
+		  //      "Crafting Materials",
+				CSText("CycleModSpecificItems"),
+			};
+		}
+
+		public static void UnloadStatic()
+		{
+			categNames = null;
+			categories.Clear();
+			categoryIcons = null;
+			ModToItems.Clear();
+			bCategories = null;
 		}
 
 		public override void Draw(SpriteBatch spriteBatch)
@@ -270,7 +270,7 @@ namespace CheatSheet.Menus
 					if(uIImage.ForegroundColor == ItemBrowser.buttonSelectedColor)
 						lastModNameNumber = left ? (lastModNameNumber + 1) % mods.Count : (mods.Count + lastModNameNumber - 1) % mods.Count;
 					string currentMod = mods[lastModNameNumber];
-					this.itemView.selectedCategory = ItemBrowser.categories[0].Where(x => this.itemView.allItemsSlots[x].item.modItem != null && this.itemView.allItemsSlots[x].item.modItem.Mod.Name == currentMod).ToArray();
+					this.itemView.selectedCategory = ItemBrowser.categories[0].Where(x => this.itemView.allItemsSlots[x].item.ModItem != null && this.itemView.allItemsSlots[x].item.ModItem.Mod.Name == currentMod).ToArray();
 					this.itemView.activeSlots = this.itemView.selectedCategory;
 					this.itemView.ReorderSlots();
 					bCategories[num].Tooltip = ItemBrowser.categNames[num] + ": " + currentMod;

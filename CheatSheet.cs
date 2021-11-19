@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Newtonsoft.Json;
+using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -30,7 +31,7 @@ namespace CheatSheet
 {
 	internal class CheatSheet : Mod
 	{
-		internal static ModHotKey ToggleCheatSheetHotbarHotKey;
+		internal static ModKeybind ToggleCheatSheetHotbarHotKey;
 		internal static CheatSheet instance;
 		internal static Dictionary<string, ModTranslation> translations; // reference to private field.
 		internal Hotbar hotbar;
@@ -67,6 +68,9 @@ namespace CheatSheet
 		internal const string QuickTeleport_Permission = "QuickTeleport";
 		internal const string QuickTeleport_Display = "Quick Teleport";
 
+		internal const int DefaultNumberOnlineToLoad = 30;
+		public int numberOnlineToLoad = 0;
+
 		public CheatSheet()
 		{
 		}
@@ -76,7 +80,7 @@ namespace CheatSheet
 		public override void Load()
 		{
 			// Since we are using hooks not in older versions, and since ItemID.Count changed, we need to do this.
-			if (ModLoader.version < new Version(0, 11, 5))
+			if (BuildInfo.tMLVersion < new Version(0, 11, 5))
 			{
 				throw new Exception("\nThis mod uses functionality only present in the latest tModLoader. Please update tModLoader to use this mod\n\n");
 			}
@@ -86,14 +90,14 @@ namespace CheatSheet
 			ButtonTexture.Clear();
 			ButtonTooltip.Clear();
 
-			ToggleCheatSheetHotbarHotKey = RegisterHotKey("Toggle Cheat Sheet Hotbar", "K");
+			ToggleCheatSheetHotbarHotKey = KeybindLoader.RegisterKeybind(this, "Toggle Cheat Sheet Hotbar", "K");
 
 			if (Main.rand == null)
 			{
 				Main.rand = new Terraria.Utilities.UnifiedRandom();
 			}
 
-			FieldInfo translationsField = typeof(Mod).GetField("translations", BindingFlags.Instance | BindingFlags.NonPublic);
+			FieldInfo translationsField = typeof(LocalizationLoader).GetField("translations", BindingFlags.Static | BindingFlags.NonPublic);
 			translations = (Dictionary<string, ModTranslation>)translationsField.GetValue(this);
 			//LoadTranslations();
 
@@ -124,12 +128,9 @@ namespace CheatSheet
 			UI.UIScrollView.ScrollbgTexture = null;
 			UI.UITextbox.textboxBackground = null;
 			//UI.UIView.closeTexture = null;
-			ItemBrowser.bCategories = null;
-			RecipeBrowserWindow.ingredients = null;
-			RecipeBrowserWindow.bCategories = null;
-			NPCBrowser.tooltipNpc = null;
-			NPCBrowser.hoverNpc = null;
-			NPCBrowser.bCategories = null;
+			ItemBrowser.UnloadStatic();
+			NPCBrowser.UnloadStatic();
+			RecipeBrowserWindow.UnloadStatic();
 			if (itemBrowser != null)
 				itemBrowser.itemView = null;
 			itemBrowser = null;
@@ -152,8 +153,8 @@ namespace CheatSheet
 			ConfigurationTool.button = null;
 			SpawnRateMultiplier.button = null;
 			MinionSlotBooster.button = null;
-			LightHack.button = null;
-			GodMode.button = null;
+			LightHack.UnloadStatic();
+			GodMode.UnloadStatic();
 		}
 
 		internal static string CSText(string category, string key)
@@ -234,14 +235,13 @@ namespace CheatSheet
 			// Add Buttons only to non-servers (otherwise the server will crash, since textures aren't loaded on servers)
 			if (!Main.dedServ)
 			{
-				Main.instance.LoadItem(ItemID.WaterCandle);
 				herosMod.Call(
 					// Special string
 					"AddSimpleButton",
 					// Name of Permission governing the availability of the button/tool
 					ModifySpawnRateMultiplier_Permission,
 					// Texture of the button. 38x38 is recommended for HERO's Mod. Also, a white outline on the icon similar to the other icons will look good.
-					Terraria.GameContent.TextureAssets.Item[ItemID.WaterCandle].Value,
+					ModUtils.GetItemTexture(ItemID.WaterCandle),
 					// A method that will be called when the button is clicked
 					(Action)SpawnRateMultiplier.HEROsButtonPressed,
 					// A method that will be called when the player's permissions have changed
@@ -278,22 +278,28 @@ namespace CheatSheet
 
 		public override void AddRecipeGroups()
 		{
+			//System.Collections.Concurrent.ConcurrentQueue<Action> glQueue = (System.Collections.Concurrent.ConcurrentQueue<Action>)typeof(Terraria.ModLoader.Engine.GLCallLocker).GetField("actionQueue", BindingFlags.NonPublic | BindingFlags.Static).GetValue(null);
+			//glQueue.Enqueue(() =>
+			//{
 			if (!Main.dedServ)
 			{
-				for (int i = 0; i < ItemLoader.ItemCount; i++)
-				{
-					Main.instance.LoadItem(i);
-				}
+				//for (int i = 0; i < ItemLoader.ItemCount; i++)
+				//{
+				//	Main.instance.LoadItem(i);
+				//}
 
 				try {
+					ItemBrowser.LoadStatic();
 					itemBrowser = new ItemBrowser(this);
 					itemBrowser.SetDefaultPosition(new Vector2(80, 300));
 					itemBrowser.Visible = false;
 
+					NPCBrowser.LoadStatic();
 					npcBrowser = new NPCBrowser(this);
 					npcBrowser.SetDefaultPosition(new Vector2(30, 180));
 					npcBrowser.Visible = false;
 
+					RecipeBrowserWindow.LoadStatic();
 					recipeBrowser = new RecipeBrowserWindow(this);
 					recipeBrowser.SetDefaultPosition(new Vector2(30, 180));
 					recipeBrowser.Visible = false;
@@ -327,6 +333,9 @@ namespace CheatSheet
 					//eventManagerHotbar.Visible = false;
 					//eventManagerHotbar.Hide();
 
+					LightHack.LoadStatic(); //Has to be before new Hotbar()
+					GodMode.LoadStatic(); //Has to be before new Hotbar()
+
 					hotbar = new Hotbar(this);
 					//hotbar.Position = new Microsoft.Xna.Framework.Vector2(120, 180);
 					hotbar.Visible = true;
@@ -340,102 +349,7 @@ namespace CheatSheet
 					Logger.Error(e.ToString());
 				}
 			}
-		}
-
-		internal const int DefaultNumberOnlineToLoad = 30;
-		public int numberOnlineToLoad = 0;
-
-		public override void UpdateUI(GameTime gameTime)
-		{
-			base.UpdateUI(gameTime);
-
-			if (Main.netMode == 1 && ModContent.GetInstance<CheatSheetServerConfig>().DisableCheatsForNonHostUsers && !IsPlayerLocalServerOwner(Main.LocalPlayer))
-				return;
-
-			if (PaintToolsEx.schematicsToLoad != null && numberOnlineToLoad > 0 && CheatSheet.instance.paintToolsUI.view.childrenToRemove.Count == 0)
-			{
-				PaintToolsEx.LoadSingleSchematic();
-				//CheatSheet.instance.paintToolsUI.view.ReorderSlots();
-			}
-
-			if (PaintToolsSlot.updateNeeded)
-			{
-				bool oneUpdated = false;
-				foreach (var item in paintToolsUI.view.slotList)
-				{
-					if (item.texture == TextureAssets.MagicPixel.Value)
-					{
-						item.texture = item.MakeThumbnail(item.stampInfo);
-						oneUpdated = true;
-						break;
-					}
-				}
-				if (!oneUpdated)
-					PaintToolsSlot.updateNeeded = false;
-			}
-		}
-
-		//public override void PostDrawFullscreenMap(ref string mouseText)
-		//{
-		//	Main.spriteBatch.DrawString(FontAssets.MouseText.Value, "Testing Testing", new Vector2(Main.screenWidth / 2, Main.screenHeight / 2), Color.Pink, 0.0f, new Vector2(), 0.8f, SpriteEffects.None, 0.0f);
-		//}
-
-		private int lastmode = -1;
-
-		public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
-		{
-			if (Main.netMode == 1 && ModContent.GetInstance<CheatSheetServerConfig>().DisableCheatsForNonHostUsers && !IsPlayerLocalServerOwner(Main.LocalPlayer))
-				return;
-
-			if (Main.netMode != lastmode)
-			{
-				lastmode = Main.netMode;
-				if (Main.netMode == 0)
-				{
-					SpawnRateMultiplier.HasPermission = true;
-					foreach (var key in herosPermissions.Keys.ToList()) {
-						herosPermissions[key] = true;
-					}
-				}
-				CheatSheet.instance.hotbar.ChangedConfiguration();
-			}
-			int MouseTextIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Mouse Text"));
-			if (MouseTextIndex != -1)
-			{
-				layers.Insert(MouseTextIndex, new LegacyGameInterfaceLayer(
-					"CheatSheet: All Cheat Sheet",
-					delegate
-					{
-						ModContent.GetInstance<AllItemsMenu>().DrawUpdateAll(Main.spriteBatch);
-						return true;
-					},
-					InterfaceScaleType.UI)
-				);
-
-				layers.Insert(MouseTextIndex, new LegacyGameInterfaceLayer(
-					"CheatSheet: Paint Tools",
-					delegate
-					{
-						ModContent.GetInstance<AllItemsMenu>().DrawUpdatePaintTools(Main.spriteBatch);
-						return true;
-					},
-					InterfaceScaleType.Game)
-				);
-			}
-
-			MouseTextIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Inventory"));
-			if (MouseTextIndex != -1)
-			{
-				layers.Insert(MouseTextIndex, new LegacyGameInterfaceLayer(
-					"CheatSheet: Extra Accessories",
-					delegate
-					{
-						ModContent.GetInstance<AllItemsMenu>().DrawUpdateExtraAccessories(Main.spriteBatch);
-						return true;
-					},
-					InterfaceScaleType.UI)
-				);
-			}
+			//});
 		}
 
 		public static bool IsPlayerLocalServerOwner(Player player) {
@@ -473,7 +387,7 @@ namespace CheatSheet
 
 		private KeyboardState PreviousKeyState;
 
-		public void RegisterButton(Texture2D texture, Action buttonClickedAction, Func<string> tooltip)
+		public void RegisterButton(Asset<Texture2D> texture, Action buttonClickedAction, Func<string> tooltip)
 		{
 			ButtonClicked.Add(buttonClickedAction);
 			ButtonTexture.Add(texture);
@@ -484,7 +398,7 @@ namespace CheatSheet
 		}
 
 		internal static List<Action> ButtonClicked = new List<Action>();
-		internal static List<Texture2D> ButtonTexture = new List<Texture2D>();
+		internal static List<Asset<Texture2D>> ButtonTexture = new List<Asset<Texture2D>>();
 		internal static List<Func<string>> ButtonTooltip = new List<Func<string>>();
 
 		public override object Call(params object[] args)
@@ -494,7 +408,7 @@ namespace CheatSheet
 				if (message == "AddButton_Test")
 				{
 					Logger.Info("Button Adding...");
-					RegisterButton(args[1] as Texture2D, args[2] as Action, args[3] as Func<string>);
+					RegisterButton(args[1] as Asset<Texture2D>, args[2] as Action, args[3] as Func<string>);
 					Logger.Info("...Button Added");
 				}
 				else if (message == "HideHotbar") {
@@ -628,7 +542,7 @@ namespace CheatSheet
 
 	public static class CheatSheetInterface
 	{
-		public static void RegisterButton(Mod mod, Texture2D texture, Action buttonClickedAction, Func<string> tooltip)
+		public static void RegisterButton(Mod mod, Asset<Texture2D> texture, Action buttonClickedAction, Func<string> tooltip)
 		{
 			if (!Main.dedServ && mod != null && mod is CheatSheet)
 			{
@@ -674,11 +588,11 @@ namespace CheatSheet
 
 	public class CheatSheetButton
 	{
-		internal Texture2D texture;
+		internal Asset<Texture2D> texture;
 
 		//internal Action buttonClickedAction;
 		//internal Func<string> tooltip;
-		public CheatSheetButton(Texture2D texture/*, Action buttonClickedAction, Func<string> tooltip*/)
+		public CheatSheetButton(Asset<Texture2D> texture/*, Action buttonClickedAction, Func<string> tooltip*/)
 		{
 			this.texture = texture;
 			//	this.buttonClickedAction = buttonClickedAction;
@@ -745,7 +659,7 @@ namespace CheatSheet
 
 			public ReportData()
 			{
-				tmodversion = ModLoader.version.ToString();
+				tmodversion = BuildInfo.tMLVersion.ToString();
 				modversion = CheatSheet.instance.Version.ToString();
 				mod = "CheatSheet";
 				platform = ModLoader.CompressedPlatformRepresentation;

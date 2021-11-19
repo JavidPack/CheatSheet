@@ -38,7 +38,7 @@ namespace CheatSheet.Menus
 		{
 			Main.hoverItemName = this.item.Name;
 			Main.HoverItem = item.Clone();
-			Main.HoverItem.SetNameOverride(Main.HoverItem.Name + (Main.HoverItem.modItem != null ? " [" + Main.HoverItem.modItem.Mod.Name + "]" : ""));
+			Main.HoverItem.SetNameOverride(Main.HoverItem.Name + (Main.HoverItem.ModItem != null ? " [" + Main.HoverItem.ModItem.Mod.Name + "]" : ""));
 		}
 
 		private void Slot2_onLeftClick(object sender, EventArgs e)
@@ -80,7 +80,7 @@ namespace CheatSheet.Menus
 			//if (item != null)
 			{
 				spriteBatch.Draw((real ? backgroundTexture : backgroundTextureFake).Value, base.DrawPosition, null, Color.White, 0f, Vector2.Zero, base.Scale, SpriteEffects.None, 0f);
-				Texture2D texture2D = Terraria.GameContent.TextureAssets.Item[this.item.type].Value;
+				Texture2D texture2D = ModUtils.GetItemTexture(item.type).Value;
 				Rectangle rectangle2;
 				if (Main.itemAnimations[item.type] != null)
 				{

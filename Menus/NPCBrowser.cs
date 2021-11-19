@@ -11,6 +11,7 @@ using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.GameContent;
+using ReLogic.Content;
 
 namespace CheatSheet.Menus
 {
@@ -29,27 +30,11 @@ namespace CheatSheet.Menus
 		internal static string CSText(string key, string category = "MobBrowser") => CheatSheet.CSText(category, key);
 		internal static NPC tooltipNpc;
 		internal static NPC hoverNpc;
-		internal Texture2D[] textures;
+		internal Asset<Texture2D>[] textures;
 
-		private static string[] categNames = new string[]
-		{
-			CSText("AllNPCs"),
-			CSText("Bosses"),
-			CSText("TownNPCs"),
-			CSText("NetIDNPCs"),
-			CSText("FilteredNPCs"),
-			CSText("CycleModSpecificNPCs")
-		};
+		private static string[] categNames;
 
-		private static Texture2D[] categoryIcons = Main.dedServ ? null : new Texture2D[]
-		{
-			ModUtils.GetItemTexture(ItemID.AlphabetStatueA),
-			ModUtils.GetItemTexture(ItemID.AlphabetStatueB),
-			ModUtils.GetItemTexture(ItemID.AlphabetStatueT),
-			ModUtils.GetItemTexture(ItemID.AlphabetStatueN),
-			ModUtils.GetItemTexture(ItemID.AlphabetStatueF),
-			ModUtils.GetItemTexture(ItemID.AlphabetStatueM),
-		};
+		private static Asset<Texture2D>[] categoryIcons;
 
 		private bool swapFilter = false;
 
@@ -81,6 +66,42 @@ namespace CheatSheet.Menus
 
 		// 270 : 16 40 ?? 16
 
+		public static void LoadStatic()
+		{
+			categNames = new string[]
+			{
+				CSText("AllNPCs"),
+				CSText("Bosses"),
+				CSText("TownNPCs"),
+				CSText("NetIDNPCs"),
+				CSText("FilteredNPCs"),
+				CSText("CycleModSpecificNPCs")
+			};
+
+			categoryIcons = Main.dedServ ? null : new Asset<Texture2D>[]
+			{
+				ModUtils.GetItemTexture(ItemID.AlphabetStatueA),
+				ModUtils.GetItemTexture(ItemID.AlphabetStatueB),
+				ModUtils.GetItemTexture(ItemID.AlphabetStatueT),
+				ModUtils.GetItemTexture(ItemID.AlphabetStatueN),
+				ModUtils.GetItemTexture(ItemID.AlphabetStatueF),
+				ModUtils.GetItemTexture(ItemID.AlphabetStatueM),
+			};
+		}
+
+		public static void UnloadStatic()
+		{
+			categNames = null;
+			categories.Clear();
+			ModToNPCs.Clear();
+			categoryIcons = null;
+			bCategories = null;
+
+			tooltipNpc = null;
+			hoverNpc = null;
+			filteredNPCSlots.Clear();
+		}
+
 		public NPCBrowser(CheatSheet mod)
 		{
 			categories.Clear();
@@ -93,7 +114,7 @@ namespace CheatSheet.Menus
 			this.npcView.Position = new Vector2(this.spacing, base.Height - this.npcView.Height - this.spacing * 3f);
 			this.AddChild(this.npcView);
 			this.ParseList2();
-			Texture2D texture = mod.GetTexture("UI/closeButton").Value;
+			Asset<Texture2D> texture = mod.Assets.Request<Texture2D>("UI/closeButton");
 			UIImage uIImage = new UIImage(texture);
 			uIImage.Anchor = AnchorPosition.TopRight;
 			uIImage.Position = new Vector2(base.Width - this.spacing, this.spacing);
@@ -110,18 +131,19 @@ namespace CheatSheet.Menus
 			{
 				UIImage uIImage2 = new UIImage(NPCBrowser.categoryIcons[j]);
 				Vector2 position = new Vector2(this.spacing, this.spacing);
-				uIImage2.Scale = 32f / Math.Max(categoryIcons[j].Width, categoryIcons[j].Height);
+                Asset<Texture2D> iconAsset = categoryIcons[j];
+                uIImage2.Scale = 32f / Math.Max(iconAsset.Width(), iconAsset.Height());
 
 				position.X += (float)(j % 6 * 40);
 				position.Y += (float)(j / 6 * 40);
 
-				if (categoryIcons[j].Height > categoryIcons[j].Width)
+				if (iconAsset.Height() > iconAsset.Width())
 				{
-					position.X += (32 - categoryIcons[j].Width) / 2;
+					position.X += (32 - iconAsset.Width()) / 2;
 				}
-				else if (categoryIcons[j].Height < categoryIcons[j].Width)
+				else if (iconAsset.Height() < iconAsset.Width())
 				{
-					position.Y += (32 - categoryIcons[j].Height) / 2;
+					position.Y += (32 - iconAsset.Height()) / 2;
 				}
 
 				uIImage2.Position = position;
@@ -140,12 +162,12 @@ namespace CheatSheet.Menus
 			npcView.selectedCategory = NPCBrowser.categories[0].ToArray();
 			npcView.activeSlots = npcView.selectedCategory;
 			npcView.ReorderSlots();
-			textures = new Texture2D[]
+			textures = new Asset<Texture2D>[]
 			{
-				mod.GetTexture("UI/NPCLifeIcon").Value,
-				mod.GetTexture("UI/NPCDamageIcon").Value,
-				mod.GetTexture("UI/NPCDefenseIcon").Value,
-				mod.GetTexture("UI/NPCKnockbackIcon").Value,
+				mod.Assets.Request<Texture2D>("UI/NPCLifeIcon"),
+				mod.Assets.Request<Texture2D>("UI/NPCDamageIcon"),
+				mod.Assets.Request<Texture2D>("UI/NPCDefenseIcon"),
+				mod.Assets.Request<Texture2D>("UI/NPCKnockbackIcon"),
 			};
 		}
 
@@ -183,8 +205,13 @@ namespace CheatSheet.Menus
 				Vector2 pos = new Vector2(vector.X, vector.Y + 24);
 				for (int i = 0; i < textures.Length; i++)
 				{
-					spriteBatch.Draw(textures[i], pos, Color.White);
-					pos.X += textures[i].Width + 4;
+                    Texture2D texture = textures[i].Value;
+					if (texture == null)
+                    {
+						continue;
+                    }
+                    spriteBatch.Draw(texture, pos, Color.White);
+					pos.X += texture.Width + 4;
 					Utils.DrawBorderStringFourWay(spriteBatch, FontAssets.MouseText.Value, texts[i], pos.X, pos.Y, Color.White, Color.Black, Vector2.Zero, 1f);
 					pos.X += FontAssets.MouseText.Value.MeasureString(texts[i]).X + 8;
 				}

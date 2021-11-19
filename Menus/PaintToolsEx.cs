@@ -260,7 +260,7 @@ namespace CheatSheet
 						// 0 needs to be 6 ,   MaxX == 5, 4 index, 
 						// need tp add 6?       4(10) < 5(11) - 5
 
-						if (Main.tile[i, j].active())
+						if (Main.tile[i, j].IsActive)
 						{
 							WorldGen.TileFrame(i, j, true, false);
 						}

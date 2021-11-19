@@ -2,6 +2,7 @@
 using CheatSheet.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using ReLogic.Graphics;
 using System;
 using System.Collections.Generic;
@@ -23,17 +24,9 @@ namespace CheatSheet.Menus
 	internal class RecipeBrowserWindow : UISlideWindow
 	{
 		internal static string CSText(string key, string category = "RecipeBrowser") => CheatSheet.CSText(category, key);
-		private static string[] categNames = new string[]
-		{
-			CSText("AllRecipes"),
-			CSText("CycleModSpecificRecipes")
-		};
+		private static string[] categNames;
 
-		private static Texture2D[] categoryIcons = new Texture2D[]
-		{
-			Terraria.GameContent.TextureAssets.Item[ItemID.AlphabetStatueA].Value,
-			Terraria.GameContent.TextureAssets.Item[ItemID.AlphabetStatueM].Value,
-		};
+		private static Asset<Texture2D>[] categoryIcons;
 
 		internal static RecipeView recipeView;
 		public CheatSheet mod;
@@ -45,7 +38,7 @@ namespace CheatSheet.Menus
 		internal static RecipeQuerySlot lookupItemSlot;
 
 		internal static GenericItemSlot[] ingredients;
-		//internal static GenericItemSlot[] tiles = new GenericItemSlot[Recipe.maxRequirements];
+		//internal static GenericItemSlot[] tiles = new GenericItemSlot[maxRequirementsOld];
 
 		public static List<List<int>> categories = new List<List<int>>();
 		private static Color buttonColor = new Color(190, 190, 190);
@@ -62,11 +55,38 @@ namespace CheatSheet.Menus
 		public Recipe selectedRecipe = null;
 		internal bool selectedRecipeChanged = false;
 
+		public const int maxRequirementsOld = 15;
+
+		public static void LoadStatic()
+		{
+			categNames = new string[]
+			{
+				CSText("AllRecipes"),
+				CSText("CycleModSpecificRecipes")
+			};
+		}
+
+		public static void UnloadStatic()
+		{
+			categNames = null;
+			categories.Clear();
+			recipeView = null;
+			categoryIcons = null;
+			bCategories = null;
+			lookupItemSlot = null;
+			ingredients = null;
+		}
+
 		// 270 : 16 40 ?? 16
 
 		public RecipeBrowserWindow(CheatSheet mod)
 		{
 			categories.Clear();
+			categoryIcons = new Asset<Texture2D>[]
+			{
+				ModUtils.GetItemTexture(ItemID.AlphabetStatueA),
+				ModUtils.GetItemTexture(ItemID.AlphabetStatueM),
+			};
 			bCategories = new UIImage[categoryIcons.Length];
 			recipeView = new RecipeView();
 			this.mod = mod;
@@ -76,7 +96,7 @@ namespace CheatSheet.Menus
 			recipeView.Position = new Vector2(this.spacing, this.spacing + 40);
 			this.AddChild(recipeView);
 			this.InitializeRecipeCategories();
-			Texture2D texture = mod.GetTexture("UI/closeButton").Value;
+			Asset<Texture2D> texture = mod.Assets.Request<Texture2D>("UI/closeButton");
 			UIImage uIImage = new UIImage(texture);
 			uIImage.Anchor = AnchorPosition.TopRight;
 			uIImage.Position = new Vector2(base.Width - this.spacing, this.spacing);
@@ -99,18 +119,19 @@ namespace CheatSheet.Menus
 			{
 				UIImage uIImage2 = new UIImage(RecipeBrowserWindow.categoryIcons[j]);
 				Vector2 position = new Vector2(this.spacing + 48, this.spacing);
-				uIImage2.Scale = 32f / Math.Max(categoryIcons[j].Width, categoryIcons[j].Height);
+                Asset<Texture2D> iconAsset = categoryIcons[j];
+                uIImage2.Scale = 32f / Math.Max(iconAsset.Width(), iconAsset.Height());
 
 				position.X += (float)(j % 6 * 40);
 				position.Y += (float)(j / 6 * 40);
 
-				if (categoryIcons[j].Height > categoryIcons[j].Width)
+				if (iconAsset.Height() > iconAsset.Width())
 				{
-					position.X += (32 - categoryIcons[j].Width) / 2;
+					position.X += (32 - iconAsset.Width()) / 2;
 				}
-				else if (categoryIcons[j].Height < categoryIcons[j].Width)
+				else if (iconAsset.Height() < iconAsset.Width())
 				{
-					position.Y += (32 - categoryIcons[j].Height) / 2;
+					position.Y += (32 - iconAsset.Height()) / 2;
 				}
 
 				uIImage2.Position = position;
@@ -127,8 +148,9 @@ namespace CheatSheet.Menus
 				this.AddChild(uIImage2);
 			}
 
-			ingredients = new GenericItemSlot[Recipe.maxRequirements];
-			for (int j = 0; j < Recipe.maxRequirements; j++)
+			//TODO dynamic UI based on the recipe length
+			ingredients = new GenericItemSlot[maxRequirementsOld];
+			for (int j = 0; j < maxRequirementsOld; j++)
 			{
 				GenericItemSlot genericItemSlot = new GenericItemSlot();
 				Vector2 position = new Vector2(this.spacing, this.spacing);
@@ -204,10 +226,22 @@ namespace CheatSheet.Menus
 				//	int num60 = Main.focusRecipe;
 				int num61 = 0;
 				int num62 = 0;
-				while (num62 < Recipe.maxRequirements)
+
+				//1.4 Fix cause idk how this code works exactly
+				int[] requiredTile = selectedRecipe.requiredTile.ToArray();
+				Array.Resize(ref requiredTile, maxRequirementsOld);
+				for (int i = Math.Max(0, selectedRecipe.requiredTile.Count - 1); i < requiredTile.Length; i++)
+				{
+					if (requiredTile[i] == 0)
+					{
+						requiredTile[i] = -1;
+					}
+				}
+
+				while (num62 < maxRequirementsOld)
 				{
 					int num63 = (num62 + 1) * 26;
-					if (selectedRecipe.requiredTile[num62] == -1)
+					if (requiredTile[num62] == -1)
 					{
 						//if (num62 == 0 && !selectedRecipe.needWater && !selectedRecipe.needHoney && !selectedRecipe.needLava)
 						if (num62 == 0 && selectedRecipe.Conditions.Count == 0)
@@ -220,7 +254,7 @@ namespace CheatSheet.Menus
 					else
 					{
 						num61++;
-						spriteBatch.DrawString(FontAssets.MouseText.Value, Lang.GetMapObjectName(MapHelper.TileToLookup(selectedRecipe.requiredTile[num62], 0)), new Vector2((float)positionX, (float)(positionY + num63)), color3, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+						spriteBatch.DrawString(FontAssets.MouseText.Value, Lang.GetMapObjectName(MapHelper.TileToLookup(requiredTile[num62], 0)), new Vector2((float)positionX, (float)(positionY + num63)), color3, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
 						num62++;
 					}
 				}
@@ -279,9 +313,9 @@ namespace CheatSheet.Menus
 
 				selectedRecipeChanged = false;
 				string oldname = Main.HoverItem.Name;
-				for (int i = 0; i < Recipe.maxRequirements; i++)
+				for (int i = 0; i < ingredients.Length; i++)
 				{
-					if (selectedRecipe.requiredItem[i].type > 0)
+					if (i < selectedRecipe.requiredItem.Count && selectedRecipe.requiredItem[i].type > 0)
 					{
 						ingredients[i].item = selectedRecipe.requiredItem[i];
 
@@ -323,8 +357,8 @@ namespace CheatSheet.Menus
 
 						if (Main.HoverItem.Name != oldname)
 						{
-							Main.HoverItem.SetNameOverride(oldname);
 							ingredients[i].item.SetNameOverride(Main.HoverItem.Name);
+							Main.HoverItem.SetNameOverride(oldname);
 						}
 					}
 					else

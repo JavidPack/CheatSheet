@@ -12,7 +12,7 @@ namespace CheatSheet.Menus
 	{
 		public override void PostUpdateEquips()
 		{
-			player.maxMinions += MinionSlotBooster.currentBoost;
+			Player.maxMinions += MinionSlotBooster.currentBoost;
 		}
 	}
 
@@ -35,7 +35,8 @@ namespace CheatSheet.Menus
 
 		public static UIImage GetButton(Mod mod)
 		{
-			button = new UIImage(TextureAssets.Buff[BuffID.Summoning].Value);
+			button = new UIImage(TextureAssets.Buff[BuffID.Summoning]);
+
 			button.Tooltip = CSText("MinionSlotBooster");
 			button.onRightClick += (s, e) =>
 			{

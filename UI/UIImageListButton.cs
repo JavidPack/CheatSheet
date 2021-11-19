@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,7 +26,7 @@ namespace CheatSheet.UI
 
 	internal class UIImageListButton : UIView
 	{
-		private List<Texture2D> _textures;
+		private List<Asset<Texture2D>> _textures;
 		private List<string> _hoverTexts;
 		private List<object> _values;
 		internal float visibilityActive = 1f;
@@ -39,26 +40,30 @@ namespace CheatSheet.UI
 
 		}
 
-		public UIImageListButton(List<Texture2D> textures, List<object> values, List<string> hoverTexts, int defaultIndex = 0)
+		public UIImageListButton(List<Asset<Texture2D>> textures, List<object> values, List<string> hoverTexts, int defaultIndex = 0)
 		{
 			this._textures = textures;
 			this._values = values;
 			this._hoverTexts = hoverTexts;
-			this.Width = (float)this._textures[0].Width;
-			this.Height = (float)this._textures[0].Height;
+			this.Width = (float)this._textures[0].Width();
+			this.Height = (float)this._textures[0].Height();
 			Index = defaultIndex;
 
 			onHover += (a, b) => UIView.HoverText = $"Current:{_hoverTexts[Index]}{Environment.NewLine}Next:{GetNextTooltip()}";
 		}
 
-		public void AddImage(Texture2D texture)
+		public void AddImage(Asset<Texture2D> texture)
 		{
 			this._textures.Add(texture);
 		}
 
 		public override void Draw(SpriteBatch spriteBatch)
 		{
-			spriteBatch.Draw(this._textures[Index], base.DrawPosition, Color.White);
+            Texture2D texture = this._textures[Index].Value;
+			if (texture != null)
+            {
+				spriteBatch.Draw(texture, base.DrawPosition, Color.White);
+			}
 		}
 
 		public void SetVisibility(float whenActive, float whenInactive)

@@ -47,7 +47,7 @@ namespace CheatSheet.Menus
 			//UIView.HoverText = recipe.createItem.name;
 			Main.hoverItemName = recipe.createItem.Name;
 			Main.HoverItem = recipe.createItem.Clone();
-			Main.HoverItem.SetNameOverride(Main.HoverItem.Name + (Main.HoverItem.modItem != null ? " [" + Main.HoverItem.modItem.Mod.Name + "]" : ""));
+			Main.HoverItem.SetNameOverride(Main.HoverItem.Name + (Main.HoverItem.ModItem != null ? " [" + Main.HoverItem.ModItem.Mod.Name + "]" : ""));
 			//UIView.HoverItem = this.item.Clone();
 			//	hovering = true;
 		}
@@ -76,7 +76,7 @@ namespace CheatSheet.Menus
 			{
 				spriteBatch.Draw(RecipeSlot.backgroundTexture.Value, base.DrawPosition, null, Color.White, 0f, Vector2.Zero, base.Scale, SpriteEffects.None, 0f);
 			}
-			Texture2D texture2D = Terraria.GameContent.TextureAssets.Item[this.recipe.createItem.type].Value;
+			Texture2D texture2D = ModUtils.GetItemTexture(this.recipe.createItem.type).Value;
 			Rectangle rectangle2;
 			if (Main.itemAnimations[recipe.createItem.type] != null)
 			{

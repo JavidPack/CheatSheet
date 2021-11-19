@@ -1,0 +1,158 @@
+Mods: {
+	CheatSheet: {
+		Hotbar: {
+			ShowItemBrowser: Show Item Browser
+			ShowClearMenu: Show Clear Menu
+			ShowNPCBrowser: Show NPC Browser
+			ShowRecipeBrowser: Show Recipe Browser
+			ShowModExtensionCheats: Show Mod Extension Cheats
+			ShowPaintTools: Show Paint Tools
+			ExtraAccessorySlots: Extra Accessory Slots
+			VacuumItems: Vacuum Items
+			ShowNPCButcherer: Show NPC Butcherer
+			ShowQuickWaypoints: Show Quick Waypoints
+			ConfigureAvailableTools: Configure Available Tools
+		}
+
+		Butcherer: {
+			ButcherHostileNPCs: Butcher hostile NPCs
+			ButcherHostileAndFriendlyNPCs: Butcher hostile and friendly NPCs
+			ButcherFriendlyNPCs: Butcher friendly NPCs
+			ButcherNotification: NPCs were butchered by {0}
+		}
+
+		Vacuum: {
+			VacuumNotification: Items on the ground were vacuumed by {0}
+		}
+
+		Teleport: {
+			Dungeon: Dungeon
+			Spawnpoint: Spawnpoint
+			Hell: Hell
+			Temple: Temple
+			Random: Random
+		}
+
+		QuickClear: {
+			ClearDroppedItems: Clear dropped items
+			ClearProjectiles: Clear projectiles
+			ClearBuffs: Clear buffs
+			ClearDebuffs: Clear debuffs
+			ItemClearNotification: Items were cleared by {0}
+			ProjectileClearNotification: Projectiles were cleared by {0}
+		}
+
+		SpawnRate: {
+			SpawnRateMultiplier: Spawn Rate Multiplier: 1х
+			SpawnRateMultiplierNew: "Spawn Rate Multiplier: "
+			SpawnRateMultiplierText: "Spawn rate and max spawns now "
+			SpawnRateNormalValue: " the normal value"
+		}
+
+		LightHack: {
+			LightHackDisabled: Light Hack: Disabled
+			LightHack25%: Light Hack: 25%
+			LightHack50%: Light Hack: 50%
+			LightHack100%: Light Hack: 100%
+		}
+
+		GodMode: {
+			GodModeDisabled: God Mode Disabled
+			GodModeEnabled: God Mode Enabled
+		}
+
+		MinionSlot: {
+			MinionSlotBooster: Minion Slot Boost: +0
+			MinionSlotBoosterNew: "Minion Slot Boost: "
+			MinionSlotBoosterText: "Minion boost now at "
+		}
+
+		RecipeBrowser: {
+			AllRecipes: All Recipes
+			CycleModSpecificRecipes: Cycle Mod Specific Recipes
+		}
+
+		ConfigurationTool: {
+			ItemBrowser: Item Browser
+			NPCBrowser: NPC Browser
+			RecipeBrowser: Recipe Browser
+			MinionBooster: Minion Booster
+			Butcher: Butcher
+			ClearMenu: Clear Menu
+			ExtraAccessorySlots: Extra Accessory Slots
+			ModExtensions: Mod Extensions
+			PaintTools: Paint Tools
+			SpawnRate: Spawn Rate
+			Vacuum: Vacuum
+			Waypoints: Waypoints
+			LightHack: Light Hack
+			GodMode: God Mode
+		}
+
+		ExtendedCheatMenu: {
+			NoExtensionCheatModsInstalled:
+				'''
+				No Extension
+				Cheat Mods
+				Installed
+				'''
+		}
+
+		ExtraAccessorySlots: {
+			ExtraAccessorySlots: "Extra Accessory Slots: "
+		}
+
+		MobBrowser: {
+			AllNPCs: All NPCs
+			Bosses: Bosses
+			TownNPCs: Town NPCs
+			NetIDNPCs: NetID NPCs
+			FilteredNPCs: Filtered NPCs
+			CycleModSpecificNPCs: Cycle Mod Specific NPCs
+			SpawnNPCNotification: Spawned {0} by {1}
+		}
+
+		ItemBrowser: {
+			AllItems: All Items
+			Weapons: Weapons
+			Tools: Tools
+			Armor: Armor
+			Accessories: Accessories
+			Blocks: Blocks
+			Ammo: Ammo
+			Potions: Potions
+			Expert: Expert
+			Furniture: Furniture
+			Pets: Pets
+			Mounts: Mounts
+			CycleModSpecificItems: Cycle Mod Specific Items
+		}
+
+		PaintTools: {
+			ExportData: Export Data
+			ImportData: Import Data
+			DeleteSelection: Delete Selection
+			SnapTopLeft: Snap: TopLeft
+			SnapTopCenter: Snap: TopCenter
+			SnapTopRight: Snap: TopRight
+			SnapLeftCenter: Snap: LeftCenter
+			SnapCenter: Snap: Center
+			SnapRightCenter: Snap: RightCenter
+			SnapBottomLeft: Snap: BottomLeft
+			SnapBottomCenter: Snap: BottomCenter
+			SnapBottomRight: Snap: BottomRight
+			PaintTiles: "    Paint Tiles"
+			EyeDropper: "    Eye Dropper"
+			Undo: "    Undo Last Paint (RMB: Last 10) ["
+			Undo2: " steps]"
+			NoUndo: There are no actions left in history to undo.
+			UndoLeft: " actions remain in undo history."
+			FlipHorizontal: Flip Horizontal
+			FlipVertical: Flip Vertical
+			TransparentSelectionOn: "    Toggle Transparent Selection: Off"
+			TransparentSelectionOff: "    Toggle Transparent Selection: On"
+			PriorBrush: Use Eyedropper prior to using brush.
+			DataExport: "Exported data to "
+		}
+	}
+}
