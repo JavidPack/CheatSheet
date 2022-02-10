@@ -203,7 +203,7 @@ namespace CheatSheet
 		{
 			int oldX = Main.maxTilesX;
 			int oldY = Main.maxTilesY;
-			Tile[,] oldTiles = Main.tile;
+			// TODO: This feature is remove for now, this line needs to be restored: Tile[,] oldTiles = Main.tile;
 			Tile[,] loadedTiles = new Tile[0, 0];
 			try
 			{
@@ -223,7 +223,7 @@ namespace CheatSheet
 				for (int i = 0; i < Main.maxTilesX; i++)
 					for (int j = 0; j < Main.maxTilesY; j++)
 						loadedTiles[i, j] = new Tile();
-				Main.tile = loadedTiles;
+				// TODO: This feature is remove for now, this line needs to be restored: Main.tile = loadedTiles;
 
 				using (MemoryStream memoryStream = new MemoryStream(tagCompound.GetByteArray("v")))
 				{
@@ -248,7 +248,7 @@ namespace CheatSheet
 							loadedTilesExpanded[i, j] = new Tile();
 						else
 							loadedTilesExpanded[i, j] = Main.tile[i - 6, j - 6];
-				Main.tile = loadedTilesExpanded;
+				// TODO: This feature is remove for now, this line needs to be restored: Main.tile = loadedTilesExpanded;
 
 				for (int i = 0; i < Main.maxTilesX; i++)
 				{
@@ -260,11 +260,11 @@ namespace CheatSheet
 						// 0 needs to be 6 ,   MaxX == 5, 4 index, 
 						// need tp add 6?       4(10) < 5(11) - 5
 
-						if (Main.tile[i, j].IsActive)
+						if (Main.tile[i, j].HasTile)
 						{
 							WorldGen.TileFrame(i, j, true, false);
 						}
-						if (Main.tile[i, j].wall > 0)
+						if (Main.tile[i, j].WallType > 0)
 						{
 							Framing.WallFrame(i, j, true);
 						}
@@ -274,7 +274,7 @@ namespace CheatSheet
 			catch { }
 			Main.maxTilesX = oldX;
 			Main.maxTilesY = oldY;
-			Main.tile = oldTiles;
+			// TODO: This feature is remove for now, this line needs to be restored: Main.tile = oldTiles;
 			return loadedTiles;
 		}
 
@@ -285,13 +285,13 @@ namespace CheatSheet
 		{
 			int oldX = Main.maxTilesX;
 			int oldY = Main.maxTilesY;
-			Tile[,] oldTiles = Main.tile;
+			// TODO: This feature is remove for now, this line needs to be restored: Tile[,] oldTiles = Main.tile;
 			string base64result = "";
 			try
 			{
 				Main.maxTilesX = tiles.GetLength(0);
 				Main.maxTilesY = tiles.GetLength(1);
-				Main.tile = tiles;
+				// TODO: This feature is remove for now, this line needs to be restored: Main.tile = tiles;
 				if (SaveTilesMethodInfo == null)
 					SaveTilesMethodInfo = typeof(Main).Assembly.GetType("Terraria.ModLoader.IO.TileIO").GetMethod("SaveTiles", BindingFlags.Static | BindingFlags.NonPublic);
 				if (SaveWorldTilesVanillaMethodInfo == null)
@@ -322,7 +322,7 @@ namespace CheatSheet
 			catch { }
 			Main.maxTilesX = oldX;
 			Main.maxTilesY = oldY;
-			Main.tile = oldTiles;
+			// TODO: This feature is remove for now, this line needs to be restored: Main.tile = oldTiles;
 			return base64result;
 		}
 

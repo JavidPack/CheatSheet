@@ -196,15 +196,15 @@ namespace CheatSheet.Menus
 				teleportPosition = new Vector2(tileX, tileY) * 16f + new Vector2((float)(-Width / 2.0 + 8.0), -player.height);
 				if (!Collision.SolidCollision(teleportPosition, Width, player.height))
 				{
-					if (Main.tile[tileX, tileY] == null)
-						Main.tile[tileX, tileY] = new Tile();
-					if ((Main.tile[tileX, tileY].wall != 87 || tileY <= Main.worldSurface || NPC.downedPlantBoss) && (!Main.wallDungeon[Main.tile[tileX, tileY].wall] || tileY <= Main.worldSurface || NPC.downedBoss3))
+					//if (Main.tile[tileX, tileY] == null)
+					//	Main.tile[tileX, tileY] = new Tile();
+					if ((Main.tile[tileX, tileY].WallType != 87 || tileY <= Main.worldSurface || NPC.downedPlantBoss) && (!Main.wallDungeon[Main.tile[tileX, tileY].WallType] || tileY <= Main.worldSurface || NPC.downedBoss3))
 					{
 						int num4 = 0;
 						while (num4 < 100 && WorldGen.InWorld(tileX, tileY + num4, 20))
 						{
-							if (Main.tile[tileX, tileY + num4] == null)
-								Main.tile[tileX, tileY + num4] = new Tile();
+							//if (Main.tile[tileX, tileY + num4] == null)
+							//	Main.tile[tileX, tileY + num4] = new Tile();
 							Tile tile = Main.tile[tileX, tileY + num4];
 							teleportPosition = new Vector2(tileX, tileY + num4) * 16f + new Vector2((float)(-(double)Width / 2.0 + 8.0), -player.height);
 							Vector4 vector4 = Collision.SlopeCollision(teleportPosition, player.velocity, Width, player.height, player.gravDir, false);
@@ -215,7 +215,7 @@ namespace CheatSheet.Menus
 							}
 							if (flag2)
 								++num4;
-							else if (!tile.IsActive || tile.IsActuated /* Not sure if this is right */ || !Main.tileSolid[tile.type])
+							else if (!tile.HasTile || tile.IsActuated /* Not sure if this is right */ || !Main.tileSolid[tile.TileType])
 								++num4;
 							else
 								break;
@@ -260,12 +260,12 @@ namespace CheatSheet.Menus
 		{
 			Vector2 prePos = player.position;
 			Vector2 pos = prePos;
-			for (int x = 0; x < Main.tile.GetLength(0); ++x) // LOOP WORLD X
+			for (int x = 0; x < Main.maxTilesX; ++x) // LOOP WORLD X
 			{
-				for (int y = 0; y < Main.tile.GetLength(1); ++y) // LOOP WORLD Y
+				for (int y = 0; y < Main.maxTilesY; ++y) // LOOP WORLD Y
 				{
 					if (Main.tile[x, y] == null) continue;
-					if (Main.tile[x, y].type != 237) continue;
+					if (Main.tile[x, y].TileType != 237) continue;
 					//if (Main.tile[x, y].wall != 87) continue;
 					pos = new Vector2((x + 2) * 16, y * 16); // get temple pos
 					break;

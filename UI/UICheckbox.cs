@@ -41,8 +41,8 @@ namespace CheatSheet.UI
 
 		public UICheckbox(string text)
 		{
-			checkboxTexture = CheatSheet.instance.Assets.Request<Texture2D>("UI/checkBox");
-			checkmarkTexture = CheatSheet.instance.Assets.Request<Texture2D>("UI/checkMark");
+			checkboxTexture = CheatSheet.instance.Assets.Request<Texture2D>("UI/checkBox", AssetRequestMode.ImmediateLoad);
+			checkmarkTexture = CheatSheet.instance.Assets.Request<Texture2D>("UI/checkMark", AssetRequestMode.ImmediateLoad);
 
 			label = new UILabel(text);
 			label.Scale = .5f;
