@@ -35,7 +35,7 @@ namespace CheatSheet.Menus
 
 		//	public int brushSize = 1;
 		//	public int[,] BrushTileType = new int[10, 10];
-		public Tile[,] StampTiles = new Tile[0, 0];
+		public TileData[,] StampTiles = new TileData[0, 0];
 		public Stack<Tuple<Point, TileData[,]>> UndoHistory = new Stack<Tuple<Point, TileData[,]>>();
 		public StampInfo stampInfo;
 
@@ -538,13 +538,13 @@ namespace CheatSheet.Menus
 
 							//ErrorLogger.Log(string.Format("JustDown2 {0} {1} {2} {3}", minX, minY, maxX, maxY));
 
-							StampTiles = new Tile[maxX - minX, maxY - minY];
+							StampTiles = new TileData[maxX - minX, maxY - minY];
 
 							for (int i = 0; i < maxX - minX; i++)
 							{
 								for (int j = 0; j < maxY - minY; j++)
 								{
-									StampTiles[i, j] = new Tile();
+									StampTiles[i, j] = new TileData();
 								}
 							}
 
@@ -567,11 +567,11 @@ namespace CheatSheet.Menus
 										}
 
 										Tile target = Framing.GetTileSafely(x, y);
-										StampTiles[x - minX, y - minY].CopyFrom(target);
+										StampTiles[x - minX, y - minY] = new TileData(target);
 										if (Main.tile[x, y].TileType == TileID.Count)
-											StampTiles[x - minX, y - minY].ClearTile();
+											StampTiles[x - minX, y - minY] = new TileData();
 										if (Main.tileContainer[Main.tile[x, y].TileType])
-											StampTiles[x - minX, y - minY].ClearTile();
+											StampTiles[x - minX, y - minY] = new TileData();
 									}
 								}
 							}
@@ -685,14 +685,16 @@ namespace CheatSheet.Menus
 										int cycledY = ((y + point.Y - startTileY) % height + height) % height;
 										if (TransparentSelectionEnabled) // What about just walls?
 										{
-											if (StampTiles[cycledX, cycledY].HasTile)
+											if (StampTiles[cycledX, cycledY].TileWallWireStateData.HasTile)
 											{
-												target.CopyFrom(StampTiles[cycledX, cycledY]);
+												//target.CopyFrom(StampTiles[cycledX, cycledY]);
+												StampTiles[cycledX, cycledY].CopyToTile(target);
 											}
 										}
 										else
 										{
-											target.CopyFrom(StampTiles[cycledX, cycledY]);
+											//target.CopyFrom(StampTiles[cycledX, cycledY]);
+											StampTiles[cycledX, cycledY].CopyToTile(target);
 										}
 									}
 								}
@@ -800,7 +802,7 @@ namespace CheatSheet.Menus
 			StampToolActive = preHidePaintTiles;
 		}
 
-		public static void DrawPreview(SpriteBatch sb, Tile[,] BrushTiles, Vector2 position, float scale = 1f)
+		public static void DrawPreview(SpriteBatch sb, TileData[,] BrushTiles, Vector2 position, float scale = 1f)
 		{
 			Color color = Color.White;
 			color.A = 160;
@@ -810,10 +812,10 @@ namespace CheatSheet.Menus
 			{
 				for (int x = 0; x < width; x++)
 				{
-					Tile tile = BrushTiles[x, y];
-					if (tile.WallType > 0)
+					TileData tile = BrushTiles[x, y];
+					if (tile.WallTypeData.Type > 0)
 					{
-						Main.instance.LoadWall(tile.WallType);
+						Main.instance.LoadWall(tile.WallTypeData.Type);
 						Texture2D textureWall;
 						//			if (PaintToolsEx.canDrawColorWall(tile) && tile.type < Main.wallAltTexture.GetLength(0) && Main.wallAltTexture[tile.type, tile.wallColor()] != null)
 						//				textureWall = Main.wallAltTexture[tile.type, tile.wallColor()];
@@ -825,39 +827,62 @@ namespace CheatSheet.Menus
 							GetTileDrawTextureMethodInfo = typeof(WallDrawing).GetMethod("GetTileDrawTexture", BindingFlags.Instance | BindingFlags.NonPublic);
 						}
 
-						textureWall = (Texture2D)GetTileDrawTextureMethodInfo.Invoke( Main.instance.WallsRenderer, new object[] { tile, -1, -1});
+						// TODO: needs a Tile instance
+						//textureWall = (Texture2D)GetTileDrawTextureMethodInfo.Invoke( Main.instance.WallsRenderer, new object[] { tile, -1, -1});
+						textureWall = GetTileDrawTexture(tile, -1, -1);
 
 						//textureWall = WallDrawing.GetTileDrawTexture(tile, -1, -1); // x/y unused
 
-						int wallFrame = Main.wallFrame[tile.WallType] * 180;
-						Rectangle value = new Rectangle(tile.WallFrameX, tile.WallFrameY + wallFrame, 32, 32);
+						int wallFrame = Main.wallFrame[tile.WallTypeData.Type] * 180;
+						Rectangle value = new Rectangle(tile.TileWallWireStateData.WallFrameX, tile.TileWallWireStateData.WallFrameY + wallFrame, 32, 32);
 						Vector2 pos = position + new Vector2(x * 16 - 8, y * 16 - 8);
 						sb.Draw(textureWall, pos * scale, value, color, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
 					}
-					if (tile.LiquidAmount > 14)
+					if (tile.LiquidData.Amount > 14)
 					{
 						Texture2D textureWater;
-						if (tile.LiquidType == LiquidID.Honey)
+						if (tile.LiquidData.LiquidType == LiquidID.Honey)
 							textureWater = LiquidRenderer.Instance._liquidTextures[11].Value.Offset(16, 48, 16, 16);
-						else if (tile.LiquidType == LiquidID.Lava)
+						else if (tile.LiquidData.LiquidType == LiquidID.Lava)
 							textureWater = LiquidRenderer.Instance._liquidTextures[1].Value.Offset(16, 48, 16, 16);
 						else
 							textureWater = LiquidRenderer.Instance._liquidTextures[0].Value.Offset(16, 48, 16, 16);
-						int waterSize = (tile.LiquidAmount + 1) / 16;
+						int waterSize = (tile.LiquidData.Amount + 1) / 16;
 						Vector2 pos = position + new Vector2(x * 16, y * 16 + (16 - waterSize));
 						sb.Draw(textureWater, pos * scale, new Rectangle(0, 16 - waterSize, 16, waterSize), color, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
 					}
-					if (tile.HasTile) // Tile
+					if (tile.TileWallWireStateData.HasTile) // Tile
 					{
-						Main.instance.LoadTiles(tile.TileType);
-						Texture2D texture = TextureAssets.Tile[tile.TileType].Value;
-						Rectangle? value = new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, 16/* tileData.CoordinateWidth, tileData.CoordinateHeights[j - (int)op.ObjectStart.Y]*/);
+						Main.instance.LoadTiles(tile.TileTypeData.Type);
+						Texture2D texture = TextureAssets.Tile[tile.TileTypeData.Type].Value;
+						Rectangle? value = new Rectangle(tile.TileWallWireStateData.TileFrameX, tile.TileWallWireStateData.TileFrameY, 16, 16/* tileData.CoordinateWidth, tileData.CoordinateHeights[j - (int)op.ObjectStart.Y]*/);
 						Vector2 pos = position + new Vector2(x * 16, y * 16);
 						sb.Draw(texture, pos * scale, value, color, 0f, Vector2.Zero, scale, /*spriteEffects*/SpriteEffects.None, 0f);
 					}
 				}
 			}
 			// Draw deleted tiles with non transparent selection?
+		}
+
+
+		// Copied from tmod since original code needs Tile instance
+		static FieldInfo _paintSystemFieldInfo;
+		static TilePaintSystemV2 _paintSystem;
+		private static Texture2D GetTileDrawTexture(TileData tile, int tileX, int tileY)
+		{
+			if (_paintSystemFieldInfo == null)
+			{
+				_paintSystemFieldInfo = typeof(WallDrawing).GetField("_paintSystem", BindingFlags.Instance | BindingFlags.NonPublic);
+				_paintSystem = (TilePaintSystemV2)_paintSystemFieldInfo.GetValue(Main.instance.WallsRenderer);
+			}
+
+			Texture2D result = TextureAssets.Wall[tile.WallTypeData.Type].Value;
+			int wall = tile.WallTypeData.Type;
+			Texture2D texture2D = _paintSystem.TryGetWallAndRequestIfNotReady(wall, tile.TileWallWireStateData.WallColor);
+			if (texture2D != null)
+				result = texture2D;
+
+			return result;
 		}
 
 		/*public static void DrawPreview(SpriteBatch sb, StampInfo info, Vector2 position)

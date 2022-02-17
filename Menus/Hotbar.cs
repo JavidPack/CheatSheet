@@ -274,7 +274,7 @@ namespace CheatSheet.Menus
 			buttonView.AddChild(bToggleRecipeBrowser);
 			buttonView.AddChild(bToggleExtendedCheat);
 			buttonView.AddChild(bToggleClearMenu);
-			//buttonView.AddChild(bTogglePaintTools);
+			buttonView.AddChild(bTogglePaintTools);
 			buttonView.AddChild(bCycleExtraAccessorySlots);
 			buttonView.AddChild(bVacuum);
 			buttonView.AddChild(bToggleNPCButcherer);

@@ -21,7 +21,7 @@ namespace CheatSheet
 {
 	internal class StampInfo
 	{
-		internal Tile[,] Tiles;
+		internal TileData[,] Tiles;
 		//internal Texture2D[,] Textures;
 		internal int Width; // in Pixels
 		internal int Height;
@@ -111,7 +111,7 @@ namespace CheatSheet
 			string tiledata = (string)schematic["tiledata"];
 			try
 			{
-				Tile[,] tiles = LoadTilesFromBase64(tiledata);
+				TileData[,] tiles = LoadTilesFromBase64(tiledata);
 				if (tiles.GetLength(0) > 0)
 				{
 					var paintToolsSlot = new PaintToolsSlot(GetStampInfo(tiles));
@@ -188,7 +188,7 @@ namespace CheatSheet
 				List<PaintToolsSlot> list = new List<PaintToolsSlot>();
 				foreach (var line in File.ReadAllLines(importPath, Encoding.UTF8))
 				{
-					Tile[,] tiles = JsonConvert.DeserializeObject<Tile[,]>(File.ReadAllText(line, Encoding.UTF8));
+					TileData[,] tiles = JsonConvert.DeserializeObject<TileData[,]>(File.ReadAllText(line, Encoding.UTF8));
 					list.Add(new PaintToolsSlot(GetStampInfo(tiles)));
 				}
 				paintToolsView.Add(list.ToArray());
@@ -199,12 +199,12 @@ namespace CheatSheet
 		static MethodInfo LoadTilesMethodInfo;
 		static MethodInfo LoadWorldTilesVanillaMethodInfo;
 
-		public static Tile[,] LoadTilesFromBase64(string data)
+		public static TileData[,] LoadTilesFromBase64(string data)
 		{
 			int oldX = Main.maxTilesX;
 			int oldY = Main.maxTilesY;
 			// TODO: This feature is remove for now, this line needs to be restored: Tile[,] oldTiles = Main.tile;
-			Tile[,] loadedTiles = new Tile[0, 0];
+			TileData[,] loadedTiles = new TileData[0, 0];
 			try
 			{
 				TagCompound tagCompound = TagIO.FromStream(new MemoryStream(Convert.FromBase64String(data)));
@@ -219,10 +219,10 @@ namespace CheatSheet
 				Point16 dimensions = tagCompound.Get<Point16>("d");
 				Main.maxTilesX = dimensions.X;
 				Main.maxTilesY = dimensions.Y;
-				loadedTiles = new Tile[Main.maxTilesX, Main.maxTilesY];
+				loadedTiles = new TileData[Main.maxTilesX, Main.maxTilesY];
 				for (int i = 0; i < Main.maxTilesX; i++)
 					for (int j = 0; j < Main.maxTilesY; j++)
-						loadedTiles[i, j] = new Tile();
+						loadedTiles[i, j] = new TileData();
 				// TODO: This feature is remove for now, this line needs to be restored: Main.tile = loadedTiles;
 
 				using (MemoryStream memoryStream = new MemoryStream(tagCompound.GetByteArray("v")))
@@ -281,7 +281,7 @@ namespace CheatSheet
 		static MethodInfo SaveTilesMethodInfo;
 		static MethodInfo SaveWorldTilesVanillaMethodInfo;
 
-		public static string SaveTilesToBase64(Tile[,] tiles)
+		public static string SaveTilesToBase64(TileData[,] tiles)
 		{
 			int oldX = Main.maxTilesX;
 			int oldY = Main.maxTilesY;
@@ -346,7 +346,7 @@ namespace CheatSheet
 			catch { }
 		}
 
-		public static StampInfo GetStampInfo(Tile[,] Tiles)
+		public static StampInfo GetStampInfo(TileData[,] Tiles)
 		{
 			int maxTile = ModUtils.TextureMaxTile;
 
@@ -368,7 +368,7 @@ namespace CheatSheet
 			{
 				for (int y = 0; y < texMaxY; y++)
 				{
-					Tile[,] tiles = new Tile[x < texMaxX - 1 ? maxTile : restX, y < texMaxY - 1 ? maxTile : restY];
+					TileData[,] tiles = new TileData[x < texMaxX - 1 ? maxTile : restX, y < texMaxY - 1 ? maxTile : restY];
 					for (int i = 0; i < tiles.GetLength(0); i++)
 					{
 						for (int j = 0; j < tiles.GetLength(1); j++)

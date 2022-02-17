@@ -85,7 +85,7 @@ namespace CheatSheet.Menus
 			if (CurrentSelect == this)
 			{
 				CurrentSelect = null;
-				CheatSheet.instance.paintToolsHotbar.StampTiles = new Tile[0, 0];
+				CheatSheet.instance.paintToolsHotbar.StampTiles = new TileData[0, 0];
 				CheatSheet.instance.paintToolsHotbar.stampInfo = null;
 			}
 			else

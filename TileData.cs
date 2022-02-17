@@ -4,13 +4,14 @@ using Terraria;
 namespace CheatSheet
 {
 	public readonly record struct TileData(TileTypeData TileTypeData, WallTypeData WallTypeData, TileWallWireStateData TileWallWireStateData, LiquidData LiquidData)
+	//public record struct TileData(TileTypeData TileTypeData, WallTypeData WallTypeData, TileWallWireStateData TileWallWireStateData, LiquidData LiquidData)
 	{
-		public TileData(Tile tile) : this()
+		public TileData(Tile tile) : this(tile.Get<TileTypeData>(), tile.Get<WallTypeData>(), tile.Get<TileWallWireStateData>(), tile.Get<LiquidData>())
 		{
-			TileTypeData = tile.Get<TileTypeData>();
-			WallTypeData = tile.Get<WallTypeData>();
-			TileWallWireStateData = tile.Get<TileWallWireStateData>();
-			LiquidData = tile.Get<LiquidData>();
+			//TileTypeData = tile.Get<TileTypeData>();
+			//WallTypeData = tile.Get<WallTypeData>();
+			//TileWallWireStateData = tile.Get<TileWallWireStateData>();
+			//LiquidData = tile.Get<LiquidData>();
 		}
 
 		internal void CopyToTile(Tile tile)

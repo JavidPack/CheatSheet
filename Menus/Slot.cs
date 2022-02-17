@@ -58,7 +58,7 @@ namespace CheatSheet.Menus
 			{
 				Main.playerInventory = true;
 
-				if (Main.stackSplit <= 1 /*&& Main.mouseRight */&& item.type > 0 && (Main.mouseItem.IsTheSameAs(item) || Main.mouseItem.type == 0))
+				if (Main.stackSplit <= 1 /*&& Main.mouseRight */&& item.type > 0 && (Main.mouseItem.type == item.type || Main.mouseItem.type == 0))
 				{
 					int num2 = Main.superFastStack + 1;
 					for (int j = 0; j < num2; j++)
@@ -216,7 +216,7 @@ namespace CheatSheet.Menus
 			//}
 			//ErrorLogger.Log("1");
 
-			if (Main.stackSplit <= 1 /*&& Main.mouseRight */&& item.type > 0 && (Main.mouseItem.IsTheSameAs(item) || Main.mouseItem.type == 0))
+			if (Main.stackSplit <= 1 /*&& Main.mouseRight */&& item.type > 0 && (Main.mouseItem.type == item.type || Main.mouseItem.type == 0))
 			{
 				////ErrorLogger.Log("2");
 
