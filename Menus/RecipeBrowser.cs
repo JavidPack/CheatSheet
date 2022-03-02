@@ -395,7 +395,7 @@ namespace CheatSheet.Menus
 				Item item = player.GetItem(player.whoAmI, lookupItemSlot.item, GetItemSettings.GetItemInDropItemCheck);
 				if (item.stack > 0)
 				{
-					int num = Item.NewItem((int)player.position.X, (int)player.position.Y, player.width, player.height, item.type, item.stack, false, (int)lookupItemSlot.item.prefix, true, false);
+					int num = Item.NewItem(player.GetItemSource_Misc(ItemSourceID.PlayerDropItemCheck), (int)player.position.X, (int)player.position.Y, player.width, player.height, item.type, item.stack, false, (int)lookupItemSlot.item.prefix, true, false);
 					Main.item[num].newAndShiny = false;
 					if (Main.netMode == 1)
 					{

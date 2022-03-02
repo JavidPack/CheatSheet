@@ -7,6 +7,7 @@ using ReLogic.Graphics;
 using System;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.GameContent;
 
 namespace CheatSheet.Menus
@@ -136,7 +137,7 @@ namespace CheatSheet.Menus
 			{
 				if (Main.keyState.IsKeyDown(Keys.LeftShift))
 				{
-					Main.LocalPlayer.QuickSpawnItem(this.item.type, this.item.maxStack);
+					Main.LocalPlayer.QuickSpawnItem(new EntitySource_DebugCommand(), this.item.type, this.item.maxStack);
 					return;
 				}
 				//	ErrorLogger.Log("On Slot2_onLeftClick Here");
