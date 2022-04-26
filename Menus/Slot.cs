@@ -137,7 +137,7 @@ namespace CheatSheet.Menus
 			{
 				if (Main.keyState.IsKeyDown(Keys.LeftShift))
 				{
-					Main.LocalPlayer.QuickSpawnItem(new EntitySource_DebugCommand(), this.item.type, this.item.maxStack);
+					Main.LocalPlayer.QuickSpawnItem(new EntitySource_DebugCommand($"{CheatSheet.instance.Name}_ItemSlot"), this.item.type, this.item.maxStack);
 					return;
 				}
 				//	ErrorLogger.Log("On Slot2_onLeftClick Here");

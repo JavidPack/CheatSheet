@@ -134,7 +134,7 @@ namespace CheatSheet
 			set
 			{
 				// This will forget unloaded modnpc.
-				List<int> loaded = value.Where(x => x != null && x.mod != null && !x.IsUnloaded).Select(npc => npc.Type).Distinct().ToList();
+				List<int> loaded = value.Where(x => x != null && x.Mod != null && !x.IsUnloaded).Select(npc => npc.Type).Distinct().ToList();
 				Menus.NPCBrowser.filteredNPCSlots = loaded;
 				Menus.NPCBrowser.needsUpdate = true;
 			}

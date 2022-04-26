@@ -240,7 +240,7 @@ namespace CheatSheet.Menus
 			}
 			int x = (int)player.Bottom.X + player.direction * 200;
 			int y = (int)player.Bottom.Y;
-			int index = NPC.NewNPC(NPC.GetSpawnSourceForNaturalSpawn(), x, y, type);
+			int index = NPC.NewNPC(NPC.GetSource_NaturalSpawn(), x, y, type);
 			if (syncID < 0)
 			{
 				//NPC refNPC = new NPC();
