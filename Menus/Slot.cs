@@ -68,7 +68,7 @@ namespace CheatSheet.Menus
 						{
 							if (j == 0)
 							{
-								SoundEngine.PlaySound(18, -1, -1, 1);
+								SoundEngine.PlaySound(new SoundStyle("Terraria/Sounds/Coin_1"));
 							}
 							if (Main.mouseItem.type == 0)
 							{
@@ -145,7 +145,7 @@ namespace CheatSheet.Menus
 				Main.mouseItem.netDefaults(item.netID);
 				Main.mouseItem.stack = Main.mouseItem.maxStack;
 				Main.playerInventory = true;
-				SoundEngine.PlaySound(18, -1, -1, 1);
+				SoundEngine.PlaySound(new SoundStyle("Terraria/Sounds/Coin_1"));
 			}
 		}
 
@@ -230,7 +230,7 @@ namespace CheatSheet.Menus
 
 						if (j == 0)
 						{
-							SoundEngine.PlaySound(18, -1, -1, 1);
+							SoundEngine.PlaySound(new SoundStyle("Terraria/Sounds/Coin_1"));
 						}
 						if (Main.mouseItem.type == 0)
 						{

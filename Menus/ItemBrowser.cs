@@ -376,7 +376,8 @@ namespace CheatSheet.Menus
 					{
 						ItemBrowser.categories[i].Add(j);
 					}
-					else if (i == (int)ItemBrowserCategories.Potions && (item.UseSound != null && item.UseSound.Style == 3))
+					//This also covers hair dyes and some foods
+					else if (i == (int)ItemBrowserCategories.Potions && item.UseSound?.IsTheSameAs(SoundID.Item3) == true)
 					{
 						ItemBrowser.categories[i].Add(j);
 					}
