@@ -9,6 +9,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
+using Terraria.ID;
 
 namespace CheatSheet.Menus
 {
@@ -68,7 +69,7 @@ namespace CheatSheet.Menus
 						{
 							if (j == 0)
 							{
-								SoundEngine.PlaySound(18, -1, -1, 1);
+								SoundEngine.PlaySound(SoundID.Coins);
 							}
 							if (Main.mouseItem.type == 0)
 							{
@@ -145,7 +146,7 @@ namespace CheatSheet.Menus
 				Main.mouseItem.netDefaults(item.netID);
 				Main.mouseItem.stack = Main.mouseItem.maxStack;
 				Main.playerInventory = true;
-				SoundEngine.PlaySound(18, -1, -1, 1);
+				SoundEngine.PlaySound(SoundID.Coins);
 			}
 		}
 
@@ -173,7 +174,7 @@ namespace CheatSheet.Menus
 
 			//			if (j == 0)
 			//			{
-			//				Main.PlaySound(18, -1, -1, 1);
+			//				SoundEngine.PlaySound(SoundID.Coins);
 			//			}
 			//			if (Main.mouseItem.type == 0)
 			//			{
@@ -230,7 +231,7 @@ namespace CheatSheet.Menus
 
 						if (j == 0)
 						{
-							SoundEngine.PlaySound(18, -1, -1, 1);
+							SoundEngine.PlaySound(SoundID.Coins);
 						}
 						if (Main.mouseItem.type == 0)
 						{
