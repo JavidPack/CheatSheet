@@ -14,7 +14,7 @@ namespace CheatSheet.Menus
 
 		}
 
-		public static UIImage hotbarButton;
+		public static UIImage hotbarButton K;
 
 		public abstract UIImage GetButton(Mod mod);
 	}
