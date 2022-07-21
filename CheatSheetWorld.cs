@@ -55,20 +55,20 @@ namespace CheatSheet
 
 		public override void NetSend(BinaryWriter writer)
 		{
-			writer.WriteVarInt((int)NPCBrowser.filteredNPCSlots.Count);
+			writer.Write7BitEncodedInt((int)NPCBrowser.filteredNPCSlots.Count);
 			foreach (var item in NPCBrowser.filteredNPCSlots)
 			{
-				writer.WriteVarInt((int)item);
+				writer.Write7BitEncodedInt((int)item);
 			}
 		}
 
 		public override void NetReceive(BinaryReader reader)
 		{
 			NPCBrowser.filteredNPCSlots.Clear();
-			int numFiltered = reader.ReadVarInt();
+			int numFiltered = reader.Read7BitEncodedInt();
 			for (int i = 0; i < numFiltered; i++)
 			{
-				NPCBrowser.filteredNPCSlots.Add(reader.ReadVarInt());
+				NPCBrowser.filteredNPCSlots.Add(reader.Read7BitEncodedInt());
 			}
 			NPCBrowser.needsUpdate = true;
 		}
