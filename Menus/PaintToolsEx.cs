@@ -16,6 +16,7 @@ using System.Collections.Specialized;
 using Newtonsoft.Json.Linq;
 using Terraria.DataStructures;
 using System.Linq;
+using Terraria.Social;
 
 namespace CheatSheet
 {
@@ -132,6 +133,10 @@ namespace CheatSheet
 
 		internal static void OnlineImport(PaintToolsView paintToolsView)
 		{
+			// TODO: restore this when online fixed
+			Main.NewText("Online Schematics Database feature has been disabled until further notice");
+			return;
+
 			if (waiting)
 			{
 				Main.NewText("Be patient");
@@ -143,12 +148,20 @@ namespace CheatSheet
 				return;
 			}
 			waiting = true;
+			if (SocialAPI.Mode != SocialMode.Steam)
+			{
+				Main.NewText("Online schematics only works on Steam version");
+				return;
+			}
 			try
 			{
 				using (WebClient client = new WebClient())
 				{
+					/* Removed for some reason. GOG users can't use anymore.
 					var steamIDMethodInfo = typeof(Main).Assembly.GetType("Terraria.ModLoader.ModLoader").GetProperty("SteamID64", BindingFlags.Static | BindingFlags.NonPublic);
 					string steamid64 = (string)steamIDMethodInfo.GetValue(null, null);
+					*/
+					string steamid64 = Steamworks.SteamUser.GetSteamID().ToString();
 					var values = new NameValueCollection
 					{
 						{ "version", CheatSheet.instance.Version.ToString() },

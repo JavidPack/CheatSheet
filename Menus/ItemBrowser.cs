@@ -97,7 +97,7 @@ namespace CheatSheet.Menus
 			this.itemView.Position = new Vector2(this.spacing, base.Height - this.spacing - this.itemView.Height);
 			this.AddChild(this.itemView);
 			this.ParseList2();
-			Asset<Texture2D> texture = mod.Assets.Request<Texture2D>("UI/closeButton");
+			Asset<Texture2D> texture = mod.Assets.Request<Texture2D>("UI/closeButton", ReLogic.Content.AssetRequestMode.ImmediateLoad);
 			UIImage uIImage = new UIImage(texture/*UIView.GetEmbeddedTexture("Images.closeButton.png")*/);
 			uIImage.Anchor = AnchorPosition.TopRight;
 			uIImage.Position = new Vector2(base.Width - this.spacing, this.spacing);

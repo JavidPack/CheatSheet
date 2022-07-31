@@ -49,7 +49,7 @@ namespace CheatSheet.UI
 			this.Height = (float)this._textures[0].Height();
 			Index = defaultIndex;
 
-			onHover += (a, b) => UIView.HoverText = $"Current:{_hoverTexts[Index]}{Environment.NewLine}Next:{GetNextTooltip()}";
+			onHover += (a, b) => UIView.HoverText = $"Current: {_hoverTexts[Index]}{Environment.NewLine}Next: {GetNextTooltip()}";
 		}
 
 		public void AddImage(Asset<Texture2D> texture)

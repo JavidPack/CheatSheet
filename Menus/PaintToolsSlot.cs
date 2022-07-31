@@ -110,7 +110,8 @@ namespace CheatSheet.Menus
 				}
 				else if (CurrentSelect.browserID == 0)
 				{
-					CheatSheet.instance.paintToolsUI.submitPanel.Visible = true;
+					// TODO: restore this when online fixed
+					//CheatSheet.instance.paintToolsUI.submitPanel.Visible = true;
 				}
 			}
 		}

@@ -70,9 +70,9 @@ namespace CheatSheet.Menus
 
 			bEyeDropper = new UIImage(ModUtils.GetItemTexture(ItemID.EmptyDropper));
 
-			bFlipHorizontal = new UIImage(mod.Assets.Request<Texture2D>("CustomUI/Horizontal"));
+			bFlipHorizontal = new UIImage(mod.Assets.Request<Texture2D>("CustomUI/Horizontal", ReLogic.Content.AssetRequestMode.ImmediateLoad));
 
-			bFlipVertical = new UIImage(mod.Assets.Request<Texture2D>("CustomUI/Vertical"));
+			bFlipVertical = new UIImage(mod.Assets.Request<Texture2D>("CustomUI/Vertical", ReLogic.Content.AssetRequestMode.ImmediateLoad));
 
 			bToggleTransparentSelection = new UIImage(TextureAssets.Buff[BuffID.Invisibility]);
 

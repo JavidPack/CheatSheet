@@ -78,7 +78,7 @@ namespace CheatSheet.Menus
 				Height += 40 * rows;
 			}
 
-			Asset<Texture2D> texture = mod.Assets.Request<Texture2D>("UI/closeButton");
+			Asset<Texture2D> texture = mod.Assets.Request<Texture2D>("UI/closeButton", ReLogic.Content.AssetRequestMode.ImmediateLoad);
 			UIImage uIImage = new UIImage(texture);
 			uIImage.Anchor = AnchorPosition.TopRight;
 			uIImage.Position = new Vector2(base.Width - this.spacing / 2, this.spacing / 2);

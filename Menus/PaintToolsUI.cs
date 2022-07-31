@@ -16,6 +16,7 @@ using Terraria;
 using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.Social;
 
 namespace CheatSheet.Menus
 {
@@ -63,7 +64,7 @@ namespace CheatSheet.Menus
 			this.view.Position = new Vector2(this.spacing, 55f);
 			this.AddChild(this.view);
 
-			Asset<Texture2D> texture = mod.Assets.Request<Texture2D>("UI/closeButton");
+			Asset<Texture2D> texture = mod.Assets.Request<Texture2D>("UI/closeButton", ReLogic.Content.AssetRequestMode.ImmediateLoad);
 			UIImage uIImage = new UIImage(texture);
 			uIImage.Anchor = AnchorPosition.TopRight;
 			uIImage.Position = new Vector2(base.Width - this.spacing, this.spacing);
@@ -135,7 +136,7 @@ namespace CheatSheet.Menus
 			position = position.Offset(uIImage.Width + this.spacing, 0);
 			uIImage.Position = position;
 			uIImage.onLeftClick += (a, b) => PaintToolsEx.OnlineImport(this.view);
-			uIImage.Tooltip = "Load Online Schematics Database";
+			uIImage.Tooltip = "Load Online Schematics Database (disabled until further notice)";
 			this.AddChild(uIImage);
 
 			uIImage = new UIImage(ModUtils.GetItemTexture(ItemID.AlphabetStatueN));
@@ -160,14 +161,14 @@ namespace CheatSheet.Menus
 			infoMessage.Position = new Vector2(30, 10);
 			infoPanel.AddChild(infoMessage);
 
-			upVoteButton = new UIImage(CheatSheet.instance.Assets.Request<Texture2D>("UI/VoteUp"));
+			upVoteButton = new UIImage(CheatSheet.instance.Assets.Request<Texture2D>("UI/VoteUp", ReLogic.Content.AssetRequestMode.ImmediateLoad));
 
 			upVoteButton.Position = new Vector2(0, 0);
 			upVoteButton.onLeftClick += (a, b) => Vote(true);
 			upVoteButton.Tooltip = "Vote Up";
 			infoPanel.AddChild(upVoteButton);
 
-			downVoteButton = new UIImage(CheatSheet.instance.Assets.Request<Texture2D>("UI/VoteDown"));
+			downVoteButton = new UIImage(CheatSheet.instance.Assets.Request<Texture2D>("UI/VoteDown", ReLogic.Content.AssetRequestMode.ImmediateLoad));
 
 			downVoteButton.Position = new Vector2(0, 24);
 			downVoteButton.onLeftClick += (a, b) => Vote(false);
@@ -193,7 +194,7 @@ namespace CheatSheet.Menus
 			submitInput.Width = 200;
 			submitPanel.AddChild(submitInput);
 
-			submitButton = new UIImage(Main.Assets.Request<Texture2D>("Images/UI/ButtonCloudActive"));
+			submitButton = new UIImage(Main.Assets.Request<Texture2D>("Images/UI/ButtonCloudActive", ReLogic.Content.AssetRequestMode.ImmediateLoad));
 
 			submitButton.Position = new Vector2(178, -2);
 			submitButton.onLeftClick += (a, b) => Submit();
@@ -221,12 +222,20 @@ namespace CheatSheet.Menus
 				Main.NewText("Be patient.");
 				return;
 			}
+			if (SocialAPI.Mode != SocialMode.Steam)
+			{
+				Main.NewText("Online schematics only works on Steam version");
+				return;
+			}
 			try
 			{
 				using (WebClient client = new WebClient())
 				{
+					/*
 					var steamIDMethodInfo = typeof(Main).Assembly.GetType("Terraria.ModLoader.ModLoader").GetProperty("SteamID64", BindingFlags.Static | BindingFlags.NonPublic);
 					string steamid64 = (string)steamIDMethodInfo.GetValue(null, null);
+					*/
+					string steamid64 = Steamworks.SteamUser.GetSteamID().ToString();
 					string base64tiles = PaintToolsEx.SaveTilesToBase64(PaintToolsSlot.CurrentSelect.stampInfo.Tiles);
 					if (string.IsNullOrEmpty(base64tiles))
 					{
@@ -316,12 +325,20 @@ namespace CheatSheet.Menus
 				CheatSheet.instance.paintToolsUI.upVoteButton.ForegroundColor = Color.Gray;
 			if (PaintToolsSlot.CurrentSelect.vote == -1)
 				CheatSheet.instance.paintToolsUI.downVoteButton.ForegroundColor = Color.Gray;
+			if (SocialAPI.Mode != SocialMode.Steam)
+			{
+				Main.NewText("Online schematics only works on Steam version");
+				return;
+			}
 			try
 			{
 				using (WebClient client = new WebClient())
 				{
+					/*
 					var steamIDMethodInfo = typeof(Main).Assembly.GetType("Terraria.ModLoader.ModLoader").GetProperty("SteamID64", BindingFlags.Static | BindingFlags.NonPublic);
 					string steamid64 = (string)steamIDMethodInfo.GetValue(null, null);
+					*/
+					string steamid64 = Steamworks.SteamUser.GetSteamID().ToString();
 					var values = new NameValueCollection
 					{
 						{ "version", CheatSheet.instance.Version.ToString() },

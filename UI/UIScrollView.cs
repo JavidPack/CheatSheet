@@ -99,7 +99,7 @@ namespace CheatSheet.UI
 
 		public UIScrollView()
 		{
-			ScrollbgTexture = CheatSheet.instance.Assets.Request<Texture2D>("UI/Images.UIKit.scrollbgEdge");
+			ScrollbgTexture = CheatSheet.instance.Assets.Request<Texture2D>("UI/Images.UIKit.scrollbgEdge", ReLogic.Content.AssetRequestMode.ImmediateLoad);
 			this.scrollBar.onMouseDown += new UIView.ClickEventHandler(this.scrollBar_onMouseDown);
 			this.AddChild(this.scrollBar);
 		}

@@ -37,7 +37,7 @@ namespace CheatSheet.UI
 
 		public UIScrollBar()
 		{
-			ScrollbarTexture = CheatSheet.instance.Assets.Request<Texture2D>("UI/Images.UIKit.scrollbarEdge");
+			ScrollbarTexture = CheatSheet.instance.Assets.Request<Texture2D>("UI/Images.UIKit.scrollbarEdge", ReLogic.Content.AssetRequestMode.ImmediateLoad);
 		}
 
 		protected override float GetHeight()

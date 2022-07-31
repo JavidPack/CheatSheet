@@ -114,7 +114,7 @@ namespace CheatSheet.Menus
 			this.npcView.Position = new Vector2(this.spacing, base.Height - this.npcView.Height - this.spacing * 3f);
 			this.AddChild(this.npcView);
 			this.ParseList2();
-			Asset<Texture2D> texture = mod.Assets.Request<Texture2D>("UI/closeButton");
+			Asset<Texture2D> texture = mod.Assets.Request<Texture2D>("UI/closeButton", ReLogic.Content.AssetRequestMode.ImmediateLoad);
 			UIImage uIImage = new UIImage(texture);
 			uIImage.Anchor = AnchorPosition.TopRight;
 			uIImage.Position = new Vector2(base.Width - this.spacing, this.spacing);
@@ -164,10 +164,10 @@ namespace CheatSheet.Menus
 			npcView.ReorderSlots();
 			textures = new Asset<Texture2D>[]
 			{
-				mod.Assets.Request<Texture2D>("UI/NPCLifeIcon"),
-				mod.Assets.Request<Texture2D>("UI/NPCDamageIcon"),
-				mod.Assets.Request<Texture2D>("UI/NPCDefenseIcon"),
-				mod.Assets.Request<Texture2D>("UI/NPCKnockbackIcon"),
+				mod.Assets.Request<Texture2D>("UI/NPCLifeIcon", ReLogic.Content.AssetRequestMode.ImmediateLoad),
+				mod.Assets.Request<Texture2D>("UI/NPCDamageIcon", ReLogic.Content.AssetRequestMode.ImmediateLoad),
+				mod.Assets.Request<Texture2D>("UI/NPCDefenseIcon", ReLogic.Content.AssetRequestMode.ImmediateLoad),
+				mod.Assets.Request<Texture2D>("UI/NPCKnockbackIcon", ReLogic.Content.AssetRequestMode.ImmediateLoad),
 			};
 		}
 

@@ -118,17 +118,17 @@ namespace CheatSheet.Menus
 			//	this.AddChild(this.timeWindow);
 			//	this.AddChild(this.npcSpawnWindow);
 			//	this.AddChild(this.weatherWindow);
-			Hotbar.loginTexture = mod.Assets.Request<Texture2D>("UI/Images.login");// UIView.GetEmbeddedTexture("Images.login.png");
-			Hotbar.logoutTexture = mod.Assets.Request<Texture2D>("UI/Images.logout"); //UIView.GetEmbeddedTexture("Images.logout.png");
+			Hotbar.loginTexture = mod.Assets.Request<Texture2D>("UI/Images.login", ReLogic.Content.AssetRequestMode.ImmediateLoad);// UIView.GetEmbeddedTexture("Images.login.png");
+			Hotbar.logoutTexture = mod.Assets.Request<Texture2D>("UI/Images.logout", ReLogic.Content.AssetRequestMode.ImmediateLoad); //UIView.GetEmbeddedTexture("Images.logout.png");
 																	   //	this.bLogin = new UIImage(Hotbar.loginTexture);
 																	   //		bLogin = new UIImage(mod.Assets.Request<Texture2D>("UI/Images.login"));
 			base.Visible = false;
 			base.UpdateWhenOutOfBounds = true;
 			//	Hotbar.groupWindow = new GroupManagementWindow();
-			this.button = new UIImage(mod.Assets.Request<Texture2D>("UI/Images.CollapseBar.CollapseButtonHorizontal"));//new UIImage(UIView.GetEmbeddedTexture("Images.CollapseBar.CollapseButtonHorizontal.png"));
+			this.button = new UIImage(mod.Assets.Request<Texture2D>("UI/Images.CollapseBar.CollapseButtonHorizontal", ReLogic.Content.AssetRequestMode.ImmediateLoad));//new UIImage(UIView.GetEmbeddedTexture("Images.CollapseBar.CollapseButtonHorizontal.png"));
 
 			this.button.UpdateWhenOutOfBounds = true;
-			this.arrow = new UIImage(mod.Assets.Request<Texture2D>("UI/Images.CollapseBar.CollapseArrowHorizontal"));  //new UIImage(UIView.GetEmbeddedTexture("Images.CollapseBar.CollapseArrowHorizontal.png"));
+			this.arrow = new UIImage(mod.Assets.Request<Texture2D>("UI/Images.CollapseBar.CollapseArrowHorizontal", ReLogic.Content.AssetRequestMode.ImmediateLoad));  //new UIImage(UIView.GetEmbeddedTexture("Images.CollapseBar.CollapseArrowHorizontal.png"));
 
 
 			//		bToggleEnemies = new UIImage(mod.Assets.Request<Texture2D>("UI/Images.npcIcon"));
@@ -149,7 +149,7 @@ namespace CheatSheet.Menus
 
 			bToggleItemBrowser = new UIImage(ModUtils.GetItemTexture(ItemID.WorkBench));
 
-			bToggleNPCBrowser = new UIImage(mod.Assets.Request<Texture2D>("UI/Images.npcIcon"));
+			bToggleNPCBrowser = new UIImage(mod.Assets.Request<Texture2D>("UI/Images.npcIcon", ReLogic.Content.AssetRequestMode.ImmediateLoad));
 
 			bToggleClearMenu = new UIImage(ModUtils.GetItemTexture(ItemID.TrashCan));
 
@@ -161,7 +161,7 @@ namespace CheatSheet.Menus
 
 			bCycleExtraAccessorySlots = new UIImage(ModUtils.GetItemTexture(ItemID.DemonHeart));
 
-			bVacuum = new UIImage(mod.Assets.Request<Texture2D>("UI/Images.bVacuum"));
+			bVacuum = new UIImage(mod.Assets.Request<Texture2D>("UI/Images.bVacuum", ReLogic.Content.AssetRequestMode.ImmediateLoad));
 
 			bToggleNPCButcherer = new UIImage(ModUtils.GetItemTexture(ItemID.Skull));
 
