@@ -180,6 +180,8 @@ namespace CheatSheet.Menus
 
 		private static void HandleHellTeleport(Player player, bool syncData = false)
 		{
+			// TODO: Replace with Player.CheckForGoodTeleportationSpot?
+
 			bool teleportDestinationFound = false;
 			bool flag2;
 			int findTeleportDestinationAttempts = 0;
@@ -220,7 +222,7 @@ namespace CheatSheet.Menus
 							else
 								break;
 						}
-						if (!Collision.LavaCollision(teleportPosition, Width, player.height) && Collision.HurtTiles(teleportPosition, player.velocity, Width, player.height, false).Y <= 0.0)
+						if (!Collision.LavaCollision(teleportPosition, Width, player.height) && !Collision.AnyHurtingTiles(teleportPosition, Width, player.height))
 						{
 							Collision.SlopeCollision(teleportPosition, player.velocity, Width, player.height, player.gravDir, false);
 							if (Collision.SolidCollision(teleportPosition, Width, player.height) && num4 < 99)

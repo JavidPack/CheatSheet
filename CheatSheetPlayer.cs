@@ -16,7 +16,15 @@ namespace CheatSheet
 		{
 			for (int i = 0; i < numberExtraAccessoriesEnabled; i++)
 			{
-				Player.VanillaUpdateEquip(ExtraAccessories[i]);
+				//Player.VanillaUpdateEquip(ExtraAccessories[i]);
+				Item item = ExtraAccessories[i];
+				if (!item.IsAir /*&& Player.IsItemSlotUnlockedAndUsable(k)*/ && (!item.expertOnly || Main.expertMode) /*&& UpdateEquips_CanItemGrantBenefits(k, item)*/)
+				{
+					if (item.accessory)
+						Player.GrantPrefixBenefits(item);
+
+					Player.GrantArmorBenefits(item);
+				}
 			}
 
 			//VanillaUpdateAccessory is now ApplyEquipFunctional
