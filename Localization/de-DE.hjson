@@ -1,3 +1,4 @@
+
 Mods: {
 	CheatSheet: {
 		Hotbar: {
@@ -21,9 +22,7 @@ Mods: {
 			ButcherNotification: Getötet NPCs {0}
 		}
 
-		Vacuum: {
-			VacuumNotification: Gegenstände auf dem boden die aufgesaugt wurden {0}
-		}
+		Vacuum.VacuumNotification: Gegenstände auf dem boden die aufgesaugt wurden {0}
 
 		Teleport: {
 			Dungeon: Verlies
@@ -56,6 +55,11 @@ Mods: {
 			LightHack100%: Licht Hack: 100%
 		}
 
+		GodMode: {
+			// GodModeDisabled: God Mode Disabled
+			// GodModeEnabled: God Mode Enabled
+		}
+
 		MinionSlot: {
 			MinionSlotBooster: Günstlings platz erhöhung: +0
 			MinionSlotBoosterNew: "Günstlings platz erhöhung: "
@@ -81,20 +85,16 @@ Mods: {
 			Vacuum: Sauger
 			Waypoints: Wegpunkte
 			LightHack: Licht Hack
+			// GodMode: God Mode
 		}
 
-		ExtendedCheatMenu: {
-			NoExtensionCheatModsInstalled:
-				'''
-				Keine Erweiterungen
-				Cheat Modifikationen
-				Installiert
-				'''
-		}
-
-		ExtraAccessorySlots: {
-			ExtraAccessorySlots: "Extra Schmuck Plätze: "
-		}
+		ExtendedCheatMenu.NoExtensionCheatModsInstalled:
+			'''
+			Keine Erweiterungen
+			Cheat Modifikationen
+			Installiert
+			'''
+		ExtraAccessorySlots.ExtraAccessorySlots: "Extra Schmuck Plätze: "
 
 		MobBrowser: {
 			AllNPCs: Alle NPCs
@@ -135,18 +135,20 @@ Mods: {
 			SnapBottomLeft: Snap: unten links
 			SnapBottomCenter: Snap: unten mitte
 			SnapBottomRight: Snap: unten rechts
-			PaintTiles: '''	   gefärbte Felder'''
-			EyeDropper: '''	   Pipette'''
-			Undo: '''	 Letzte Färbung rückgängig machen (RMB: Letzten 10) ['''
+			PaintTiles: gefärbte Felder
+			EyeDropper: Pipette
+			Undo: Letzte Färbung rückgängig machen (RMB: Letzten 10) [
 			Undo2: " stufen]"
 			NoUndo: Es gibt keine aktionen zum rückgängig machen in der historie.
 			UndoLeft: "  rückgängig machbare Aktionen."
 			FlipHorizontal: Horizontal spiegeln
 			FlipVertical: Vertikal spiegeln
-			TransparentSelectionOn: '''	   Umschalten von transparenter Selektion: Off'''
-			TransparentSelectionOff: '''	Umschalten von transparenter Selektion: On'''
+			TransparentSelectionOn: Umschalten von transparenter Selektion: Off
+			TransparentSelectionOff: Umschalten von transparenter Selektion: On
 			PriorBrush: Nutze die pipette vor dem Pinsel.
 			DataExport: "Exportierte daten zu "
 		}
+
+		// Keybinds.ToggleCheatSheetHotbar.DisplayName: Toggle Cheat Sheet Hotbar
 	}
 }

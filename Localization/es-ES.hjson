@@ -1,3 +1,4 @@
+
 Mods: {
 	CheatSheet: {
 		Hotbar: {
@@ -21,9 +22,7 @@ Mods: {
 			ButcherNotification: NPCs exterminados por {0}
 		}
 
-		Vacuum: {
-			VacuumNotification: Los objetos del suelo han sido aspirados por {0}
-		}
+		Vacuum.VacuumNotification: Los objetos del suelo han sido aspirados por {0}
 
 		Teleport: {
 			Dungeon: Mazmorra
@@ -89,18 +88,13 @@ Mods: {
 			GodMode: Modo dios
 		}
 
-		ExtendedCheatMenu: {
-			NoExtensionCheatModsInstalled:
-				'''
-				No hay trucos
-				de mods
-				disponibles
-				'''
-		}
-
-		ExtraAccessorySlots: {
-			ExtraAccessorySlots: "Espacios de accesorio adicionales: "
-		}
+		ExtendedCheatMenu.NoExtensionCheatModsInstalled:
+			'''
+			No hay trucos
+			de mods
+			disponibles
+			'''
+		ExtraAccessorySlots.ExtraAccessorySlots: "Espacios de accesorio adicionales: "
 
 		MobBrowser: {
 			AllNPCs: Todos los NPCs
@@ -154,5 +148,7 @@ Mods: {
 			PriorBrush: Priorizar uso del Cuentagotas sobre el Pincel
 			DataExport: "Exportar datos a "
 		}
+
+		// Keybinds.ToggleCheatSheetHotbar.DisplayName: Toggle Cheat Sheet Hotbar
 	}
 }

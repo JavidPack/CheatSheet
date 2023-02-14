@@ -1,3 +1,4 @@
+
 Mods: {
 	CheatSheet: {
 		Hotbar: {
@@ -21,9 +22,7 @@ Mods: {
 			ButcherNotification: Существа/НИП'ы были убиты игроком {0}
 		}
 
-		Vacuum: {
-			VacuumNotification: Предметы, лежащие на земле были притянуты игроком {0}
-		}
+		Vacuum.VacuumNotification: Предметы, лежащие на земле были притянуты игроком {0}
 
 		Teleport: {
 			Dungeon: Подземелье
@@ -89,18 +88,13 @@ Mods: {
 			GodMode: Режим Бога
 		}
 
-		ExtendedCheatMenu: {
-			NoExtensionCheatModsInstalled:
-				'''
-				Не обнаружено
-				установленных
-				расширений
-				'''
-		}
-
-		ExtraAccessorySlots: {
-			ExtraAccessorySlots: "Доп. слоты Аксессуаров: "
-		}
+		ExtendedCheatMenu.NoExtensionCheatModsInstalled:
+			'''
+			Не обнаружено
+			установленных
+			расширений
+			'''
+		ExtraAccessorySlots.ExtraAccessorySlots: "Доп. слоты Аксессуаров: "
 
 		MobBrowser: {
 			AllNPCs: Все существа
@@ -154,5 +148,7 @@ Mods: {
 			PriorBrush: Сначала нужно использовать выделение.
 			DataExport: "Экспорт в "
 		}
+
+		// Keybinds.ToggleCheatSheetHotbar.DisplayName: Toggle Cheat Sheet Hotbar
 	}
 }

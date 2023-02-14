@@ -1,3 +1,4 @@
+
 Mods: {
 	CheatSheet: {
 		Hotbar: {
@@ -21,9 +22,7 @@ Mods: {
 			ButcherNotification: Des PNJ ont été éradiqués par {0}
 		}
 
-		Vacuum: {
-			VacuumNotification: Les objets au sol ont été aspirés par {0}
-		}
+		Vacuum.VacuumNotification: Les objets au sol ont été aspirés par {0}
 
 		Teleport: {
 			Dungeon: Donjon
@@ -56,6 +55,11 @@ Mods: {
 			LightHack100%: Manipulation de la Lumière: 100%
 		}
 
+		GodMode: {
+			// GodModeDisabled: God Mode Disabled
+			// GodModeEnabled: God Mode Enabled
+		}
+
 		MinionSlot: {
 			MinionSlotBooster: Augmentation de la Capacité Maximale d'Invocations: +0
 			MinionSlotBoosterNew: "Augmentation de la Capacité Maximale d'Invocations: "
@@ -81,20 +85,16 @@ Mods: {
 			Vacuum: Aspirateur d'Objets
 			Waypoints: Points de Localisation
 			LightHack: Manipulation de la Lumière
+			// GodMode: God Mode
 		}
 
-		ExtendedCheatMenu: {
-			NoExtensionCheatModsInstalled:
-				'''
-				Pas d'Extensions
-				de Modules de Triche
-				Installés
-				'''
-		}
-
-		ExtraAccessorySlots: {
-			ExtraAccessorySlots: "Emplacements D'Accessoire Supplémentaires: "
-		}
+		ExtendedCheatMenu.NoExtensionCheatModsInstalled:
+			'''
+			Pas d'Extensions
+			de Modules de Triche
+			Installés
+			'''
+		ExtraAccessorySlots.ExtraAccessorySlots: "Emplacements D'Accessoire Supplémentaires: "
 
 		MobBrowser: {
 			AllNPCs: Tout les PNJ
@@ -148,5 +148,7 @@ Mods: {
 			PriorBrush: Utiliser le Compte-Goutte Avant le Pinceau.
 			DataExport: "Exporter dans "
 		}
+
+		// Keybinds.ToggleCheatSheetHotbar.DisplayName: Toggle Cheat Sheet Hotbar
 	}
 }

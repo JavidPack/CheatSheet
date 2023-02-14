@@ -1,3 +1,4 @@
+
 Mods: {
 	CheatSheet: {
 		Hotbar: {
@@ -18,7 +19,10 @@ Mods: {
 			ButcherHostileNPCs: Exterminar NPCs hostis
 			ButcherHostileAndFriendlyNPCs: Exterminar NPCs hostis e amigáveis
 			ButcherFriendlyNPCs: Exterminar NPCs amigáveis
+			// ButcherNotification: NPCs were butchered by {0}
 		}
+
+		// Vacuum.VacuumNotification: Items on the ground were vacuumed by {0}
 
 		Teleport: {
 			Dungeon: Calabouço
@@ -33,6 +37,8 @@ Mods: {
 			ClearProjectiles: Limpar projéteis
 			ClearBuffs: Limpar buffs
 			ClearDebuffs: Limpar debuffs
+			// ItemClearNotification: Items were cleared by {0}
+			// ProjectileClearNotification: Projectiles were cleared by {0}
 		}
 
 		SpawnRate: {
@@ -47,6 +53,11 @@ Mods: {
 			LightHack25%: Hack de Luz: 25%
 			LightHack50%: Hack de Luz: 50%
 			LightHack100%: Hack de Luz: 100%
+		}
+
+		GodMode: {
+			// GodModeDisabled: God Mode Disabled
+			// GodModeEnabled: God Mode Enabled
 		}
 
 		MinionSlot: {
@@ -74,21 +85,17 @@ Mods: {
 			Vacuum: Aspirador
 			Waypoints: Waypoints
 			LightHack: Hack de Luz
+			// GodMode: God Mode
 		}
 
-		ExtendedCheatMenu: {
-			NoExtensionCheatModsInstalled:
-				'''
-				Sem Mods de
-				Cheat com
-				Extensões
-				Instalados
-				'''
-		}
-
-		ExtraAccessorySlots: {
-			ExtraAccessorySlots: "Slots de Acessório Extras: "
-		}
+		ExtendedCheatMenu.NoExtensionCheatModsInstalled:
+			'''
+			Sem Mods de
+			Cheat com
+			Extensões
+			Instalados
+			'''
+		ExtraAccessorySlots.ExtraAccessorySlots: "Slots de Acessório Extras: "
 
 		MobBrowser: {
 			AllNPCs: Todos os NPCs
@@ -97,6 +104,7 @@ Mods: {
 			NetIDNPCs: NPCs NetID
 			FilteredNPCs: NPCs Filtrados
 			CycleModSpecificNPCs: Ciclar NPCs de Mod Específico
+			// SpawnNPCNotification: Spawned {0} by {1}
 		}
 
 		ItemBrowser: {
@@ -141,5 +149,7 @@ Mods: {
 			PriorBrush: Usar Conta-Gotas antes do pincel.
 			DataExport: "Dados exportados para "
 		}
+
+		// Keybinds.ToggleCheatSheetHotbar.DisplayName: Toggle Cheat Sheet Hotbar
 	}
 }

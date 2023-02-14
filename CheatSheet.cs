@@ -33,7 +33,7 @@ namespace CheatSheet
 	{
 		internal static ModKeybind ToggleCheatSheetHotbarHotKey;
 		internal static CheatSheet instance;
-		internal static Dictionary<string, ModTranslation> translations; // reference to private field.
+		//internal static Dictionary<string, ModTranslation> translations; // reference to private field.
 		internal Hotbar hotbar;
 		internal ItemBrowser itemBrowser;
 		internal NPCBrowser npcBrowser;
@@ -90,15 +90,15 @@ namespace CheatSheet
 			ButtonTexture.Clear();
 			ButtonTooltip.Clear();
 
-			ToggleCheatSheetHotbarHotKey = KeybindLoader.RegisterKeybind(this, "Toggle Cheat Sheet Hotbar", "K");
+			ToggleCheatSheetHotbarHotKey = KeybindLoader.RegisterKeybind(this, "ToggleCheatSheetHotbar", "K");
 
 			if (Main.rand == null)
 			{
 				Main.rand = new Terraria.Utilities.UnifiedRandom();
 			}
 
-			FieldInfo translationsField = typeof(LocalizationLoader).GetField("translations", BindingFlags.Static | BindingFlags.NonPublic);
-			translations = (Dictionary<string, ModTranslation>)translationsField.GetValue(this);
+			//FieldInfo translationsField = typeof(LocalizationLoader).GetField("translations", BindingFlags.Static | BindingFlags.NonPublic);
+			//translations = (Dictionary<string, ModTranslation>)translationsField.GetValue(this);
 			//LoadTranslations();
 
 			// set all to true on load
@@ -159,7 +159,8 @@ namespace CheatSheet
 
 		internal static string CSText(string category, string key)
 		{
-			return translations[$"Mods.CheatSheet.{category}.{key}"].GetTranslation(Language.ActiveCulture);
+			return Language.GetTextValue($"Mods.CheatSheet.{category}.{key}");
+			//return translations[$"Mods.CheatSheet.{category}.{key}"].GetTranslation(Language.ActiveCulture);
 			// This isn't good until after load....can revert after fixing static initializers for string[]
 			// return Language.GetTextValue($"Mods.CheatSheet.{category}.{key}");
 		}

@@ -1,3 +1,4 @@
+
 Mods: {
 	CheatSheet: {
 		Hotbar: {
@@ -21,9 +22,7 @@ Mods: {
 			ButcherNotification: Gli NPC sono stati uccisi da {0}
 		}
 
-		Vacuum: {
-			VacuumNotification: Gli oggetti a terra sono stati attirati by {0}
-		}
+		Vacuum.VacuumNotification: Gli oggetti a terra sono stati attirati by {0}
 
 		Teleport: {
 			Dungeon: Dungeon
@@ -89,14 +88,13 @@ Mods: {
 			GodMode: God Mode
 		}
 
-		ExtendedCheatMenu: {
-			NoExtensionCheatModsInstalled:
-				'''
-				Nessuna estensione
-				Cheat Mods
-				Installata
-				'''
-		}
+		ExtendedCheatMenu.NoExtensionCheatModsInstalled:
+			'''
+			Nessuna estensione
+			Cheat Mods
+			Installata
+			'''
+		// ExtraAccessorySlots.ExtraAccessorySlots: "Extra Accessory Slots: "
 
 		MobBrowser: {
 			AllNPCs: Tutti gli NPC
@@ -150,5 +148,7 @@ Mods: {
 			PriorBrush: Usa il contagocce prima di usare il pennello.
 			DataExport: Dati esportati in
 		}
+
+		// Keybinds.ToggleCheatSheetHotbar.DisplayName: Toggle Cheat Sheet Hotbar
 	}
 }

@@ -1,3 +1,4 @@
+
 Mods: {
 	CheatSheet: {
 		Hotbar: {
@@ -21,9 +22,7 @@ Mods: {
 			ButcherNotification: NPCs were butchered by {0}
 		}
 
-		Vacuum: {
-			VacuumNotification: Items on the ground were vacuumed by {0}
-		}
+		Vacuum.VacuumNotification: Items on the ground were vacuumed by {0}
 
 		Teleport: {
 			Dungeon: Dungeon
@@ -89,18 +88,13 @@ Mods: {
 			GodMode: God Mode
 		}
 
-		ExtendedCheatMenu: {
-			NoExtensionCheatModsInstalled:
-				'''
-				No Extension
-				Cheat Mods
-				Installed
-				'''
-		}
-
-		ExtraAccessorySlots: {
-			ExtraAccessorySlots: "Extra Accessory Slots: "
-		}
+		ExtendedCheatMenu.NoExtensionCheatModsInstalled:
+			'''
+			No Extension
+			Cheat Mods
+			Installed
+			'''
+		ExtraAccessorySlots.ExtraAccessorySlots: "Extra Accessory Slots: "
 
 		MobBrowser: {
 			AllNPCs: All NPCs
@@ -154,5 +148,7 @@ Mods: {
 			PriorBrush: Use Eyedropper prior to using brush.
 			DataExport: "Exported data to "
 		}
+
+		Keybinds.ToggleCheatSheetHotbar.DisplayName: Toggle Cheat Sheet Hotbar
 	}
 }

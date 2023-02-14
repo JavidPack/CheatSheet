@@ -1,3 +1,4 @@
+
 Mods: {
 	CheatSheet: {
 		Hotbar: {
@@ -21,9 +22,7 @@ Mods: {
 			ButcherNotification: NPC已被 {0} 清除
 		}
 
-		Vacuum: {
-			VacuumNotification: 地面物品已被 {0} 快速拾取
-		}
+		Vacuum.VacuumNotification: 地面物品已被 {0} 快速拾取
 
 		Teleport: {
 			Dungeon: 地牢
@@ -89,18 +88,13 @@ Mods: {
 			GodMode: 上帝模式
 		}
 
-		ExtendedCheatMenu: {
-			NoExtensionCheatModsInstalled:
-				'''
-				无扩展模组
-				作弊模组
-				已安装
-				'''
-		}
-
-		ExtraAccessorySlots: {
-			ExtraAccessorySlots: "额外饰品栏: "
-		}
+		ExtendedCheatMenu.NoExtensionCheatModsInstalled:
+			'''
+			无扩展模组
+			作弊模组
+			已安装
+			'''
+		ExtraAccessorySlots.ExtraAccessorySlots: "额外饰品栏: "
 
 		MobBrowser: {
 			AllNPCs: 全部NPC
@@ -154,5 +148,7 @@ Mods: {
 			PriorBrush: 使用笔刷之前请先使用吸管提取图像.
 			DataExport: "数据已导出至该路径  "
 		}
+
+		// Keybinds.ToggleCheatSheetHotbar.DisplayName: Toggle Cheat Sheet Hotbar
 	}
 }

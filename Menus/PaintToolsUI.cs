@@ -1,6 +1,6 @@
 ﻿using CheatSheet.CustomUI;
 using CheatSheet.UI;
-using IL.Terraria.GameContent;
+//using IL.Terraria.GameContent;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json.Linq;
