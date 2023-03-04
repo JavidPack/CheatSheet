@@ -327,6 +327,16 @@ namespace CheatSheet.Menus
 					if (!Main.LocalPlayer.mouseInterface)
 					{
 						DrawBrush();
+
+						Terraria.GameInput.PlayerInput.LockVanillaMouseScroll("CheatSheet/DrawBrush");
+
+						if(Terraria.GameInput.PlayerInput.ScrollWheelDeltaForUI != 0)
+						{
+							if(Terraria.GameInput.PlayerInput.ScrollWheelDeltaForUI < 0)
+								CheatSheet.instance.paintToolsUI.btnSnap.NextIamge();
+							else
+								CheatSheet.instance.paintToolsUI.btnSnap.PrevIamge();
+						}
 					}
 				}
 			}
