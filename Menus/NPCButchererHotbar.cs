@@ -137,15 +137,19 @@ namespace CheatSheet.Menus
 			// 2 == town NPCs // friendlies only
 			for (int i = 0; i < Main.maxNPCs; i++) // Iteration
 			{
-				if (Main.npc[i].active && CheckNPC(i))
+				NPC npc = Main.npc[i];
+				if (npc.active && CheckNPC(i))
 				{
-					if (butcherType == 0 && (Main.npc[i].townNPC || Main.npc[i].friendly)) continue;
-					else if (butcherType == 2 && (!Main.npc[i].townNPC || !Main.npc[i].friendly)) continue;
+					if (butcherType == 0 && (npc.townNPC || npc.friendly)) continue;
+					else if (butcherType == 2 && (!npc.townNPC || !npc.friendly)) continue;
 					//always run for the visual effects (damage drawn and sounds) for client
-					Main.npc[i].StrikeNPCNoInteraction(Main.npc[i].lifeMax, 0f, -Main.npc[i].direction, true);
+					NPC.HitInfo hit = npc.SimpleStrike(npc.lifeMax, -npc.direction, false, 0f);
+					hit.InstantKill = true;
+					npc.StrikeNPC(hit, true, noPlayerInteraction: true);
 					if (syncData) // syncData does not do visuals
 					{
-						NetMessage.SendData(28, -1, -1, null, i, Main.npc[i].lifeMax, 0f, -Main.npc[i].direction, 1);
+						NetMessage.SendStrikeNPC(npc, hit);
+						//NetMessage.SendData(28, -1, -1, null, i, npc.lifeMax, 0f, -npc.direction, 1);
 						// type, -1, -1, msg, index, damage, knockback, direction, crit
 					}
 				}

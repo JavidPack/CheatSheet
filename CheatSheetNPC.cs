@@ -18,10 +18,13 @@ namespace CheatSheet
 				//NPCSlot.HandleFilterNPC(npc.whoAmI);
 				isFiltered = true;
 				int life = npc.life;
-				npc.StrikeNPCNoInteraction(life, 0f, -npc.direction, true);
+				NPC.HitInfo hit = npc.SimpleStrike(life, -npc.direction, false, 0f);
+				hit.InstantKill = true;
+				npc.StrikeNPC(hit, true, noPlayerInteraction: true);
 				if (Main.netMode == 1) // syncData does not do visuals
 				{
-					NetMessage.SendData(28, -1, -1, null, npc.whoAmI, life, 0f, -Main.npc[npc.whoAmI].direction, 1);
+					NetMessage.SendStrikeNPC(npc, hit);
+					//NetMessage.SendData(28, -1, -1, null, npc.whoAmI, life, 0f, -Main.npc[npc.whoAmI].direction, 1);
 					// type, -1, -1, msg, index, damage, knockback, direction, crit
 				}
 				//NetMessage.SendData(23, -1, -1, "", npc.whoAmI);
