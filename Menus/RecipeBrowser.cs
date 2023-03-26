@@ -261,7 +261,7 @@ namespace CheatSheet.Menus
 				foreach (var condition in selectedRecipe.Conditions)
 				{
 					int y = (num61 + 1) * 26;
-					spriteBatch.DrawString(FontAssets.MouseText.Value, condition.Description, new Vector2((float)positionX, (float)(positionY + y)), color3, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+					spriteBatch.DrawString(FontAssets.MouseText.Value, condition.Description.Value, new Vector2((float)positionX, (float)(positionY + y)), color3, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
 				}
 				/*
 				if (selectedRecipe.needWater)
