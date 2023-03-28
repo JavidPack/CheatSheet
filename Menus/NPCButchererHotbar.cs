@@ -143,7 +143,7 @@ namespace CheatSheet.Menus
 					if (butcherType == 0 && (npc.townNPC || npc.friendly)) continue;
 					else if (butcherType == 2 && (!npc.townNPC || !npc.friendly)) continue;
 					//always run for the visual effects (damage drawn and sounds) for client
-					NPC.HitInfo hit = npc.SimpleStrike(npc.lifeMax, -npc.direction, false, 0f);
+					NPC.HitInfo hit = npc.CalculateHitInfo(npc.lifeMax, -npc.direction, false, 0f);
 					hit.InstantKill = true;
 					npc.StrikeNPC(hit, true, noPlayerInteraction: true);
 					if (syncData) // syncData does not do visuals

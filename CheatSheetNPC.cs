@@ -18,7 +18,7 @@ namespace CheatSheet
 				//NPCSlot.HandleFilterNPC(npc.whoAmI);
 				isFiltered = true;
 				int life = npc.life;
-				NPC.HitInfo hit = npc.SimpleStrike(life, -npc.direction, false, 0f);
+				NPC.HitInfo hit = npc.CalculateHitInfo(life, -npc.direction, false, 0f);
 				hit.InstantKill = true;
 				npc.StrikeNPC(hit, true, noPlayerInteraction: true);
 				if (Main.netMode == 1) // syncData does not do visuals
