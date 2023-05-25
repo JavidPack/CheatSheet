@@ -1,4 +1,3 @@
-
 Mods: {
 	CheatSheet: {
 		Hotbar: {
@@ -150,5 +149,25 @@ Mods: {
 		}
 
 		// Keybinds.ToggleCheatSheetHotbar.DisplayName: Toggle Cheat Sheet Hotbar
+
+		Configs: {
+			CheatSheetClientConfig: {
+				// DisplayName: Cheat Sheet Client Config
+
+				HotbarShownByDefault: {
+					// Label: Hotbar Shown by Default
+					// Tooltip: Allows the hotbar to default to being shown rather than hidden.
+				}
+			}
+
+			CheatSheetServerConfig: {
+				// DisplayName: Cheat Sheet Server Config
+
+				DisableCheatsForNonHostUsers: {
+					// Label: Disable Cheats for Non-Host users
+					// Tooltip: Disabled the features of this mod from working in multiplayer except for the Host
+				}
+			}
+		}
 	}
 }
