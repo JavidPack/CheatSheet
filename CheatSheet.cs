@@ -542,20 +542,20 @@ namespace CheatSheet
 	}
 
 	public static class CheatSheetInterface
-	{
-		public static void RegisterButton(Mod mod, Asset<Texture2D> texture, Action buttonClickedAction, Func<string> tooltip)
+	{ 
+		public static void RegisterButton(Asset<Texture2D> texture, Action buttonClickedAction, Func<string> tooltip)
 		{
-			if (!Main.dedServ && mod != null && mod is CheatSheet)
+			if (!Main.dedServ)
 			{
-				((CheatSheet)mod).RegisterButton(texture, buttonClickedAction, tooltip);
+				ModContent.GetInstance<CheatSheet>().RegisterButton(texture, buttonClickedAction, tooltip);
 			}
 		}
 
-		public static void RegisterButton(Mod mod, CheatSheetButton csb)
+		public static void RegisterButton(CheatSheetButton csb)
 		{
-			if (!Main.dedServ && mod != null && mod is CheatSheet)
+			if (!Main.dedServ)
 			{
-				((CheatSheet)mod).RegisterButton(csb.texture, csb.buttonClickedAction, csb.tooltip);
+				ModContent.GetInstance<CheatSheet>().RegisterButton(csb.texture, csb.buttonClickedAction, csb.tooltip);
 			}
 		}
 
