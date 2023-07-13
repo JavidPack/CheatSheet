@@ -148,24 +148,24 @@ Mods: {
 			DataExport: "Экспорт в "
 		}
 
-		// Keybinds.ToggleCheatSheetHotbar.DisplayName: Toggle Cheat Sheet Hotbar
+		Keybinds.ToggleCheatSheetHotbar.DisplayName: Открыть панель Cheat Sheet
 
 		Configs: {
 			CheatSheetClientConfig: {
-				// DisplayName: Cheat Sheet Client Config
+				DisplayName: Конфигурация игрока
 
 				HotbarShownByDefault: {
-					// Label: Hotbar Shown by Default
-					// Tooltip: Allows the hotbar to default to being shown rather than hidden.
+					Label: Панель Cheat Sheet отображается по умолчанию
+					Tooltip: Позволяет отображать панель Cheat Sheet по умолчанию, а не скрывать ее.
 				}
 			}
 
 			CheatSheetServerConfig: {
-				// DisplayName: Cheat Sheet Server Config
+				DisplayName: Конфигурация сервера
 
 				DisableCheatsForNonHostUsers: {
-					// Label: Disable Cheats for Non-Host users
-					// Tooltip: Disabled the features of this mod from working in multiplayer except for the Host
+					Label: Отключить читы для пользователей, не являющихся хостами
+					Tooltip: Отключить функции этого мода для игроков в мультиплеере, кроме хоста.
 				}
 			}
 		}
