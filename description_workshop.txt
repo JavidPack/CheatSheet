@@ -1,0 +1,71 @@
+﻿[img]https://i.imgur.com/W2c5CX6.gif[/img]
+
+Cheat Sheet is a tool for developers and those who just want to play around with any vanilla or mod item, recipe, or NPC. There are also tools to "paint" tiles to make building easier and faster.
+Press K (or whatever hotkey you've assigned to "Toggle Cheat Sheet Hotbar") or click the button at the bottom center of your screen to view the Cheat Sheet Hotbar to access all the items. Press/Click again to hide it along with the selected item.
+
+With the config, you can set tools to only be available to the host in multiplayer if you wish.
+
+If you are using HEROsMod, you can selectively allow usage of tools in multiplayer. All the tools will be limited by the permissions assigned to your user.
+
+See below for mod details, please note some buttons have a right-click feature as an addition to left-click.
+
+Item Browser:
+Click an item to grab a full stack of that item or Shift-click to move a full stack of that item immediately to your inventory. Right click to grab one, hold right click to grab quickly. The category buttons and the search field can be used to filter the list of items.
+
+NPC Browser:
+Click any NPC to spawn it in front of your character. Use categories and search filter to find the NPC you desire.
+
+Recipe Browser:
+Click on any Recipe to see details. Use categories and search filter to find the recipe you want.
+
+Paint Tools:
+Click to reveal the Paint Tools shelf.
+--Eye Dropper: Use cursor to select tiles.
+--Paint Tiles: Click to paint selected tiles. Click and drag to paint a tiled instance of selected tiles. Hold shift while dragging to constrain movement vertically or horizontally. Be very careful, stray clicks will override tiles and there is no undo function yet.
+--Pallet Window: Store several tile selections.
+--Schematics Browser: Submit builds to the schematics browser and explore other builds.
+
+Extra Accessory Slots:
+These slots appear to the left of your equipment. They will not affect you visually, but do affect stats as normal. Untested in multiplayer. 
+
+Auto-Trash Slot:
+Now it's own mod, look for it on the Mod Browser.
+
+Quick Clear Menu:
+Use this menu to quickly clear either: items, projectiles or (de)buffs. Some features are untested in multiplayer.
+
+Vacuum:
+Left click to vacuum all current items in the world to you.
+Right click to permanently vacuum items to you (until you stop playing or disable).
+
+Quick Waypoints:
+Left click to browse quick waypoints, this currently includes teleport to: spawn, hell, lihzahrd altar, dungeon and a random place.
+Please note: temple teleport only works if there's a Lihzahrd Altar.
+
+NPC Butcher Menu:
+You can butcher (kill) hostile NPCs as well as Town NPCs using the Butcher menu.
+This is programmed to exclude Target Dummies, Banners and Cultist spawned near the dungeon.
+
+Spawn Rate Multiplier:
+Cycle through settings for manipulating a spawn rate multiplier. (Spawn limit also affected) Fun for a challenge.
+
+LightHack:
+See through the darkness.
+
+Next Update: Event Manager:
+Start or stop all events.
+
+Next Update: Boss Downer:
+Allows you to set various bosses as defeated in the world.
+
+Mod Extension Cheats:
+Any cheats added by other mods will appear here. See the mod thread for info on how to add your own cheat buttons.
+
+More tools will be added over time. Your input is highly appreciated, which you can leave by the Cheat Sheet forum post.
+
+[h1]Links[/h1]
+Source code hosted on [url=github.com/JavidPack/CheatSheet]GitHub[/url], collaboration welcome
+For questions or suggestions, come to my Discord: [url=discord.gg/w8Hcwby][img]https://discordapp.com/api/guilds/276235094622994433/widget.png?style=shield[/img][/url]
+Bug reports in the comments here will not be seen, come to Discord or Github to report issues.
+If you'd like to support my mods, I have a Patreon [url=www.patreon.com/jopojelly][img]https://i.imgur.com/xII2DwJ.png[/img][/url]
+[url=https://steamcommunity.com/profiles/76561198025715866/myworkshopfiles/?appid=1281930]Check out all my mods[/url]

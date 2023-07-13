@@ -9,8 +9,6 @@ namespace CheatSheet
 		public override ConfigScope Mode => ConfigScope.ServerSide;
 
 		[DefaultValue(false)]
-		[Label("Disable Cheats for Non-Host users")]
-		[Tooltip("Disabled the features of this mod from working in multiplayer except for the Host")]
 		public bool DisableCheatsForNonHostUsers { get; set; }
 
 		public override bool AcceptClientChanges(ModConfig pendingConfig, int whoAmI, ref string message) {

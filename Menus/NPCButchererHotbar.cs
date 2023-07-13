@@ -97,7 +97,7 @@ namespace CheatSheet.Menus
 
 		public static void HandleButcher(int butcherType = 0, bool forceHandle = false)
 		{
-			bool syncData = forceHandle || Main.netMode == 0;
+			bool syncData = forceHandle || Main.netMode == NetmodeID.SinglePlayer;
 			if (syncData)
 			{
 				ButcherNPCs(butcherType, forceHandle);
