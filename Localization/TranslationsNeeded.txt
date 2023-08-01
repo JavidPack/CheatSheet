@@ -1,5 +1,9 @@
-pt-BR 8
-pl-PL 102
-fr-FR 3
-es-ES 3
-de-DE 3
+en-US, 109/109, 100%, missing 0
+de-DE, 99/109, 91%, missing 10
+it-IT, 101/109, 93%, missing 8
+fr-FR, 99/109, 91%, missing 10
+es-ES, 102/109, 94%, missing 7
+ru-RU, 109/109, 100%, missing 0
+zh-Hans, 102/109, 94%, missing 7
+pt-BR, 94/109, 86%, missing 15
+pl-PL, 0/109, 0%, missing 109
