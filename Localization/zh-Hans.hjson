@@ -33,11 +33,11 @@ Mods: {
 
 		QuickClear: {
 			ClearDroppedItems: 清除掉落物品
-			ClearProjectiles: 清除抛射物
+			ClearProjectiles: 清除射弹
 			ClearBuffs: 清除增益效果
 			ClearDebuffs: 清除减益效果
 			ItemClearNotification: 物品已被 {0} 清除
-			ProjectileClearNotification: 抛射物已被 {0} 清除
+			ProjectileClearNotification: 射弹已被 {0} 清除
 		}
 
 		SpawnRate: {
@@ -148,24 +148,24 @@ Mods: {
 			DataExport: "数据已导出至该路径  "
 		}
 
-		// Keybinds.ToggleCheatSheetHotbar.DisplayName: Toggle Cheat Sheet Hotbar
+		Keybinds.ToggleCheatSheetHotbar.DisplayName: 开关作弊小抄快捷栏
 
 		Configs: {
 			CheatSheetClientConfig: {
-				// DisplayName: Cheat Sheet Client Config
+				DisplayName: 作弊小抄本地端设置
 
 				HotbarShownByDefault: {
-					// Label: Hotbar Shown by Default
-					// Tooltip: Allows the hotbar to default to being shown rather than hidden.
+					Label: 快捷栏保持开启
+					Tooltip: 允许快捷栏保持开启而不是隐藏
 				}
 			}
 
 			CheatSheetServerConfig: {
-				// DisplayName: Cheat Sheet Server Config
+				DisplayName: 作弊小抄服务器设置
 
 				DisableCheatsForNonHostUsers: {
-					// Label: Disable Cheats for Non-Host users
-					// Tooltip: Disabled the features of this mod from working in multiplayer except for the Host
+					Label: 对服务器管理员以外的玩家禁用作弊选项
+					Tooltip: 多人模式下对服务器管理员以外的玩家禁用本模组提供的功能
 				}
 			}
 		}
