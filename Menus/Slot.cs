@@ -10,6 +10,7 @@ using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ID;
+using Terraria.UI;
 
 namespace CheatSheet.Menus
 {
@@ -263,6 +264,12 @@ namespace CheatSheet.Menus
 		{
 			spriteBatch.Draw(Slot.backgroundTexture.Value, base.DrawPosition, null, Color.White, 0f, Vector2.Zero, base.Scale, SpriteEffects.None, 0f);
 
+			float sizeLimit = backgroundTexture.Width() * Scale * 0.6f;
+			ItemSlot.DrawItemIcon(item, ItemSlot.Context.InventoryItem, spriteBatch, DrawPosition + new Vector2(backgroundTexture.Width() * Scale * 0.5f), 1f, sizeLimit, Color.White);
+			if (ItemID.Sets.TrapSigned[item.type])
+				spriteBatch.Draw(TextureAssets.Wire.Value, DrawPosition + new Vector2(40f, 40f) * Scale, new Rectangle(4, 58, 8, 8), Color.White, 0f, new Vector2(4f), 1f, SpriteEffects.None, 0f);
+
+			/*
 			Texture2D texture2D = ModUtils.GetItemTexture(this.item.type).Value;
 
 			if (texture2D == null)
@@ -302,6 +309,7 @@ namespace CheatSheet.Menus
 			{
 				spriteBatch.Draw(texture2D, drawPosition, new Rectangle?(rectangle2), this.item.GetColor(Color.White), 0f, Vector2.Zero, num, SpriteEffects.None, 0f);
 			}
+			*/
 			if (this.item.stack > 1)
 			{
 				spriteBatch.DrawString(FontAssets.ItemStack.Value, this.item.stack.ToString(), new Vector2(base.DrawPosition.X + 10f * base.Scale, base.DrawPosition.Y + 26f * base.Scale), Color.White, 0f, Vector2.Zero, base.Scale, SpriteEffects.None, 0f);
