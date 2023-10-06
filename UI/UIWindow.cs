@@ -103,6 +103,11 @@ namespace CheatSheet.UI
 					}
 				}
 			}
+
+			if (IsMouseInside())
+			{
+				Terraria.GameInput.PlayerInput.LockVanillaMouseScroll("CheatSheet/UIWindow");
+			}
 		}
 
 		public override void Draw(SpriteBatch spriteBatch)
