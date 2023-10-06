@@ -277,7 +277,7 @@ namespace CheatSheet
 			CheatSheet.instance.hotbar.ChangedConfiguration();
 		}
 
-		public override void AddRecipeGroups()/* tModPorter Note: Removed. Use ModSystem.AddRecipeGroups */
+		public void SetupUI()
 		{
 			//System.Collections.Concurrent.ConcurrentQueue<Action> glQueue = (System.Collections.Concurrent.ConcurrentQueue<Action>)typeof(Terraria.ModLoader.Engine.GLCallLocker).GetField("actionQueue", BindingFlags.NonPublic | BindingFlags.Static).GetValue(null);
 			//glQueue.Enqueue(() =>
