@@ -3,10 +3,10 @@ using Terraria;
 
 namespace CheatSheet
 {
-	public readonly record struct TileData(TileTypeData TileTypeData, WallTypeData WallTypeData, TileWallWireStateData TileWallWireStateData, LiquidData LiquidData)
+	public readonly record struct TileData(TileTypeData TileTypeData, WallTypeData WallTypeData, TileWallWireStateData TileWallWireStateData, LiquidData LiquidData, TileWallBrightnessInvisibilityData TileWallBrightnessInvisibilityData)
 	//public record struct TileData(TileTypeData TileTypeData, WallTypeData WallTypeData, TileWallWireStateData TileWallWireStateData, LiquidData LiquidData)
 	{
-		public TileData(Tile tile) : this(tile.Get<TileTypeData>(), tile.Get<WallTypeData>(), tile.Get<TileWallWireStateData>(), tile.Get<LiquidData>())
+		public TileData(Tile tile) : this(tile.Get<TileTypeData>(), tile.Get<WallTypeData>(), tile.Get<TileWallWireStateData>(), tile.Get<LiquidData>(), tile.Get<TileWallBrightnessInvisibilityData>())
 		{
 			//TileTypeData = tile.Get<TileTypeData>();
 			//WallTypeData = tile.Get<WallTypeData>();
@@ -20,6 +20,7 @@ namespace CheatSheet
 			tile.Get<WallTypeData>() = WallTypeData;
 			tile.Get<TileWallWireStateData>() = TileWallWireStateData;
 			tile.Get<LiquidData>() = LiquidData;
+			tile.Get<TileWallBrightnessInvisibilityData>() = TileWallBrightnessInvisibilityData;
 		}
 	}
 }
