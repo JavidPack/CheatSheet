@@ -133,6 +133,7 @@ namespace CheatSheet.Menus
 
 			uIImage = new UIImage(ModUtils.GetItemTexture(ItemID.AlphabetStatueW));
 
+			/*
 			position = position.Offset(uIImage.Width + this.spacing, 0);
 			uIImage.Position = position;
 			uIImage.onLeftClick += (a, b) => PaintToolsEx.OnlineImport(this.view);
@@ -146,6 +147,7 @@ namespace CheatSheet.Menus
 			uIImage.onLeftClick += (a, b) => PaintToolsEx.LoadNextX(this.view);
 			uIImage.Tooltip = $"Load Next {CheatSheet.DefaultNumberOnlineToLoad}";
 			this.AddChild(uIImage);
+			*/
 
 			infoPanel = new UIView();
 			position = position.Offset(uIImage.Width + this.spacing, 0);
