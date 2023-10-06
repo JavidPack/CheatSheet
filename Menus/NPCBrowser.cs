@@ -316,7 +316,7 @@ namespace CheatSheet.Menus
 			{
 				int num = category[i];
 				NPCSlot slot = this.npcView.allNPCSlot[num];
-				if (slot.displayName.ToLower().IndexOf(this.textbox.Text.ToLower(), StringComparison.Ordinal) != -1)
+				if (slot.displayName.Value.ToLower().IndexOf(this.textbox.Text.ToLower(), StringComparison.Ordinal) != -1)
 				{
 					list.Add(num);
 				}

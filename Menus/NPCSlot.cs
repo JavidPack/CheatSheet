@@ -5,6 +5,7 @@ using ReLogic.Content;
 using System;
 using Terraria;
 using Terraria.GameContent;
+using Terraria.Localization;
 
 namespace CheatSheet.Menus
 {
@@ -16,7 +17,7 @@ namespace CheatSheet.Menus
 		public int netID = 0;
 		public NPC npc = new NPC();
 		//private static NPC syncNPC;
-		public string displayName = "";
+		public LocalizedText displayName;
 
 		public bool isBoss;
 		public bool isTown;
@@ -52,7 +53,7 @@ namespace CheatSheet.Menus
 			npcType = npc.type;
 			netID = npc.netID;
 			//displayName = Lang.GetNPCNameValue(npcType);
-			displayName = Lang.GetNPCNameValue(netID);
+			displayName = Lang.GetNPCName(netID); // Use TypeName -> NPCLoader.ModifyTypeName instead?
 			//syncNPC = (NPC)npc.Clone();
 			//npcType = npc.type;
 			//	this.isBoss = npc.boss;
@@ -94,7 +95,7 @@ namespace CheatSheet.Menus
 
 		private void Slot2_onHover(object sender, EventArgs e)
 		{
-			UIView.HoverText = displayName + (npc.ModNPC != null ? " [" + npc.ModNPC.Mod.Name + "]" : "") + (isFiltered ? " [DISABLED]" : "");
+			UIView.HoverText = displayName.Value + (npc.ModNPC != null ? " [" + npc.ModNPC.Mod.Name + "]" : "") + (isFiltered ? " [DISABLED]" : "");
 			NPCBrowser.hoverNpc = npc;
 			//UIView.HoverItem = this.item.Clone();
 			//	hovering = true;
