@@ -140,8 +140,8 @@ namespace CheatSheet.Menus
 				NPC npc = Main.npc[i];
 				if (npc.active && CheckNPC(i))
 				{
-					if (butcherType == 0 && (npc.townNPC || npc.friendly)) continue;
-					else if (butcherType == 2 && (!npc.townNPC || !npc.friendly)) continue;
+					if (butcherType == 0 && (npc.townNPC || npc.friendly || NPCID.Sets.CountsAsCritter[npc.type])) continue;
+					else if (butcherType == 2 && !(npc.townNPC || npc.friendly || NPCID.Sets.CountsAsCritter[npc.type])) continue;
 					//always run for the visual effects (damage drawn and sounds) for client
 					NPC.HitInfo hit = npc.CalculateHitInfo(npc.lifeMax, -npc.direction, false, 0f);
 					hit.InstantKill = true;
