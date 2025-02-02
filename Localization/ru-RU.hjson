@@ -60,9 +60,9 @@ Mods: {
 		}
 
 		MinionSlot: {
-			MinionSlotBooster: Доп. слотов для миньонов: 0
-			MinionSlotBoosterNew: Доп. слотов для миньонов:
-			MinionSlotBoosterText: Доп. слотов для миньонов теперь
+			MinionSlotBooster: Доп. слотов под миньонов: 0
+			MinionSlotBoosterNew: Доп. слотов под миньонов:
+			MinionSlotBoosterText: Доп. слотов под миньонов теперь
 		}
 
 		RecipeBrowser: {
@@ -75,10 +75,10 @@ Mods: {
 			ItemBrowser: Браузер предметов
 			NPCBrowser: Браузер существ
 			RecipeBrowser: Браузер рецептов
-			MinionBooster: Доп. слоты для миньонов
+			MinionBooster: Доп. слоты под миньонов
 			Butcher: Убить существ
 			ClearMenu: Меню очистки
-			ExtraAccessorySlots: Доп. слоты для аксессуаров
+			ExtraAccessorySlots: Доп. слоты под аксессуаров
 			ModExtensions: Расширения
 			PaintTools: Инструменты копирования
 			SpawnRate: Множитель появления существ
@@ -157,20 +157,20 @@ Mods: {
 
 		# These are not in use right now, so they don't actually need localization yet
 		SchematicsBrowser: {
-			// SubmitToSchematicsBrowser: Submit to Schematics Browser
-			// VoteUp: Vote Up
-			// VoteDown: Vote Down
-			// SubmitName: Submit Name:
-			// ThanksForVoting: Thanks for voting.
-			// SchematicsServerVotingProblem: Schematics Server voting problem
-			// OnlineSchematicsOnlyWorksOnSteamVersion: Online schematics only works on Steam version
-			// YouAlreadyVoted: You already voted
-			// SchematicsServerProblemX: Schematics Server problem {0}
-			// SelectionTooBigForNow: Selection too big for now.
-			// PleaseNameYourCreation: Please name your creation.
-			// OopsBase64TilesIsBad: Oops, base64tiles is bad.
-			// BePatient: Be patient.
-			// AlreadySubmitted: Already submitted.
+			SubmitToSchematicsBrowser: Submit to Schematics Browser
+			VoteUp: Vote Up
+			VoteDown: Vote Down
+			SubmitName: Submit Name:
+			ThanksForVoting: Thanks for voting.
+			SchematicsServerVotingProblem: Schematics Server voting problem
+			OnlineSchematicsOnlyWorksOnSteamVersion: Online schematics only works on Steam version
+			YouAlreadyVoted: You already voted
+			SchematicsServerProblemX: Schematics Server problem {0}
+			SelectionTooBigForNow: Selection too big for now.
+			PleaseNameYourCreation: Please name your creation.
+			OopsBase64TilesIsBad: Oops, base64tiles is bad.
+			BePatient: Be patient.
+			AlreadySubmitted: Already submitted.
 		}
 
 		Keybinds.ToggleCheatSheetHotbar.DisplayName: Открыть панель Cheat Sheet
@@ -181,7 +181,7 @@ Mods: {
 
 				HotbarShownByDefault: {
 					Label: Отображать панель в открытом виде по умолчанию
-					Tooltip: Панель с инструментами по умолчанию будет открыта, а не скрыта
+					Tooltip: Панель с инструментами по умолчанию будет открыта, а не скрыта.
 				}
 			}
 
@@ -190,7 +190,7 @@ Mods: {
 
 				DisableCheatsForNonHostUsers: {
 					Label: Отключить панель для гостей сервера
-					Tooltip: Отключить функции этого мода для всех игроков в мультиплеере, кроме хоста
+					Tooltip: Отключить функции этого мода для всех игроков в мультиплеере, кроме хоста.
 				}
 			}
 		}
