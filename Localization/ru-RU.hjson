@@ -78,13 +78,13 @@ Mods: {
 			MinionBooster: Доп. слоты под миньонов
 			Butcher: Убить существ
 			ClearMenu: Меню очистки
-			ExtraAccessorySlots: Доп. слоты под аксессуаров
+			ExtraAccessorySlots: Доп. слоты для аксессуаров
 			ModExtensions: Расширения
 			PaintTools: Инструменты копирования
 			SpawnRate: Множитель появления существ
 			Vacuum: Магнит предметов
 			Waypoints: Точки телепортации
-			LightHack: Глабальное освещение
+			LightHack: Глобальное освещение
 			GodMode: Режим бога
 		}
 
