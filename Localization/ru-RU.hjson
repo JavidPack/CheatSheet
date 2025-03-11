@@ -60,9 +60,9 @@ Mods: {
 		}
 
 		MinionSlot: {
-			MinionSlotBooster: Доп. слотов под миньонов: 0
-			MinionSlotBoosterNew: Доп. слотов под миньонов:
-			MinionSlotBoosterText: Доп. слотов под миньонов теперь
+			MinionSlotBooster: Доп. слотов миньонов: 0
+			MinionSlotBoosterNew: Доп. слотов миньонов:
+			MinionSlotBoosterText: Доп. слотов миньонов теперь
 		}
 
 		RecipeBrowser: {
@@ -75,7 +75,7 @@ Mods: {
 			ItemBrowser: Браузер предметов
 			NPCBrowser: Браузер существ
 			RecipeBrowser: Браузер рецептов
-			MinionBooster: Доп. слоты под миньонов
+			MinionBooster: Доп. слоты миньонов
 			Butcher: Убить существ
 			ClearMenu: Меню очистки
 			ExtraAccessorySlots: Доп. слоты для аксессуаров
