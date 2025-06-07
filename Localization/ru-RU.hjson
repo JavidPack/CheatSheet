@@ -48,21 +48,21 @@ Mods: {
 		}
 
 		LightHack: {
-			LightHackDisabled: Хак освещения: Отключён
-			LightHack25%: Хак освещения: 25%
-			LightHack50%: Хак освещения: 50%
-			LightHack100%: Хак освещения: 100%
+			LightHackDisabled: Глобальное освещение: отключено
+			LightHack25%: Глобальное освещение: 25%
+			LightHack50%: Глобальное освещение: 50%
+			LightHack100%: Глобальное освещение: 100%
 		}
 
 		GodMode: {
-			GodModeDisabled: Режим бога: Отключён
-			GodModeEnabled: Режим бога: Включён
+			GodModeDisabled: Режим бога: отключён
+			GodModeEnabled: Режим бога: включён
 		}
 
 		MinionSlot: {
-			MinionSlotBooster: Доп. слотов для миньонов: 0
-			MinionSlotBoosterNew: Доп. слотов для миньонов:
-			MinionSlotBoosterText: Доп. слотов для миньонов теперь
+			MinionSlotBooster: Доп. слотов миньонов: 0
+			MinionSlotBoosterNew: Доп. слотов миньонов:
+			MinionSlotBoosterText: Доп. слотов миньонов теперь
 		}
 
 		RecipeBrowser: {
@@ -75,7 +75,7 @@ Mods: {
 			ItemBrowser: Браузер предметов
 			NPCBrowser: Браузер существ
 			RecipeBrowser: Браузер рецептов
-			MinionBooster: Доп. слоты для миньонов
+			MinionBooster: Доп. слоты миньонов
 			Butcher: Убить существ
 			ClearMenu: Меню очистки
 			ExtraAccessorySlots: Доп. слоты для аксессуаров
@@ -84,7 +84,7 @@ Mods: {
 			SpawnRate: Множитель появления существ
 			Vacuum: Магнит предметов
 			Waypoints: Точки телепортации
-			LightHack: Хак освещения
+			LightHack: Глобальное освещение
 			GodMode: Режим бога
 		}
 
@@ -104,7 +104,7 @@ Mods: {
 			NetIDNPCs: Разновидности одного существа
 			FilteredNPCs: Отсортированные существа
 			CycleModSpecificNPCs: Существа из модов
-			SpawnNPCNotification: Игрок {1} призвал {0}
+			SpawnNPCNotification: Игрок {1} призвал существо «{0}»
 			NoNPCHaveBeenAddedByMods: Ни один из модов не добавляет новых существ.
 		}
 
@@ -117,7 +117,7 @@ Mods: {
 			Blocks: Блоки
 			Ammo: Боеприпасы
 			Potions: Зелья
-			Expert: Предметы режима Эксперт
+			Expert: Предметы режима эксперта
 			Furniture: Мебель
 			Pets: Питомцы
 			Mounts: Маунты
@@ -140,14 +140,14 @@ Mods: {
 			SnapBottomRight: Взять выделенное за нижний правый угол
 			PaintTiles: Вставить
 			EyeDropper: Выделить
-			Undo: Отменить последнюю вставку (ПКМ: Последние 10 вставок) [
+			Undo: Отменить последнюю вставку (ПКМ: последние 10 вставок) [
 			Undo2: " действий]"
 			NoUndo: Не осталось действий, которые можно было бы отменить.
 			UndoLeft: " действий осталось, которые можно отменить."
 			FlipHorizontal: Отразить по горизонтали
 			FlipVertical: Отразить по вертикали
-			TransparentSelectionOn: Прозрачное выделение: Отключено
-			TransparentSelectionOff: Прозрачное выделение: Включено
+			TransparentSelectionOn: Прозрачное выделение: отключено
+			TransparentSelectionOff: Прозрачное выделение: включено
 			PriorBrush: Сначала используйте выделение, перед тем как что-либо вставлять.
 			DataExport: "Экспортировано по пути "
 			Current: "Текущ.: "
@@ -177,16 +177,16 @@ Mods: {
 
 		Configs: {
 			CheatSheetClientConfig: {
-				DisplayName: Клиентские настройки
+				DisplayName: Клиентская конфигурация
 
 				HotbarShownByDefault: {
 					Label: Отображать панель в открытом виде по умолчанию
-					Tooltip: Панель с инструментами по умолчанию будет открыта, а не скрыта
+					Tooltip: Панель с инструментами по умолчанию будет открыта, а не скрыта.
 				}
 			}
 
 			CheatSheetServerConfig: {
-				DisplayName: Серверные настройки
+				DisplayName: Серверная конфигурация
 
 				DisableCheatsForNonHostUsers: {
 					Label: Отключить панель для гостей сервера
