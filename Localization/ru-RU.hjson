@@ -157,20 +157,20 @@ Mods: {
 
 		# These are not in use right now, so they don't actually need localization yet
 		SchematicsBrowser: {
-			SubmitToSchematicsBrowser: Submit to Schematics Browser
-			VoteUp: Vote Up
-			VoteDown: Vote Down
-			SubmitName: Submit Name:
-			ThanksForVoting: Thanks for voting.
-			SchematicsServerVotingProblem: Schematics Server voting problem
-			OnlineSchematicsOnlyWorksOnSteamVersion: Online schematics only works on Steam version
-			YouAlreadyVoted: You already voted
-			SchematicsServerProblemX: Schematics Server problem {0}
-			SelectionTooBigForNow: Selection too big for now.
-			PleaseNameYourCreation: Please name your creation.
-			OopsBase64TilesIsBad: Oops, base64tiles is bad.
-			BePatient: Be patient.
-			AlreadySubmitted: Already submitted.
+			// SubmitToSchematicsBrowser: Submit to Schematics Browser
+			// VoteUp: Vote Up
+			// VoteDown: Vote Down
+			// SubmitName: Submit Name:
+			// ThanksForVoting: Thanks for voting.
+			// SchematicsServerVotingProblem: Schematics Server voting problem
+			// OnlineSchematicsOnlyWorksOnSteamVersion: Online schematics only works on Steam version
+			// YouAlreadyVoted: You already voted
+			// SchematicsServerProblemX: Schematics Server problem {0}
+			// SelectionTooBigForNow: Selection too big for now.
+			// PleaseNameYourCreation: Please name your creation.
+			// OopsBase64TilesIsBad: Oops, base64tiles is bad.
+			// BePatient: Be patient.
+			// AlreadySubmitted: Already submitted.
 		}
 
 		Keybinds.ToggleCheatSheetHotbar.DisplayName: Открыть панель Cheat Sheet
