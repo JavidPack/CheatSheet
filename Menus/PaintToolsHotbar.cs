@@ -465,6 +465,9 @@ namespace CheatSheet.Menus
 		}
 
 		public void Update2() {
+			if (Main.gameInactive)
+				return;
+
 			Player player = Main.LocalPlayer;
 			if (selected && (EyeDropperActive || StampToolActive)) {
 				//			player.mouseInterface = true;
@@ -527,6 +530,7 @@ namespace CheatSheet.Menus
 									if (WorldGen.InWorld(x, y)) {
 										if (Main.tile[x, y].TileType == TileID.Count) {
 										}
+										// TODO: This is intended to make sure the stamp has framed values, but some users don't want it to frame existing tiles.
 										if (Main.tile[x, y].HasTile) {
 											WorldGen.TileFrame(x, y, true, false);
 										}
