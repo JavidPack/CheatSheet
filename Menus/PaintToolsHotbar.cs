@@ -94,6 +94,24 @@ namespace CheatSheet.Menus
 						Utils.Swap(ref StampTiles[i, j], ref StampTiles[i, StampTiles.GetLength(1) - 1 - j]);
 					}
 				}
+				for (int j = 0; j < StampTiles.GetLength(1); j++) {
+					for (int i = 0; i < StampTiles.GetLength(0); i++) {
+						if (StampTiles[i, j].TileWallWireStateData.Slope != SlopeType.Solid) {
+							StampTiles[i, j] = StampTiles[i, j] with {
+								TileWallWireStateData = StampTiles[i, j].TileWallWireStateData with {
+									Slope = StampTiles[i, j].TileWallWireStateData.Slope switch {
+										SlopeType.Solid => SlopeType.Solid,
+										SlopeType.SlopeDownLeft => SlopeType.SlopeUpLeft,
+										SlopeType.SlopeDownRight => SlopeType.SlopeUpRight,
+										SlopeType.SlopeUpLeft => SlopeType.SlopeDownLeft,
+										SlopeType.SlopeUpRight => SlopeType.SlopeDownRight,
+										_ => throw new NotImplementedException(),
+									}
+								}
+							};
+						}
+					}
+				}
 				if (stampInfo != null) {
 					stampInfo.bFlipVertical = !stampInfo.bFlipVertical;
 				}
@@ -104,6 +122,24 @@ namespace CheatSheet.Menus
 				for (int j = 0; j < StampTiles.GetLength(1); j++) {
 					for (int i = 0; i < StampTiles.GetLength(0) / 2; i++) {
 						Utils.Swap(ref StampTiles[i, j], ref StampTiles[StampTiles.GetLength(0) - 1 - i, j]);
+					}
+				}
+				for (int j = 0; j < StampTiles.GetLength(1); j++) {
+					for (int i = 0; i < StampTiles.GetLength(0); i++) {
+						if (StampTiles[i, j].TileWallWireStateData.Slope != SlopeType.Solid) {
+							StampTiles[i, j] = StampTiles[i, j] with {
+								TileWallWireStateData = StampTiles[i, j].TileWallWireStateData with {
+									Slope = StampTiles[i, j].TileWallWireStateData.Slope switch {
+										SlopeType.Solid => SlopeType.Solid,
+										SlopeType.SlopeDownLeft => SlopeType.SlopeDownRight,
+										SlopeType.SlopeDownRight => SlopeType.SlopeDownLeft,
+										SlopeType.SlopeUpLeft => SlopeType.SlopeUpRight,
+										SlopeType.SlopeUpRight => SlopeType.SlopeUpLeft,
+										_ => throw new NotImplementedException(),
+									}
+								}
+							};
+						}
 					}
 				}
 				if (stampInfo != null) {
