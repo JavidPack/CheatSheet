@@ -748,6 +748,9 @@ namespace CheatSheet.Menus
 		}
 
 		public static void DrawPreview(SpriteBatch sb, TileData[,] BrushTiles, Vector2 position, float scale = 1f) {
+			sb.End();
+			sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix); // Fix tiny lines between tiles in preview and thumbnail
+
 			Color color = Color.White;
 			color.A = 160;
 			int width = BrushTiles.GetLength(0);
@@ -781,14 +784,14 @@ namespace CheatSheet.Menus
 					if (tile.LiquidData.Amount > 14) {
 						Texture2D textureWater;
 						if (tile.LiquidData.LiquidType == LiquidID.Honey)
-							textureWater = LiquidRenderer.Instance._liquidTextures[11].Value.Offset(16, 48, 16, 16);
+							textureWater = LiquidRenderer.Instance._liquidTextures[11].Value;
 						else if (tile.LiquidData.LiquidType == LiquidID.Lava)
-							textureWater = LiquidRenderer.Instance._liquidTextures[1].Value.Offset(16, 48, 16, 16);
+							textureWater = LiquidRenderer.Instance._liquidTextures[1].Value;
 						else
-							textureWater = LiquidRenderer.Instance._liquidTextures[0].Value.Offset(16, 48, 16, 16);
+							textureWater = LiquidRenderer.Instance._liquidTextures[0].Value;
 						int waterSize = (tile.LiquidData.Amount + 1) / 16;
 						Vector2 pos = position + new Vector2(x * 16, y * 16 + (16 - waterSize));
-						sb.Draw(textureWater, pos * scale, new Rectangle(0, 16 - waterSize, 16, waterSize), color, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+						sb.Draw(textureWater, pos * scale, new Rectangle(16, 48 + 16 - waterSize, 16, waterSize), color, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
 					}
 					if (tile.TileWallWireStateData.HasTile) // Tile
 					{
