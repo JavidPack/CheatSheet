@@ -235,7 +235,7 @@ namespace CheatSheet.UI
 				}
 				spriteBatch.End();
 				spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, null, null, null, null, Main.UIScaleMatrix);
-				Main.instance.DrawWindowsIMEPanel(new Vector2(98f, (float)(Main.screenHeight - 36)), 0f);
+				//Main.instance.DrawWindowsIMEPanel(new Vector2(98f, (float)(Main.screenHeight - 36)), 0f);
 			}
 
 			spriteBatch.Draw(textboxBackground.Value, DrawPosition, null, Color.White, 0f, Origin, 1f, SpriteEffects.None, 0f);

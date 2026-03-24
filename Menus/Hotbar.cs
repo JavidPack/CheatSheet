@@ -607,7 +607,7 @@ namespace CheatSheet.Menus
 				if (Main.item[i].active) {
 					Main.item[i].position = changePos;
 					if (syncData) {
-						NetMessage.SendData(21, -1, -1, null, i, Main.item[i].netID, 0f, 0f, 0);
+						NetMessage.SendData(21, -1, -1, null, i, Main.item[i].type, 0f, 0f, 0);
 					}
 				}
 			}

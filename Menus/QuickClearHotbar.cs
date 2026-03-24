@@ -146,7 +146,7 @@ namespace CheatSheet.Menus
 		private static void HandleClearItems(bool syncData = false) {
 			for (int i = 0; i < Main.maxItems; i++) {
 				if (!syncData) {
-					Main.item[i].active = false;
+					//Main.item[i].active = false;
 				}
 				else {
 					Main.item[i].SetDefaults(0);

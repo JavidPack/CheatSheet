@@ -36,7 +36,7 @@ namespace CheatSheet.Menus
 
 		private void Init(int itemNum) {
 			base.Scale = 0.85f;
-			this.item.SetDefaults(itemNum, false);
+			this.item.SetDefaults(itemNum);
 			base.onLeftClick += new EventHandler(this.Slot2_onLeftClick);
 			//	base.onRightClick += new EventHandler(this.Slot2_onRightClick);
 			base.onMouseDown += new ClickEventHandler(this.Slot2_onMouseDown);
@@ -62,7 +62,7 @@ namespace CheatSheet.Menus
 								SoundEngine.PlaySound(SoundID.Coins);
 							}
 							if (Main.mouseItem.type == 0) {
-								Main.mouseItem.netDefaults(item.netID);
+								Main.mouseItem.netDefaults(item.type);
 								if (item.prefix != 0) {
 									Main.mouseItem.Prefix((int)item.prefix);
 								}
@@ -123,7 +123,7 @@ namespace CheatSheet.Menus
 				}
 				//	ErrorLogger.Log("On Slot2_onLeftClick Here");
 				//Main.mouseItem = this.item.Clone();
-				Main.mouseItem.netDefaults(item.netID);
+				Main.mouseItem.netDefaults(item.type);
 				Main.mouseItem.stack = Main.mouseItem.maxStack;
 				Main.playerInventory = true;
 				SoundEngine.PlaySound(SoundID.Coins);
@@ -209,7 +209,7 @@ namespace CheatSheet.Menus
 						if (Main.mouseItem.type == 0) {
 							//	ErrorLogger.Log("4");
 
-							Main.mouseItem.netDefaults(item.netID);
+							Main.mouseItem.netDefaults(item.type);
 							if (item.prefix != 0) {
 								//ErrorLogger.Log("??");
 								Main.mouseItem.Prefix((int)item.prefix);

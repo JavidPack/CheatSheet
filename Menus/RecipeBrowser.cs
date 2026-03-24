@@ -213,6 +213,7 @@ namespace CheatSheet.Menus
 				int num62 = 0;
 
 				//1.4 Fix cause idk how this code works exactly
+				/*
 				int[] requiredTile = selectedRecipe.requiredTile.ToArray();
 				Array.Resize(ref requiredTile, maxRequirementsOld);
 				for (int i = Math.Max(0, selectedRecipe.requiredTile.Count - 1); i < requiredTile.Length; i++) {
@@ -220,8 +221,11 @@ namespace CheatSheet.Menus
 						requiredTile[i] = -1;
 					}
 				}
+				*/
 
-				while (num62 < maxRequirementsOld) {
+				int[] requiredTile = [selectedRecipe.requiredTile];
+
+				while (num62 < 1) {
 					int num63 = (num62 + 1) * 26;
 					if (requiredTile[num62] == -1) {
 						//if (num62 == 0 && !selectedRecipe.needWater && !selectedRecipe.needHoney && !selectedRecipe.needLava)
@@ -360,10 +364,10 @@ namespace CheatSheet.Menus
 				//lookupItemSlot.item.SetDefaults(0);
 
 				Player player = Main.LocalPlayer;
-				lookupItemSlot.item.position = player.Center;
-				Item item = player.GetItem(player.whoAmI, lookupItemSlot.item, GetItemSettings.GetItemInDropItemCheck);
+				//lookupItemSlot.item.position = player.Center;
+				Item item = player.GetItem(lookupItemSlot.item, GetItemSettings.ReturnItemFromSlot);
 				if (item.stack > 0) {
-					int num = Item.NewItem(player.GetSource_Misc("PlayerDropItemCheck"), (int)player.position.X, (int)player.position.Y, player.width, player.height, item.type, item.stack, false, (int)lookupItemSlot.item.prefix, true, false);
+					int num = Item.NewItem(player.GetSource_Misc("PlayerDropItemCheck"), (int)player.position.X, (int)player.position.Y, player.width, player.height, item.type, item.stack, false, (int)lookupItemSlot.item.prefix, true);
 					Main.item[num].newAndShiny = false;
 					if (Main.netMode == 1) {
 						NetMessage.SendData(21, -1, -1, null, num, 1f, 0f, 0f, 0, 0, 0);

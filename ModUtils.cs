@@ -24,7 +24,7 @@ namespace CheatSheet
 				if (num == -1)
 					break;
 
-				if (RecipeGroup.recipeGroups[num].ContainsItem(invType) && RecipeGroup.recipeGroups[num].ContainsItem(reqType))
+				if (RecipeGroup.recipeGroups[num].Contains(invType) && RecipeGroup.recipeGroups[num].Contains(reqType))
 					return true;
 			}
 
@@ -37,7 +37,7 @@ namespace CheatSheet
 				if (num == -1)
 					break;
 
-				if (RecipeGroup.recipeGroups[num].ContainsItem(type)) {
+				if (RecipeGroup.recipeGroups[num].Contains(type)) {
 					theText = RecipeGroup.recipeGroups[num].GetText();
 					return true;
 				}

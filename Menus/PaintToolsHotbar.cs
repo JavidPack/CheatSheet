@@ -465,7 +465,7 @@ namespace CheatSheet.Menus
 		}
 
 		public void Update2() {
-			if (Main.gameInactive)
+			if (!FocusHelper.AllowGameplayInputs)
 				return;
 
 			Player player = Main.LocalPlayer;

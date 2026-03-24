@@ -107,10 +107,10 @@ namespace CheatSheet.Menus
 				//Main.LocalPlayer.QuickSpawnItem(RecipeBrowserWindow.lookupItemSlot.item.type, RecipeBrowserWindow.lookupItemSlot.item.stack);
 
 				Player player = Main.LocalPlayer;
-				RecipeBrowserWindow.lookupItemSlot.item.position = player.Center;
-				Item item2 = player.GetItem(player.whoAmI, RecipeBrowserWindow.lookupItemSlot.item, GetItemSettings.GetItemInDropItemCheck);
+				//RecipeBrowserWindow.lookupItemSlot.item.position = player.Center;
+				Item item2 = player.GetItem(RecipeBrowserWindow.lookupItemSlot.item, GetItemSettings.ReturnItemFromSlot);
 				if (item2.stack > 0) {
-					int num = Item.NewItem(player.GetSource_Misc("PlayerDropItemCheck"), (int)player.position.X, (int)player.position.Y, player.width, player.height, item2.type, item2.stack, false, (int)RecipeBrowserWindow.lookupItemSlot.item.prefix, true, false);
+					int num = Item.NewItem(player.GetSource_Misc("PlayerDropItemCheck"), (int)player.position.X, (int)player.position.Y, player.width, player.height, item2.type, item2.stack, false, (int)RecipeBrowserWindow.lookupItemSlot.item.prefix, true);
 					Main.item[num].newAndShiny = false;
 					if (Main.netMode == 1) {
 						NetMessage.SendData(21, -1, -1, null, num, 1f, 0f, 0f, 0, 0, 0);
