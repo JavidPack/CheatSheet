@@ -139,5 +139,52 @@ namespace CheatSheet
 				);
 			}
 		}
+
+		public static List<(int, bool)> ItemsToVacuum = new();
+		public override void PreUpdateItems() {
+			if (ItemsToVacuum.Count > 0) {
+				foreach (var item in ItemsToVacuum) {
+					VacuumItems(item.Item2, item.Item1);
+				}
+				ItemsToVacuum.Clear();
+			}
+		}
+
+		private static void VacuumItems(bool syncData = false, int whoAmI = 0) {
+			/*
+            	Item item2 = Main.item[number];
+				writer.Write((short)number);
+				writer.WriteVector2(item2.position);
+				writer.WriteVector2(item2.velocity);
+				writer.Write((short)item2.stack);
+				writer.Write(item2.prefix);
+				writer.Write((byte)number2);
+				writer.Write(value); //netID
+
+                int num56 = (int)this.reader.ReadInt16();
+				Vector2 vector = this.reader.ReadVector2();
+				Vector2 velocity = this.reader.ReadVector2();
+				int stack3 = (int)this.reader.ReadInt16();
+				int pre = (int)this.reader.ReadByte();
+				int num57 = (int)this.reader.ReadByte();
+				int num58 = (int)this.reader.ReadInt16();
+            */
+			Player player;
+			if (!syncData) {
+				player = Main.LocalPlayer;
+			}
+			else {
+				player = Main.player[whoAmI];
+			}
+			Vector2 changePos = new Vector2((int)player.position.X, (int)player.position.Y);
+			for (int i = 0; i < Main.maxItems; i++) {
+				if (Main.item[i].active) {
+					Main.item[i].position = changePos;
+					if (syncData) {
+						NetMessage.SendData(21, -1, -1, null, i, Main.item[i].netID, 0f, 0f, 0);
+					}
+				}
+			}
+		}
 	}
 }
