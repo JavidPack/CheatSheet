@@ -28,7 +28,7 @@ Mods: {
 			Spawnpoint: Punto de inicio
 			Hell: Inframundo
 			Temple: Templo
-			Random: Aleatoria
+			Random: Aleatorio
 		}
 
 		QuickClear: {
@@ -68,7 +68,7 @@ Mods: {
 		RecipeBrowser: {
 			AllRecipes: Todas las recetas
 			CycleModSpecificRecipes: Ver recetas específicas del mod
-			// NoRecipesHaveBeenAddedByMods: No Recipes have been added by mods.
+			NoRecipesHaveBeenAddedByMods: Los mods no han añadido ninguna receta.
 		}
 
 		ConfigurationTool: {
@@ -81,7 +81,7 @@ Mods: {
 			ExtraAccessorySlots: Añadir accesorios
 			ModExtensions: Trucos de mods
 			PaintTools: Pintura y diseños
-			SpawnRate: Multiplicador de tasas
+			SpawnRate: Multiplicador de tasa de generación
 			Vacuum: Aspirador
 			Waypoints: Ub. de referencia
 			LightHack: Hack de luz
@@ -100,11 +100,11 @@ Mods: {
 			AllNPCs: Todos los NPCs
 			Bosses: Jefes
 			TownNPCs: NPCs ciudadanos
-			NetIDNPCs: NPCs NetID
+			NetIDNPCs: NetID NPCs
 			FilteredNPCs: NPCs filtrados
 			CycleModSpecificNPCs: Ver NPCs específicos del mod
 			SpawnNPCNotification: "{1} ha invocado a {0}"
-			// NoNPCHaveBeenAddedByMods: No NPC have been added by mods.
+			NoNPCHaveBeenAddedByMods: Los mods no han añadido ningún NPC.
 		}
 
 		ItemBrowser: {
@@ -121,7 +121,7 @@ Mods: {
 			Pets: Mascotas
 			Mounts: Monturas
 			CycleModSpecificItems: Ver objetos específicos del mod
-			// NoItemsHaveBeenAddedByMods: No Items have been added by mods.
+			NoItemsHaveBeenAddedByMods: Los mods no han añadido ningún objeto.
 		}
 
 		PaintTools: {
@@ -149,9 +149,9 @@ Mods: {
 			TransparentSelectionOff: "    Modificar selección transparente: Activado"
 			PriorBrush: Priorizar uso del Cuentagotas sobre el Pincel
 			DataExport: "Exportar datos a "
-			// Current: "Current: "
-			// Next: "Next: "
-			// ScrollToCycleSnapPositions: Scroll to cycle snap positions
+			Current: "Actual: "
+			Next: "Siguiente: "
+			ScrollToCycleSnapPositions: Desplácese para alternar las posiciones de ajuste
 		}
 
 		# These are not in use right now, so they don't actually need localization yet
@@ -172,24 +172,24 @@ Mods: {
 			// AlreadySubmitted: Already submitted.
 		}
 
-		// Keybinds.ToggleCheatSheetHotbar.DisplayName: Toggle Cheat Sheet Hotbar
+		Keybinds.ToggleCheatSheetHotbar.DisplayName: Mostrar/ocultar barra de acceso rápido
 
 		Configs: {
 			CheatSheetClientConfig: {
-				// DisplayName: Cheat Sheet Client Config
+				DisplayName: Cheat Sheet configuración del cliente
 
 				HotbarShownByDefault: {
-					// Label: Hotbar Shown by Default
-					// Tooltip: Allows the hotbar to default to being shown rather than hidden.
+					Label: Barra de acceso rápido activada de forma predeterminada
+					Tooltip: Permite que la barra de acceso rápido se muestre de forma predeterminada en lugar de ocultarse
 				}
 			}
 
 			CheatSheetServerConfig: {
-				// DisplayName: Cheat Sheet Server Config
+				DisplayName: Cheat Sheet configuración del servidor
 
 				DisableCheatsForNonHostUsers: {
-					// Label: Disable Cheats for Non-Host users
-					// Tooltip: Disabled the features of this mod from working in multiplayer except for the Host
+					Label: Deshabilitar trucos para usuarios que no son anfitriones
+					Tooltip: Se deshabilitaron las características de este mod para que no funcionen en el modo multijugador, excepto el anfitrión
 				}
 			}
 		}
