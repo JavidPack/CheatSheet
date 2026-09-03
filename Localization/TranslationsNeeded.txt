@@ -2,7 +2,7 @@ en-US, 129/129, 100%, missing 0
 de-DE, 99/129, 77%, missing 30
 it-IT, 101/129, 78%, missing 28
 fr-FR, 99/129, 77%, missing 30
-es-ES, 102/129, 79%, missing 27
+es-ES, 115/129, 89%, missing 14
 ru-RU, 115/129, 89%, missing 14
 zh-Hans, 109/129, 84%, missing 20
 pt-BR, 94/129, 73%, missing 35
